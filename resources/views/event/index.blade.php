@@ -66,7 +66,7 @@
                     <h1>Хотите узнать о кафедре больше?</h1>
                 </div>
                 <div class="col-lg-4 cta-right">
-                    <a class="primary-btn wh" href="#">посмотрите наш блог</a>
+                    <a class="primary-btn wh" href="/news">посмотрите наш блог</a>
                 </div>
             </div>
         </div>

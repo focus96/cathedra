@@ -28,8 +28,12 @@ Route::prefix('event')->group(function () {
     Route::get('/{event}', 'EventController@show')->name('event-show');
 });
 
-Route::view('/contact', 'contact');
+Route::prefix('album')->group(function () {
+    Route::get('/', 'AlbumController@index');
+    Route::get('/{album}', 'AlbumController@show')->name('album-show');
+});
 
+Route::view('/contact', 'contact');
 
 Auth::routes();
 

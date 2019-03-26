@@ -67,7 +67,7 @@
                     <li><a href="/about">Про нас</a></li>
                     <li><a href="courses.html">Студентам</a></li>
                     <li><a href="/event">Події</a></li>
-                    <li><a href="gallery.html">Галерея</a></li>
+                    <li><a href="/album">Галерея</a></li>
                     <li><a href="/news">Новини</a></li>
                     <li><a href="/contact">Контакти</a></li>
                 </ul>
@@ -186,5 +186,6 @@
 <script src="/js/mail-script.js"></script>
 <script src="/js/main.js"></script>
 <script src="/js/app.js"></script>
+@stack('scripts')
 </body>
 </html>
