@@ -2,20 +2,17 @@
 
 namespace App\Admin\Controllers;
 
-use App\Models\CathedraUser;
-use App\Http\Controllers\Controller;
 use App\Models\Group;
+use App\Http\Controllers\Controller;
 use Encore\Admin\Controllers\HasResourceActions;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Layout\Content;
 use Encore\Admin\Show;
 
-class CathedraUsersController extends Controller
+class GroupsController extends Controller
 {
     use HasResourceActions;
-
-    protected $roles = [1 => 'Студент', 2 => 'Преподаватель', 3 => 'Абитуриент', 0 => 'Прочее',];
 
     /**
      * Index interface.
@@ -26,7 +23,7 @@ class CathedraUsersController extends Controller
     public function index(Content $content)
     {
         return $content
-            ->header('Персонал кафедры')
+            ->header('Группы кафедры')
             ->description(' ')
             ->body($this->grid());
     }
@@ -82,20 +79,10 @@ class CathedraUsersController extends Controller
      */
     protected function grid()
     {
-        $grid = new Grid(new CathedraUser);
+        $grid = new Grid(new Group);
 
         $grid->id('Ид');
-        $grid->column('ФИО')->display(function () {
-            return $this->surname.' '.$this->name.' '.$this->last_name;
-        });
-        $grid->group_id('Группа')->display(function ($groupId) {
-            $group = Group::find($groupId);
-            return $group ? $group->name : '-';
-        });
-        $roles = $this->roles;
-        $grid->role('Статус')->display(function ($role) use($roles) {
-            return $roles[$role];
-        });
+        $grid->name('Найменование');
 
         return $grid;
     }
@@ -108,18 +95,14 @@ class CathedraUsersController extends Controller
      */
     protected function detail($id)
     {
-        $show = new Show(CathedraUser::findOrFail($id));
+        $show = new Show(Group::findOrFail($id));
 
         $show->id('Ид');
-        $show->surname('Фамилия');
-        $show->name('Имя');
-        $show->last_name('Отчество');
-        $show->group_id('Группа')->using(Group::all()->pluck('name', 'id')->toArray());
-        $show->branch('Специальность')->using([1 => 'АВП', 2 => 'КI']);
-        $show->telegram_id('Telegram id');
-        $show->role('Статус')->using($this->roles);
+        $show->name('Найменование');
+        $show->curator_id('Куратор группы');
+        $show->headman_id('Староста группы');
         $show->created_at('Запись создана');
-        $show->updated_at('Запись обнвлена');
+        $show->updated_at('Запись обновленна');
 
         return $show;
     }
@@ -131,24 +114,11 @@ class CathedraUsersController extends Controller
      */
     protected function form()
     {
-        $form = new Form(new CathedraUser);
+        $form = new Form(new Group);
 
-        $form->text('name', 'Имя');
-        $form->text('surname', 'Фамилия');
-        $form->text('last_name', 'Отчество');
-
-        $groups = Group::all()->pluck('name', 'id');
-        $form->select('group_id', 'Группа')->options($groups);
-
-        $branches = [
-            1 => 'АВП',
-            2 => 'КI',
-        ];
-        $form->select('branch', 'Специальность')->options($branches);
-
-        $form->text('telegram_id', 'Telegram id');
-
-        $form->select('role', 'Статус')->options($this->roles);
+        $form->text('name', 'Найменование');
+        $form->number('curator_id', 'Куратор');
+        $form->number('headman_id', 'Староста');
 
         return $form;
     }

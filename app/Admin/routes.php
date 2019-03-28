@@ -18,6 +18,7 @@ Route::group([
     $router->resource('/albums', 'AlbumController');
     $router->resource('/events', 'EventController');
     $router->resource('/cathedra-users', 'CathedraUsersController');
+    $router->resource('/groups', 'GroupsController');
 
     $router->get('/telegram-bot', 'TelegramBotController@index');
 });

@@ -35,6 +35,9 @@ Route::prefix('album')->group(function () {
 
 Route::view('/contact', 'contact');
 
+Route::get('/get-all-cathedra-users', 'CathedraUserController@all');
+Route::post('/send-telegram-message', 'TelegramBotController@send');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
