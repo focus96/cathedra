@@ -60,8 +60,8 @@
                             <textarea class="form-control" cols="30" rows="10"
                                       placeholder="Сообщение для рассылки" v-model="message"></textarea>
                             <br>
-                            <button class="form-control btn btn-primary" @click="send()">Отправить (получателей: {{ countRecipients
-                                }})
+                            <button class="form-control btn btn-primary" @click="send()">
+                                Отправить (получателей: {{ countRecipients }})
                             </button>
                         </div>
                     </div>

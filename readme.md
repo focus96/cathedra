@@ -1,68 +1,24 @@
-<p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
+## Установка проекта
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
+- клонируем репозиторий `git clone https://tarasenkoevgenii@bitbucket.org/tarasenkoevgenii/cathedra.git`
+- создадим базу данных у себя в pma.
+- обновим файл .env прописав свои доступы для базы данных. Так же рекомендую устанвить занчение `APP_KEY=base64:frat1lWSZsroJxUSASyOjs5Tm6qUYbvdBl0tGC6T/GQ=` для того, чтобы не парится потом с ручной настройкой меню в админке и тестовых данных по другим таблицам, а воспользоваться дампом. так же в файле .env вам необходимо будет хранить токен для телеграмма (у кого задание по телеграмму) и использовать уже значение из файла .env, потому что у каждого из вас будет свой бот для тестирования и чтобы вы не мешали друг другу.
+- импортируем дамп базы данных, который я скину отдельно в телеграмме.
+- переходим в директорию с проектом
+- устанавливаем зависемости php `composer update`
+- выполним `php artisan migrate`, чтобы убедиться, что все миграции выполнены и после создания дампа ничего больше не было добавлено.
+- так же напомню, что нужно установить рут-директорию в опен сервере на папку /public, но это вы и сами должны помнить.
+- сразу установим зависемости npm (вы можете этого не делать, но это необходимо, чтобы у вас работали все модуля, которые уже написаны на vue и если вы будете сами писать компоненты на vue, что было бы здорово, но не обязательно). убеждаемся что установлен node.js - пишем в консоли npm - если команада не найдена - устанвливаем ноду отсюда https://nodejs.org/uk/ . Если установлена выполняем `npm intsall` и после этого сделаем сборку `npm run dev`. Обратите внимание, что npm может быть не виден с консоли опенсервера, попробуйте через стандартную консоль.
 
-## About Laravel
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as:
+Доступы в админку: admin / admin
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Так же хочу обратить внимание, что исходные файлы html-шаблона находятся в конре в папке template. Их можно использовать для своей работы.
 
-Laravel is accessible, yet powerful, providing tools needed for large, robust applications.
+Админ часть делаем внутри админки согласно пакету `"encore/laravel-admin"`. Если внимательно почитать документацию, то вы можете полностью управлять содержимым страницы, выводить туда свои представления и прочее. Желаельно сохранить общую шапку и меню в своих шаблонах. В остальном вы имеете полную свободу действий каким образом и с помощью чего вы будете реализовывать свои модуля.
 
-## Learning Laravel
+Телеграм бот делаем на основе пакета `"botman/botman": "^2.4"`. Для прослушивания сообщений пользователя можно пользоваться тунелями от https://ngrok.com/ . Открываем тунель - получаем https урл нашей локалки, который виден в сети - привязываем свой бот к этому урлу согласно https://botman.io/2.0/driver-telegram (см. Register Your Webhook) -  пользуемся и радуемся.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of any modern web application framework, making it a breeze to get started learning the framework.
+Приветсвуется ипользование готовых решений в виде пакетов.
 
-If you're not in the mood to read, [Laracasts](https://laracasts.com) contains over 1100 video tutorials on a range of topics including Laravel, modern PHP, unit testing, JavaScript, and more. Boost the skill level of yourself and your entire team by digging into our comprehensive video library.
-
-## Laravel Sponsors
-
-We would like to extend our thanks to the following sponsors for helping fund on-going Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell):
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[British Software Development](https://www.britishsoftware.co)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- [UserInsights](https://userinsights.com)
-- [Fragrantica](https://www.fragrantica.com)
-- [SOFTonSOFA](https://softonsofa.com/)
-- [User10](https://user10.com)
-- [Soumettre.fr](https://soumettre.fr/)
-- [CodeBrisk](https://codebrisk.com)
-- [1Forge](https://1forge.com)
-- [TECPRESSO](https://tecpresso.co.jp/)
-- [Runtime Converter](http://runtimeconverter.com/)
-- [WebL'Agence](https://weblagence.com/)
-- [Invoice Ninja](https://www.invoiceninja.com)
-- [iMi digital](https://www.imi-digital.de/)
-- [Earthlink](https://www.earthlink.ro/)
-- [Steadfast Collective](https://steadfastcollective.com/)
-- [We Are The Robots Inc.](https://watr.mx/)
-- [Understand.io](https://www.understand.io/)
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Работу ведем каждый в своей ветке. Команда по разработке телеграм бота - наймнование ветки telegram_bot, команда по онлайн-журналу - online_journal. Если что ветки уже созданы)
