@@ -1,4 +1,4 @@
-## Установка проекта
+## Установка проекта test
 
 - клонируем репозиторий `git clone https://tarasenkoevgenii@bitbucket.org/tarasenkoevgenii/cathedra.git`
 - создадим базу данных у себя в pma.
