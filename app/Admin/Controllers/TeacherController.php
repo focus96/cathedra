@@ -2,6 +2,7 @@
 
 namespace App\Admin\Controllers;
 
+use App\Models\Cathedra;
 use App\Models\Teacher;
 use App\Http\Controllers\Controller;
 use Encore\Admin\Controllers\HasResourceActions;
@@ -143,10 +144,10 @@ class TeacherController extends Controller
             'max' => 'Кол-во символов не более :max',
         ]);
         $academic_degree = [
-            1 => 'Ph_D',
-            2 => 'PhD',
-            3 => 'Assistant_professor',
-            4 => 'Professor',
+            'Ph.D' => 'Доктор наук',
+            'PhD' => 'Кандидат наук',
+            'Assistant_professor' => 'Доцент',
+            'Professor' => 'Профессор',
         ];
         $form->select('academic_degree','Ученая степень')->options($academic_degree)->rules('required', [
             'required' => 'Обязательно для заполнения',
@@ -178,6 +179,9 @@ class TeacherController extends Controller
         $form->number('publicity_phone','признак публичности телефона, то есть отображать ли его публично для всех (0 или 1)')->rules('required|numeric', [
             'required' => 'Обязательно для заполнения',
             'numeric' => 'В поле должно быть число',
+        ]);
+        $form->select('cathedra_id', 'ид кафедры')->options(Cathedra::all()->pluck('name', 'id'))->rules('required', [
+            'required' => 'Обязательно для заполнения',
         ]);
 
         $form->image('foto','фото преподавателя ')->move('/app/public/teachers_foto/')->rules('required|image|max:2000000', [
