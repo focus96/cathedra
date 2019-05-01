@@ -15,6 +15,7 @@ class CreateGroupsTable extends Migration
     {
         Schema::create('groups', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('name_group')->comment('Наименование группы');
             $table->string('specialty')->comment('Специальность');
             $table->integer('admission_year')->comment('Год поступления');
             $table->integer('group_number')->comment('Номер группы');

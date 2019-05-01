@@ -115,6 +115,7 @@ class GroupsController extends Controller
         $show = new Show(Group::findOrFail($id));
 
         $show->id('Ид');
+        $show->name_group('Наименование группы');
         $show->specialty('Специальность');
         $show->admission_year('Год поступления');
         $show->group_number('Номер группы');
@@ -161,6 +162,26 @@ class GroupsController extends Controller
             'required' => 'Обязательно для заполнения',
         ]);
 
+        $form->saving(function (Form $form) {
+
+            $group_name = $form->specialty . ' ' . $form->admission_year . ' - ' . $form->group_number;
+
+            if ($form->level_education === 'bachelor_acceleration'){
+                $name_group = $group_name . ' [ у ] ';
+            }
+            elseif ($form->level_education === 'master'){
+                $name_group = $group_name . ' [ м ] ';
+            }
+            else {
+                $name_group = $group_name;
+            }
+
+            $form->model()->name_group = $name_group;
+        });
+
+
+
         return $form;
+
     }
 }
