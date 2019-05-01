@@ -36,8 +36,20 @@ Route::prefix('album')->group(function () {
 Route::view('/contact', 'contact');
 
 Route::get('/get-all-cathedra-users', 'CathedraUserController@all');
-Route::post('/send-telegram-message', 'TelegramBotController@send');
+Route::post('/send-telegram-message', 'TelegramController@send');
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/register-telegram-url', function() {
+  $ch = curl_init("https://api.telegram.org/bot769322022:AAF3OGog48cGB8llOWThuvf3iWfCjtGdLlU/setWebhook");
+
+    curl_setopt($ch, CURLOPT_HEADER, 0);
+    curl_setopt($ch, CURLOPT_POST, 1);
+  curl_setopt($ch, CURLOPT_POSTFIELDS,
+            "url=https://fbc7ea69.ngrok.io");
+
+    curl_exec($ch);
+    curl_close($ch);
+});
