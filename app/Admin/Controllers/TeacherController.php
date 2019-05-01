@@ -86,7 +86,7 @@ class TeacherController extends Controller
         $grid->surname('Фамилия');
         $grid->name('Имя');
         $grid->last_name('Отчество');
-        $grid->academic_degree('Ученая степень');
+        $grid->academic_degree('Ученая степень')->using(['Ph_D' => 'Доктор наук', 'PhD' => 'Кандидат наук', 'Assistant_professor' => 'Доцент', 'Professor' => 'Профессор']);
         $grid->function('Должность');
 
         return $grid;
@@ -106,7 +106,7 @@ class TeacherController extends Controller
         $show->surname('Фамилия');
         $show->name('Имя');
         $show->last_name('Отчество');
-        $show->academic_degree('Ученая степень');
+        $show->academic_degree('Ученая степень')->using(['Ph_D' => 'Доктор наук', 'PhD' => 'Кандидат наук', 'Assistant_professor' => 'Доцент', 'Professor' => 'Профессор']);
         $show->function('Должность на кафедре');
         $show->additional_information('дополнительная информация ');
         $show->specialization('специализация, то есть на чем специализируется этот преподаватель, например на автоматизации или CAD/CAM системах и тд.');
@@ -144,7 +144,7 @@ class TeacherController extends Controller
             'max' => 'Кол-во символов не более :max',
         ]);
         $academic_degree = [
-            'Ph.D' => 'Доктор наук',
+            'Ph_D' => 'Доктор наук',
             'PhD' => 'Кандидат наук',
             'Assistant_professor' => 'Доцент',
             'Professor' => 'Профессор',
@@ -164,7 +164,7 @@ class TeacherController extends Controller
             'required' => 'Обязательно для заполнения',
             'max' => 'Кол-во символов не более :max',
         ]);
-        $form->number('telegram_id','телеграмм ид ')->rules('required|numeric', [
+        $form->number('telegram_id','телеграмм ид ')->min(0)->rules('required|numeric', [
             'required' => 'Обязательно для заполнения',
             'numeric' => 'В поле должно быть число',
         ]);
@@ -176,7 +176,7 @@ class TeacherController extends Controller
             'required' => 'Обязательно для заполнения',
             'max' => 'Кол-во символов не более :max',
         ]);
-        $form->number('publicity_phone','признак публичности телефона, то есть отображать ли его публично для всех (0 или 1)')->rules('required|numeric', [
+        $form->number('publicity_phone','признак публичности телефона, то есть отображать ли его публично для всех (0 или 1)')->min(0)->max(1)->rules('required|numeric', [
             'required' => 'Обязательно для заполнения',
             'numeric' => 'В поле должно быть число',
         ]);
