@@ -22,7 +22,8 @@ Route::group([
     $router->resource('/cathedras', 'CathedraController');
     $router->resource('/teachers', 'TeacherController');
     $router->resource('/shedules', 'SheduleController');
-    //$router->resource('demo/users', UserController::class);
+    $router->resource('/items', 'ItemController');
+    $router->resource('/students', 'StudentController');
 
     $router->get('/telegram-bot', 'TelegramBotController@index');
 });
