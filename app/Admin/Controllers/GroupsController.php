@@ -4,6 +4,7 @@ namespace App\Admin\Controllers;
 
 use App\Models\Group;
 use App\Http\Controllers\Controller;
+use App\Models\Student;
 use App\Models\Teacher;
 use Encore\Admin\Controllers\HasResourceActions;
 use Encore\Admin\Form;
@@ -158,7 +159,7 @@ class GroupsController extends Controller
         $form->select('curator_id', 'Ид куратора группы')->options(Teacher::all()->pluck('surname', 'id'))->rules('required', [
             'required' => 'Обязательно для заполнения',
         ]);
-        $form->select('headman_id', 'Ид старосты группы')->options(Teacher::all()->pluck('surname', 'id'))->rules('required', [
+        $form->select('headman_id', 'Ид старосты группы')->options(Student::all()->pluck('surname', 'id'))->rules('required', [
             'required' => 'Обязательно для заполнения',
         ]);
 
