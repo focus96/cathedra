@@ -88,6 +88,8 @@ class TeacherController extends Controller
         $grid->last_name('Отчество');
         $grid->academic_degree('Ученая степень')->using(['Ph_D' => 'Доктор наук', 'PhD' => 'Кандидат наук', 'Assistant_professor' => 'Доцент', 'Professor' => 'Профессор']);
         $grid->function('Должность');
+        $grid->cathedra_id('ид кафедры ');
+
 
         return $grid;
     }
