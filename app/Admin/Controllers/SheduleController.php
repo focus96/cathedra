@@ -3,6 +3,7 @@
 namespace App\Admin\Controllers;
 
 use App\Models\Group;
+use App\Models\Items;
 use App\Models\Shedule;
 use App\Http\Controllers\Controller;
 use App\Models\Teacher;
@@ -90,6 +91,7 @@ class SheduleController extends Controller
         $grid->lecture_hall('Аудитория');
         $grid->group('Группа');
         $grid->teacher('Преподаватель');
+        $grid->item('Предмет');
         $grid->type_occupation('Тип занятия')->using(['laboratory_work' => 'лабораторная работа', 'practical_lesson' => 'практическое занятие', 'lecture' => 'лекция']);
 
         return $grid;
@@ -112,6 +114,7 @@ class SheduleController extends Controller
         $show->teacher('Преподаватель');
         $show->parity_week('Четность недели')->using(['even' => 'четная', 'odd' => 'нечетная']);
         $show->day('День недели');
+        $show->item('Предмет');
         $show->type_occupation('Тип занятия')->using(['laboratory_work' => 'лабораторная работа', 'practical_lesson' => 'практическое занятие', 'lecture' => 'лекция']);
         $show->created_at('Запись создана');
         $show->updated_at('Запись обновлена');
@@ -146,6 +149,9 @@ class SheduleController extends Controller
             'required' => 'Обязательно для заполнения',
         ]);
         $form->date('day','День недели')->format('dddd')->rules('required', [
+            'required' => 'Обязательно для заполнения',
+        ]);
+        $form->select('item','Предмет')->options(Items::all()->pluck('name', 'name'))->rules('required', [
             'required' => 'Обязательно для заполнения',
         ]);
         $form->select('type_occupation','Тип занятия')->options(['laboratory_work' => 'лабораторная работа', 'practical_lesson' => 'практическое занятие', 'lecture' => 'лекция'])->rules('required', [
