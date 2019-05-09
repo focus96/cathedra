@@ -3,18 +3,19 @@
 @section('content')
 <!-- start banner Area -->
 <section class="banner-area relative" id="home">
+    <style>
+        .banner-area{
+            background: url(../img/baner.jpg) right;
+        }
+    </style>
     <div class="overlay overlay-bg"></div>
     <div class="container">
         <div class="row fullscreen d-flex align-items-center justify-content-between">
             <div class="banner-content col-lg-9 col-md-12">
                 <h1 class="text-uppercase">
-                    We Ensure better education
-                    for a better world
+                    Ми забезпечуємо кращу освіту для майбутнього країни
                 </h1>
-                <p class="pt-10 pb-10">
-                    In the history of modern astronomy, there is probably no one greater leap forward than the building and launch of the space telescope known as the Hubble.
-                </p>
-                <a href="#" class="primary-btn text-uppercase">Get Started</a>
+
             </div>
         </div>
     </div>
@@ -28,40 +29,43 @@
             <div class="col-lg-4">
                 <div class="single-feature">
                     <div class="title">
-                        <h4>Learn Online Courses</h4>
+                        <h4>Заочні підготовчі
+                            курси </h4>
                     </div>
                     <div class="desc-wrap">
                         <p>
-                            Usage of the Internet is becoming more common due to rapid advancement
-                            of technology.
+                            На базі ДДМА відкриті очні та заочні підготовчі курси. Заочні курси працюють за дистанційною формою навчання.
+
                         </p>
-                        <a href="#">Join Now</a>
+                        <a href="#">Приєднатися</a>
                     </div>
                 </div>
             </div>
             <div class="col-lg-4">
                 <div class="single-feature">
                     <div class="title">
-                        <h4>No.1 of universities</h4>
+                        <h4>Університ №1</h4>
                     </div>
                     <div class="desc-wrap">
                         <p>
-                            For many of us, our very first experience of learning about the celestial bodies begins when we saw our first.
+                           В академії створені всі належні умови для підготовки висококваліфікованих фахівців, та відповідає державним вимогам.
                         </p>
-                        <a href="#">Join Now</a>
+                        <a href="#">Приєднатися</a>
                     </div>
                 </div>
             </div>
             <div class="col-lg-4">
                 <div class="single-feature">
                     <div class="title">
-                        <h4>Huge Library</h4>
+                        <h4>
+                            Академії стала доступна мережа Uran</h4>
                     </div>
                     <div class="desc-wrap">
                         <p>
-                            If you are a serious astronomy fanatic like a lot of us are, you can probably remember that one event.
+
+                            Завдяки цій мережі вченим Академії стануть доступні можливості брати участь в спільних проектах, в тому числі і з вченими країн ЄС
                         </p>
-                        <a href="#">Join Now</a>
+                        <a href="#">Приєднатися</a>
                     </div>
                 </div>
             </div>
@@ -76,18 +80,19 @@
         <div class="row d-flex justify-content-center">
             <div class="menu-content pb-70 col-lg-8">
                 <div class="title text-center">
-                    <h1 class="mb-10">Popular Courses we offer</h1>
-                    <p>There is a moment in the life of any aspiring.</p>
+                    <h1 class="mb-10">ОСТАННІ НОВИНИ</h1>
+                    <p>Актуальні Новини життя ДДМА</p>
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="active-popular-carusel">
+                @foreach($news as $news)
                 <div class="single-popular-carusel">
                     <div class="thumb-wrap relative">
                         <div class="thumb relative">
                             <div class="overlay overlay-bg"></div>
-                            <img class="img-fluid" src="img/p1.jpg" alt="">
+                            <img class="img-fluid" src="{{$news ->getImage()}}" alt="">
                         </div>
                         <div class="meta d-flex justify-content-between">
                             <p><span class="lnr lnr-users"></span> 355 <span class="lnr lnr-bubble"></span>35</p>
@@ -97,168 +102,15 @@
                     <div class="details">
                         <a href="#">
                             <h4>
-                                Learn Designing
+                                {{$news ->title}}
                             </h4>
                         </a>
                         <p>
-                            When television was young, there was a hugely popular show based on the still popular fictional characte
+                            {{$news ->short}}
                         </p>
                     </div>
                 </div>
-                <div class="single-popular-carusel">
-                    <div class="thumb-wrap relative">
-                        <div class="thumb relative">
-                            <div class="overlay overlay-bg"></div>
-                            <img class="img-fluid" src="img/p2.jpg" alt="">
-                        </div>
-                        <div class="meta d-flex justify-content-between">
-                            <p><span class="lnr lnr-users"></span> 355 <span class="lnr lnr-bubble"></span>35</p>
-                            <h4>$150</h4>
-                        </div>
-                    </div>
-                    <div class="details">
-                        <a href="#">
-                            <h4>
-                                Learn React js beginners
-                            </h4>
-                        </a>
-                        <p>
-                            When television was young, there was a hugely popular show based on the still popular fictional characte
-                        </p>
-                    </div>
-                </div>
-                <div class="single-popular-carusel">
-                    <div class="thumb-wrap relative">
-                        <div class="thumb relative">
-                            <div class="overlay overlay-bg"></div>
-                            <img class="img-fluid" src="img/p3.jpg" alt="">
-                        </div>
-                        <div class="meta d-flex justify-content-between">
-                            <p><span class="lnr lnr-users"></span> 355 <span class="lnr lnr-bubble"></span>35</p>
-                            <h4>$150</h4>
-                        </div>
-                    </div>
-                    <div class="details">
-                        <a href="#">
-                            <h4>
-                                Learn Photography
-                            </h4>
-                        </a>
-                        <p>
-                            When television was young, there was a hugely popular show based on the still popular fictional characte
-                        </p>
-                    </div>
-                </div>
-                <div class="single-popular-carusel">
-                    <div class="thumb-wrap relative">
-                        <div class="thumb relative">
-                            <div class="overlay overlay-bg"></div>
-                            <img class="img-fluid" src="img/p4.jpg" alt="">
-                        </div>
-                        <div class="meta d-flex justify-content-between">
-                            <p><span class="lnr lnr-users"></span> 355 <span class="lnr lnr-bubble"></span>35</p>
-                            <h4>$150</h4>
-                        </div>
-                    </div>
-                    <div class="details">
-                        <a href="#">
-                            <h4>
-                                Learn Surveying
-                            </h4>
-                        </a>
-                        <p>
-                            When television was young, there was a hugely popular show based on the still popular fictional characte
-                        </p>
-                    </div>
-                </div>
-                <div class="single-popular-carusel">
-                    <div class="thumb-wrap relative">
-                        <div class="thumb relative">
-                            <div class="overlay overlay-bg"></div>
-                            <img class="img-fluid" src="img/p1.jpg" alt="">
-                        </div>
-                        <div class="meta d-flex justify-content-between">
-                            <p><span class="lnr lnr-users"></span> 355 <span class="lnr lnr-bubble"></span>35</p>
-                            <h4>$150</h4>
-                        </div>
-                    </div>
-                    <div class="details">
-                        <a href="#">
-                            <h4>
-                                Learn Designing
-                            </h4>
-                        </a>
-                        <p>
-                            When television was young, there was a hugely popular show based on the still popular fictional characte
-                        </p>
-                    </div>
-                </div>
-                <div class="single-popular-carusel">
-                    <div class="thumb-wrap relative">
-                        <div class="thumb relative">
-                            <div class="overlay overlay-bg"></div>
-                            <img class="img-fluid" src="img/p2.jpg" alt="">
-                        </div>
-                        <div class="meta d-flex justify-content-between">
-                            <p><span class="lnr lnr-users"></span> 355 <span class="lnr lnr-bubble"></span>35</p>
-                            <h4>$150</h4>
-                        </div>
-                    </div>
-                    <div class="details">
-                        <a href="#">
-                            <h4>
-                                Learn React js beginners
-                            </h4>
-                        </a>
-                        <p>
-                            When television was young, there was a hugely popular show based on the still popular fictional characte
-                        </p>
-                    </div>
-                </div>
-                <div class="single-popular-carusel">
-                    <div class="thumb-wrap relative">
-                        <div class="thumb relative">
-                            <div class="overlay overlay-bg"></div>
-                            <img class="img-fluid" src="img/p3.jpg" alt="">
-                        </div>
-                        <div class="meta d-flex justify-content-between">
-                            <p><span class="lnr lnr-users"></span> 355 <span class="lnr lnr-bubble"></span>35</p>
-                            <h4>$150</h4>
-                        </div>
-                    </div>
-                    <div class="details">
-                        <a href="#">
-                            <h4>
-                                Learn Photography
-                            </h4>
-                        </a>
-                        <p>
-                            When television was young, there was a hugely popular show based on the still popular fictional characte
-                        </p>
-                    </div>
-                </div>
-                <div class="single-popular-carusel">
-                    <div class="thumb-wrap relative">
-                        <div class="thumb relative">
-                            <div class="overlay overlay-bg"></div>
-                            <img class="img-fluid" src="img/p4.jpg" alt="">
-                        </div>
-                        <div class="meta d-flex justify-content-between">
-                            <p><span class="lnr lnr-users"></span> 355 <span class="lnr lnr-bubble"></span>35</p>
-                            <h4>$150</h4>
-                        </div>
-                    </div>
-                    <div class="details">
-                        <a href="#">
-                            <h4>
-                                Learn Surveying
-                            </h4>
-                        </a>
-                        <p>
-                            When television was young, there was a hugely popular show based on the still popular fictional characte
-                        </p>
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
     </div>
@@ -273,8 +125,7 @@
         <div class="row justify-content-between align-items-center">
             <div class="col-lg-6 col-md-6 search-course-left">
                 <h1 class="text-white">
-                    Get reduced fee <br>
-                    during this Summer!
+                    Не втрачай часу  даремно, приходь і здавай вступні іспити
                 </h1>
                 <p>
                     inappropriate behavior is often laughed off as “boys will be boys,” women face higher conduct standards especially in the workplace. That’s why it’s crucial that, as women, our behavior on the job is beyond reproach.
@@ -298,10 +149,11 @@
             </div>
             <div class="col-lg-4 col-md-6 search-course-right section-gap">
                 <form class="form-wrap" action="#">
-                    <h4 class="text-white pb-20 text-center mb-30">Search for Available Course</h4>
-                    <input type="text" class="form-control" name="name" placeholder="Your Name" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Your Name'" >
-                    <input type="phone" class="form-control" name="phone" placeholder="Your Phone Number" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Your Phone Number'" >
-                    <input type="email" class="form-control" name="email" placeholder="Your Email Address" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Your Email Address'" >
+                    <h4 class="text-white pb-20 text-center mb-30">
+                        Зареєструватися на сайті</h4>
+                    <input type="text" class="form-control" name="name" placeholder="Твоє ім'я" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Твоє ім\'я'" >
+                    <input type="phone" class="form-control" name="phone" placeholder="Ваша електронна адреса" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Ваша електронна адреса'" >
+                    <input type="email" class="form-control" name="email" placeholder="Пароль" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Пароль'" >
                     <div class="form-select" id="service-select">
                         <select>
                             <option datd-display="">Choose Course</option>
@@ -642,10 +494,10 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-8 cta-left">
-                <h1>Not Yet Satisfied with our Trend?</h1>
+                <h1>Хотите узнать о кафедре больше?</h1>
             </div>
             <div class="col-lg-4 cta-right">
-                <a class="primary-btn wh" href="#">view our blog</a>
+                <a class="primary-btn wh" href="/news">посмотрите наш блог</a>
             </div>
         </div>
     </div>

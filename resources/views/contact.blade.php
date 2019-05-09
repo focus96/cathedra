@@ -29,9 +29,10 @@
                             <span class="lnr lnr-home"></span>
                         </div>
                         <div class="contact-details">
-                            <h5>Binghamton, New York</h5>
+                            <h5> м. Краматорськ, вул. Академічна (Академічна), 72</h5>
                             <p>
-                                4343 Hinkle Deegan Lake Road
+                                84313, Донецька обл.
+
                             </p>
                         </div>
                     </div>
@@ -40,8 +41,8 @@
                             <span class="lnr lnr-phone-handset"></span>
                         </div>
                         <div class="contact-details">
-                            <h5>00 (958) 9865 562</h5>
-                            <p>Mon to Fri 9am to 6 pm</p>
+                            <h5>тел.: (0626) 41-68-09, (0626) 41-80-68</h5>
+                            <p>факс: (0626) 41-63-15, (0626) 41-66-76</p>
                         </div>
                     </div>
                     <div class="single-contact-address d-flex flex-row">
@@ -49,41 +50,26 @@
                             <span class="lnr lnr-envelope"></span>
                         </div>
                         <div class="contact-details">
-                            <h5>support@colorlib.com</h5>
-                            <p>Send us your query anytime!</p>
+                            <h5>E-mail: dgma@dgma.donetsk.ua</h5>
+                            <p>Web: <a href="http://www.dgma.donetsk.ua">http://www.dgma.donetsk.ua</a></p>
                         </div>
                     </div>
+
                 </div>
                 <div class="col-lg-8">
-                    <form class="form-area contact-form text-right" id="myForm" action="mail.php" method="post">
+                    <form class="form-area contact-form text-center" id="myForm" action="mail.php" method="post">
                         <div class="row">
-                            <div class="col-lg-6 form-group">
-                                <input name="name" placeholder="Enter your name" onfocus="this.placeholder = ''"
-                                       onblur="this.placeholder = 'Enter your name'"
-                                       class="common-input mb-20 form-control" required="" type="text">
-
-                                <input name="email" placeholder="Enter email address"
-                                       pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$"
-                                       onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter email address'"
-                                       class="common-input mb-20 form-control" required="" type="email">
-
-                                <input name="subject" placeholder="Enter subject" onfocus="this.placeholder = ''"
-                                       onblur="this.placeholder = 'Enter subject'"
-                                       class="common-input mb-20 form-control" required="" type="text">
-                            </div>
-                            <div class="col-lg-6 form-group">
-                                <textarea class="common-textarea form-control" name="message"
-                                          placeholder="Enter Messege" onfocus="this.placeholder = ''"
-                                          onblur="this.placeholder = 'Enter Messege'" required=""></textarea>
-                            </div>
-                            <div class="col-lg-12">
-                                <div class="alert-msg" style="text-align: left;"></div>
-                                <button class="genric-btn primary" style="float: right;">Send Message</button>
+                            <div class="col-lg-12 ">
+                                <h5>Юридичні підстави для здійснення освітньої діяльності:</h5>
+                                <p>
+                                    Ліцензія на надання освітніх послуг навчальними закладами, пов’язаних із одержанням вищої освіти на рівні кваліфікаційних
+                                    вимог до молодшого спеціаліста, бакалавра, спеціаліста, магістра (у т. ч. для іноземних громадян) серія АЕ №636131 від 15.04.2015 р.
+                                </p>
                             </div>
                         </div>
                     </form>
                 </div>
-                <div class="map-wrap" style="width:100%; height: 445px;" id="map"></div>
+                </div>
             </div>
         </div>
     </section>

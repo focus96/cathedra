@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-});
+Route::get('/', 'HomePageController@index');;
 
 Route::view('/about', 'about');
 
@@ -31,6 +29,18 @@ Route::prefix('event')->group(function () {
 Route::prefix('album')->group(function () {
     Route::get('/', 'AlbumController@index');
     Route::get('/{album}', 'AlbumController@show')->name('album-show');
+});
+
+Route::prefix('students')->group(function () {
+    Route::get('/', 'StudentsController@index');
+});
+
+Route::prefix('schedule')->group(function () {
+    Route::get('/', 'ScheduleController@index');
+});
+
+Route::prefix('magazine')->group(function () {
+    Route::get('/', 'MagazineController@index');
 });
 
 Route::view('/contact', 'contact');

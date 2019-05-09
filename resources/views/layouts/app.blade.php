@@ -22,6 +22,8 @@
     <!--
     CSS
     ============================================= -->
+    <script src="{{ asset('js/app.js') }}"></script>
+
     <link rel="stylesheet" href="/css/linearicons.css">
     <link rel="stylesheet" href="/css/font-awesome.min.css">
     <link rel="stylesheet" href="/css/bootstrap.css">
@@ -32,6 +34,7 @@
     <link rel="stylesheet" href="/css/jquery-ui.css">
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/css/app.css">
+    <script src="/js/vendor/jquery-2.2.4.min.js"></script>
 </head>
 <body>
 <header id="header" id="home">
@@ -40,10 +43,9 @@
             <div class="row">
                 <div class="col-lg-6 col-sm-6 col-8 header-top-left no-padding">
                     <ul>
-                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                        <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
-                        <li><a href="#"><i class="fa fa-behance"></i></a></li>
+                        <li><a href="https://www.facebook.com/DonbaskaDerzavnaMasinobudivnaAkademia/?rf=106994689348589"><i class="fa fa-facebook"></i></a></li>
+                        <li><a href="https://twitter.com/dgma_donetsk_ua"><i class="fa fa-twitter"></i></a></li>
+                        <li><a href="http://www.dgma.donetsk.ua/kodeks-chesti.html"><i class="fa fa-dribbble"></i></a></li>
                     </ul>
                 </div>
                 <div class="col-lg-6 col-sm-6 col-4 header-top-right no-padding">
@@ -62,10 +64,21 @@
                 </a>
             </div>
             <nav id="nav-menu-container">
+                <style>
+                    .nav-menu-nav li{
+                        background-color: transparent;
+                    }
+                </style>
                 <ul class="nav-menu">
-                    <li><a href="/">Головна</a></li>
+                    <li ><a href="/">Головна</a></li>
                     <li><a href="/about">Про нас</a></li>
-                    <li><a href="courses.html">Студентам</a></li>
+                    <li ><a href="/students">Студентам</a>
+                        <ul class="nav-menu-nav">
+                            <li ><a href="/schedule">Розклад</a></li>
+                            <li ><a href="/magazine">Журнал</a></li>
+
+                        </ul>
+                    </li>
                     <li><a href="/event">Події</a></li>
                     <li><a href="/album">Галерея</a></li>
                     <li><a href="/news">Новини</a></li>
@@ -158,10 +171,9 @@
                         href="https://colorlib.com" target="_blank">Colorlib</a>
                 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
             <div class="col-lg-6 col-sm-12 footer-social">
-                <a href="#"><i class="fa fa-facebook"></i></a>
-                <a href="#"><i class="fa fa-twitter"></i></a>
-                <a href="#"><i class="fa fa-dribbble"></i></a>
-                <a href="#"><i class="fa fa-behance"></i></a>
+                <a href="https://www.facebook.com/DonbaskaDerzavnaMasinobudivnaAkademia/?rf=106994689348589"><i class="fa fa-facebook"></i></a>
+                <a href="https://twitter.com/dgma_donetsk_ua"><i class="fa fa-twitter"></i></a>
+                <a href="http://www.dgma.donetsk.ua/kodeks-chesti.html"><i class="fa fa-dribbble"></i></a>
             </div>
         </div>
     </div>
@@ -169,7 +181,6 @@
 <!-- End footer Area -->
 
 
-<script src="/js/vendor/jquery-2.2.4.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
         integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
         crossorigin="anonymous"></script>
@@ -186,6 +197,8 @@
 <script src="/js/mail-script.js"></script>
 <script src="/js/main.js"></script>
 <script src="/js/app.js"></script>
+
+
 @stack('scripts')
 </body>
 </html>

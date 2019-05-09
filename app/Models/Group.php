@@ -10,4 +10,8 @@ class Group extends Model
     {
         return $this->hasMany(CathedraUser::class)->where('role', 1);
     }
+    public function shedule()
+    {
+        return $this->belongsTo('App\Shedule');
+    }
 }

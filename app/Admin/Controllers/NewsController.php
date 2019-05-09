@@ -157,8 +157,8 @@ class NewsController extends Controller
             'required' => 'Обязательно для заполнения',
             'max' => 'Кол-во символов не более :max',
         ]);
-        $form->multipleSelect('tags', 'Теги')->options(NewsTag::all()->pluck('name', 'id'));
-        $form->multipleSelect('categories', 'Категории')->options(NewsCategory::all()->pluck('name', 'id'));
+//        $form->multipleSelect('news_tag_id', 'Теги')->options(NewsTag::all()->pluck('name', 'id'));
+//        $form->multipleSelect('categories', 'Категории')->options(NewsCategory::all()->pluck('name', 'id'));
 
         $form->model()->author_id = Admin::user()->id;
 

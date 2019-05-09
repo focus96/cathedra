@@ -24,8 +24,8 @@ class ItemController extends Controller
     public function index(Content $content)
     {
         return $content
-            ->header('Index')
-            ->description('description')
+            ->header('Список предметов')
+            ->description('')
             ->body($this->grid());
     }
 
@@ -39,8 +39,8 @@ class ItemController extends Controller
     public function show($id, Content $content)
     {
         return $content
-            ->header('Detail')
-            ->description('description')
+            ->header('Просмотр')
+            ->description('')
             ->body($this->detail($id));
     }
 
@@ -54,8 +54,8 @@ class ItemController extends Controller
     public function edit($id, Content $content)
     {
         return $content
-            ->header('Edit')
-            ->description('description')
+            ->header('Редактирование')
+            ->description('Редатирование предметов')
             ->body($this->form()->edit($id));
     }
 
@@ -68,8 +68,8 @@ class ItemController extends Controller
     public function create(Content $content)
     {
         return $content
-            ->header('Create')
-            ->description('description')
+            ->header('Добавление')
+            ->description('Добавление нового предмета')
             ->body($this->form());
     }
 
