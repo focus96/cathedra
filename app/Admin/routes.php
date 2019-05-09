@@ -24,6 +24,10 @@ Route::group([
     $router->resource('/shedules', 'SheduleController');
     $router->resource('/items', 'ItemController');
     $router->resource('/students', 'StudentController');
+    $router->resource('/online_journals', 'Online_journalController');
+    //$router->resource('/checkpoints', 'CheckPointController');
 
+    $router->get('/journals/{id}', 'JournalController@index')->name('journal');
+    $router->post('/checkpoints', 'CheckPointController@store')->name('checkpoints');
     $router->get('/telegram-bot', 'TelegramBotController@index');
 });
