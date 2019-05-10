@@ -29,5 +29,8 @@ Route::group([
 
     $router->get('/journals/{id}', 'JournalController@index')->name('journal');
     $router->post('/checkpoints', 'CheckPointController@store')->name('checkpoints');
+    $router->get('/checkpoints/{id}/edit', 'CheckPointController@edit');
+    $router->post('/checkpoints/update/{id}', 'CheckPointController@update')->name('checkpoints_update');
+    $router->get('/checkpoints/delete/{id}', 'CheckPointController@destroy');
     $router->get('/telegram-bot', 'TelegramBotController@index');
 });
