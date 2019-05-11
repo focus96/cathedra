@@ -38,6 +38,7 @@ Route::view('/contact', 'contact');
 Route::get('/get-all-cathedra-users', 'CathedraUserController@all');
 Route::post('/send-telegram-message', 'TelegramController@send');
 
+
 Route::get('/register-telegram-url', function() {
   $ch = curl_init("https://api.telegram.org/bot636548977:AAF3TFV6jmYbSUxgyyW3PQbgjhVJ9gb7JUk/setWebhook");
 
@@ -53,3 +54,4 @@ Route::get('/register-telegram-url', function() {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+

@@ -35,8 +35,8 @@ class TelegramBotController extends Controller
         if(isset($file)){
             $newFilename = time() . str_random(5) . '.' . $file->getClientOriginalExtension();
             Storage::disk('local')->put('public/images/'.$newFilename, file_get_contents($file));
-            $url = 'https://botman.io/img/logo.png';
-            // $url = secure_asset('storage/images/'.$newFilename);
+            // $url = 'https://botman.io/img/logo.png';
+            $url = secure_asset('storage/images/'.$newFilename);
             $attachment = new Image($url);
         }
           
