@@ -38,6 +38,20 @@ Route::view('/contact', 'contact');
 Route::get('/get-all-cathedra-users', 'CathedraUserController@all');
 Route::post('/send-telegram-message', 'TelegramBotController@send');
 
+
+Route::get('/register-telegram-url', function() {
+  $ch = curl_init("https://api.telegram.org/bot636548977:AAF3TFV6jmYbSUxgyyW3PQbgjhVJ9gb7JUk/setWebhook");
+
+    curl_setopt($ch, CURLOPT_HEADER, 0);
+    curl_setopt($ch, CURLOPT_POST, 1);
+  	curl_setopt($ch, CURLOPT_POSTFIELDS,
+            "url=https://298bd188.ngrok.io/botman");
+
+    curl_exec($ch);
+    curl_close($ch);
+});
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+

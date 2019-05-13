@@ -21,4 +21,5 @@ Route::group([
     $router->resource('/groups', 'GroupsController');
 
     $router->get('/telegram-bot', 'TelegramBotController@index');
+    $router->get('/telegram-bot/applicants/cathedra', 'TelegramBotController@cathedra');
 });
