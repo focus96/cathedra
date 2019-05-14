@@ -1,6 +1,7 @@
 <?php
 
 use App\Admin\Controllers\NewsController;
+use App\Admin\Controllers\CathedraInfoController;
 use Illuminate\Routing\Router;
 
 Admin::registerAuthRoutes();
@@ -22,4 +23,5 @@ Route::group([
 
     $router->get('/telegram-bot', 'TelegramBotController@index');
     $router->get('/telegram-bot/applicants/cathedra', 'TelegramBotController@cathedra');
+    $router->resource('/cathedra-info', 'CathedraInfoControllers');
 });

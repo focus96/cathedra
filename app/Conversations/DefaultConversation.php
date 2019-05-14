@@ -10,6 +10,7 @@ use BotMan\BotMan\Messages\Outgoing\Actions\Button;
 use BotMan\BotMan\Messages\Conversations\Conversation;
 use BotMan\BotMan\Storages\Storage;
 use App\Models\Applicant;
+use App\Models\CathedraInfo;
 use App\Models\UserQuestion;
 
 class DefaultConversation extends Conversation
@@ -100,32 +101,25 @@ class DefaultConversation extends Conversation
             if ($answer->isInteractiveMessageReply()) {
                 switch ($answer->getValue()) {
                     case 'cathedra':
-                    $question = Question::create('О кафедре:')
-                    ->addButtons([
-                        Button::create('Материальная база')->value('material'),
-                        Button::create('Состав')->value('consist'),
-                        Button::create('История')->value('history'),
-                    ]);
-
-                    $this->ask($question, function (Answer $answer) {            
-                        // Detect if button was clicked:
-                        if ($answer->isInteractiveMessageReply()) {
-                            switch ($answer->getValue()) {
-                                case 'material':
-                                    $this->say('Материальная база');
-                                    $this->askInfo();
-                                break;
-                                case 'consist':
-                                    $this->say('Состав');
-                                    $this->askInfo();
-                                break;
-                                case 'history':
-                                    $this->say('История');
-                                    $this->askInfo();
-                                break;
-                            }
+                        $cathedraInfo = CathedraInfo::where('active', '=', 1)->get();
+                        $buttonArray = [];
+                    
+                        foreach ($cathedraInfo as $value) {
+                            $button = Button::create($value->caption)->value($value->id);
+                            $buttonArray[] = $button;
                         }
-                    });
+
+                        $question = Question::create('О кафедре:')->addButtons($buttonArray);
+
+                        $this->ask($question, function (Answer $answer) {
+                            if ($answer->isInteractiveMessageReply()) {
+                                $cathedraId = CathedraInfo::where('id', '=', $answer->getValue())->first();
+                                if($answer->getValue()) {
+                                    $this->say($cathedraId->answer);
+                                    $this->askInfo();                                    
+                                }
+                            }
+                        }); 
                     break;
                     case 'programm':
                         $question = Question::create('Вступительная компания:')

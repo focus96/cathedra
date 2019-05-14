@@ -45,7 +45,7 @@ Route::get('/register-telegram-url', function() {
     curl_setopt($ch, CURLOPT_HEADER, 0);
     curl_setopt($ch, CURLOPT_POST, 1);
   	curl_setopt($ch, CURLOPT_POSTFIELDS,
-            "url=https://298bd188.ngrok.io/botman");
+            "url=https://61e32cf6.ngrok.io/botman");
 
     curl_exec($ch);
     curl_close($ch);
@@ -55,3 +55,4 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::post('/botman', 'TelegramBotHearsController@hears');
