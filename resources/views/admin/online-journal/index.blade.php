@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
@@ -10,66 +11,114 @@
         .is-invalid {
             border-color: #e3342f;
         }
+
+        table {
+            font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+            font-size: 12px;
+            border-radius: 10px;
+            border-spacing: 0;
+            text-align: center;
+        }
+
+        th, td:first-child {
+            background: #AFCDE7;
+            color: white;
+            text-shadow: 0 1px 1px #2D2020;
+            padding: 10px 20px;
+        }
+
+        th, td {
+            border-style: solid;
+            border-width: 0 1px 1px 0;
+            border-color: white;
+        }
+
+        th:first-child, td:first-child {
+            text-align: left;
+        }
+
+        th:first-child {
+            border-top-left-radius: 10px;
+        }
+
+        th:last-child {
+            border-top-right-radius: 10px;
+            border-right: none;
+        }
+
+        td {
+            padding: 10px 20px;
+            _background: #c7c78f;
+            background: #D8E6F3;
+        }
+
+        tr:last-child td:first-child {
+            border-radius: 0 0 0 10px;
+        }
+
+        tr:last-child td:last-child {
+            border-radius: 0 0 10px 0;
+        }
+
+        tr td:last-child {
+            border-right: none;
+        }
     </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
     <script>
-        $(document).ready(function(){
-        @if (count($errors) > 0)
+        $(document).ready(function () {
+            @if (count($errors) > 0)
             $('#basicModal').modal('show');
-        @endif
+            @endif
         });
     </script>
 </head>
 <body>
 <div>
-    <form action="">
-        <table border>
+    <div class="row mb-4">
+        <div class="col text-left">
+            <a href="#" id="btnAddCol" class="btn btn-primary" data-toggle="modal" data-target="#basicModal"
+               style="margin-left: 15px;">Добавить
+                контрольную точку</a>
+        </div>
+    </div>
+        <table id="student_points">
             @if($journal->is_close === 0)
                 <caption>Журнал № {{ $journal->id }} Статус: Открыт</caption>
             @else
                 <caption>Журнал № {{ $journal->id }} Статус: Закрыт</caption>
             @endif
-
-            <div class="row mb-4">
-                <div class="col text-left">
-                    <a href="#" id="btnAddCol" class="btn btn-primary" data-toggle="modal" data-target="#basicModal"
-                       style="margin-left: 15px;">Добавить
-                        контрольную точку</a>
-                </div>
-            </div>
-
-            <thead>
             <tr>
-                <th>{{ $group->name_group }}</th>
-                    @foreach($checkpoints as $checkpoint)
-                        <td>
-                            {{ $checkpoint->name }}
-                            <a href="/admin/checkpoints/{{ $checkpoint->id }}/edit">Ред</a>
-                            <span>\</span>
-                            <a class="delete" data-confirm="Удалить контрольную точку?" href="/admin/checkpoints/delete/{{ $checkpoint->id }}">Удалить</a>
-                        </td>
-                    @endforeach
+                <th>{{ $journal->groupRelation->name_group }}</th>
+                @foreach($journal->checkpoints as $checkpoint)
+                    <th>
+                        {{ $checkpoint->name }}
+                        <a href="/admin/checkpoints/{{ $checkpoint->id }}/edit">Ред</a>
+                        <span>\</span>
+                        <a class="delete" data-confirm="Удалить контрольную точку?"
+                           href="/admin/checkpoints/delete/{{ $checkpoint->id }}">Удалить</a>
+                    </th>
+                @endforeach
             </tr>
-            </thead>
-            <tfoot>
-            @foreach($students as $student)
-                <tr>
-                    <td>{{ $student->surname }}</td>
-                    @foreach($student_points as $student_point)
-                        @if($student_point->student_id === $student->id)
-                            <td>{{ $student_point->points }}</td>
-                        @endif
-                    @endforeach
-                </tr>
-            @endforeach
-            </tfoot>
-            <tbody>
+                @foreach($journal->groupRelation->students as $student)
+                    <tr>
+                        <td>{{ $student->surname }}</td>
+                        @foreach($journal->checkpoints as $checkpoint)
+                            @php
+                                $point = $student->points->where('checkpoint_id', $checkpoint->id)->first();
+                            @endphp
+                            <td
+                                    data-journal-id="{{$journal->id}}"
+                                    data-student-id="{{$student->id}}"
+                                    data-checkpoint-id="{{$checkpoint->id}}"
+                                    data-student_point-id="{{$point ? $point->id : ''}}"
 
-            </tbody>
+                                    class="edit points">{{ $point ? $point->points : '' }}</td>
+                        @endforeach
+                    </tr>
+                @endforeach
         </table>
-    </form>
 </div>
-{{--{{ dump($errors) }}--}}
 
 <div class="modal fade" id="basicModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
     <div class="modal-dialog">
@@ -161,14 +210,11 @@
 </div>
 
 <script>
-    $('#btnAddCol').click(function () {
-        $("tr").append("<td>New Column</td>");
-    });
 
     var deleteLinks = document.querySelectorAll('.delete');
 
     for (var i = 0; i < deleteLinks.length; i++) {
-        deleteLinks[i].addEventListener('click', function(event) {
+        deleteLinks[i].addEventListener('click', function (event) {
             event.preventDefault();
 
             var choice = confirm(this.getAttribute('data-confirm'));
@@ -179,6 +225,72 @@
         });
     };
 
+
+    //при нажатии на ячейку таблицы с классом edit
+    $('td.edit').dblclick(function () {
+        //находим input внутри элемента с классом ajax и вставляем вместо input его значение
+        $('.ajax').html($('.ajax input').val());
+        //удаляем все классы ajax
+        $('.ajax').removeClass('ajax');
+        //Нажатой ячейке присваиваем класс ajax
+        $(this).addClass('ajax');
+        //внутри ячейки создаём input и вставляем текст из ячейки в него
+        $(this).html('<input id="editbox" size="' + $(this).text().length + '" type="text" value="' + $(this).text() + '" />');
+        //устанавливаем фокус на созданном элементе
+        $('#editbox').focus();
+    });
+
+    //определяем нажатие кнопки на клавиатуре
+    $('td.edit').keydown(function (event) {
+        //проверяем какая была нажата клавиша и если была нажата клавиша Enter (код 13)
+        if (event.which == 13) {
+            saveData($(this));
+        }
+    });
+
+    //сохранение при нажатии вне поля
+    $(document).on('blur', '#editbox', function () {
+        saveData($(this).closest('td'));
+        $('.ajax').html($('.ajax input').val());
+        $('.ajax').removeClass('ajax');
+    });
+
+    function saveData(el) {
+        //получаем значение класса и разбиваем на массив
+        //в итоге получаем такой массив - arr[0] = edit, arr[1] = наименование столбца (points)
+        let arr = el.attr('class').split(" ");
+        //назначаем атрибуты для ячейки
+        let studentId =  el.attr('data-student-id');
+        let journalId =  el.attr('data-journal-id');
+        let checkpointId =  el.attr('data-checkpoint-id');
+        let student_pointlId =  el.attr('data-student_point-id');
+        //получаем наименование таблицы, в которую будем вносить изменения
+        var table = $('table').attr('id');
+        //подготавливаем данные для отправки
+        //value = введенное значение
+        //field = название столбца
+        //table = название таблицы
+        var data = {value : $('.ajax input').val(), student_point_id : student_pointlId, field : arr[1], checkpoint_id : checkpointId, student_id : studentId, journal_id : journalId, table : table};
+
+        //выполняем ajax запрос методом POST
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            url: '/admin/student_points',
+            type: 'POST',
+            data: data,
+            //при удачном выполнении скрипта, производим действия
+            success: function (data) {
+                //находим input внутри элемента с классом ajax и вставляем вместо input его значение
+                $('.ajax').html($('.ajax input').val());
+                //удаялем класс ajax
+                $('.ajax').removeClass('ajax');
+            }
+        });
+    }
 
 </script>
 

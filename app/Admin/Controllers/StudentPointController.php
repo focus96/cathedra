@@ -4,114 +4,38 @@ namespace App\Admin\Controllers;
 
 use App\Models\StudentPoint;
 use App\Http\Controllers\Controller;
-use Encore\Admin\Controllers\HasResourceActions;
-use Encore\Admin\Form;
-use Encore\Admin\Grid;
-use Encore\Admin\Layout\Content;
-use Encore\Admin\Show;
+use Illuminate\Http\Request;
 
 class StudentPointController extends Controller
 {
-    use HasResourceActions;
-
-    /**
-     * Index interface.
-     *
-     * @param Content $content
-     * @return Content
-     */
-    public function index(Content $content)
+    public function update(Request $request)
     {
-        return $content
-            ->header('Index')
-            ->description('description')
-            ->body($this->grid());
-    }
+        $studentPoint = StudentPoint::find($request->student_point_id);
 
-    /**
-     * Show interface.
-     *
-     * @param mixed $id
-     * @param Content $content
-     * @return Content
-     */
-    public function show($id, Content $content)
-    {
-        return $content
-            ->header('Detail')
-            ->description('description')
-            ->body($this->detail($id));
-    }
-
-    /**
-     * Edit interface.
-     *
-     * @param mixed $id
-     * @param Content $content
-     * @return Content
-     */
-    public function edit($id, Content $content)
-    {
-        return $content
-            ->header('Edit')
-            ->description('description')
-            ->body($this->form()->edit($id));
-    }
-
-    /**
-     * Create interface.
-     *
-     * @param Content $content
-     * @return Content
-     */
-    public function create(Content $content)
-    {
-        return $content
-            ->header('Create')
-            ->description('description')
-            ->body($this->form());
-    }
-
-    /**
-     * Make a grid builder.
-     *
-     * @return Grid
-     */
-    protected function grid()
-    {
-        $grid = new Grid(new StudentPoint);
+        if($studentPoint){
 
 
+            $studentPoint->checkpoint_id = $request->checkpoint_id;
+            $studentPoint->student_id = $request->student_id;
+            $studentPoint->journal_id = $request->journal_id;
+            $studentPoint->checkpoint_id = $request->checkpoint_id;
+            $studentPoint->points = $request->value;
 
-        return $grid;
-    }
+            $studentPoint->save();
 
-    /**
-     * Make a show builder.
-     *
-     * @param mixed $id
-     * @return Show
-     */
-    protected function detail($id)
-    {
-        $show = new Show(StudentPoint::findOrFail($id));
+        }else{
 
+            $studentPoint = new StudentPoint();
 
+            $studentPoint->checkpoint_id = $request->checkpoint_id;
+            $studentPoint->student_id = $request->student_id;
+            $studentPoint->journal_id = $request->journal_id;
+            $studentPoint->checkpoint_id = $request->checkpoint_id;
+            $studentPoint->points = $request->value;
 
-        return $show;
-    }
+            $studentPoint->save();
+        }
 
-    /**
-     * Make a form builder.
-     *
-     * @return Form
-     */
-    protected function form()
-    {
-        $form = new Form(new StudentPoint);
-
-
-
-        return $form;
+        return redirect(route('journal', $request->journal_id));
     }
 }

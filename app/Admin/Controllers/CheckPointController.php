@@ -56,7 +56,6 @@ class CheckPointController extends Controller
 
     public function destroy($id)
     {
-        dd(1);
         $checkpoint = CheckPoint::findOrFail($id)->delete();
 
         return redirect()->back();
