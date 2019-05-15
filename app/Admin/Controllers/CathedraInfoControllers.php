@@ -26,7 +26,7 @@ class CathedraInfoControllers extends Controller
     {
         return $content
             ->header('О кафедре')
-            ->description('наша кафедра')
+            ->description('')
             ->body($this->grid());
     }
 
@@ -55,8 +55,8 @@ class CathedraInfoControllers extends Controller
     public function edit($id, Content $content)
     {
         return $content
-            ->header('Edit')
-            ->description('description')
+            ->header('Редактировать')
+            ->description('запись')
             ->body($this->form()->edit($id));
     }
 
@@ -69,8 +69,8 @@ class CathedraInfoControllers extends Controller
     public function create(Content $content)
     {   
         return $content
-            ->header('Create')
-            ->description('description')
+            ->header('Создать')
+            ->description('запись')
             ->body($this->form());
     }
 
@@ -144,39 +144,25 @@ class CathedraInfoControllers extends Controller
         $form->switch('active', 'Статус')->default(1);
         $form->saved(function (Form $form) {
             $path = storage_path('/app/public/uploads' . $form->model()->id);
-            dump($path);
             if(!file_exists($path)) {
                 mkdir($path);
             }   
         });
 
-        //подключаемся к бд
-        $link = mysqli_connect("localhost", "root", "", "telegram_bot");
-
-        /* проверка соединения */
-        if (mysqli_connect_errno()) {
-            printf("Соединение не удалось: %s\n", mysqli_connect_error());
-            exit();
-        }
-
-        if ($result = mysqli_query($link, "SELECT * FROM cathedra_info WHERE active = 1")) {
-
+        $form->saving(function ($form) {
             /* определение числа рядов в выборке */
-            if ($row_cnt = mysqli_num_rows($result) >= 5) {
+            $result = CathedraInfo::where('active', '=', 1)->count();
+            
+            if ($result >= 5 && $form->active === 'on') {
                 // redirect back with an error message
-                $form->saving(function ($form) {
+                $error = new MessageBag([
+                    'title'   => 'Ошибка',
+                    'message' => 'Максимальное количество активных записей 5. ',
+                ]);
 
-                    $error = new MessageBag([
-                        'title'   => 'Ошибка',
-                        'message' => 'Максимальное количество активных записей 5. ',
-                    ]);
-
-                    return redirect('/admin/cathedra-info')->with(compact('error'));
-                });
+                return redirect('/admin/cathedra-info')->with(compact('error'));              
             }
-            /* закрытие выборки */
-            mysqli_free_result($result);
-        }
+        });
 
         return $form;       
     }
