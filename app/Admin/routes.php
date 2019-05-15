@@ -24,5 +24,6 @@ Route::group([
     $router->resource('/telegram-bot/applicants/cathedra', 'CathedraInfoControllers');
 
     $router->get('/telegram-bot/mailing/mail', 'TelegramBotController@index');
+    $router->resource('/telegram-bot/applicants/cathedra-info', 'CathedraInfoControllers');
     
 });
