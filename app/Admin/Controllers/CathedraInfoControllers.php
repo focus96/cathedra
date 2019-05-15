@@ -151,7 +151,7 @@ class CathedraInfoControllers extends Controller
         });
 
         //подключаемся к бд
-        $link = mysqli_connect("localhost", "root", "", "telegram_bot");
+        $link = mysqli_connect("localhost", "root", "", "cathedra");
 
         /* проверка соединения */
         if (mysqli_connect_errno()) {

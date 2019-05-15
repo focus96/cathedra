@@ -20,8 +20,9 @@ Route::group([
     $router->resource('/events', 'EventController');
     $router->resource('/cathedra-users', 'CathedraUsersController');
     $router->resource('/groups', 'GroupsController');
+    $router->resource('/telegram-bot/mailing/list', 'MailController');
+    $router->resource('/telegram-bot/applicants/cathedra', 'CathedraInfoControllers');
 
-    $router->get('/telegram-bot', 'TelegramBotController@index');
-    $router->get('/telegram-bot/applicants/cathedra', 'TelegramBotController@cathedra');
-    $router->resource('/cathedra-info', 'CathedraInfoControllers');
+    $router->get('/telegram-bot/mailing/mail', 'TelegramBotController@index');
+    
 });
