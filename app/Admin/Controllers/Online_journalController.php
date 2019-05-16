@@ -104,34 +104,6 @@ class Online_journalController extends Controller
         $grid->model()->orderBy('is_close', 'asc');
         $grid->updated_at('Журнал обновлен');
 
-        /*$grid->id('Ид, Содержание')->modal('Содержание журнала', function () {
-
-            $headers = ['Список группы', 'Лаб.раб.', 'Контр.раб.', 'Практич.раб.'];
-
-            $lab = [10, 15, 20];
-            $kontr = [100, 150, 200];
-            $prakt = [110, 115, 120];
-            $rows = [];
-
-            $students = Student::all()->pluck('name');
-            foreach ($students as $student){
-                foreach ($lab as $key_l => $l){
-                    foreach ($kontr as $key_k => $k){
-                        foreach ($prakt as $key_p => $p){
-                            $rows[] = [$student, $l, $k, $p];
-                            unset($prakt[$key_p]);
-                            break;
-                        }
-                        unset($kontr[$key_k]);
-                        break;
-                    }
-                    unset($lab[$key_l]);
-                    break;
-                }
-            }
-            Return new Table($headers, $rows);
-        });*/
-
         return $grid;
     }
 

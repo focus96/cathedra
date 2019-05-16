@@ -8,7 +8,7 @@ class Group extends Model
 {
     public function students()
     {
-        return $this->hasMany(CathedraUser::class)->where('role', 1);
+        return $this->hasMany(Student::class, 'groups_id');
     }
     public function shedule()
     {

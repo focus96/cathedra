@@ -90,10 +90,10 @@ class GroupsController extends Controller
             $group_name = $this->specialty . ' ' . $this->admission_year . ' - ' . $this->group_number;
 
             if ($this->level_education === 'bachelor_acceleration'){
-                return $group_name . ' [ у ] ';
+                return $group_name . ' [у] ';
             }
             elseif ($this->level_education === 'master'){
-                return $group_name . ' [ м ] ';
+                return $group_name . ' [м] ';
             }
             else {
                 return $group_name;

@@ -25,9 +25,9 @@ class CheckPointRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:255|min:3',
-            //'max_point' => 'required|numeric|min:0',
-            //'date' => 'required|date|after:today',
-            //'deadline' => 'required|after:date',
+            'max_point' => 'required|numeric|min:0',
+            'date' => 'required|date|after_or_equal:today',
+            'deadline' => 'required|after:date',
         ];
     }
 }

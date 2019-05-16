@@ -31,4 +31,33 @@ class CheckPointController extends Controller
 
         return redirect(route('journal', $request->journal_id));
     }
+
+    public function edit($id)
+    {
+        $checkpoint = CheckPoint::findOrFail($id);
+
+        return view('admin.online-journal.edit', compact('checkpoint'));
+    }
+
+    public function update(CheckPointRequest $request, $id)
+    {
+        $checkpoint = CheckPoint::findOrFail($id);
+
+        $checkpoint->name = $request->name;
+        $checkpoint->max_point = $request->max_point;
+        $checkpoint->date = $request->date;
+        $checkpoint->deadline = $request->deadline;
+        $checkpoint->journal_id = $request->journal_id;
+
+        $checkpoint->save();
+
+        return redirect(route('journal', $request->journal_id));
+    }
+
+    public function destroy($id)
+    {
+        $checkpoint = CheckPoint::findOrFail($id)->delete();
+
+        return redirect()->back();
+    }
 }

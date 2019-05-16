@@ -6,5 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Student extends Model
 {
-    //
+    public function points()
+    {
+        return $this->hasMany(StudentPoint::class);
+    }
 }

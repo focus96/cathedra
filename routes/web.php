@@ -73,5 +73,3 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-//Route::post('checkpoints', 'CheckPointController@store')->name('checkpoints');
-//Route::resource('checkpoints', 'CheckPointController');
