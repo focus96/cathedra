@@ -5,9 +5,11 @@
     <!-- start banner Area -->
     <section class="banner-area relative about-banner" id="home">
         <style>
-
+            .genric-btn{
+                line-height: 30px;
+            }
             .banner-area{
-                background: url(../img/baner.jpg) right;
+                background: url(../img/baner2.jpg) right;
             }
         </style>
         <div class="overlay overlay-bg"></div>
@@ -26,91 +28,36 @@
     <!-- Start contact-page Area -->
     <section class="contact-page-area section-gap">
         <div class="container">
+            <div class="row">
+                <div class="col-lg-2 d-flex flex-column address-wrap">
+                    <div class="single-contact-address d-flex flex-row">
+                        <select class="btn btn-secondary btn-sm dropdown-toggle" id="list">
+                            <option value="1" selected>По группе</option>
+                            <option value="2">По преподователю</option>
+                            <option value="3">По аудитории</option>
+                            <option value="4">От предмета по группе</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-lg-8">
+                    <a href="edit.html" class="genric-btn primary"><i class="fa fa-download"></i> PDF</a>
+                    <a href="edit.html" class="genric-btn primary"><i class="fa fa-download"></i> Excel</a>
+                    <a href="edit.html" class="genric-btn primary"><i class="fa fa-download"></i> Png</a>
+                </div>
+            </div>
             <div class="col-md-12s">
-                {{--<div class="btn-group">--}}
-                    {{--<button class="btn btn-warning btn-sm dropdown-toggle" style="background-color: #f7631b" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">--}}
-                        {{--Фільтр--}}
-                    {{--</button>--}}
-                    {{--<div class="dropdown-menu">--}}
-                        {{--<a class="dropdown-item" href="#">По групі</a>--}}
-                        {{--<a class="dropdown-item" href="#">По викладачеві</a>--}}
-                        {{--<a class="dropdown-item" href="#">По предмету</a>--}}
-                        {{--<div class="dropdown-divider"></div>--}}
-                        {{--<a class="dropdown-item" href="#">Від кабінету</a>--}}
-                    {{--</div>--}}
-                {{--</div>--}}
-
-                {{--<div class="form-group">--}}
-                    {{--<select name="filter" id="">--}}
-                        {{--<option value="1">День недели по группе</option>--}}
-                        {{--<option value="1">День недели по преподователю</option>--}}
-                        {{--<option value="1">День недели по предмету</option>--}}
-                        {{--<option value="1">День недели от кабинета</option>--}}
-                    {{--</select>--}}
-                {{--</div>--}}
-                <!-- /.box-header -->
-                <div class="box-body">
-                    {{--<table id="example1" class="table table-bordered table-striped">--}}
-                        {{--<thead>--}}
-                        {{--<tr>--}}
-                            {{--<th>День тижня</th>--}}
-                            {{--<th>Група</th>--}}
-                            {{--<th>Аудиторія</th>--}}
-                            {{--<th>Номер пари</th>--}}
-                            {{--<th>Викладач</th>--}}
-                            {{--<th>Парність тижня</th>--}}
-                            {{--<th>Тип занять</th>--}}
-                            {{--<th>Завантажити</th>--}}
-
-                        {{--</tr>--}}
-                        {{--</thead>--}}
-                        {{--<tbody>--}}
-                        {{--@foreach($shedules as $shedule)--}}
-                            {{--<tr>--}}
-                                {{--<td>{{$shedule->day}}</td>--}}
-                                {{--<td>{{$shedule->group}}</td>--}}
-
-                                {{--<td>{{$shedule->lecture_hall}}</td>--}}
-                                {{--<td>{{$shedule->couple_number}}</td>--}}
-                                {{--<td>{{$shedule->teacher}}</td>--}}
-                                {{--<td>{{$shedule->parity_week}}</td>--}}
-                                {{--<td>{{$shedule->type_occupation}}</td>--}}
-                                {{--<td>--}}
-                                    {{--<a href="edit.html" class="fa fa-download"> PDF</a>--}}
-                                    {{--<a href="edit.html" class="fa fa-download"> Excel</a>--}}
-                                    {{--<a href="edit.html" class="fa fa-download"> Png</a>--}}
-                                {{--</td>--}}
-                            {{--</tr>--}}
-                        {{--@endforeach--}}
-                        {{--</tfoot>--}}
-                    {{--</table>--}}
-                </div>
-                <div class="btn-group">
-                    <select class="btn btn-secondary btn-sm dropdown-toggle" id="list">
-                        <option value="1" selected>По дню</option>
-                        <option value="2">По группе</option>
-                    </select>
-                </div>
                 <table id="example1" class="table table-bordered table-striped">
                     <thead>
 
                     <tr id="headTable">
                         <th>День недели</th>
                         <th>Номер пары</th>
-                         @foreach($groups as $key => $group)
+                        @foreach($groups as $key => $group)
                             <th id="{{'group'.$key}}">{{$group}}</th>
-                            @endforeach
+                        @endforeach
                     </tr>
                     </thead>
                     <tbody>
-
-                    {{--<tr>--}}
-                        {{--<td  width="10%" id="mon">Понедельник</td>--}}
-                        {{--<td id="td1"></td>--}}
-                        {{--<td id="td2"></td>--}}
-                        {{--<td id="td3"></td>--}}
-                        {{--<td id="td4"></td>--}}
-                    {{--</tr>--}}
                     <tr id="m1">
                         <td rowspan="5" width="10%" id="mon" >Понедельник</td>
                         <td id="mn1">1</td>
@@ -304,15 +251,9 @@
                         @endforeach
                     </tr>
 
-                </tbody>
-            </table>
-            <!-- /.box-body -->
-            {{--<div class="form-group">--}}
-                    {{--<a href="create.html" class="genric-btn primary"><i class="fa fa-download"></i><span class="hidden-xs"> Экспорт PDF</span></a>--}}
-                    {{--<a href="create.html" class="genric-btn primary"><i class="fa fa-download"></i><span class="hidden-xs"> Экспорт Excel</span></a>--}}
-                    {{--<a href="create.html" class="genric-btn primary"><i class="fa fa-download"></i><span class="hidden-xs"> Экспорт Png</span></a>--}}
+                    </tbody>
+                </table>
 
-                {{--</div>--}}
             </div>
     </section>
     <!-- End contact-page Area -->
@@ -327,16 +268,23 @@
 
         $(function(){
             dayFromGroup();
-
             $("#list").on('change', function () {
                 switch ($("#list option:selected").val()) {
                     case '1':
-                        dayFromGroup();
-                    break;
+                        document.location.href = '/'
+                        break;
 
                     case '2':
-                        alert('2')
-                    break;
+                        window.location.replace("/teacher");
+                        break;
+
+                    case '3':
+                        window.location.replace("/lecture");
+                        break;
+
+                    case '4':
+                        window.location.replace("/item");
+                        break;
 
                     default:
                         alert( 'Я таких значений не знаю' );
@@ -353,7 +301,7 @@
                         if ($('#headTable #group' + index).text() == value.group) {
                             for (var i = 1; i < 6; i++) {
                                 if ($('#mn' + i).text() == value.couple_number) {
-                                    $('#m' + i + ' .td' + index).text(value.teacher + ', ');
+                                    $('#m' + i + ' .td' + index).text(value.item + ', '+ value.teacher);
                                 }
                             }
                             ;
@@ -366,7 +314,7 @@
                         if ($('#headTable #group' + index).text() == value.group) {
                             for (var i = 1; i < 6; i++) {
                                 if ($('#ts' + i).text() == value.couple_number) {
-                                    $('#t' + i + ' .td' + index).text(value.teacher + ', ');
+                                    $('#t' + i + ' .td' + index).text(value.item + ', '+ value.teacher);
                                 }
                             }
                             ;
@@ -379,7 +327,7 @@
                         if ($('#headTable #group' + index).text() == value.group) {
                             for (var i = 1; i < 6; i++) {
                                 if ($('#we' + i).text() == value.couple_number) {
-                                    $('#w' + i + ' .td' + index).text(value.teacher + ', ');
+                                    $('#w' + i + ' .td' + index).text(value.item + ', '+ value.teacher);
                                 }
                             }
                             ;
@@ -392,7 +340,7 @@
                         if ($('#headTable #group' + index).text() == value.group) {
                             for (var i = 1; i < 6; i++) {
                                 if ($('#thu' + i).text() == value.couple_number) {
-                                    $('#th' + i + ' .td' + index).text(value.teacher + ', ');
+                                    $('#th' + i + ' .td' + index).text(value.item + ', '+ value.teacher);
                                 }
                             }
                             ;
@@ -405,7 +353,7 @@
                         if ($('#headTable #group' + index).text() == value.group) {
                             for (var i = 1; i < 6; i++) {
                                 if ($('#f' + i).text() == value.couple_number) {
-                                    $('#fr' + i + ' .td' + index).text(value.teacher + ', ');
+                                    $('#fr' + i + ' .td' + index).text(value.item + ', '+ value.teacher);
                                 }
                             }
                             ;
@@ -418,7 +366,7 @@
                         if ($('#headTable #group' + index).text() == value.group) {
                             for (var i = 1; i < 6; i++) {
                                 if ($('#s' + i).text() == value.couple_number) {
-                                    $('#sa' + i + ' .td' + index).text(value.teacher + ', ');
+                                    $('#sa' + i + ' .td' + index).text(value.item + ', '+ value.teacher);
                                 }
                             }
                             ;
@@ -426,24 +374,6 @@
                     });
                 }
             });
-        }
-
-        function dayFromTeacher()
-        {
-            $.each(shedules, function (id, value) {
-                if ($("#mon").text().toUpperCase() == value.day.toUpperCase()) {
-                    $.each(teachers, function (index, item) {
-                        if ($('#headTable #group' + index).text() == value.teachers) {
-                            for (var i = 1; i < 6; i++) {
-                                if ($('#mn' + i).text() == value.couple_number) {
-                                    $('#m' + i + ' .td' + index).text(value.parity_week + ', ');
-                                }
-                            }
-                            ;
-                        }
-                    });
-                }
-            })
         }
     </script>
 @endsection

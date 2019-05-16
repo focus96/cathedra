@@ -3,12 +3,16 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\User;
+use Cviebrock\EloquentSluggable\Sluggable;
 
 class News extends Model
 {
-//    u
+    use Sluggable;
+
     protected $fillable = [
         'title',
+        'slug',
         'short',
         'content',
         'image',
@@ -49,12 +53,17 @@ class News extends Model
 
         return '/uploads/' . $this->image;
     }
-//    public function sluggable()
+
+//    public function author()
 //    {
-//        return [
-//            'slug' => [
-//                'source' => 'name'
-//            ]
-//        ];
+//        return $this->hasOne(User::class);
 //    }
+    public function sluggable()
+    {
+        return [
+            'slug' => [
+                'source' => 'title'
+            ]
+        ];
+    }
 }

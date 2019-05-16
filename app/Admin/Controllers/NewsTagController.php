@@ -31,31 +31,31 @@ class NewsTagController extends Controller
     /**
      * Show interface.
      *
-     * @param mixed $id
+     * @param mixed $slug
      * @param Content $content
      * @return Content
      */
-    public function show($id, Content $content)
+    public function show($slug, Content $content)
     {
         return $content
             ->header('Детали')
             ->description(' ')
-            ->body($this->detail($id));
+            ->body($this->detail($slug));
     }
 
     /**
      * Edit interface.
      *
-     * @param mixed $id
+     * @param mixed $slug
      * @param Content $content
      * @return Content
      */
-    public function edit($id, Content $content)
+    public function edit($slug, Content $content)
     {
         return $content
             ->header('Редактирование')
             ->description(' ')
-            ->body($this->form()->edit($id));
+            ->body($this->form()->edit($slug));
     }
 
     /**
@@ -92,9 +92,9 @@ class NewsTagController extends Controller
      * @param mixed $id
      * @return Show
      */
-    protected function detail($id)
+    protected function detail($slug)
     {
-        $show = new Show(NewsTag::findOrFail($id));
+        $show = new Show(NewsTag::findOrFail($slug));
 
         $show->name('Найменование');
 

@@ -35,12 +35,12 @@ class EventController extends Controller
      * @param Content $content
      * @return Content
      */
-    public function show($id, Content $content)
+    public function show($slug, Content $content)
     {
         return $content
             ->header('Детали')
             ->description(' ')
-            ->body($this->detail($id));
+            ->body($this->detail($slug));
     }
 
     /**
@@ -50,12 +50,12 @@ class EventController extends Controller
      * @param Content $content
      * @return Content
      */
-    public function edit($id, Content $content)
+    public function edit($slug, Content $content)
     {
         return $content
             ->header('Редактирование')
             ->description(' ')
-            ->body($this->form()->edit($id));
+            ->body($this->form()->edit($slug));
     }
 
     /**
@@ -95,9 +95,9 @@ class EventController extends Controller
      * @param mixed $id
      * @return Show
      */
-    protected function detail($id)
+    protected function detail($slug)
     {
-        $show = new Show(Event::findOrFail($id));
+        $show = new Show(Event::findOrFail($slug));
 
         $show->id('Id');
         $show->name('Найменование');

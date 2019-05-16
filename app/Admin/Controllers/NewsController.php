@@ -38,12 +38,12 @@ class NewsController extends Controller
      * @param Content $content
      * @return Content
      */
-    public function show($id, Content $content)
+    public function show($slug, Content $content)
     {
         return $content
             ->header('Просмотр новости')
             ->description(' ')
-            ->body($this->detail($id));
+            ->body($this->detail($slug));
     }
 
     /**
@@ -53,12 +53,12 @@ class NewsController extends Controller
      * @param Content $content
      * @return Content
      */
-    public function edit($id, Content $content)
+    public function edit($slug, Content $content)
     {
         return $content
             ->header('Редактирование новости')
             ->description(' ')
-            ->body($this->form()->edit($id));
+            ->body($this->form()->edit($slug));
     }
 
     /**
@@ -103,9 +103,9 @@ class NewsController extends Controller
      * @param mixed $id
      * @return Show
      */
-    protected function detail($id)
+    protected function detail($slug)
     {
-        $show = new Show(News::findOrFail($id));
+        $show = new Show(News::findOrFail($slug));
 
         $show->id('Ид');
         $show->title('Заголовк');
@@ -157,7 +157,7 @@ class NewsController extends Controller
             'required' => 'Обязательно для заполнения',
             'max' => 'Кол-во символов не более :max',
         ]);
-//        $form->multipleSelect('news_tag_id', 'Теги')->options(NewsTag::all()->pluck('name', 'id'));
+//        $form->multipleSelect('news_news_tag_id', 'Теги')->options(NewsTag::all()->pluck('name', 'id'));
 //        $form->multipleSelect('categories', 'Категории')->options(NewsCategory::all()->pluck('name', 'id'));
 
         $form->model()->author_id = Admin::user()->id;

@@ -73,17 +73,17 @@
                             <div class="col-lg-6 col-md-6 col-12 nav-left flex-row d-flex justify-content-start align-items-center">
                                 @if($previous)
                                     <div class="thumb" style="width: 40%;">
-                                        <a href="{{ route('news-show', $previous->id) }}"><img class="img-fluid"
+                                        <a href="{{ route('news-show', $previous->slug) }}"><img class="img-fluid"
                                                                                                src="{{ '/uploads/' . $previous->image }}"
                                                                                                alt=""></a>
                                     </div>
                                     <div class="arrow" style="width: 40%;">
-                                        <a href="{{ route('news-show', $previous->id) }}"><span
+                                        <a href="{{ route('news-show', $previous->slug) }}"><span
                                                     class="lnr text-white lnr-arrow-left"></span></a>
                                     </div>
                                     <div class="detials" style="width: 60%">
                                         <p>Предыдущая новость</p>
-                                        <a href="{{ route('news-show', $previous->id) }}">
+                                        <a href="{{ route('news-show', $previous->slug) }}">
                                             <h4>{{ $previous->title }}</h4></a>
                                     </div>
                                 @endif
@@ -92,14 +92,14 @@
                                 @if($next)
                                     <div class="detials" style="width: 60%">
                                         <p>Следующая новость</p>
-                                        <a href="{{ route('news-show', $next->id) }}"><h4>{{ $next->title }}</h4></a>
+                                        <a href="{{ route('news-show', $next->slug) }}"><h4>{{ $next->title }}</h4></a>
                                     </div>
                                     <div class="arrow" style="width: 40%;">
-                                        <a href="{{ route('news-show', $next->id) }}"><span
+                                        <a href="{{ route('news-show', $next->slug) }}"><span
                                                     class="lnr text-white lnr-arrow-right"></span></a>
                                     </div>
                                     <div class="thumb" style="width: 40%;">
-                                        <a href="{{ route('news-show', $next->id) }}"><img class="img-fluid"
+                                        <a href="{{ route('news-show', $next->slug) }}"><img class="img-fluid"
                                                                                            src="{{ '/uploads/' . $next->image }}"
                                                                                            alt=""></a>
                                     </div>
@@ -147,63 +147,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="comment-list left-padding">
-                            <div class="single-comment justify-content-between d-flex">
-                                <div class="user justify-content-between d-flex">
-                                    <div class="thumb">
-                                        <img src="/img/blog/c3.jpg" alt="">
-                                    </div>
-                                    <div class="desc">
-                                        <h5><a href="#">Annie Stephens</a></h5>
-                                        <p class="date">December 4, 2017 at 3:12 pm </p>
-                                        <p class="comment">
-                                            Never say goodbye till the end comes!
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="reply-btn">
-                                    <a href="" class="btn-reply text-uppercase">reply</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="comment-list">
-                            <div class="single-comment justify-content-between d-flex">
-                                <div class="user justify-content-between d-flex">
-                                    <div class="thumb">
-                                        <img src="/img/blog/c4.jpg" alt="">
-                                    </div>
-                                    <div class="desc">
-                                        <h5><a href="#">Maria Luna</a></h5>
-                                        <p class="date">December 4, 2017 at 3:12 pm </p>
-                                        <p class="comment">
-                                            Never say goodbye till the end comes!
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="reply-btn">
-                                    <a href="" class="btn-reply text-uppercase">reply</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="comment-list">
-                            <div class="single-comment justify-content-between d-flex">
-                                <div class="user justify-content-between d-flex">
-                                    <div class="thumb">
-                                        <img src="/img/blog/c5.jpg" alt="">
-                                    </div>
-                                    <div class="desc">
-                                        <h5><a href="#">Ina Hayes</a></h5>
-                                        <p class="date">December 4, 2017 at 3:12 pm </p>
-                                        <p class="comment">
-                                            Never say goodbye till the end comes!
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="reply-btn">
-                                    <a href="" class="btn-reply text-uppercase">reply</a>
-                                </div>
-                            </div>
-                        </div>
+
                     </div>
                     <div class="comment-form">
                         <h4>Leave a Comment</h4>

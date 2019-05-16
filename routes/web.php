@@ -11,7 +11,9 @@
 |
 */
 
-Route::get('/', 'HomePageController@index');;
+Route::get('/', 'HomePageController@index');
+Route::post('/', 'HomePageController@regist');
+Route::get('/news/{slug}','HomePageController@show')->name('news-show');
 
 Route::view('/about', 'about');
 
@@ -38,6 +40,25 @@ Route::prefix('students')->group(function () {
 Route::prefix('schedule')->group(function () {
     Route::get('/', 'ScheduleController@index');
 });
+
+Route::prefix('teacher')->group(function () {
+    Route::get('/', 'ScheduleController@teacher');
+});
+
+Route::prefix('lecture')->group(function () {
+    Route::get('/', 'ScheduleController@lecture');
+});
+
+Route::prefix('item')->group(function () {
+    Route::get('/', 'ScheduleController@item');
+});
+
+
+Route::prefix('faculties')->group(function () {
+    Route::get('/', 'ScheduleController@faculties');
+});
+
+Route::post('/subscribe','SubsController@subscribe');
 
 Route::prefix('magazine')->group(function () {
     Route::get('/', 'MagazineController@index');
