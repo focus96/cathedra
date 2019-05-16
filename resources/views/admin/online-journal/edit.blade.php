@@ -28,14 +28,6 @@
 </head>
 <body>
 
-<div class="row mb-4">
-    <div class="col text-center" style="margin-top: 150px;">
-        <a href="#" id="btnAddCol" class="btn btn-primary" data-toggle="modal" data-target="#basicModal"
-           style="margin-left: 15px;">Редактировать
-            контрольную точку</a>
-    </div>
-</div>
-
 <div class="modal fade" id="basicModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -107,8 +99,8 @@
                                         @endif
                                         <br>
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-default" data-dismiss="modal">
-                                                Закрыть
+                                            <button type="button" class="exit btn btn-default" data-dismiss="modal">
+                                                Отмена
                                             </button>
                                             <button type="submit" class="btn btn-primary">Редактировать</button>
                                         </div>
@@ -126,5 +118,12 @@
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+    $('.close, .exit').click(function() {
+        window.location.href= "/admin/journals/{{ $checkpoint->journal_id }}";
+    });
+</script>
+
 </body>
 </html>

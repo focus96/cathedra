@@ -7,7 +7,29 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8.10.7/dist/sweetalert2.all.min.js"></script>
     <style type="text/css">
+
+        i {
+            font-family: fontawesome !important;
+            font: normal normal normal 14px/1 FontAwesome !important;
+            margin-left: 5px;
+        }
+
+        .yellow {
+            background: yellow;
+        }
+
+        .red {
+            background: red;
+        }
+
+        body {
+            font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell,
+            "Helvetica Neue", Helvetica, Arial, sans-serif;
+        }
+
         .is-invalid {
             border-color: #e3342f;
         }
@@ -75,49 +97,61 @@
 </head>
 <body>
 <div>
-    <div class="row mb-4">
-        <div class="col text-left">
-            <a href="#" id="btnAddCol" class="btn btn-primary" data-toggle="modal" data-target="#basicModal"
-               style="margin-left: 15px;">Добавить
-                контрольную точку</a>
+    @if($journal->is_close === 0)
+        <div class="row mb-4">
+            <div class="col text-left">
+                <a href="#" id="btnAddCol" class="btn btn-primary" data-toggle="modal" data-target="#basicModal"
+                   style="margin-left: 15px;">Добавить
+                    контрольную точку</a>
+            </div>
         </div>
-    </div>
-        <table id="student_points">
-            @if($journal->is_close === 0)
-                <caption>Журнал № {{ $journal->id }} Статус: Открыт</caption>
-            @else
-                <caption>Журнал № {{ $journal->id }} Статус: Закрыт</caption>
-            @endif
+    @else
+    @endif
+    <table id="student_points">
+        @if($journal->is_close === 0)
+            <caption>Журнал № {{ $journal->id }} Статус: Открыт</caption>
+        @else
+            <caption>Журнал № {{ $journal->id }} Статус: Закрыт</caption>
+        @endif
+        <tr>
+            <th>{{ $journal->groupRelation->name_group }}</th>
+            @foreach($journal->checkpoints as $checkpoint)
+                <th>
+                    {{ $checkpoint->name }}
+                    @if($journal->is_close === 0)
+                        <a href="/admin/checkpoints/{{ $checkpoint->id }}/edit"><i class="far fa-edit"></i></a>
+                        <a class="delete" href="/admin/checkpoints/delete/{{ $checkpoint->id }}"><i class="fa fa-trash"></i></a>
+                    @else
+                    @endif
+                </th>
+            @endforeach
+        </tr>
+        @foreach($journal->groupRelation->students as $student)
             <tr>
-                <th>{{ $journal->groupRelation->name_group }}</th>
+                <td>{{ $student->surname }}</td>
                 @foreach($journal->checkpoints as $checkpoint)
-                    <th>
-                        {{ $checkpoint->name }}
-                        <a href="/admin/checkpoints/{{ $checkpoint->id }}/edit">Ред</a>
-                        <span>\</span>
-                        <a class="delete" data-confirm="Удалить контрольную точку?"
-                           href="/admin/checkpoints/delete/{{ $checkpoint->id }}">Удалить</a>
-                    </th>
+                    @php
+                        $point = $student->points->where('checkpoint_id', $checkpoint->id)->first();
+                    @endphp
+                    <td
+                            data-journal-id="{{$journal->id}}"
+                            data-student-id="{{$student->id}}"
+                            data-checkpoint-id="{{$checkpoint->id}}"
+                            data-student_point-id="{{$point ? $point->id : ''}}"
+
+                            class="edit points {{ (($point && ($checkpoint->deadline < $point->created_at or
+                            $checkpoint->deadline < $point->updated_at) && ($point->points == null)) or
+                            (!$point && ($checkpoint->deadline < now()))) ? 'red' : '' }}
+                            {{ (($point && ($checkpoint->deadline < $point->created_at or
+                            $checkpoint->deadline < $point->updated_at)) &&
+                            ($point->points)) ? 'yellow' : '' }}">{{ $point ? $point->points : '' }}</td>
+
                 @endforeach
             </tr>
-                @foreach($journal->groupRelation->students as $student)
-                    <tr>
-                        <td>{{ $student->surname }}</td>
-                        @foreach($journal->checkpoints as $checkpoint)
-                            @php
-                                $point = $student->points->where('checkpoint_id', $checkpoint->id)->first();
-                            @endphp
-                            <td
-                                    data-journal-id="{{$journal->id}}"
-                                    data-student-id="{{$student->id}}"
-                                    data-checkpoint-id="{{$checkpoint->id}}"
-                                    data-student_point-id="{{$point ? $point->id : ''}}"
-
-                                    class="edit points">{{ $point ? $point->points : '' }}</td>
-                        @endforeach
-                    </tr>
-                @endforeach
-        </table>
+        @endforeach
+    </table>
+    <br>
+    <div class="alert alert-danger" style="display:none"></div>
 </div>
 
 <div class="modal fade" id="basicModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
@@ -190,7 +224,7 @@
 
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-default" data-dismiss="modal">
-                                                Закрыть
+                                                Отмена
                                             </button>
                                             <button type="submit" class="btn btn-primary">Сохранить</button>
                                         </div>
@@ -209,22 +243,35 @@
     </div>
 </div>
 
-<script>
+@if($journal->is_close === 0)
+<script type="text/javascript">
 
     var deleteLinks = document.querySelectorAll('.delete');
 
     for (var i = 0; i < deleteLinks.length; i++) {
         deleteLinks[i].addEventListener('click', function (event) {
             event.preventDefault();
-
-            var choice = confirm(this.getAttribute('data-confirm'));
-
-            if (choice) {
-                window.location.href = this.getAttribute('href');
-            }
+            var link = this.getAttribute('href');
+            Swal.fire({
+                title: 'Удалить контрольную точку?',
+                type: 'warning',
+                showCancelButton: true,
+                cancelButtonText: 'Отмена!',
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Да, удалить!'
+            }).then((result) => {
+                if (result.value) {
+                    window.location.href = link;
+                    Swal.fire(
+                        'Удалено!',
+                        'Контрольная точка была удалена.',
+                        'success',
+                    )
+                }
+            });
         });
-    };
-
+    }
 
     //при нажатии на ячейку таблицы с классом edit
     $('td.edit').dblclick(function () {
@@ -244,33 +291,52 @@
     $('td.edit').keydown(function (event) {
         //проверяем какая была нажата клавиша и если была нажата клавиша Enter (код 13)
         if (event.which == 13) {
-            saveData($(this));
+            $('.ajax').html($('.ajax input').val());
+            $('.ajax').removeClass('ajax');
         }
     });
 
     //сохранение при нажатии вне поля
-    $(document).on('blur', '#editbox', function () {
-        saveData($(this).closest('td'));
-        $('.ajax').html($('.ajax input').val());
-        $('.ajax').removeClass('ajax');
-    });
+        $(document).on('blur', '#editbox', function () {
+            saveData($(this).closest('td'));
+            $('.ajax').html($('.ajax input').val());
+            $('.ajax').removeClass('ajax');
+        });
 
     function saveData(el) {
         //получаем значение класса и разбиваем на массив
         //в итоге получаем такой массив - arr[0] = edit, arr[1] = наименование столбца (points)
         let arr = el.attr('class').split(" ");
         //назначаем атрибуты для ячейки
-        let studentId =  el.attr('data-student-id');
-        let journalId =  el.attr('data-journal-id');
-        let checkpointId =  el.attr('data-checkpoint-id');
-        let student_pointlId =  el.attr('data-student_point-id');
+        let studentId = el.attr('data-student-id');
+        let journalId = el.attr('data-journal-id');
+        let checkpointId = el.attr('data-checkpoint-id');
+        let student_pointlId = el.attr('data-student_point-id');
+
+        var d = new Date();
+        var curr_date = (d.getDate() < 10 ? '0' : '') + d.getDate();
+        var curr_month = ((d.getMonth() + 1) < 10 ? '0' : '') + (d.getMonth() + 1);
+        var curr_year = d.getFullYear();
+
+        let points_date = (curr_year + "-" + curr_month + "-" + curr_date);
+
+
         //получаем наименование таблицы, в которую будем вносить изменения
         var table = $('table').attr('id');
         //подготавливаем данные для отправки
         //value = введенное значение
         //field = название столбца
         //table = название таблицы
-        var data = {value : $('.ajax input').val(), student_point_id : student_pointlId, field : arr[1], checkpoint_id : checkpointId, student_id : studentId, journal_id : journalId, table : table};
+        var data = {
+            value: $('.ajax input').val(),
+            student_point_id: student_pointlId,
+            field: arr[1],
+            checkpoint_id: checkpointId,
+            student_id: studentId,
+            journal_id: journalId,
+            table: table,
+            points_date: points_date,
+        };
 
         //выполняем ajax запрос методом POST
         $.ajaxSetup({
@@ -288,11 +354,28 @@
                 $('.ajax').html($('.ajax input').val());
                 //удаялем класс ajax
                 $('.ajax').removeClass('ajax');
+                if (data.errors){
+                    $.each(data.errors, function(key, value){
+                        $('.alert-danger').show();
+                        $('.alert-danger').append('<p>'+value+'</p>');
+                    });
+                }else {
+                    $('.alert-danger').html($('.alert-danger').val());
+                    $('.alert-danger').removeClass('alert-danger');
+                    Swal.fire({
+                        position: 'top',
+                        type: 'success',
+                        title: 'Изменения сохранены',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                }
             }
         });
     }
 
 </script>
+@endif
 
 </body>
 </html>
