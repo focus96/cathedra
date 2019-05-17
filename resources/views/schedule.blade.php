@@ -40,12 +40,16 @@
                     </div>
                 </div>
                 <div class="col-lg-8">
-                    <a href="edit.html" class="genric-btn primary"><i class="fa fa-download"></i> PDF</a>
+
+                    <a href="{{route('export-file')}}" class="genric-btn primary"><i class="fa fa-download"></i> PDF</a>
                     <a href="edit.html" class="genric-btn primary"><i class="fa fa-download"></i> Excel</a>
                     <a href="edit.html" class="genric-btn primary"><i class="fa fa-download"></i> Png</a>
                 </div>
+
             </div>
             <div class="col-md-12s">
+
+
                 <table id="example1" class="table table-bordered table-striped">
                     <thead>
 
@@ -253,8 +257,8 @@
 
                     </tbody>
                 </table>
-
             </div>
+        </div>
     </section>
     <!-- End contact-page Area -->
 
@@ -371,9 +375,17 @@
                             }
                             ;
                         }
-                    });
-                }
+                    });                }
             });
         }
+    </script>
+
+    <script>
+        var tbl = document.getElementById('example1').innerHTML ;
+
+        $(".genric-btn primary").click(function() {
+            location.href = "http://cathedra/schedule" + tbl;
+        });
+        console.log(tbl);
     </script>
 @endsection

@@ -117,12 +117,12 @@
                                 <div class="feature-img">
                                     <img class="img-fluid" src="{{ '/uploads/' . $singleNews->image }}" alt="">
                                 </div>
-                                <a class="posts-title" href="{{ route('news-show', $singleNews->slug) }}">
+                                <a class="posts-title" href="{{ route('news-show', $singleNews->id) }}">
                                     <h3>{{ $singleNews->title }}</h3></a>
                                 <p class="excert">
                                     {{ $singleNews->short }}
                                 </p>
-                                <a href="{{ route('news-show', $singleNews->slug) }}" class="primary-btn">Подробнее</a>
+                                <a href="{{ route('news-show', $singleNews->id) }}" class="primary-btn">Подробнее</a>
                             </div>
                         </div>
                     @endforeach

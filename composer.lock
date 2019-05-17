@@ -3537,6 +3537,7 @@
         },
         {
             "name": "spatie/image-optimizer",
+/*<<<<<<< HEAD*/
             "version": "1.1.5",
             "source": {
                 "type": "git",
@@ -3547,16 +3548,36 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/spatie/image-optimizer/zipball/e62f8b459bee0a880c8976c316e82638a74510b5",
                 "reference": "e62f8b459bee0a880c8976c316e82638a74510b5",
+/*=======
+            "version": "1.1.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spatie/image-optimizer.git",
+                "reference": "11f0b270669a55f90093d63ddb5214e0f7c279da"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spatie/image-optimizer/zipball/11f0b270669a55f90093d63ddb5214e0f7c279da",
+                "reference": "11f0b270669a55f90093d63ddb5214e0f7c279da",
+>>>>>>> 049fe5b828c93f2c724072652736cf223bc231c0*/
                 "shasum": ""
             },
             "require": {
                 "ext-fileinfo": "*",
+/*<<<<<<< HEAD*/
                 "php": "^7.2",
+/*=======
+                "php": "^7.0",
+>>>>>>> 049fe5b828c93f2c724072652736cf223bc231c0*/
                 "psr/log": "^1.0",
                 "symfony/process": "^4.2"
             },
             "require-dev": {
+/*<<<<<<< HEAD*/
                 "phpunit/phpunit": "^8.0",
+/*=======
+                "phpunit/phpunit": "^7.5",
+>>>>>>> 049fe5b828c93f2c724072652736cf223bc231c0*/
                 "symfony/var-dumper": "^4.2"
             },
             "type": "library",
@@ -3583,7 +3604,11 @@
                 "image-optimizer",
                 "spatie"
             ],
+/*<<<<<<< HEAD*/
             "time": "2019-02-15T12:11:38+00:00"
+/*=======
+            "time": "2019-01-14T09:15:47+00:00"
+>>>>>>> 049fe5b828c93f2c724072652736cf223bc231c0*/
         },
         {
             "name": "spatie/laravel-backup",

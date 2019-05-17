@@ -38,12 +38,12 @@ class NewsController extends Controller
      * @param Content $content
      * @return Content
      */
-    public function show($slug, Content $content)
+    public function show($id, Content $content)
     {
         return $content
             ->header('Просмотр новости')
             ->description(' ')
-            ->body($this->detail($slug));
+            ->body($this->detail($id));
     }
 
     /**
@@ -53,12 +53,12 @@ class NewsController extends Controller
      * @param Content $content
      * @return Content
      */
-    public function edit($slug, Content $content)
+    public function edit($id, Content $content)
     {
         return $content
             ->header('Редактирование новости')
             ->description(' ')
-            ->body($this->form()->edit($slug));
+            ->body($this->form()->edit($id));
     }
 
     /**
@@ -103,9 +103,9 @@ class NewsController extends Controller
      * @param mixed $id
      * @return Show
      */
-    protected function detail($slug)
+    protected function detail($id)
     {
-        $show = new Show(News::findOrFail($slug));
+        $show = new Show(News::findOrFail($id));
 
         $show->id('Ид');
         $show->title('Заголовк');
