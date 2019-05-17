@@ -54,7 +54,7 @@
                     </div>
                     <div class="col-lg-8">
                         <a href="edit.html" class="genric-btn primary"><i class="fa fa-download"></i> PDF</a>
-                        <a href="edit.html" class="genric-btn primary"><i class="fa fa-download"></i> Excel</a>
+                        <a href="/download" class="genric-btn primary"><i class="fa fa-download"></i> Excel</a>
                         <a href="edit.html" class="genric-btn primary"><i class="fa fa-download"></i> Png</a>
                     </div>
                 </div>

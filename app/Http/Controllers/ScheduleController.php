@@ -47,6 +47,6 @@ class ScheduleController extends Controller
 
     public function export()
     {
-        Browsershot::url('https://example.com')->bodyHtml();
+        Browsershot::url('http://127.0.0.1:8000/schedule')->savePdf('example.pdf');
     }
 }
