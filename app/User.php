@@ -27,4 +27,27 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function comments()
+    {
+        return $this->hasMany(Commet::class);
+    }
+
+    public static function add($fields )
+    {
+        $user = new static;
+        $user->fill($fields);
+        $user->save();
+
+        return $user;
+    }
+
+    public function generatePassword($password)
+    {
+        if($password != null)
+        {
+            $this->password = bcrypt($password);
+            $this->save();
+        }
+    }
 }

@@ -10,4 +10,8 @@ class Group extends Model
     {
         return $this->hasMany(Student::class, 'groups_id');
     }
+    public function shedule()
+    {
+        return $this->belongsTo('App\Shedule');
+    }
 }

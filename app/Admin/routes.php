@@ -11,7 +11,7 @@ Route::group([
     'middleware'    => config('admin.route.middleware'),
 ], function (Router $router) {
 
-    $router->get('/', 'HomeController@index');
+    $router->get('/', ' HomeController@index');
     $router->resource('/news', 'NewsController');
     $router->resource('/news-category', 'NewsCategoryController');
     $router->resource('/news-tags', 'NewsTagController');

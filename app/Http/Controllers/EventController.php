@@ -22,6 +22,8 @@ class EventController extends Controller
 
     public function show(Event $event)
     {
-        return View('event.show', compact(['event']));
+        $previous = Event::where('id', '<', $event->id)->orderBy('id', 'DESC')->first();
+        $next = Event::where('id', '>', $event->id)->orderBy('id', 'ASC')->first();
+        return View('event.show', compact(['event', 'previous', 'next']));
     }
 }
