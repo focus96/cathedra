@@ -13,7 +13,7 @@
 
 Route::get('/', 'HomePageController@index');
 Route::post('/', 'HomePageController@regist');
-Route::get('/news/{slug}','HomePageController@show')->name('news-show');
+Route::get('/news','HomePageController@show')->name('news-show');
 
 Route::view('/about', 'about');
 
@@ -31,6 +31,15 @@ Route::prefix('event')->group(function () {
 Route::prefix('album')->group(function () {
     Route::get('/', 'AlbumController@index');
     Route::get('/{album}', 'AlbumController@show')->name('album-show');
+});
+
+Route::prefix('online_journals')->group(function () {
+    Route::get('/', 'OnlineJournalController@index');
+});
+
+Route::prefix('online_journals')->group(function () {
+    Route::get('/show_journal/{online_journal}', 'OnlineJournalController@show_journal');
+    Route::get('/show_group/{group}', 'OnlineJournalController@show_group');
 });
 
 Route::prefix('students')->group(function () {
@@ -63,9 +72,6 @@ Route::prefix('faculties')->group(function () {
 
 Route::post('/subscribe','SubsController@subscribe');
 
-Route::prefix('magazine')->group(function () {
-    Route::get('/', 'MagazineController@index');
-});
 
 Route::view('/contact', 'contact');
 
