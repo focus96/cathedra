@@ -84,7 +84,7 @@ class CathedraInfoControllers extends Controller
         $grid = new Grid(new CathedraInfo);
 
         $grid->id('Ид');
-        $grid->caption('Заголовок')->sortable();;
+        $grid->caption('Заголовок')->sortable();
         $grid->answer('Сообщение');
         $grid->image('Изображение')->display(function ($id) {
             if (isset($id)) {
@@ -93,9 +93,11 @@ class CathedraInfoControllers extends Controller
                 return '-';
             }
         });
-        $grid->active('Статус')->sortable();;
-        $grid->created_at('Дата создания')->sortable();;
-        $grid->updated_at('Дата редактирования')->sortable();;
+        $grid->active('Публичная новость')->display(function ($isPublic) {
+            return $isPublic ? 'Да' : 'Нет';
+        })->sortable();
+        $grid->created_at('Дата создания')->sortable();
+        $grid->updated_at('Дата редактирования')->sortable();
 
         return $grid;
     }
@@ -142,15 +144,7 @@ class CathedraInfoControllers extends Controller
             'image' => 'Это должна быть картинка',
         ]);
         $form->switch('active', 'Статус')->default(1);
-        $form->saved(function (Form $form) {
-            $path = storage_path('/app/public/uploads' . $form->model()->id);
-            dump($path);
-            if(!file_exists($path)) {
-                mkdir($path);
-            }   
-        });
-
-       $form->saving(function ($form) {
+        $form->saving(function ($form) {
             /* определение числа рядов в выборке */
             $result = CathedraInfo::where('active', '=', 1)->count();
             
@@ -161,7 +155,7 @@ class CathedraInfoControllers extends Controller
                     'message' => 'Максимальное количество активных записей 5. ',
                 ]);
 
-                return redirect('/admin/cathedra-info')->with(compact('error'));              
+                return redirect('/admin/telegram-bot/applicants/cathedra-info')->with(compact('error'));              
             }
         });
 

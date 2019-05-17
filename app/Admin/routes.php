@@ -21,13 +21,13 @@ Route::group([
     $router->resource('/cathedra-users', 'CathedraUsersController');
     $router->resource('/groups', 'GroupsController');
 
-    $router->resource('/bachelor', 'BachelorController');
-    $router->resource('/bachelor-accelerated', 'BachelorАcceleratedController');
-    $router->resource('/master', 'MasterController');
-    $router->resource('/postgraduate', 'PostgraduateController');
+    $router->resource('/telegram-bot/campaign/bachelor', 'BachelorController');
+    $router->resource('/telegram-bot/campaign/bachelor-accelerated', 'BachelorАcceleratedController');
+    $router->resource('/telegram-bot/campaign/master', 'MasterController');
+    $router->resource('/telegram-bot/campaign/postgraduate', 'PostgraduateController');
 
     $router->resource('/telegram-bot/mailing/list', 'MailController');
-    $router->resource('/telegram-bot/applicants/cathedra', 'CathedraInfoControllers');
+    $router->resource('/telegram-bot/applicants/cathedra-info', 'CathedraInfoControllers');
 
     $router->get('/telegram-bot/mailing/mail', 'TelegramBotController@index');
    

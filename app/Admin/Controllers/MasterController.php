@@ -130,17 +130,14 @@ class MasterController extends Controller
             'required' => 'Обязательно для заполнения',
             'max' => 'Кол-во символов не более :max',
         ]);;
-        $form->ckeditor('content', 'Содержание')->rules('required|max:30000', [
+        $form->textarea('content', 'Содержание')->rules('required|max:30000', [
             'required' => 'Обязательно для заполнения',
             'max' => 'Кол-во символов не более :max',
         ]);
-        $form->image('image', 'Изображение')->rules('required|image', [
-            'required' => 'Обязательно для заполнения',
+        $form->image('image', 'Изображение')->rules('image', [
             'image' => 'Это должна быть картинка',
         ]);
-        $form->switch('is_public', 'Публичная новсть')->default(1)->rules('required', [
-            'required' => 'Обязательно для заполнения',
-        ]);
+        $form->switch('is_public', 'Публичная новсть')->default(1);
 
 
         $form->saved(function (Form $form) {
@@ -151,33 +148,20 @@ class MasterController extends Controller
             }   
         });
 
-        //подключаемся к бд
-        $link = mysqli_connect("localhost", "root", "", "bot");
-
-        /* проверка соединения */
-        if (mysqli_connect_errno()) {
-            printf("Соединение не удалось: %s\n", mysqli_connect_error());
-            exit();
-        }
-
-        if ($result = mysqli_query($link, "SELECT * FROM masters WHERE is_public = 1")) {
+        $form->saving(function ($form) {
+            $result = Master::where("is_public", "=", 1)->count();
 
             /* определение числа рядов в выборке */
-            if ($row_cnt = mysqli_num_rows($result) >= 5) {
+            if ($result >= 5 && $form->is_public === 'on') {
                 // redirect back with an error message
-                $form->saving(function ($form) {
+                $error = new MessageBag([
+                    'title'   => 'Ошибка',
+                    'message' => 'Максимальное количество активных записей 5. ',
+                ]);
 
-                    $error = new MessageBag([
-                        'title'   => 'Ошибка',
-                        'message' => 'Максимальное количество активных записей 5. ',
-                    ]);
-
-                    return redirect('/admin/master')->with(compact('error'));
-                });
+                return redirect('/admin/telegram-bot/campaign/master')->with(compact('error'));
             }
-            /* закрытие выборки */
-            mysqli_free_result($result);
-        }
+        });
 
         return $form;
     }
