@@ -11,7 +11,7 @@ Route::group([
     'middleware'    => config('admin.route.middleware'),
 ], function (Router $router) {
 
-    $router->get('/', ' HomeController@index');
+    $router->get('/', 'HomeController@index');
     $router->resource('/news', 'NewsController');
     $router->resource('/news-category', 'NewsCategoryController');
     $router->resource('/news-tags', 'NewsTagController');
@@ -25,7 +25,6 @@ Route::group([
     $router->resource('/items', 'ItemController');
     $router->resource('/students', 'StudentController');
     $router->resource('/online_journals', 'Online_journalController');
-    //$router->resource('/checkpoints', 'CheckPointController');
 
     $router->get('/journals/{id}', 'JournalController@index')->name('journal');
     $router->post('/checkpoints', 'CheckPointController@store')->name('checkpoints');

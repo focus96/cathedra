@@ -127,5 +127,7 @@
 <br>
 <br>
 <a href="/online_journals">Вернуться к списку групп</a>
+        <br>
+        <a href="/save-pdf">Сохранить в PDF</a>
     </div>
 @endsection

@@ -73,7 +73,7 @@
                     <li ><a href="">Студентам</a>
                         <ul class="nav-menu-nav">
                             <li ><a href="/schedule">Розклад</a></li>
-                            <li ><a href="/magazine">Журнал</a></li>
+                            <li ><a href="/online_journals">Онлайн-журнали</a></li>
                             <li ><a href="/faculties">Факультети</a></li>
 
                         </ul>
