@@ -40,6 +40,7 @@ Route::prefix('online_journals')->group(function () {
 Route::prefix('online_journals')->group(function () {
     Route::get('/show_journal/{online_journal}', 'OnlineJournalController@show_journal');
     Route::get('/show_group/{group}', 'OnlineJournalController@show_group');
+});
 
 Route::prefix('students')->group(function () {
     Route::get('/', 'StudentsController@index');
