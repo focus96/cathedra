@@ -49,10 +49,13 @@ Route::prefix('lecture')->group(function () {
     Route::get('/', 'ScheduleController@lecture');
 });
 
+Route::prefix('export')->group(function () {
+    Route::get('/', 'ScheduleController@export')->name('export-file');
+});
+
 Route::prefix('item')->group(function () {
     Route::get('/', 'ScheduleController@item');
 });
-
 
 Route::prefix('faculties')->group(function () {
     Route::get('/', 'ScheduleController@faculties');

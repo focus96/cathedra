@@ -7,6 +7,7 @@ use App\Models\Group;
 use App\Models\Teacher;
 use App\Models\Items;
 use Illuminate\Http\Request;
+use Spatie\Browsershot\Browsershot;
 
 class ScheduleController extends Controller
 {
@@ -42,5 +43,10 @@ class ScheduleController extends Controller
     public function faculties()
     {
         return view('faculties');
+    }
+
+    public function export()
+    {
+        Browsershot::url('https://example.com')->bodyHtml();
     }
 }

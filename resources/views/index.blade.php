@@ -128,7 +128,6 @@
 </section>
 <!-- End popular-course Area -->
 
-
 <!-- Start search-course Area -->
 <section class="search-course-area relative">
     <div class="overlay overlay-bg"></div>
@@ -137,19 +136,19 @@
             <div class="col-lg-6 col-md-6 search-course-left">
                 <h1 class="text-white">
                     Не втрачай часу  даремно, приходь і здавай вступні іспити
-                </h1>
+                </h1>>
                 <p>
                     <ul>
-                    <li>
-                        Кафедри, оснащені сучасними аудиторіями і лабораторіями, що мають багатий науково-дослідний потенціал;
-                    </li>
-                    <li>
-                        Доброзичливий колектив, що дозволяє студентам розвивати свої захоплення, про що свідчать численні нагороди та досягнення.
-                    </li>
-                    <li>
-                       Інститут активно співпрацюює з провідними підприємствами та фірмами на регіональному й міжнародному ринках;
-                    </li>
-                </ul>
+                        <li>
+                            Кафедри, оснащені сучасними аудиторіями і лабораторіями, що мають багатий науково-дослідний потенціал;
+                        </li>
+                        <li>
+                            Доброзичливий колектив, що дозволяє студентам розвивати свої захоплення, про що свідчать численні нагороди та досягнення.
+                        </li>
+                        <li>
+                            Інститут активно співпрацюює з провідними підприємствами та фірмами на регіональному й міжнародному ринках;
+                        </li>
+                    </ul>
                 </p>
                 <div class="row details-content">
                     <div class="col single-detials">
@@ -163,7 +162,7 @@
                         <span class="lnr lnr-license"></span>
                         <a href="/contact"><h4>Перспективне майбутнє</h4></a>
                         <p>
-                            <ul>
+                        <ul>
                             <li>Широкі можливості розподілу на фірми IT-індустрії міста</li>
                             <li>Творчі колективи</li>
                         </ul>
@@ -173,20 +172,21 @@
                 </div>
             </div>
             <div class="col-lg-4 col-md-6 search-course-right section-gap">
-                @include ('errors')
-
-                <h4 class="text-white pb-20 text-center mb-30">
-                    Зареєструватися на сайті
-                </h4>
-
-                <form class="form-wrap" role="form" action="/" method="post">
-                    {{csrf_field()}}
-                    <input type="text" class="form-control" name="name" value="{{old('name')}}" placeholder="Ім'я" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Твоє ім\'я'" >
-                    <input type="text" class="form-control" name="email" value="{{old('email')}}" placeholder="Ваша електронна адреса" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Ваша електронна адреса'" >
-
-                    <input type="password" class="form-control" name="password" placeholder="Пароль" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Ваша електронна адреса'" >
-
-                    <button type="submit" class="primary-btn text-uppercase">Реєстрація</button>
+                <form class="form-wrap" action="#">
+                    <h4 class="text-white pb-20 text-center mb-30">Search for Available Course</h4>
+                    <input type="text" class="form-control" name="name" placeholder="Your Name" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Твоє ім\'я'" >
+                    <input type="password" class="form-control" name="password" placeholder="Your Password" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Пароль'" >
+                    <input type="email" class="form-control" name="email" placeholder="Your Email Address" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Ваша електронна адреса'" >
+                    <div class="form-select" id="service-select">
+                        <select>
+                            <option datd-display="">Choose Course</option>
+                            <option value="1">Course One</option>
+                            <option value="2">Course Two</option>
+                            <option value="3">Course Three</option>
+                            <option value="4">Course Four</option>
+                        </select>
+                    </div>
+                    <button class="primary-btn text-uppercase">Submit</button>
                 </form>
             </div>
         </div>
