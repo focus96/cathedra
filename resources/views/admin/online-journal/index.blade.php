@@ -375,6 +375,8 @@
     }
 
 </script>
+    <br><div class="yellow" style="width: 150px; height: 40px; text-align: center; padding-top: 10px; color: white; font-size: small;"><b>Оценка просрочена</b></div><br>
+    <div class="red" style="width: 150px; height: 40px; text-align: center; color: white; font-size: small;"><b>Оценка просрочена и отсутствует</b></div>
 @endif
 
 </body>

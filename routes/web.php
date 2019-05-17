@@ -33,6 +33,15 @@ Route::prefix('album')->group(function () {
     Route::get('/{album}', 'AlbumController@show')->name('album-show');
 });
 
+Route::prefix('online_journals')->group(function () {
+    Route::get('/', 'OnlineJournalController@index');
+});
+
+Route::prefix('online_journals')->group(function () {
+    Route::get('/show_journal/{online_journal}', 'OnlineJournalController@show_journal');
+    Route::get('/show_group/{group}', 'OnlineJournalController@show_group');
+});
+
 Route::view('/contact', 'contact');
 
 Route::get('/get-all-cathedra-users', 'CathedraUserController@all');
