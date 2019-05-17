@@ -257,8 +257,8 @@
 
                     </tbody>
                 </table>
-
             </div>
+        </div>
     </section>
     <!-- End contact-page Area -->
 

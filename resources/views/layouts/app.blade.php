@@ -37,7 +37,8 @@
     <script src="/js/vendor/jquery-2.2.4.min.js"></script>
 </head>
 <body>
-<header id="header" id="home">
+<header id="header" id="home" >
+
     <div class="header-top">
         <div class="container">
             <div class="row">
@@ -61,9 +62,9 @@
                 <a href="/">
                     <img src="/img/logo1.png" alt="" title=""/></a>
             </div>
-            <nav id="nav-menu-container">
+            <nav id="nav-menu-container" >
                 <style>
-                    .nav-menu-nav li{
+                    .nav-menu li{
                         background-color: transparent;
                     }
                 </style>
