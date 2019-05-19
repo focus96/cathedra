@@ -20,7 +20,7 @@
         <div class="container">
             <div class="row d-flex align-items-center justify-content-center">
                 <div class="about-content col-lg-12">
-                    <h1 class="text-white">Журнал</h1>
+                    <h1 class="text-white">Онлайн-журнал</h1>
                     <p class="text-white link-nav"><a href="/">Головна</a> </p>
                 </div>
             </div>
@@ -125,7 +125,7 @@
                             <blockquote>
                                 <q>
                                     Якщо оцінка підсвічується <b class="yellow ">жовтим</b> кольором - термін здачі був прострочений.
-                                    <b class="red">Червоним</b> кольором - оцінка прострочена або відсутня.
+                                    <b class="red">Червоним</b> кольором - оцінка прострочена та відсутня.
                                 </q>
                             </blockquote>
                         </div>

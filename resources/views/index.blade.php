@@ -213,7 +213,7 @@
                     </div>
                     <div class="detials col-12 col-md-6">
                         <p>Дата початку:    {{$event->start_date}}</p>
-                        <a href="{{route('event-show',$event->slug)}}"><h4>
+                        <a href="{{route('event-show',$event->id)}}"><h4>
                                 {{$event->name}}
                             </h4></a>
                         <p>

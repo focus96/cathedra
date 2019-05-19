@@ -78,6 +78,9 @@ Route::prefix('faculties')->group(function () {
 Route::post('/subscribe','SubsController@subscribe');
 
 
+
+
+
 Route::view('/contact', 'contact');
 
 Route::get('/get-all-cathedra-users', 'CathedraUserController@all');

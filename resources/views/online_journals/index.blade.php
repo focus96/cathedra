@@ -44,7 +44,7 @@
         <div class="container">
             <div class="row d-flex align-items-center justify-content-center">
                 <div class="about-content col-lg-12">
-                    <h1 class="text-white">Журнал</h1>
+                    <h1 class="text-white">Онлайн-журнали</h1>
                     <p class="text-white link-nav"><a href="/">Головна</a> </p>
                 </div>
             </div>
