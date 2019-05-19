@@ -1,5 +1,6 @@
 <?php
 
+use App\Exports\ScheduleExport;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -65,6 +66,11 @@ Route::prefix('lecture')->group(function () {
 
 Route::prefix('export')->group(function () {
     Route::get('/', 'ScheduleController@export')->name('export-file');
+});
+
+Route::get('/download',function (){
+
+    return Excel::download(new ScheduleExport, 'schedule.xlsx');
 });
 
 Route::prefix('item')->group(function () {

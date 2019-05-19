@@ -129,14 +129,12 @@ class StudentController extends Controller
     {
         $form = new Form(new Student);
 
-        $form->text('surname', 'Фамилия')->rules('required|max:50|unique:students', [
+        $form->text('surname', 'Фамилия')->rules('required|max:50', [
             'required' => 'Обязательно для заполнения',
-            'unique' => 'Должен быть уникальным',
             'max' => 'Кол-во символов не более :max',
         ]);
-        $form->text('name', 'Имя')->rules('required|max:50|unique:students', [
+        $form->text('name', 'Имя')->rules('required|max:50', [
             'required' => 'Обязательно для заполнения',
-            'unique' => 'Должен быть уникальным',
             'max' => 'Кол-во символов не более :max',
         ]);
         $form->text('family_name', 'Отчество')->rules('required|max:255', [
@@ -146,11 +144,10 @@ class StudentController extends Controller
         $form->number('telegram_id', 'Telegram-id')->rules('unique:students', [
             'unique' => 'Должен быть уникальным',
         ]);
-        $form->email('email', 'Email');
-//        $form->email('email', 'Email')->rules('unique:students', [
-//            'unique' => 'Должен быть уникальным',
-//            'email' => 'Поле должно быть типом email'
-//        ]);
+//        $form->email('email', 'Email');
+        $form->email('email', 'Email')->rules('unique:students', [
+            'unique' => 'Должен быть уникальным'
+        ]);
         $form->text('number', 'Номер')->rules('max:100', [
             'max' => 'Кол-во символов не более :max',
         ]);;

@@ -127,9 +127,9 @@ class ItemController extends Controller
             'max' => 'Кол-во символов не более :max',
         ]);
 
-        $form->text('abbreviation', 'Аббревиатура')->rules('required||max:10', [
+        $form->text('abbreviation', 'Аббревиатура')->rules('required|unique:items|max:10', [
             'required' => 'Обязательно для заполнения',
-
+            'unique' => 'Должен быть уникальным',
             'max' => 'Кол-во символов не более :max',
         ]);
         $form->select('cathedra_id', 'Кафедра')->options(Cathedra::all()->pluck('name', 'id'));
