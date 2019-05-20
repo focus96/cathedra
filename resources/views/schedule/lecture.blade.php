@@ -34,12 +34,11 @@
                             <option value="1" >По группе</option>
                             <option value="2" >По преподователю</option>
                             <option value="3" selected>По аудитории</option>
-                            <option value="4">От предмета по группе</option>
                         </select>
                     </div>
                 </div>
                 <div class="col-lg-8">
-                    <a href="edit.html" class="genric-btn primary"><i class="fa fa-download"></i> PDF</a>
+                    <a href="/download-pdf" class="genric-btn primary"><i class="fa fa-download"></i> PDF</a>
                     <a href="/download" class="genric-btn primary"><i class="fa fa-download"></i> Excel</a>
                     <a href="edit.html" class="genric-btn primary"><i class="fa fa-download"></i> Png</a>
                 </div>
@@ -292,7 +291,7 @@
             $.each(shedules, function (id, value) {
                 if ($("#mon").text().toUpperCase() == value.day.toUpperCase()) {
                     $.each(lectures, function (index, item) {
-                        if ($('#headTable #lecture' + index).text() == value.lecture) {
+                        if ($('#headTable #lecture' + index).text() == value.lecture_hall) {
                             for (var i = 1; i < 6; i++) {
                                 if ($('#mn' + i).text() == value.couple_number) {
                                     $('#m' + i + ' .td' + index).text(value.group);
@@ -307,10 +306,10 @@
             $.each(shedules, function (id, value) {
                 if ($("#tue").text().toUpperCase() == value.day.toUpperCase()) {
                     $.each(lectures, function (index, item) {
-                        if ($('#headTable #lecture' + index).text() == value.lecture) {
+                        if ($('#headTable #lecture' + index).text() == value.lecture_hall) {
                             for (var i = 1; i < 6; i++) {
                                 if ($('#ts' + i).text() == value.couple_number) {
-                                    $('#t' + i + ' .td' + index).text(value.group + ', '+value.item);
+                                    $('#t' + i + ' .td' + index).text(value.group);
                                 }
                             }
                             ;
@@ -322,10 +321,10 @@
             $.each(shedules, function (id, value) {
                 if ($("#wed").text().toUpperCase() == value.day.toUpperCase()) {
                     $.each(lectures, function (index, item) {
-                        if ($('#headTable #lecture' + index).text() == value.lecture) {
+                        if ($('#headTable #lecture' + index).text() == value.lecture_hall) {
                             for (var i = 1; i < 6; i++) {
                                 if ($('#we' + i).text() == value.couple_number) {
-                                    $('#w' + i + ' .td' + index).text(value.group + ', '+value.item);
+                                    $('#w' + i + ' .td' + index).text(value.group);
                                 }
                             }
                             ;
@@ -337,10 +336,10 @@
             $.each(shedules, function (id, value) {
                 if ($("#thur").text().toUpperCase() == value.day.toUpperCase()) {
                     $.each(lectures, function (index, item) {
-                        if ($('#headTable #lecture' + index).text() == value.lecture) {
+                        if ($('#headTable #lecture' + index).text() == value.lecture_hall) {
                             for (var i = 1; i < 6; i++) {
                                 if ($('#thu' + i).text() == value.couple_number) {
-                                    $('#th' + i + ' .td' + index).text(value.group + ', '+value.item);
+                                    $('#th' + i + ' .td' + index).text(value.group);
                                 }
                             }
                             ;
@@ -352,10 +351,10 @@
             $.each(shedules, function (id, value) {
                 if ($("#fri").text().toUpperCase() == value.day.toUpperCase()) {
                     $.each(lectures, function (index, item) {
-                        if ($('#headTable #lecture' + index).text() == value.lecture) {
+                        if ($('#headTable #lecture' + index).text() == value.lecture_hall) {
                             for (var i = 1; i < 6; i++) {
                                 if ($('#f' + i).text() == value.couple_number) {
-                                    $('#fr' + i + ' .td' + index).text(value.group + ', '+value.item);
+                                    $('#fr' + i + ' .td' + index).text(value.group);
                                 }
                             }
                             ;
@@ -367,10 +366,10 @@
             $.each(shedules, function (id, value) {
                 if ($("#sat").text().toUpperCase() == value.day.toUpperCase()) {
                     $.each(lectures, function (index, item) {
-                        if ($('#headTable #lecture' + index).text() == value.lecture) {
+                        if ($('#headTable #lecture' + index).text() == value.lecture_hall) {
                             for (var i = 1; i < 6; i++) {
                                 if ($('#s' + i).text() == value.couple_number) {
-                                    $('#sa' + i + ' .td' + index).text(value.group + ', '+value.item);
+                                    $('#sa' + i + ' .td' + index).text(value.group);
                                 }
                             }
                             ;

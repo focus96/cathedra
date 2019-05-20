@@ -13,6 +13,8 @@
     <meta name="keywords" content="">
     <!-- meta character set -->
     <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
     <!-- Site Title -->
     <title>{{ env('APP_NAME', 'АВП | Кафедра автоматизації виробничих процесів') }}</title>
 
@@ -72,11 +74,10 @@
                     <li ><a href="/">Головна</a></li>
                     <li><a href="/about">Про нас</a></li>
                     <li ><a href="">Студентам</a>
-                        <ul class="nav-menu-nav">
+                        <ul class="nav-menu">
                             <li ><a href="/schedule">Розклад</a></li>
                             <li ><a href="/online_journals">Журнал</a></li>
                             <li ><a href="/faculties">Факультети</a></li>
-
                         </ul>
                     </li>
                     <li><a href="/event">Події</a></li>

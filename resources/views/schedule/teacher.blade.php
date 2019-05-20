@@ -35,12 +35,11 @@
                             <option value="1" >По группе</option>
                             <option value="2" selected>По преподователю</option>
                             <option value="3">По аудитории</option>
-                            <option value="4">От предмета по группе</option>
                         </select>
                     </div>
                 </div>
                 <div class="col-lg-8">
-                    <a href="edit.html" class="genric-btn primary"><i class="fa fa-download"></i> PDF</a>
+                    <a href="/download-pdf" class="genric-btn primary"><i class="fa fa-download"></i> PDF</a>
                     <a href="/download" class="genric-btn primary"><i class="fa fa-download"></i> Excel</a>
                     <a href="edit.html" class="genric-btn primary"><i class="fa fa-download"></i> Png</a>
                 </div>

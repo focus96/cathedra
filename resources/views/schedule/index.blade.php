@@ -33,19 +33,16 @@
                     <div class="single-contact-address d-flex flex-row">
                         <select class="btn btn-secondary btn-sm dropdown-toggle" id="list">
                             <option value="1" selected>По группе</option>
-                            <option value="2">По преподователю</option>
+                            <option value="2" >По преподователю</option>
                             <option value="3">По аудитории</option>
-                            <option value="4">От предмета по группе</option>
                         </select>
                     </div>
                 </div>
                 <div class="col-lg-8">
-
-                    <a href="#" class="genric-btn primary"><i class="fa fa-download"></i> PDF</a>
+                    <a href="/download-pdf" class="genric-btn primary"><i class="fa fa-download"></i> PDF</a>
                     <a href="/download" class="genric-btn primary"><i class="fa fa-download"></i> Excel</a>
-                    <a href="#" class="genric-btn primary"><i class="fa fa-download"></i> Png</a>
+                    <a href="edit.html" class="genric-btn primary"><i class="fa fa-download"></i> Png</a>
                 </div>
-
             </div>
             <div class="col-md-12s">
 
@@ -258,7 +255,6 @@
                     </tbody>
                 </table>
             </div>
-        </div>
     </section>
     <!-- End contact-page Area -->
 
@@ -305,7 +301,7 @@
                         if ($('#headTable #group' + index).text() == value.group) {
                             for (var i = 1; i < 6; i++) {
                                 if ($('#mn' + i).text() == value.couple_number) {
-                                    $('#m' + i + ' .td' + index).text(value.item + ', '+ value.teacher);
+                                    $('#m' + i + ' .td' + index).text(value.item +'('+value.teacher+')');
                                 }
                             }
                             ;
@@ -318,7 +314,7 @@
                         if ($('#headTable #group' + index).text() == value.group) {
                             for (var i = 1; i < 6; i++) {
                                 if ($('#ts' + i).text() == value.couple_number) {
-                                    $('#t' + i + ' .td' + index).text(value.item + ', '+ value.teacher);
+                                    $('#t' + i + ' .td' + index).text(value.item +'('+value.teacher+')');
                                 }
                             }
                             ;
@@ -331,7 +327,7 @@
                         if ($('#headTable #group' + index).text() == value.group) {
                             for (var i = 1; i < 6; i++) {
                                 if ($('#we' + i).text() == value.couple_number) {
-                                    $('#w' + i + ' .td' + index).text(value.item + ', '+ value.teacher);
+                                    $('#w' + i + ' .td' + index).text(value.item +'('+value.teacher+')');
                                 }
                             }
                             ;
@@ -344,7 +340,7 @@
                         if ($('#headTable #group' + index).text() == value.group) {
                             for (var i = 1; i < 6; i++) {
                                 if ($('#thu' + i).text() == value.couple_number) {
-                                    $('#th' + i + ' .td' + index).text(value.item + ', '+ value.teacher);
+                                    $('#th' + i + ' .td' + index).text(value.item +'('+value.teacher+')');
                                 }
                             }
                             ;
@@ -357,7 +353,7 @@
                         if ($('#headTable #group' + index).text() == value.group) {
                             for (var i = 1; i < 6; i++) {
                                 if ($('#f' + i).text() == value.couple_number) {
-                                    $('#fr' + i + ' .td' + index).text(value.item + ', '+ value.teacher);
+                                    $('#fr' + i + ' .td' + index).text(value.item +'('+value.teacher+')');
                                 }
                             }
                             ;
@@ -370,7 +366,7 @@
                         if ($('#headTable #group' + index).text() == value.group) {
                             for (var i = 1; i < 6; i++) {
                                 if ($('#s' + i).text() == value.couple_number) {
-                                    $('#sa' + i + ' .td' + index).text(value.item + ', '+ value.teacher);
+                                    $('#sa' + i + ' .td' + index).text(value.item +'('+value.teacher+')');
                                 }
                             }
                             ;
@@ -379,11 +375,8 @@
             });
         }
     </script>
-
     <script>
         var tbl = document.getElementById('example1').innerHTML ;
-        window.location = "http://127.0.0.1:8000/export?tbl="+ tbl;
-
         console.log(tbl);
     </script>
 @endsection
