@@ -5,6 +5,7 @@ use App\Exports\ScheduleExport;
 use App\Models\Group;
 use App\Models\Shedule;
 use App\Models\Teacher;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -76,6 +77,10 @@ Route::get('/download',function (){
 
     return Excel::download(new ScheduleExport, 'schedule.xlsx');
 });
+Route::prefix('download-pdf')->group(function () {
+    Route::get('/', 'ScheduleController@downloadPdf')->name('download-pdf');
+});
+
 
 Route::prefix('item')->group(function () {
     Route::get('/', 'ScheduleController@item');

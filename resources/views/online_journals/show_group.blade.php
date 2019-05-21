@@ -24,15 +24,12 @@
                     <table class="table table-bordered table-striped">
 
                         <tr>
-                            <th>Группа</th>
-                            <th>Журнал</th>
-                        </tr>
-                        <tr>
-                            <th>{{ $group->name_group }}</th>
+                            <th>Группа: {{ $group->name_group }}</th>
+
                         </tr>
                             @foreach($online_journals as $online_journal)
                                 @if($online_journal->is_public === 1)
-                                <tr><td></td>
+                                <tr>
                                     <td>
                                         <a href="/online_journals/show_journal/{{ $online_journal->id }}">Журнал № {{ $online_journal->id }}, предмет: {{ $online_journal->item }}, преподаватель: {{ $online_journal->teacher }}, последние изменения: {{ $online_journal->updated_at }}</a>
                                     </td>

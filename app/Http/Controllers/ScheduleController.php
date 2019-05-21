@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Shedule;
+use PDF;
+use DB;
 use App\Models\Group;
 use App\Models\Teacher;
 use App\Models\Items;
@@ -16,7 +18,7 @@ class ScheduleController extends Controller
         $shedules = Shedule::orderBy('couple_number','asc')->get();
         $teachers = Teacher::pluck('surname','id')->all();
         $groups = Group::pluck('name_group','id')->all();
-                return View('schedule',['shedules' => $shedules,'groups' => $groups,'teachers'=>$teachers]);
+                return View('schedule/index',['shedules' => $shedules,'groups' => $groups,'teachers'=>$teachers]);
     }
     public function teacher()
     {
@@ -49,4 +51,34 @@ class ScheduleController extends Controller
     {
         Browsershot::url('http://127.0.0.1:8000/schedule')->savePdf('example.pdf');
     }
+
+    public function downloadPdf() {
+        $shedules = Shedule::orderBy('couple_number','asc')->get();
+        $teachers = Teacher::pluck('surname','id')->all();
+        $groups = Group::pluck('name_group','id')->all();
+
+        $pdf = PDF::loadView('schedule/download-pdf',[
+
+            'shedules' => $shedules,
+            'groups' => $groups,
+            'teachers'=>$teachers,
+        ]);
+        return $pdf->download('shedule.pdf');
+//        return $pdf->stream('invoice.pdf');
+    }
+
+
+//    public function downloadPdf()
+//    {
+//        $customer_data = $this->get_customer_data();
+//
+//        return view('')->with('customer_data',$customer_data);
+//    }
+//
+//    public function get_customer_data()
+//    {
+//        $customer_data = DB::table('shedules')->get();
+//
+//        return $customer_data;
+//    }
 }

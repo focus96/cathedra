@@ -8,6 +8,11 @@
         background: #ff0000;
         color: #ffffff;
     }
+    blockquote{
+        border-left: .25em solid #dfe2e5;
+        color: #6a737d;
+        padding: 0 1em;
+    }
 </style>
 
 @extends('layouts.app')
@@ -27,10 +32,17 @@
         </div>
     </section>
     <!-- End banner Area -->
-    <div class="mytable">
         <section class="contact-page-area section-gap">
             <div class="container">
-
+                <div class="col-md-12">
+                    <blockquote>
+                        <h4 class="lnr lnr-bubble">Підказка</h4>
+                        <q>
+                            Якщо оцінка підсвічується <b class="yellow ">жовтим</b> кольором - термін здачі був прострочений.
+                            <b class="red">Червоним</b> кольором - оцінка прострочена та відсутня.
+                        </q>
+                    </blockquote>
+                </div>
                 @if($journal->is_close === 0)
                     <h4>Журнал № {{ $journal->id }} Статус: Открыт</h4>
                 @else
@@ -93,24 +105,8 @@
                         </style>
 
                     </div>
-
                 </div>
-                    <div class="col-md-12">
-                        <div class="col-md-6">
-                            <h4 class="lnr lnr-bubble">Підказка</h4>
 
-
-                        </div>
-                        <div class="col-md-6">
-                            <blockquote>
-                                <q>
-                                    Якщо оцінка підсвічується <b class="yellow ">жовтим</b> кольором - термін здачі був прострочений.
-                                    <b class="red">Червоним</b> кольором - оцінка прострочена та відсутня.
-                                </q>
-                            </blockquote>
-                        </div>
-
-                    </div>
             </div>
 
         </section>
