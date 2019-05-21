@@ -6,6 +6,7 @@
     "type": "project",
     "require": {
         "php": "^7.1.3",
+        "barryvdh/laravel-dompdf": "^0.8.4",
         "botman/botman": "^2.4",
         "botman/driver-telegram": "^1.5",
         "cviebrock/eloquent-sluggable": "4.6",
@@ -18,6 +19,7 @@
         "laravel/framework": "5.7.*",
         "laravel/tinker": "^1.0",
         "maatwebsite/excel": "^3.1",
+        "mpdf/mpdf": "^8.0",
         "spatie/browsershot": "^3.29"
     },
     "require-dev": {

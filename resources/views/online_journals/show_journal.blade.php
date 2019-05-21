@@ -38,7 +38,7 @@
                 @endif
                 <div class="col-md-12s">
                     <div class="col-md-6s menu-down">
-                        <a href="{{route('export-file')}}" class="genric-btn primary"><i class="fa fa-download"></i> PDF</a>
+                        <a href="/save-pdf/{{ $journal->id }}" class="genric-btn primary"><i class="fa fa-download"></i> PDF</a>
                         <a href="edit.html" class="genric-btn primary"><i class="fa fa-download"></i> Excel</a>
                         <a href="edit.html" class="genric-btn primary"><i class="fa fa-download"></i> Png</a>
                     </div>
@@ -67,28 +67,8 @@
                                                 data-student_point-id="{{$point ? $point->id : ''}}"
 
                                                 class="edit points {{ (($point && ($checkpoint->deadline < $point->created_at or
-                            $checkpoint->deadline < $point->updated_at) && ($point->points == null)) or
-                            (!$point && ($checkpoint->deadline < now()))) ? 'red' : '' }}
-{{--<<<<<<< HEAD
-                        {{ (($point && ($checkpoint->deadline < $point->created_at or
-                        $checkpoint->deadline < $point->updated_at)) &&
-                        ($point->points)) ? 'yellow' : '' }}">{{ $point ? $point->points : '' }}</td>
-
-            @endforeach
-        </tr>
-    @endforeach
-</table>
-<br><div class="yellow" style="width: 150px; height: 40px; text-align: center; padding-top: 10px; color: white; font-size: small;"><b>Оценка просрочена</b></div><br>
-<div class="red" style="width: 150px; height: 40px; text-align: center; color: white; font-size: small;"><b>Оценка просрочена и отсутствует</b></div>
-<br>
-<a href="/online_journals/show_group/{{ $journal->groupRelation->id }}">Вернуться к списку журналов</a>
-<br>
-<br>
-<a href="/online_journals">Вернуться к списку групп</a>
-        <br>
-        <a href="/save-pdf">Сохранить в PDF</a>
-    </div>
-=======--}}
+                                                $checkpoint->deadline < $point->updated_at) && ($point->points == null)) or
+                                                (!$point && ($checkpoint->deadline < now()))) ? 'red' : '' }}
                                                 {{ (($point && ($checkpoint->deadline < $point->created_at or
                                                 $checkpoint->deadline < $point->updated_at)) &&
                                                 ($point->points)) ? 'yellow' : '' }}">{{ $point ? $point->points : '' }}</td>
@@ -134,5 +114,5 @@
             </div>
 
         </section>
-{{-->>>>>>> 049fe5b828c93f2c724072652736cf223bc231c0--}}
+
 @endsection

@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Online_journal;
+use Barryvdh\DomPDF\Facade as PDF;
+use function GuzzleHttp\Promise\all;
 use Illuminate\Http\Request;
-use Spatie\Browsershot\Browsershot;
+use Illuminate\Support\Facades\App;
 
 class SavePDFController extends Controller
 {
@@ -30,7 +33,7 @@ class SavePDFController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -41,7 +44,7 @@ class SavePDFController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -52,7 +55,7 @@ class SavePDFController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -63,8 +66,8 @@ class SavePDFController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -75,7 +78,7 @@ class SavePDFController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
@@ -83,9 +86,14 @@ class SavePDFController extends Controller
         //
     }
 
-    public function save()
+    public function save($id)
     {
-        //dd(121212);
-        return Browsershot::url('https://cathedra.loc')->savePdf('example.pdf');
+        $journal = Online_journal::with(['groupRelation.students.points' => function($q) use($id) {
+            $q->where('journal_id', $id);
+        }, 'checkpoints'])->find($id);
+
+        $pdf = PDF::loadView('online_journals.journal_pdf', compact('journal'));
+        return $pdf->download('journal.pdf');
+
     }
 }

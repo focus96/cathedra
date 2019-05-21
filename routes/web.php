@@ -1,6 +1,10 @@
 <?php
 
 use App\Exports\ScheduleExport;
+
+use App\Models\Group;
+use App\Models\Shedule;
+use App\Models\Teacher;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -96,7 +100,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/save-pdf', 'SavePDFController@save');
+Route::get('/save-pdf/{id}', 'SavePDFController@save');
 
 
 
