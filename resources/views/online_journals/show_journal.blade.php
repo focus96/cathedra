@@ -51,7 +51,7 @@
                 <div class="col-md-12s">
                     <div class="col-md-6s menu-down">
                         <a href="/save-pdf/{{ $journal->id }}" class="genric-btn primary"><i class="fa fa-download"></i> PDF</a>
-                        <a href="edit.html" class="genric-btn primary"><i class="fa fa-download"></i> Excel</a>
+                        <a href="/save-xls/{{ $journal->id }}" class="genric-btn primary"><i class="fa fa-download"></i> Excel</a>
                         <a href="edit.html" class="genric-btn primary"><i class="fa fa-download"></i> Png</a>
                     </div>
 

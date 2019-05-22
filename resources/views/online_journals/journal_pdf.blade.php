@@ -98,13 +98,7 @@
                                 @php
                                     $point = $student->points->where('checkpoint_id', $checkpoint->id)->first();
                                 @endphp
-                                <td
-                                        data-journal-id="{{$journal->id}}"
-                                        data-student-id="{{$student->id}}"
-                                        data-checkpoint-id="{{$checkpoint->id}}"
-                                        data-student_point-id="{{$point ? $point->id : ''}}"
-
-                                        class="edit points {{ (($point && ($checkpoint->deadline < $point->created_at or
+                                <td class="edit points {{ (($point && ($checkpoint->deadline < $point->created_at or
                                                 $checkpoint->deadline < $point->updated_at) && ($point->points == null)) or
                                                 (!$point && ($checkpoint->deadline < now()))) ? 'red' : '' }} {{ (($point &&
                                                 ($checkpoint->deadline < $point->created_at or

@@ -2,10 +2,6 @@
 
 use App\Exports\ScheduleExport;
 
-use App\Models\Group;
-use App\Models\Shedule;
-use App\Models\Teacher;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,10 +12,6 @@ use App\Models\Teacher;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-/*Route::get('/', function () {
-    return view('index');
-});*/
 
 Route::get('/', 'HomePageController@index');
 Route::post('/', 'HomePageController@regist');
@@ -42,10 +34,6 @@ Route::prefix('album')->group(function () {
     Route::get('/', 'AlbumController@index');
     Route::get('/{album}', 'AlbumController@show')->name('album-show');
 });
-
-/*Route::prefix('online_journals')->group(function () {
-    Route::get('/', 'OnlineJournalController@index');
-});*/
 
 Route::prefix('online_journals')->group(function () {
     Route::get('/', 'OnlineJournalController@index');
@@ -74,13 +62,11 @@ Route::prefix('export')->group(function () {
 });
 
 Route::get('/download',function (){
-
     return Excel::download(new ScheduleExport, 'schedule.xlsx');
 });
 Route::prefix('download-pdf')->group(function () {
     Route::get('/', 'ScheduleController@downloadPdf')->name('download-pdf');
 });
-
 
 Route::prefix('item')->group(function () {
     Route::get('/', 'ScheduleController@item');
@@ -92,13 +78,10 @@ Route::prefix('faculties')->group(function () {
 
 Route::post('/subscribe','SubsController@subscribe');
 
-
-
-
-
 Route::view('/contact', 'contact');
 
 Route::get('/get-all-cathedra-users', 'CathedraUserController@all');
+
 Route::post('/send-telegram-message', 'TelegramBotController@send');
 
 Auth::routes();
@@ -106,6 +89,8 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/save-pdf/{id}', 'SavePDFController@save');
+
+Route::get('/save-xls/{id}', 'SaveXLSController@save');
 
 
 

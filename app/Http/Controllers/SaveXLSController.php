@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\Online_journalExport;
 use App\Models\Online_journal;
-use Barryvdh\DomPDF\Facade as PDF;
+use Maatwebsite\Excel\Facades\Excel;
 
-class SavePDFController extends Controller
+class SaveXLSController extends Controller
 {
     public function save($id)
     {
@@ -13,8 +14,6 @@ class SavePDFController extends Controller
             $q->where('journal_id', $id);
         }, 'checkpoints'])->find($id);
 
-        $pdf = PDF::loadView('online_journals.journal_pdf', compact('journal'));
-        return $pdf->download('journal.pdf');
-
+        return Excel::download(new Online_journalExport($journal), 'journal.xls');
     }
 }

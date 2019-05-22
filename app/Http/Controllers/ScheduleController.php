@@ -18,7 +18,8 @@ class ScheduleController extends Controller
         $shedules = Shedule::orderBy('couple_number','asc')->get();
         $teachers = Teacher::pluck('surname','id')->all();
         $groups = Group::pluck('name_group','id')->all();
-                return View('schedule/index',['shedules' => $shedules,'groups' => $groups,'teachers'=>$teachers]);
+
+        return View('schedule/index',['shedules' => $shedules,'groups' => $groups,'teachers'=>$teachers]);
     }
     public function teacher()
     {
