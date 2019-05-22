@@ -18,6 +18,7 @@
         background: #ff0000;
         color: #ffffff;
     }
+
     body {
         font-family: DejaVu Sans, sans-serif;
     }

@@ -168,10 +168,10 @@ class GroupsController extends Controller
             $group_name = $form->specialty . ' ' . $form->admission_year . ' - ' . $form->group_number;
 
             if ($form->level_education === 'bachelor_acceleration'){
-                $name_group = $group_name . ' [ у ] ';
+                $name_group = $group_name . ' [у] ';
             }
             elseif ($form->level_education === 'master'){
-                $name_group = $group_name . ' [ м ] ';
+                $name_group = $group_name . ' [м] ';
             }
             else {
                 $name_group = $group_name;

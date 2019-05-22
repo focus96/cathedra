@@ -5,7 +5,7 @@ namespace App\Admin\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\CheckPoint;
 use App\Models\Group;
-use App\Models\Online_journal;
+use App\Models\OnlineJournal;
 use App\Models\Student;
 use App\Models\StudentPoint;
 use Encore\Admin\Controllers\Dashboard;
@@ -23,30 +23,12 @@ class JournalController extends Controller
      */
     public function index($id, Content $content)
     {
-
-        $journal = Online_journal::with(['groupRelation.students.points' => function($q) use($id) {
+        $journal = OnlineJournal::with(['groupRelation.students.points' => function($q) use($id) {
             $q->where('journal_id', $id);
         }, 'checkpoints'])->find($id);
 
         return $content->header('Управление журналом')
             ->description(' ')
             ->body(view('admin.online-journal.index', compact( 'journal')));
-
-
-//        $journal = Online_journal::findOrFail($id);
-//        $group = Group::where('id', '=', $journal->group)->first();
-//        $students = Student::where('groups_id', '=', $journal->group)->get();
-//        $checkpoints = CheckPoint::where('journal_id', '=', $journal->id)->get();
-//        $student_points = StudentPoint::where('journal_id', '=', $journal->id)->get();
-
-
-//        return $content
-//
-//            // optional
-//            ->header('Управление журналом')
-//            ->description(' ')
-//            // Fill the page body part, you can put any renderable objects here
-//            ->body(view('admin.online-journal.index', compact('journal', 'group', 'students', 'checkpoints', 'student_points')));
-
     }
 }

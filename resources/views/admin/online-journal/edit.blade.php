@@ -15,11 +15,11 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <script type="text/javascript">
-        $(window).on('load',function(){
+        $(window).on('load', function () {
             $('#basicModal').modal('show');
         });
 
-        $(document).ready(function(){
+        $(document).ready(function () {
             @if (count($errors) > 0)
             $('#basicModal').modal('show');
             @endif
@@ -120,8 +120,8 @@
 </div>
 
 <script type="text/javascript">
-    $('.close, .exit').click(function() {
-        window.location.href= "/admin/journals/{{ $checkpoint->journal_id }}";
+    $('.close, .exit').click(function () {
+        window.location.href = "/admin/journals/{{ $checkpoint->journal_id }}";
     });
 </script>
 

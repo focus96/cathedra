@@ -1,4 +1,3 @@
-
 @extends('layouts.app')
 
 @section('content')
@@ -10,7 +9,7 @@
             <div class="row d-flex align-items-center justify-content-center">
                 <div class="about-content col-lg-12">
                     <h1 class="text-white">Журнал</h1>
-                    <p class="text-white link-nav"><a href="/">Головна</a> </p>
+                    <p class="text-white link-nav"><a href="/">Головна</a></p>
                 </div>
             </div>
         </div>
@@ -22,36 +21,33 @@
                 <div class="col-md-8s">
 
                     <table class="table table-bordered table-striped">
-
                         <tr>
                             <th>Группа: {{ $group->name_group }}</th>
-
                         </tr>
-                            @foreach($online_journals as $online_journal)
-                                @if($online_journal->is_public === 1)
+                        @foreach($online_journals as $online_journal)
+                            @if($online_journal->is_public === 1)
                                 <tr>
                                     <td>
-                                        <a href="/online_journals/show_journal/{{ $online_journal->id }}">Журнал № {{ $online_journal->id }}, предмет: {{ $online_journal->item }}, преподаватель: {{ $online_journal->teacher }}, последние изменения: {{ $online_journal->updated_at }}</a>
+                                        <a href="/online_journals/show_journal/{{ $online_journal->id }}">Журнал
+                                            № {{ $online_journal->id }}, предмет: {{ $online_journal->item }},
+                                            преподаватель: {{ $online_journal->teacher }}, последние
+                                            изменения: {{ $online_journal->updated_at }}</a>
                                     </td>
                                 </tr>
-                                @endif
-                            @endforeach
-                        </tr>
-
-
-
-
+                            @endif
+                        @endforeach
                     </table>
                 </div>
                 <style>
-
-                    .menu-down{
+                    .menu-down {
                         margin-bottom: 10px;
                     }
-                    a{
+
+                    a {
                         color: #77777f;
                     }
-                    a:hover{
+
+                    a:hover {
                         color: #f05d22;
                     }
                 </style>

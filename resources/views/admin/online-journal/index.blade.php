@@ -120,7 +120,8 @@
                     {{ $checkpoint->name }}
                     @if($journal->is_close === 0)
                         <a href="/admin/checkpoints/{{ $checkpoint->id }}/edit"><i class="far fa-edit"></i></a>
-                        <a class="delete" href="/admin/checkpoints/delete/{{ $checkpoint->id }}"><i class="fa fa-trash"></i></a>
+                        <a class="delete" href="/admin/checkpoints/delete/{{ $checkpoint->id }}"><i
+                                    class="fa fa-trash"></i></a>
                     @else
                     @endif
                 </th>
@@ -244,139 +245,143 @@
 </div>
 
 @if($journal->is_close === 0)
-<script type="text/javascript">
+    <script type="text/javascript">
 
-    var deleteLinks = document.querySelectorAll('.delete');
+        var deleteLinks = document.querySelectorAll('.delete');
 
-    for (var i = 0; i < deleteLinks.length; i++) {
-        deleteLinks[i].addEventListener('click', function (event) {
-            event.preventDefault();
-            var link = this.getAttribute('href');
-            Swal.fire({
-                title: 'Удалить контрольную точку?',
-                type: 'warning',
-                showCancelButton: true,
-                cancelButtonText: 'Отмена!',
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Да, удалить!'
-            }).then((result) => {
-                if (result.value) {
-                    window.location.href = link;
-                    Swal.fire(
-                        'Удалено!',
-                        'Контрольная точка была удалена.',
-                        'success',
-                    )
-                }
+        for (var i = 0; i < deleteLinks.length; i++) {
+            deleteLinks[i].addEventListener('click', function (event) {
+                event.preventDefault();
+                var link = this.getAttribute('href');
+                Swal.fire({
+                    title: 'Удалить контрольную точку?',
+                    type: 'warning',
+                    showCancelButton: true,
+                    cancelButtonText: 'Отмена!',
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Да, удалить!'
+                }).then((result) => {
+                    if (result.value) {
+                        window.location.href = link;
+                        Swal.fire(
+                            'Удалено!',
+                            'Контрольная точка была удалена.',
+                            'success',
+                        )
+                    }
+                });
             });
-        });
-    }
-
-    //при нажатии на ячейку таблицы с классом edit
-    $('td.edit').dblclick(function () {
-        //находим input внутри элемента с классом ajax и вставляем вместо input его значение
-        $('.ajax').html($('.ajax input').val());
-        //удаляем все классы ajax
-        $('.ajax').removeClass('ajax');
-        //Нажатой ячейке присваиваем класс ajax
-        $(this).addClass('ajax');
-        //внутри ячейки создаём input и вставляем текст из ячейки в него
-        $(this).html('<input id="editbox" size="' + $(this).text().length + '" type="text" value="' + $(this).text() + '" />');
-        //устанавливаем фокус на созданном элементе
-        $('#editbox').focus();
-    });
-
-    //определяем нажатие кнопки на клавиатуре
-    $('td.edit').keydown(function (event) {
-        //проверяем какая была нажата клавиша и если была нажата клавиша Enter (код 13)
-        if (event.which == 13) {
-            $('.ajax').html($('.ajax input').val());
-            $('.ajax').removeClass('ajax');
         }
-    });
 
-    //сохранение при нажатии вне поля
+        //при нажатии на ячейку таблицы с классом edit
+        $('td.edit').dblclick(function () {
+            //находим input внутри элемента с классом ajax и вставляем вместо input его значение
+            $('.ajax').html($('.ajax input').val());
+            //удаляем все классы ajax
+            $('.ajax').removeClass('ajax');
+            //Нажатой ячейке присваиваем класс ajax
+            $(this).addClass('ajax');
+            //внутри ячейки создаём input и вставляем текст из ячейки в него
+            $(this).html('<input id="editbox" size="' + $(this).text().length + '" type="text" value="' + $(this).text() + '" />');
+            //устанавливаем фокус на созданном элементе
+            $('#editbox').focus();
+        });
+
+        //определяем нажатие кнопки на клавиатуре
+        $('td.edit').keydown(function (event) {
+            //проверяем какая была нажата клавиша и если была нажата клавиша Enter (код 13)
+            if (event.which == 13) {
+                $('.ajax').html($('.ajax input').val());
+                $('.ajax').removeClass('ajax');
+            }
+        });
+
+        //сохранение при нажатии вне поля
         $(document).on('blur', '#editbox', function () {
             saveData($(this).closest('td'));
             $('.ajax').html($('.ajax input').val());
             $('.ajax').removeClass('ajax');
         });
 
-    function saveData(el) {
-        //получаем значение класса и разбиваем на массив
-        //в итоге получаем такой массив - arr[0] = edit, arr[1] = наименование столбца (points)
-        let arr = el.attr('class').split(" ");
-        //назначаем атрибуты для ячейки
-        let studentId = el.attr('data-student-id');
-        let journalId = el.attr('data-journal-id');
-        let checkpointId = el.attr('data-checkpoint-id');
-        let student_pointlId = el.attr('data-student_point-id');
+        function saveData(el) {
+            //получаем значение класса и разбиваем на массив
+            //в итоге получаем такой массив - arr[0] = edit, arr[1] = наименование столбца (points)
+            let arr = el.attr('class').split(" ");
+            //назначаем атрибуты для ячейки
+            let studentId = el.attr('data-student-id');
+            let journalId = el.attr('data-journal-id');
+            let checkpointId = el.attr('data-checkpoint-id');
+            let student_pointlId = el.attr('data-student_point-id');
 
-        var d = new Date();
-        var curr_date = (d.getDate() < 10 ? '0' : '') + d.getDate();
-        var curr_month = ((d.getMonth() + 1) < 10 ? '0' : '') + (d.getMonth() + 1);
-        var curr_year = d.getFullYear();
+            var d = new Date();
+            var curr_date = (d.getDate() < 10 ? '0' : '') + d.getDate();
+            var curr_month = ((d.getMonth() + 1) < 10 ? '0' : '') + (d.getMonth() + 1);
+            var curr_year = d.getFullYear();
 
-        let points_date = (curr_year + "-" + curr_month + "-" + curr_date);
+            let points_date = (curr_year + "-" + curr_month + "-" + curr_date);
 
 
-        //получаем наименование таблицы, в которую будем вносить изменения
-        var table = $('table').attr('id');
-        //подготавливаем данные для отправки
-        //value = введенное значение
-        //field = название столбца
-        //table = название таблицы
-        var data = {
-            value: $('.ajax input').val(),
-            student_point_id: student_pointlId,
-            field: arr[1],
-            checkpoint_id: checkpointId,
-            student_id: studentId,
-            journal_id: journalId,
-            table: table,
-            points_date: points_date,
-        };
+            //получаем наименование таблицы, в которую будем вносить изменения
+            var table = $('table').attr('id');
+            //подготавливаем данные для отправки
+            //value = введенное значение
+            //field = название столбца
+            //table = название таблицы
+            var data = {
+                value: $('.ajax input').val(),
+                student_point_id: student_pointlId,
+                field: arr[1],
+                checkpoint_id: checkpointId,
+                student_id: studentId,
+                journal_id: journalId,
+                table: table,
+                points_date: points_date,
+            };
 
-        //выполняем ajax запрос методом POST
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-        $.ajax({
-            url: '/admin/student_points',
-            type: 'POST',
-            data: data,
-            //при удачном выполнении скрипта, производим действия
-            success: function (data) {
-                //находим input внутри элемента с классом ajax и вставляем вместо input его значение
-                $('.ajax').html($('.ajax input').val());
-                //удаялем класс ajax
-                $('.ajax').removeClass('ajax');
-                if (data.errors){
-                    $.each(data.errors, function(key, value){
-                        $('.alert-danger').show();
-                        $('.alert-danger').append('<p>'+value+'</p>');
-                    });
-                }else {
-                    $('.alert-danger').html($('.alert-danger').val());
-                    $('.alert-danger').removeClass('alert-danger');
-                    Swal.fire({
-                        position: 'top',
-                        type: 'success',
-                        title: 'Изменения сохранены',
-                        showConfirmButton: false,
-                        timer: 1500
-                    });
+            //выполняем ajax запрос методом POST
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
-            }
-        });
-    }
+            });
+            $.ajax({
+                url: '/admin/student_points',
+                type: 'POST',
+                data: data,
+                //при удачном выполнении скрипта, производим действия
+                success: function (data) {
+                    //находим input внутри элемента с классом ajax и вставляем вместо input его значение
+                    $('.ajax').html($('.ajax input').val());
+                    //удаялем класс ajax
+                    $('.ajax').removeClass('ajax');
+                    if (data.errors) {
+                        $.each(data.errors, function (key, value) {
+                            $('.alert-danger').show();
+                            $('.alert-danger').append('<p>' + value + '</p>');
+                        });
+                    } else {
+                        $('.alert-danger').html($('.alert-danger').val());
+                        $('.alert-danger').removeClass('alert-danger');
+                        Swal.fire({
+                            position: 'top',
+                            type: 'success',
+                            title: 'Изменения сохранены',
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                    }
+                }
+            });
+        }
 
-</script>
-    <br><div class="yellow" style="width: 150px; height: 40px; text-align: center; padding-top: 10px; color: white; font-size: small;"><b>Оценка просрочена</b></div><br>
-    <div class="red" style="width: 150px; height: 40px; text-align: center; color: white; font-size: small;"><b>Оценка просрочена и отсутствует</b></div>
+    </script>
+    <br>
+    <div class="yellow"
+         style="width: 150px; height: 40px; text-align: center; padding-top: 10px; color: white; font-size: small;"><b>Оценка
+            просрочена</b></div><br>
+    <div class="red" style="width: 150px; height: 40px; text-align: center; color: white; font-size: small;"><b>Оценка
+            просрочена и отсутствует</b></div>
 @endif
 
 </body>

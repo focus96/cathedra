@@ -3,7 +3,7 @@
 namespace App\Admin\Controllers;
 
 use App\Models\CheckPoint;
-use App\Models\Online_journal;
+use App\Models\OnlineJournal;
 use App\Models\StudentPoint;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -16,7 +16,7 @@ class StudentPointController extends Controller
         $max_point = $validStudentPoint->max_point;
         $date = $validStudentPoint->date;
 
-        $closeJournal = Online_journal::where('id', '=', $request->journal_id)->first();
+        $closeJournal = OnlineJournal::where('id', '=', $request->journal_id)->first();
 
         if ($closeJournal->is_close === 0){
             $validator = \Validator::make($request->all(), [
@@ -30,9 +30,7 @@ class StudentPointController extends Controller
             }else{
                 $studentPoint = StudentPoint::find($request->student_point_id);
 
-
                 if($studentPoint){
-
 
                     $studentPoint->checkpoint_id = $request->checkpoint_id;
                     $studentPoint->student_id = $request->student_id;
@@ -57,6 +55,5 @@ class StudentPointController extends Controller
                 return response()->json(['success'=>'Сохранение успешно выполнено']);
             }
         }
-        //return redirect(route('journal', $request->journal_id));
     }
 }

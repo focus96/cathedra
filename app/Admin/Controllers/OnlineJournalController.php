@@ -4,7 +4,7 @@ namespace App\Admin\Controllers;
 
 use App\Models\Group;
 use App\Models\Items;
-use App\Models\Online_journal;
+use App\Models\OnlineJournal;
 use App\Http\Controllers\Controller;
 use App\Models\Student;
 use App\Models\Teacher;
@@ -16,7 +16,7 @@ use Encore\Admin\Show;
 use Encore\Admin\Widgets\Table;
 use function GuzzleHttp\Promise\all;
 
-class Online_journalController extends Controller
+class OnlineJournalController extends Controller
 {
     use HasResourceActions;
 
@@ -85,7 +85,7 @@ class Online_journalController extends Controller
      */
     protected function grid()
     {
-        $grid = new Grid(new Online_journal);
+        $grid = new Grid(new OnlineJournal);
 
         $grid->id('Ид')->display(function ($id) {
             return '<a href="' . route('journal', $id) . '">' . $id . '</a>';
@@ -115,7 +115,7 @@ class Online_journalController extends Controller
      */
     protected function detail($id)
     {
-        $show = new Show(Online_journal::findOrFail($id));
+        $show = new Show(OnlineJournal::findOrFail($id));
 
         $show->id('Ид');
         $show->item('Предмет');
@@ -136,7 +136,7 @@ class Online_journalController extends Controller
      */
     protected function form()
     {
-        $form = new Form(new Online_journal);
+        $form = new Form(new OnlineJournal);
 
         $form->select('item','Предмет')->options(Items::all()->pluck('name', 'name'))->rules('required', [
             'required' => 'Обязательно для заполнения',
