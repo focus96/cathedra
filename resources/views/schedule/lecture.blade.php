@@ -43,9 +43,8 @@
                 </div>
             </div>
             <div class="col-md-12s">
-                <table id="example1" class="table table-bordered table-striped">
-                    <thead>
-
+                <table id="example1" class="table table-bordered table-hover">
+                    <thead class="thead-light">
                     <tr id="headTable">
                         <th>День недели</th>
                         <th>Номер пары</th>

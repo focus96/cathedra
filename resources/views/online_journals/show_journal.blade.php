@@ -56,7 +56,8 @@
                     </div>
 
                     <div class="col-md-6s">
-                        <table class="table table-bordered table-st">
+                        <table class="table table-bordered table-hover">
+                            <thead class="thead-light">
                             <tr>
                                 <th>{{ $journal->groupRelation->name_group }}</th>
                                 @foreach($journal->checkpoints as $checkpoint)
@@ -65,6 +66,7 @@
                                     </th>
                                 @endforeach
                             </tr>
+                            </thead>
                             @foreach($journal->groupRelation->students as $student)
                                 <tr>
                                     <td>{{ $student->surname }}</td>

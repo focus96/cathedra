@@ -21,12 +21,13 @@
             <div class="col-md-12">
                 <div class="col-md-8s">
 
-                    <table class="table table-bordered table-striped">
+                    <table class="table table-bordered table-hover">
+                        <thead class="thead-light">
+                            <tr>
+                                <th>Группа: {{ $group->name_group }}</th>
 
-                        <tr>
-                            <th>Группа: {{ $group->name_group }}</th>
-
-                        </tr>
+                            </tr>
+                        </thead>
                             @foreach($online_journals as $online_journal)
                                 @if($online_journal->is_public === 1)
                                 <tr>
