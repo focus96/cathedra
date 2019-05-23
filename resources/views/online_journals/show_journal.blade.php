@@ -43,16 +43,16 @@
                         </q>
                     </blockquote>
                 </div>
-                @if($journal->is_close === 0)
-                    <h4>Журнал № {{ $journal->id }} Статус: Открыт</h4>
-                @else
-                    <h4>Журнал № {{ $journal->id }} Статус: Закрыт</h4>
-                @endif
+
                 <div class="col-md-12s">
+                    @if($journal->is_close === 0)
+                        <h4>Журнал № {{ $journal->id }} Статус: Открыт</h4>
+                    @else
+                        <h4>Журнал № {{ $journal->id }} Статус: Закрыт</h4>
+                    @endif
                     <div class="col-md-6s menu-down">
                         <a href="/save-pdf/{{ $journal->id }}" class="genric-btn primary"><i class="fa fa-download"></i> PDF</a>
                         <a href="edit.html" class="genric-btn primary"><i class="fa fa-download"></i> Excel</a>
-                        <a href="edit.html" class="genric-btn primary"><i class="fa fa-download"></i> Png</a>
                     </div>
 
                     <div class="col-md-6s">

@@ -10,6 +10,8 @@ use App\Models\Teacher;
 use App\Models\Items;
 use Illuminate\Http\Request;
 use Spatie\Browsershot\Browsershot;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\ScheduleExport;
 
 class ScheduleController extends Controller
 {
@@ -41,44 +43,4 @@ class ScheduleController extends Controller
         $groups = Group::pluck('name_group','id')->all();
         return View('schedule/item',['shedules' => $shedules,'items'=>$items,'groups' => $groups]);
     }
-
-    public function faculties()
-    {
-        return view('faculties');
-    }
-
-    public function export()
-    {
-        Browsershot::url('http://127.0.0.1:8000/schedule')->savePdf('example.pdf');
-    }
-
-    public function downloadPdf() {
-        $shedules = Shedule::orderBy('couple_number','asc')->get();
-        $teachers = Teacher::pluck('surname','id')->all();
-        $groups = Group::pluck('name_group','id')->all();
-
-        $pdf = PDF::loadView('schedule/download-pdf',[
-
-            'shedules' => $shedules,
-            'groups' => $groups,
-            'teachers'=>$teachers,
-        ]);
-        return $pdf->download('shedule.pdf');
-//        return $pdf->stream('invoice.pdf');
-    }
-
-
-//    public function downloadPdf()
-//    {
-//        $customer_data = $this->get_customer_data();
-//
-//        return view('')->with('customer_data',$customer_data);
-//    }
-//
-//    public function get_customer_data()
-//    {
-//        $customer_data = DB::table('shedules')->get();
-//
-//        return $customer_data;
-//    }
 }

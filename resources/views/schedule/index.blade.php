@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-
+    <meta name="http-equiv" content="Content-type: text/html; charset=UTF-8">
     <!-- start banner Area -->
     <section class="banner-area relative about-banner" id="home">
         <style>
@@ -10,6 +10,9 @@
             }
             .banner-area{
                 background: url(../img/baner2.jpg) right;
+            }
+            #example1 {
+                width: auto;
             }
         </style>
         <div class="overlay overlay-bg"></div>
@@ -23,8 +26,6 @@
         </div>
     </section>
     <!-- End banner Area -->
-
-
     <!-- Start contact-page Area -->
     <section class="contact-page-area section-gap">
         <div class="container">
@@ -34,22 +35,18 @@
                         <select class="btn btn-secondary btn-sm dropdown-toggle" id="list">
                             <option value="1" selected>По группе</option>
                             <option value="2" >По преподователю</option>
-                            <option value="3">По аудитории</option>
+                            <option value="3" >По аудитории</option>
                         </select>
                     </div>
                 </div>
                 <div class="col-lg-8">
-                    <a href="/download-pdf" class="genric-btn primary"><i class="fa fa-download"></i> PDF</a>
+                    <button id="print" class="genric-btn primary"><i class="fa fa-download"></i> PDF</button>
                     <a href="/download" class="genric-btn primary"><i class="fa fa-download"></i> Excel</a>
-                    <a href="edit.html" class="genric-btn primary"><i class="fa fa-download"></i> Png</a>
                 </div>
             </div>
             <div class="col-md-12s">
-
-
                 <table id="example1" class="table table-bordered table-striped">
                     <thead>
-
                     <tr id="headTable">
                         <th>День недели</th>
                         <th>Номер пары</th>
@@ -255,14 +252,23 @@
                     </tbody>
                 </table>
             </div>
+        </div>
     </section>
     <!-- End contact-page Area -->
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.3/jspdf.min.js"></script>
+
+
+
+
     <script src="{{ asset('js/app.js') }}"></script>
+
+    <script src="{{ asset('js/schedule.js') }}"></script>
     <script>
         var shedules = {!! json_encode($shedules->toArray()) !!};
         var groups = {!! json_encode($groups) !!};
-        var teachers = {!! json_encode($teachers) !!};
 
 
 
@@ -301,7 +307,7 @@
                         if ($('#headTable #group' + index).text() == value.group) {
                             for (var i = 1; i < 6; i++) {
                                 if ($('#mn' + i).text() == value.couple_number) {
-                                    $('#m' + i + ' .td' + index).text(value.item +'('+value.teacher+')');
+                                    $('#m' + i + ' .td' + index).text(value.item);
                                 }
                             }
                             ;
@@ -314,7 +320,7 @@
                         if ($('#headTable #group' + index).text() == value.group) {
                             for (var i = 1; i < 6; i++) {
                                 if ($('#ts' + i).text() == value.couple_number) {
-                                    $('#t' + i + ' .td' + index).text(value.item +'('+value.teacher+')');
+                                    $('#t' + i + ' .td' + index).text(value.item);
                                 }
                             }
                             ;
@@ -327,7 +333,7 @@
                         if ($('#headTable #group' + index).text() == value.group) {
                             for (var i = 1; i < 6; i++) {
                                 if ($('#we' + i).text() == value.couple_number) {
-                                    $('#w' + i + ' .td' + index).text(value.item +'('+value.teacher+')');
+                                    $('#w' + i + ' .td' + index).text(value.item);
                                 }
                             }
                             ;
@@ -340,7 +346,7 @@
                         if ($('#headTable #group' + index).text() == value.group) {
                             for (var i = 1; i < 6; i++) {
                                 if ($('#thu' + i).text() == value.couple_number) {
-                                    $('#th' + i + ' .td' + index).text(value.item +'('+value.teacher+')');
+                                    $('#th' + i + ' .td' + index).text(value.item);
                                 }
                             }
                             ;
@@ -353,7 +359,7 @@
                         if ($('#headTable #group' + index).text() == value.group) {
                             for (var i = 1; i < 6; i++) {
                                 if ($('#f' + i).text() == value.couple_number) {
-                                    $('#fr' + i + ' .td' + index).text(value.item +'('+value.teacher+')');
+                                    $('#fr' + i + ' .td' + index).text(value.item);
                                 }
                             }
                             ;
@@ -366,7 +372,7 @@
                         if ($('#headTable #group' + index).text() == value.group) {
                             for (var i = 1; i < 6; i++) {
                                 if ($('#s' + i).text() == value.couple_number) {
-                                    $('#sa' + i + ' .td' + index).text(value.item +'('+value.teacher+')');
+                                    $('#sa' + i + ' .td' + index).text(value.item);
                                 }
                             }
                             ;
@@ -375,8 +381,5 @@
             });
         }
     </script>
-    <script>
-        var tbl = document.getElementById('example1').innerHTML ;
-        console.log(tbl);
-    </script>
+
 @endsection
