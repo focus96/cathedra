@@ -14,6 +14,7 @@ class SavePDFController extends Controller
         }, 'checkpoints'])->find($id);
 
         $pdf = PDF::loadView('online_journals.journal_pdf', compact('journal'));
+
         return $pdf->download('journal.pdf');
     }
 }

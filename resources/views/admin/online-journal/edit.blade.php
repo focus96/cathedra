@@ -59,6 +59,7 @@
                                 <div class="card-body">
 
                                     <form action="{{ route('checkpoints_update', $checkpoint->id) }}" method="post">
+                                        {{ method_field('PATCH') }}
                                         @csrf
 
                                         <label for="name">Наименование контрольной точки</label>

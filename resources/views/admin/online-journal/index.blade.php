@@ -119,9 +119,8 @@
                 <th>
                     {{ $checkpoint->name }}
                     @if($journal->is_close === 0)
-                        <a href="/admin/checkpoints/{{ $checkpoint->id }}/edit"><i class="far fa-edit"></i></a>
-                        <a class="delete" href="/admin/checkpoints/delete/{{ $checkpoint->id }}"><i
-                                    class="fa fa-trash"></i></a>
+                        <a href="/admin/checkpoints/{{ $checkpoint->id }}/edit"><i class="far fa-edit" title="Редактировать"></i></a>
+                        <a href="#" title="Удалить" class="delete"><i class="fa fa-trash"></i></a>
                     @else
                     @endif
                 </th>
@@ -151,6 +150,10 @@
             </tr>
         @endforeach
     </table>
+    <form id="delete" method="POST" action="{{ route('checkpoint_delete', $checkpoint->id) }}">
+        @csrf
+        {{ method_field('DELETE') }}
+    </form>
     <br>
     <div class="alert alert-danger" style="display:none"></div>
 </div>
@@ -252,7 +255,6 @@
         for (var i = 0; i < deleteLinks.length; i++) {
             deleteLinks[i].addEventListener('click', function (event) {
                 event.preventDefault();
-                var link = this.getAttribute('href');
                 Swal.fire({
                     title: 'Удалить контрольную точку?',
                     type: 'warning',
@@ -263,7 +265,7 @@
                     confirmButtonText: 'Да, удалить!'
                 }).then((result) => {
                     if (result.value) {
-                        window.location.href = link;
+                        $('form#delete').submit();
                         Swal.fire(
                             'Удалено!',
                             'Контрольная точка была удалена.',
@@ -306,7 +308,7 @@
 
         function saveData(el) {
             //получаем значение класса и разбиваем на массив
-            //в итоге получаем такой массив - arr[0] = edit, arr[1] = наименование столбца (points)
+            //получаем такой массив - arr[0] = edit, arr[1] = наименование столбца (points)
             let arr = el.attr('class').split(" ");
             //назначаем атрибуты для ячейки
             let studentId = el.attr('data-student-id');
@@ -324,12 +326,9 @@
 
             //получаем наименование таблицы, в которую будем вносить изменения
             var table = $('table').attr('id');
-            //подготавливаем данные для отправки
-            //value = введенное значение
-            //field = название столбца
-            //table = название таблицы
+            //подготавливаем данные для отправки: points = введенное значение, field = название столбца, table = название таблицы
             var data = {
-                value: $('.ajax input').val(),
+                points: $('.ajax input').val(),
                 student_point_id: student_pointlId,
                 field: arr[1],
                 checkpoint_id: checkpointId,

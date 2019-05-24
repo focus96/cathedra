@@ -6,21 +6,21 @@ use App\Models\CheckPoint;
 use App\Models\OnlineJournal;
 use App\Models\StudentPoint;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 
 class StudentPointController extends Controller
 {
-    public function update(Request $request)
+    public function save(StudentPoint $studentPoint)
     {
-        $validStudentPoint = CheckPoint::where('id', '=', $request->checkpoint_id)->first();
+        $validStudentPoint = CheckPoint::where('id', request('checkpoint_id'))->first();
+
         $max_point = $validStudentPoint->max_point;
         $date = $validStudentPoint->date;
 
-        $closeJournal = OnlineJournal::where('id', '=', $request->journal_id)->first();
+        $closeJournal = OnlineJournal::where('id', request('journal_id'))->first();
 
         if ($closeJournal->is_close === 0){
-            $validator = \Validator::make($request->all(), [
-                'value' => 'nullable|numeric|min:0|max:'.$max_point,
+            $validator = \Validator::make(request()->all(), [
+                'points' => 'nullable|numeric|min:0|max:'.$max_point,
                 'points_date' => 'after_or_equal:'.$date,
             ]);
 
@@ -28,29 +28,17 @@ class StudentPointController extends Controller
             {
                 return response()->json(['errors'=>$validator->errors()->all()]);
             }else{
-                $studentPoint = StudentPoint::find($request->student_point_id);
+
+                $studentPoint = $studentPoint->find(request('student_point_id'));
 
                 if($studentPoint){
 
-                    $studentPoint->checkpoint_id = $request->checkpoint_id;
-                    $studentPoint->student_id = $request->student_id;
-                    $studentPoint->journal_id = $request->journal_id;
-                    $studentPoint->checkpoint_id = $request->checkpoint_id;
-                    $studentPoint->points = $request->value;
-
-                    $studentPoint->save();
+                    $studentPoint->update(request(['checkpoint_id', 'student_id', 'journal_id', 'points']));
 
                 }else{
 
-                    $studentPoint = new StudentPoint();
+                    StudentPoint::create(request(['checkpoint_id', 'student_id', 'journal_id', 'points']));
 
-                    $studentPoint->checkpoint_id = $request->checkpoint_id;
-                    $studentPoint->student_id = $request->student_id;
-                    $studentPoint->journal_id = $request->journal_id;
-                    $studentPoint->checkpoint_id = $request->checkpoint_id;
-                    $studentPoint->points = $request->value;
-
-                    $studentPoint->save();
                 }
                 return response()->json(['success'=>'Сохранение успешно выполнено']);
             }

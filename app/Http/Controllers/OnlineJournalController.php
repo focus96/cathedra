@@ -23,10 +23,9 @@ class OnlineJournalController extends Controller
         return view('online_journals.show_journal', compact( 'journal'));
     }
 
-    public function show_group($id)
+    public function show_group(Group $group)
     {
-        $group = Group::find($id);
-        $online_journals = OnlineJournal::where('group', $id)->get();
+        $online_journals = OnlineJournal::where('group', $group->id)->get();
 
         return view('online_journals.show_group', compact( 'group', 'online_journals'));
     }

@@ -6,15 +6,12 @@ use App\Models\Group;
 use App\Models\Items;
 use App\Models\OnlineJournal;
 use App\Http\Controllers\Controller;
-use App\Models\Student;
 use App\Models\Teacher;
 use Encore\Admin\Controllers\HasResourceActions;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Layout\Content;
 use Encore\Admin\Show;
-use Encore\Admin\Widgets\Table;
-use function GuzzleHttp\Promise\all;
 
 class OnlineJournalController extends Controller
 {
