@@ -1,11 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <style>
-        .banner-area{
-            background: url(../img/baner2.jpg) right;
-        }
-    </style>
+
     <!-- start banner Area -->
     <section class="banner-area relative about-banner" id="home">
         <div class="overlay overlay-bg"></div>
@@ -13,9 +9,10 @@
             <div class="row d-flex align-items-center justify-content-center">
                 <div class="about-content col-lg-12">
                     <h1 class="text-white">
-                        Події
+                        События
                     </h1>
-                    <p class="text-white link-nav"><a href="/">Головна</a></p>
+                    <p class="text-white link-nav"><a href="/">Home </a> <span
+                                class="lnr lnr-arrow-right"></span> <a href="events.html"> Events</a></p>
                 </div>
             </div>
         </div>
@@ -54,7 +51,7 @@
 
                 <a v-show="viewFetchButton" href="javascript:;" @click="fetch()"
                    class="text-uppercase primary-btn mx-auto mt-40">
-                    Завантажити ще
+                    Загрузить еще
                 </a>
             </div>
         </div>
@@ -66,10 +63,10 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 cta-left">
-                    <h1>Цікаво дізнатися ще більше?</h1>
+                    <h1>Хотите узнать о кафедре больше?</h1>
                 </div>
                 <div class="col-lg-4 cta-right">
-                    <a class="primary-btn wh" href="/news">Подивитися</a>
+                    <a class="primary-btn wh" href="/news">посмотрите наш блог</a>
                 </div>
             </div>
         </div>

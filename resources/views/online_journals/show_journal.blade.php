@@ -55,11 +55,11 @@
                     <a href="/save-pdf/{{ $journal->id }}" class="genric-btn primary"><i class="fa fa-download"></i> PDF</a>
                     <a href="/save-xls/{{ $journal->id }}" class="genric-btn primary"><i class="fa fa-download"></i>
                         Excel</a>
-                    <a href="edit.html" class="genric-btn primary"><i class="fa fa-download"></i> Png</a>
                 </div>
-
                 <div class="col-md-6s">
-                    <table class="table table-bordered table-st">
+                    {{--<table class="table table-bordered table-st">--}}
+                    <table class="table table-bordered table-hover">
+                        <thead class="thead-light">
                         <tr>
                             <th>{{ $journal->groupRelation->name_group }}</th>
                             @foreach($journal->checkpoints as $checkpoint)

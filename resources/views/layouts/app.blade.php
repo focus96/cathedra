@@ -77,7 +77,6 @@
                         <ul class="nav-menu">
                             <li ><a href="/schedule">Розклад</a></li>
                             <li ><a href="/online_journals">Онлайн-журнали</a></li>
-                            <li ><a href="/faculties">Факультети</a></li>
                         </ul>
                     </li>
                     <li><a href="/event">Події</a></li>

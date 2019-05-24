@@ -41,9 +41,6 @@ Route::prefix('online_journals')->group(function () {
     Route::get('/show_group/{group}', 'OnlineJournalController@show_group');
 });
 
-Route::prefix('students')->group(function () {
-    Route::get('/', 'StudentsController@index');
-});
 
 Route::prefix('schedule')->group(function () {
     Route::get('/', 'ScheduleController@index');
@@ -57,15 +54,8 @@ Route::prefix('lecture')->group(function () {
     Route::get('/', 'ScheduleController@lecture');
 });
 
-Route::prefix('export')->group(function () {
-    Route::get('/', 'ScheduleController@export')->name('export-file');
-});
-
 Route::get('/download',function (){
     return Excel::download(new ScheduleExport, 'schedule.xlsx');
-});
-Route::prefix('download-pdf')->group(function () {
-    Route::get('/', 'ScheduleController@downloadPdf')->name('download-pdf');
 });
 
 Route::prefix('item')->group(function () {

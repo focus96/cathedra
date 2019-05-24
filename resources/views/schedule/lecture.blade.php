@@ -38,15 +38,13 @@
                     </div>
                 </div>
                 <div class="col-lg-8">
-                    <a href="/download-pdf" class="genric-btn primary"><i class="fa fa-download"></i> PDF</a>
+                    <button id="print" class="genric-btn primary"><i class="fa fa-download"></i> PDF</button>
                     <a href="/download" class="genric-btn primary"><i class="fa fa-download"></i> Excel</a>
-                    <a href="edit.html" class="genric-btn primary"><i class="fa fa-download"></i> Png</a>
                 </div>
             </div>
             <div class="col-md-12s">
-                <table id="example1" class="table table-bordered table-striped">
-                    <thead>
-
+                <table id="example1" class="table table-bordered table-hover">
+                    <thead class="thead-light">
                     <tr id="headTable">
                         <th>День недели</th>
                         <th>Номер пары</th>
@@ -255,8 +253,16 @@
             </div>
     </section>
     <!-- End contact-page Area -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.3/jspdf.min.js"></script>
+
+
+
 
     <script src="{{ asset('js/app.js') }}"></script>
+
+    <script src="{{ asset('js/schedule.js') }}"></script>
     <script>
 
         var lectures = {!! json_encode($lectures) !!};
