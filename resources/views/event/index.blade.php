@@ -11,7 +11,7 @@
                     <h1 class="text-white">
                         События
                     </h1>
-                    <p class="text-white link-nav"><a href="index.html">Home </a> <span
+                    <p class="text-white link-nav"><a href="/">Home </a> <span
                                 class="lnr lnr-arrow-right"></span> <a href="events.html"> Events</a></p>
                 </div>
             </div>

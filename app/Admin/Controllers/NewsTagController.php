@@ -31,7 +31,7 @@ class NewsTagController extends Controller
     /**
      * Show interface.
      *
-     * @param mixed $id
+     * @param mixed $slug
      * @param Content $content
      * @return Content
      */
@@ -46,7 +46,7 @@ class NewsTagController extends Controller
     /**
      * Edit interface.
      *
-     * @param mixed $id
+     * @param mixed $slug
      * @param Content $content
      * @return Content
      */
