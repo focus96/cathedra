@@ -2,7 +2,7 @@
 
 namespace App\Admin\Controllers;
 
-use App\Models\BachelorАccelerated;
+use App\Models\BachelorAccelerated;
 use App\Http\Controllers\Controller;
 use Encore\Admin\Controllers\HasResourceActions;
 use Encore\Admin\Facades\Admin;
@@ -81,13 +81,14 @@ class BachelorАcceleratedController extends Controller
      */
     protected function grid()
     {
-        $grid = new Grid(new BachelorАccelerated);
+        $grid = new Grid(new BachelorAccelerated);
         $grid->id('Ид');
         $grid->title('Заголовок')->sortable();
         $grid->content('Содежание');
         $grid->image('Изображение')->display(function ($id) {
             if (isset($id)) {
-                return '<a href="/admin/media?path=' . urlencode('/uploads/' . $id) . '">Просмотреть</a>';
+
+                return '<a href="/storage/uploads/' . urlencode($id) . '">Просмотреть</a>';
             } else {
                 return '-';
             }
@@ -107,7 +108,7 @@ class BachelorАcceleratedController extends Controller
      */
     protected function detail($id)
     {
-        $show = new Show(BachelorАccelerated::findOrFail($id));
+        $show = new Show(BachelorAccelerated::findOrFail($id));
 
         $show->id('Ид');
         $show->title('Заголовк');
@@ -124,7 +125,7 @@ class BachelorАcceleratedController extends Controller
      */
     protected function form()
     {
-        $form = new Form(new BachelorАccelerated);
+        $form = new Form(new BachelorAccelerated);
 
         $form->text('title', 'Заголовок')->rules('required|max:255', [
             'required' => 'Обязательно для заполнения',
@@ -134,22 +135,13 @@ class BachelorАcceleratedController extends Controller
             'required' => 'Обязательно для заполнения',
             'max' => 'Кол-во символов не более :max',
         ]);
-        $form->image('image', 'Изображение')->rules('image', [
+        $form->image('image', 'Изображение')->uniqueName()->rules('image', [
             'image' => 'Это должна быть картинка',
         ]);
         $form->switch('is_public', 'Публичная новсть')->default(1);
 
-
-        $form->saved(function (Form $form) {
-            $path = storage_path('/app/public/uploads' . $form->model()->id);
-            dump($path);
-            if(!file_exists($path)) {
-                mkdir($path);
-            }   
-        });
-
         $form->saving(function ($form) {
-            $result = BachelorАccelerated::where("is_public", "=", 1)->count();
+            $result = BachelorAccelerated::where("is_public", "=", 1)->count();
 
             /* определение числа рядов в выборке */
             if ($result >= 5 && $form->is_public === 'on') {

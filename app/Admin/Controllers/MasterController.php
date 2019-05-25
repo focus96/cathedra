@@ -87,7 +87,7 @@ class MasterController extends Controller
         $grid->content('Содежание');
         $grid->image('Изображение')->display(function ($id) {
             if (isset($id)) {
-                return '<a href="/admin/media?path=' . urlencode('/uploads/' . $id) . '">Просмотреть</a>';
+                return '<a href="/storage/uploads/' . urlencode($id) . '">Просмотреть</a>';
             } else {
                 return '-';
             }
@@ -134,19 +134,10 @@ class MasterController extends Controller
             'required' => 'Обязательно для заполнения',
             'max' => 'Кол-во символов не более :max',
         ]);
-        $form->image('image', 'Изображение')->rules('image', [
+        $form->image('image', 'Изображение')->uniqueName()->rules('image', [
             'image' => 'Это должна быть картинка',
         ]);
         $form->switch('is_public', 'Публичная новсть')->default(1);
-
-
-        $form->saved(function (Form $form) {
-            $path = storage_path('/app/public/uploads' . $form->model()->id);
-            dump($path);
-            if(!file_exists($path)) {
-                mkdir($path);
-            }   
-        });
 
         $form->saving(function ($form) {
             $result = Master::where("is_public", "=", 1)->count();
