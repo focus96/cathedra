@@ -85,6 +85,14 @@ class MailController extends Controller
         return Admin::grid(Mail::class, function (Grid $grid) {
             $grid->id('id')->sortable();
             $grid->message('Текст сообщения');
+            // $grid->image('Изображение');
+            $grid->image('Изображение')->display(function ($id) {
+                if (isset($id)) {
+                    return '<a href="/storage/' . urlencode($id) . '">Просмотреть</a>';
+                } else {
+                    return '-';
+                }
+            });
             $grid->column('Количество получателей')->display(function (){
                 $count = count($this->recipients);
                 return "<span class='label label-warning'>{$count}</span>";

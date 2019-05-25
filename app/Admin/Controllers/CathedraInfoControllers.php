@@ -160,6 +160,7 @@ class CathedraInfoControllers extends Controller
                 ]);
 
                 return redirect('/admin/telegram-bot/applicants/cathedra-info')->with(compact('error'));              
+
             }
         });
 

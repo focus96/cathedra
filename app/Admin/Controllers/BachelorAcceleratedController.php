@@ -12,7 +12,7 @@ use Encore\Admin\Layout\Content;
 use Encore\Admin\Show;
 use Illuminate\Support\MessageBag;
 
-class BachelorАcceleratedController extends Controller
+class BachelorAcceleratedController extends Controller
 {
     use HasResourceActions;
 
@@ -158,4 +158,3 @@ class BachelorАcceleratedController extends Controller
         return $form;
     }
 }
-
