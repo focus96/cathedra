@@ -10,6 +10,8 @@ use Encore\Admin\Grid;
 use Encore\Admin\Layout\Content;
 use Encore\Admin\Show;
 use Illuminate\Support\MessageBag;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class CathedraInfoControllers extends Controller
 {
@@ -88,8 +90,10 @@ class CathedraInfoControllers extends Controller
         $grid->answer('Сообщение');
         $grid->image('Изображение')->display(function ($id) {
             if (isset($id)) {
-                return '<a href="/admin/media?path=' . urlencode('/uploads/' . $id) . '">Просмотреть</a>';
+                
+                return '<a href="/storage/uploads/' . $id . '">Просмотреть</a>';
             } else {
+
                 return '-';
             }
         });
@@ -115,7 +119,7 @@ class CathedraInfoControllers extends Controller
         $show->id('Ид');
         $show->caption('Заголовок');
         $show->answer('Сообщение');
-        $show->image('Изображение');
+        $show->image('Изображение')->image();
         $show->active('Статус');
         $show->created_at('Дата создания');
         $show->updated_at('Дата редактирования');
@@ -140,7 +144,7 @@ class CathedraInfoControllers extends Controller
             'required' => 'Обязательно для заполнения',
             'max' => 'Кол-во символов не более :max',
         ]);
-        $form->image('image', 'Изображение')->rules('image', [
+        $form->image('image', 'Изображение')->uniqueName()->rules('image', [
             'image' => 'Это должна быть картинка',
         ]);
         $form->switch('active', 'Статус')->default(1);
