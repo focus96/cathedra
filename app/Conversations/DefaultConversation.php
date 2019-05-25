@@ -12,7 +12,7 @@ use BotMan\BotMan\Storages\Storage;
 use App\Models\Applicant;
 use App\Models\CathedraInfo;
 use App\Models\Bachelor;
-use App\Models\BachelorАccelerated;
+use App\Models\BachelorAccelerated;
 use App\Models\Master;
 use App\Models\Postgraduate;
 use App\Models\UserQuestion;
@@ -113,12 +113,17 @@ class DefaultConversation extends Conversation
                             $buttonArray[] = $button;
                         }
 
+                        $back = Button::create('Назад')->value('back');
+                        $buttonArray[] = $back;
+
                         $question = Question::create('О кафедре:')->addButtons($buttonArray);
 
                         $this->ask($question, function (Answer $answer) {
                             if ($answer->isInteractiveMessageReply()) {
                                 $cathedraId = CathedraInfo::where('id', '=', $answer->getValue())->first();
-                                if($answer->getValue()) {
+                                if($answer->getValue() === 'back') {                         
+                                    $this->askInfo();                                    
+                                } else {
                                     $this->say($cathedraId->answer);
                                     $this->askInfo();                                    
                                 }
@@ -132,6 +137,7 @@ class DefaultConversation extends Conversation
                         Button::create('Бакалавр ускор.')->value('accelerate'),
                         Button::create('Магистр')->value('master'),
                         Button::create('Аспирантура')->value('graduate'),
+                        Button::create('Назад')->value('back'),
                     ]);
 
                     $this->ask($question, function (Answer $answer) {            
@@ -144,23 +150,28 @@ class DefaultConversation extends Conversation
                                 
                                     foreach ($bachelorInfo as $value) {
                                         $button = Button::create($value->title)->value($value->id);
-                                        $buttonArray[] = $button;
+                                        $buttonArray[] = $button;                                        
                                     }
+
+                                    $back = Button::create('Назад')->value('back');
+                                    $buttonArray[] = $back;
 
                                     $question = Question::create('Бакалавр:')->addButtons($buttonArray);
 
                                     $this->ask($question, function (Answer $answer) {
                                         if ($answer->isInteractiveMessageReply()) {
                                             $bachelorId = Bachelor::where('id', '=', $answer->getValue())->first();
-                                            if($answer->getValue()) {
-                                                $this->say($bachelorId->content);
+                                            if($answer->getValue() === 'back') {                         
                                                 $this->askInfo();                                    
+                                            } else {
+                                                $this->say($bachelorId->content);
+                                                $this->askInfo();
                                             }
                                         }
                                     }); 
                                 break;
                                 case 'accelerate':
-                                        $bachelorAcc = BachelorАccelerated::where('is_public', '=', 1)->get();
+                                        $bachelorAcc = BachelorAccelerated::where('is_public', '=', 1)->get();
                                     $buttonArray = [];
                                 
                                     foreach ($bachelorAcc as $value) {
@@ -168,12 +179,17 @@ class DefaultConversation extends Conversation
                                         $buttonArray[] = $button;
                                     }
 
+                                    $back = Button::create('Назад')->value('back');
+                                    $buttonArray[] = $back;
+
                                     $question = Question::create('Бакалавр ускоренный:')->addButtons($buttonArray);
 
                                     $this->ask($question, function (Answer $answer) {
                                         if ($answer->isInteractiveMessageReply()) {
-                                            $bachelorAccId = BachelorАccelerated::where('id', '=', $answer->getValue())->first();
-                                            if($answer->getValue()) {
+                                            $bachelorAccId = BachelorAccelerated::where('id', '=', $answer->getValue())->first();
+                                            if($answer->getValue() === 'back') {                         
+                                                $this->askInfo();                                    
+                                            } else {
                                                 $this->say($bachelorAccId->content);
                                                 $this->askInfo();                                    
                                             }
@@ -189,12 +205,17 @@ class DefaultConversation extends Conversation
                                         $buttonArray[] = $button;
                                     }
 
+                                    $back = Button::create('Назад')->value('back');
+                                    $buttonArray[] = $back;
+
                                     $question = Question::create('Магистр:')->addButtons($buttonArray);
 
                                     $this->ask($question, function (Answer $answer) {
                                         if ($answer->isInteractiveMessageReply()) {
                                             $masterId = Master::where('id', '=', $answer->getValue())->first();
-                                            if($answer->getValue()) {
+                                            if($answer->getValue() === 'back') {                         
+                                                $this->askInfo();                                    
+                                            } else {
                                                 $this->say($masterId->content);
                                                 $this->askInfo();                                    
                                             }
@@ -210,17 +231,25 @@ class DefaultConversation extends Conversation
                                         $buttonArray[] = $button;
                                     }
 
+                                    $back = Button::create('Назад')->value('back');
+                                    $buttonArray[] = $back;
+
                                     $question = Question::create('Аспирантура:')->addButtons($buttonArray);
 
                                     $this->ask($question, function (Answer $answer) {
                                         if ($answer->isInteractiveMessageReply()) {
                                             $postgraduateId = Postgraduate::where('id', '=', $answer->getValue())->first();
-                                            if($answer->getValue()) {
+                                            if($answer->getValue() === 'back') {                         
+                                                $this->askInfo();                                    
+                                            } else {
                                                 $this->say($postgraduateId->content);
                                                 $this->askInfo();                                    
                                             }
                                         }
                                     }); 
+                                break;
+                                case 'back':                                
+                                    $this->askInfo();                                    
                                 break;
                             }
                         }
@@ -237,7 +266,7 @@ class DefaultConversation extends Conversation
                     });
                     break;
                     case 'exit':
-                        $this->say('До встречи');
+                        $this->say('До встречи. Для того, чтобы начать чат с ботом, введите и отправьте команду "/start"');
                     break;
                 }
             }
@@ -246,7 +275,7 @@ class DefaultConversation extends Conversation
 
     public function bye()
     {
-        $this->say('Спасибо! Ожидайте ответа.');
+        $this->say('Спасибо! Ожидайте ответа. Для того, чтобы начать чат с ботом, введите и отправьте команду "/start"');
         $this->saveQuestion();
     }
 
