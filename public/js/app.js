@@ -33704,6 +33704,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -33715,11 +33723,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             checkAllTeachers: false,
             countRecipients: 0,
             users: [],
-            message: null
+            message: null,
+            file: ''
         };
     },
     components: { SelectionGroupUsers: __WEBPACK_IMPORTED_MODULE_0__SelectionGroupUsers___default.a },
     methods: {
+        handleFileUpload: function handleFileUpload() {
+            this.file = this.$refs.file.files[0];
+        },
         setSelected: function setSelected(telegramId) {
             var index = this.selected.indexOf(telegramId);
 
@@ -33730,14 +33742,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         send: function send() {
             var _this = this;
 
+            var formData = new FormData();
+            formData.append('message', this.message);
+            for (var i = 0; i < this.selected.length; i++) {
+                formData.append('users[]', this.selected[i]);
+            }
+            formData.append('file', this.file);
             if (this.selected.length && this.message) {
-                axios.post('/send-telegram-message', {
-                    users: this.selected,
-                    message: this.message
+                axios.post('/send-telegram-message', formData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
                 }).then(function (response) {
                     _this.message = null;
+                    console.log('SUCCESS!!');
                     __WEBPACK_IMPORTED_MODULE_1_sweetalert2___default.a.fire('Отправленно', 'Ваше сообщение успешно отправленно', 'success');
                 }).catch(function (error) {
+                    console.log('FAILURE!!');
                     __WEBPACK_IMPORTED_MODULE_1_sweetalert2___default.a.fire('Ошибка', 'Упс.. Произошла ошибка', 'error');
                 });
             } else {
@@ -36777,6 +36798,27 @@ var render = function() {
                       return
                     }
                     _vm.message = $event.target.value
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c("br"),
+              _vm._v(" "),
+              _c("label", { attrs: { for: "file" } }, [
+                _vm._v("Выберите изображение:")
+              ]),
+              _vm._v(" "),
+              _c("input", {
+                ref: "file",
+                staticClass: "form-control",
+                attrs: {
+                  type: "file",
+                  id: "file",
+                  accept: "image/png, image/jpeg"
+                },
+                on: {
+                  change: function($event) {
+                    _vm.handleFileUpload()
                   }
                 }
               }),

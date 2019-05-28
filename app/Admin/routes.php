@@ -1,5 +1,8 @@
 <?php
 
+
+use App\Admin\Controllers\NewsController;
+use App\Admin\Controllers\CathedraInfoController;
 use Illuminate\Routing\Router;
 
 Admin::registerAuthRoutes();
@@ -31,4 +34,9 @@ Route::group([
     $router->delete('/checkpoints/delete/{id}', 'CheckPointController@destroy')->name('checkpoint_delete');
     $router->post('/student_points', 'StudentPointController@save');
     $router->get('/telegram-bot', 'TelegramBotController@index');
+    $router->resource('/items', 'ItemsController');
+    $router->resource('/students', 'StudentsController');
+    $router->get('/telegram-bot', 'TelegramBotController@index');
+    $router->get('/telegram-bot/applicants/cathedra', 'TelegramBotController@cathedra');
+    $router->resource('/cathedra-info', 'CathedraInfoControllers');
 });

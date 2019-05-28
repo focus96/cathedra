@@ -16,4 +16,5 @@ class Items extends Model
         return $this->belongsTo(Cathedra::class);
     }
 
+
 }

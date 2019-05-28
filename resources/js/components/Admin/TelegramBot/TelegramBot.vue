@@ -58,7 +58,15 @@
                         </div>
                         <div class="card-body">
                             <textarea class="form-control" cols="30" rows="10"
-                                      placeholder="Сообщение для рассылки" v-model="message"></textarea>
+                                placeholder="Сообщение для рассылки" v-model="message">
+                            </textarea>
+                            <br>
+                            <label for="file">Выберите изображение:</label>
+                            <input class="form-control"
+                                   type="file"
+                                   id="file" ref="file"
+                                   accept="image/png, image/jpeg"
+                                   @change="handleFileUpload()">
                             <br>
                             <button class="form-control btn btn-primary" @click="send()">
                                 Отправить (получателей: {{ countRecipients }})
@@ -82,9 +90,13 @@
             countRecipients: 0,
             users: [],
             message: null,
+            file: '',
         }),
         components: {SelectionGroupUsers},
         methods: {
+            handleFileUpload(){
+                this.file = this.$refs.file.files[0];
+            },
             setSelected(telegramId) {
                 let index = this.selected.indexOf(telegramId);
 
@@ -94,18 +106,28 @@
                 this.countRecipients = this.selected.length;
             },
             send() {
+                let formData = new FormData();
+                formData.append('message', this.message);
+                for(let i=0; i < this.selected.length; i++){
+                    formData.append('users[]', this.selected[i])
+                }
+                formData.append('file', this.file);
                 if(this.selected.length && this.message) {
-                    axios.post('/send-telegram-message', {
-                        users: this.selected,
-                        message: this.message
+                    axios.post('/send-telegram-message', formData,
+                    {
+                        headers: {
+                            'Content-Type': 'multipart/form-data'
+                        }, 
                     }).then(response => {
                         this.message = null;
+                        console.log('SUCCESS!!');
                         Swal.fire(
                             'Отправленно',
                             'Ваше сообщение успешно отправленно',
                             'success'
                         )
                     }).catch(error => {
+                        console.log('FAILURE!!');
                         Swal.fire(
                             'Ошибка',
                             'Упс.. Произошла ошибка',
