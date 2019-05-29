@@ -23,7 +23,7 @@ class CreateTeachersTable extends Migration
             $table->text('additional_information', 2000)->comment('дополнительная информация ');
             $table->text('specialization', 2000)->comment('специализация ');
             $table->unsignedBigInteger('telegram_id')->nullable()->comment('телеграмм ид ')->unique();
-            $table->string('email', 255)->comment('емейл')->unique();
+            $table->string('email', 255)->comment('емейл');
             $table->string('phone', 100)->comment('контактный телефон ');
             $table->unsignedTinyInteger('publicity_phone')->comment('признак публичности телефона, то есть отображать ли его публично для всех (0 или 1)');
             $table->unsignedInteger('cathedra_id')->comment('ид кафедры')->nullable();
