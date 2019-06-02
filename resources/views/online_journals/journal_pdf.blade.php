@@ -76,7 +76,7 @@
 </style>
 <div class="mytable">
     <div class="container">
-        @if($journal->is_close === 0)
+        @if($journal->is_close === "0")
             <h4>Журнал № {{ $journal->id }} Статус: Открыт</h4>
         @else
             <h4>Журнал № {{ $journal->id }} Статус: Закрыт</h4>
@@ -84,33 +84,33 @@
         <div class="col-md-12s">
             <div class="col-md-6s">
                 <table class="table table-bordered table-hover"">
-                    <thead class="thead-light">
+                <thead class="thead-light">
+                <tr>
+                    <th>{{ $journal->groupRelation->name_group }}</th>
+                    @foreach($journal->checkpoints as $checkpoint)
+                        <th>
+                            {{ $checkpoint->name }}
+                        </th>
+                    @endforeach
+                </tr>
+                </thead>
+                @foreach($journal->groupRelation->students as $student)
                     <tr>
-                        <th>{{ $journal->groupRelation->name_group }}</th>
+                        <td>{{ $student->surname }}</td>
                         @foreach($journal->checkpoints as $checkpoint)
-                            <th>
-                                {{ $checkpoint->name }}
-                            </th>
-                        @endforeach
-                    </tr>
-                    </thead>
-                    @foreach($journal->groupRelation->students as $student)
-                        <tr>
-                            <td>{{ $student->surname }}</td>
-                            @foreach($journal->checkpoints as $checkpoint)
-                                @php
-                                    $point = $student->points->where('checkpoint_id', $checkpoint->id)->first();
-                                @endphp
-                                <td class="edit points {{ (($point && ($checkpoint->deadline < $point->created_at or
+                            @php
+                                $point = $student->points->where('checkpoint_id', $checkpoint->id)->first();
+                            @endphp
+                            <td class="edit points {{ (($point && ($checkpoint->deadline < $point->created_at or
                                                 $checkpoint->deadline < $point->updated_at) && ($point->points == null)) or
                                                 (!$point && ($checkpoint->deadline < now()))) ? 'red' : '' }} {{ (($point &&
                                                 ($checkpoint->deadline < $point->created_at or
                                                 $checkpoint->deadline < $point->updated_at)) &&
                                                 ($point->points)) ? 'yellow' : '' }}">{{ $point ? $point->points : '' }}</td>
-                            @endforeach
-                        </tr>
+                        @endforeach
+                    </tr>
                     @endforeach
-                </table>
+                    </table>
             </div>
         </div>
         <div class="col-md-12">

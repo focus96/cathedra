@@ -88,8 +88,8 @@ class StudentController extends Controller
         $grid->family_name('Отчество');
         $grid->telegram_id('Telegram-id');
         $grid->email('Email');
-        $grid->number('Номер');
-        $grid->groups_id('Группа');
+        $grid->number('Контактный телефон');
+        $grid->groups_id('Ид группы');
         $grid->created_at('Создание записи');
         $grid->updated_at('Редактирование записи');
 
@@ -112,8 +112,8 @@ class StudentController extends Controller
         $show->family_name('Отчество');
         $show->telegram_id('Telegram id');
         $show->email('Email');
-        $show->number('Номер');
-        $show->groups_id('Группа');
+        $show->number('Контактный телефон');
+        $show->groups_id('Ид группы');
         $show->created_at('Создание записи');
         $show->updated_at('Редактирование записи');
 
@@ -148,10 +148,10 @@ class StudentController extends Controller
         $form->email('email', 'Email')->rules('unique:students', [
             'unique' => 'Должен быть уникальным'
         ]);
-        $form->text('number', 'Номер')->rules('max:100', [
+        $form->text('number', 'Контактный телефон')->rules('max:100', [
             'max' => 'Кол-во символов не более :max',
         ]);;
-        $form->select('groups_id', 'Группа')->options(Group::all()->pluck('name_group', 'id'));
+        $form->select('groups_id', 'Ид группы')->options(Group::all()->pluck('name_group', 'id'));
 
         return $form;
     }

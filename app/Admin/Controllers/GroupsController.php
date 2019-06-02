@@ -90,10 +90,10 @@ class GroupsController extends Controller
             $group_name = $this->specialty . ' ' . $this->admission_year . ' - ' . $this->group_number;
 
             if ($this->level_education === 'bachelor_acceleration'){
-                return $group_name . ' [у] ';
+                return $group_name . ' [у]';
             }
             elseif ($this->level_education === 'master'){
-                return $group_name . ' [м] ';
+                return $group_name . ' [м]';
             }
             else {
                 return $group_name;
@@ -159,19 +159,17 @@ class GroupsController extends Controller
         $form->select('curator_id', 'Ид куратора группы')->options(Teacher::all()->pluck('surname', 'id'))->rules('required', [
             'required' => 'Обязательно для заполнения',
         ]);
-        $form->select('headman_id', 'Ид старосты группы')->options(Student::all()->pluck('surname', 'id'))->rules('required', [
-            'required' => 'Обязательно для заполнения',
-        ]);
+        $form->select('headman_id', 'Ид старосты группы')->options(Student::all()->pluck('surname', 'id'));
 
         $form->saving(function (Form $form) {
 
             $group_name = $form->specialty . ' ' . $form->admission_year . ' - ' . $form->group_number;
 
             if ($form->level_education === 'bachelor_acceleration'){
-                $name_group = $group_name . ' [у] ';
+                $name_group = $group_name . ' [у]';
             }
             elseif ($form->level_education === 'master'){
-                $name_group = $group_name . ' [м] ';
+                $name_group = $group_name . ' [м]';
             }
             else {
                 $name_group = $group_name;

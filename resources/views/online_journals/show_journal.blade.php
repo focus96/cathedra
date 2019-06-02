@@ -45,7 +45,7 @@
                     </q>
                 </blockquote>
             </div>
-            @if($journal->is_close === 0)
+            @if($journal->is_close === "0")
                 <h4>Журнал № {{ $journal->id }} Статус: Открыт</h4>
             @else
                 <h4>Журнал № {{ $journal->id }} Статус: Закрыт</h4>

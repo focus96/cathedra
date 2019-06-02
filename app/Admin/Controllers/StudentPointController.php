@@ -18,7 +18,7 @@ class StudentPointController extends Controller
 
         $closeJournal = OnlineJournal::where('id', request('journal_id'))->first();
 
-        if ($closeJournal->is_close === 0){
+        if ($closeJournal->is_close === "0"){
             $validator = \Validator::make(request()->all(), [
                 'points' => 'nullable|numeric|min:0|max:'.$max_point,
                 'points_date' => 'after_or_equal:'.$date,

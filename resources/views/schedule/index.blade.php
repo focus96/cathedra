@@ -277,7 +277,7 @@
             $("#list").on('change', function () {
                 switch ($("#list option:selected").val()) {
                     case '1':
-                        document.location.href = '/'
+                        document.location.href = '/';
                         break;
 
                     case '2':

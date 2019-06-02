@@ -97,7 +97,7 @@
 </head>
 <body>
 <div>
-    @if($journal->is_close === 0)
+    @if($journal->is_close === "0")
         <div class="row mb-4">
             <div class="col text-left">
                 <a href="#" id="btnAddCol" class="btn btn-primary" data-toggle="modal" data-target="#basicModal"
@@ -108,7 +108,7 @@
     @else
     @endif
     <table id="student_points">
-        @if($journal->is_close === 0)
+        @if($journal->is_close === "0")
             <caption>Журнал № {{ $journal->id }} Статус: Открыт</caption>
         @else
             <caption>Журнал № {{ $journal->id }} Статус: Закрыт</caption>
@@ -118,7 +118,7 @@
             @foreach($journal->checkpoints as $checkpoint)
                 <th>
                     {{ $checkpoint->name }}
-                    @if($journal->is_close === 0)
+                    @if($journal->is_close === "0")
                         <a href="/admin/checkpoints/{{ $checkpoint->id }}/edit"><i class="far fa-edit" title="Редактировать"></i></a>
                         <a href="#" title="Удалить" class="delete"><i class="fa fa-trash"></i></a>
                     @else
@@ -140,20 +140,21 @@
                             data-student_point-id="{{$point ? $point->id : ''}}"
 
                             class="edit points {{ (($point && ($checkpoint->deadline < $point->created_at or
-                            $checkpoint->deadline < $point->updated_at) && ($point->points == null)) or
-                            (!$point && ($checkpoint->deadline < now()))) ? 'red' : '' }}
+                                $checkpoint->deadline < $point->updated_at) && ($point->points == null)) or
+                                (!$point && ($checkpoint->deadline < now()))) ? 'red' : '' }}
                             {{ (($point && ($checkpoint->deadline < $point->created_at or
                             $checkpoint->deadline < $point->updated_at)) &&
                             ($point->points)) ? 'yellow' : '' }}">{{ $point ? $point->points : '' }}</td>
+
+                    <form id="delete" method="POST" action="{{ route('checkpoint_delete', $checkpoint->id) }}">
+                        @csrf
+                        {{ method_field('DELETE') }}
+                    </form>
 
                 @endforeach
             </tr>
         @endforeach
     </table>
-    <form id="delete" method="POST" action="{{ route('checkpoint_delete', $checkpoint->id) }}">
-        @csrf
-        {{ method_field('DELETE') }}
-    </form>
     <br>
     <div class="alert alert-danger" style="display:none"></div>
 </div>
@@ -247,7 +248,7 @@
     </div>
 </div>
 
-@if($journal->is_close === 0)
+@if($journal->is_close === "0")
     <script type="text/javascript">
 
         var deleteLinks = document.querySelectorAll('.delete');
