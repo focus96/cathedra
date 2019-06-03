@@ -1,11 +1,11 @@
 <style type="text/css">
     .yellow {
-        background: #ffff00;
+        background: #FFD700;
         color: #ff0000;
     }
 
     .red {
-        background: #ff0000;
+        background: #FF6347;
         color: #ffffff;
     }
 
@@ -45,7 +45,7 @@
                     </q>
                 </blockquote>
             </div>
-            @if($journal->is_close === "0")
+            @if((int)$journal->is_close === 0)
                 <h4>Журнал № {{ $journal->id }} Статус: Открыт</h4>
             @else
                 <h4>Журнал № {{ $journal->id }} Статус: Закрыт</h4>

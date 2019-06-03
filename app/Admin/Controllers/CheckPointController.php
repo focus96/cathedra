@@ -3,6 +3,7 @@
 namespace App\Admin\Controllers;
 
 use App\Http\Requests\CheckPointRequest;
+use App\Http\Requests\CheckPointUpdateRequest;
 use App\Models\CheckPoint;
 use App\Http\Controllers\Controller;
 
@@ -22,7 +23,7 @@ class CheckPointController extends Controller
         return view('admin.online-journal.edit', compact('checkpoint'));
     }
 
-    public function update(CheckPointRequest $request, $id)
+    public function update(CheckPointUpdateRequest $request, $id)
     {
         $checkpoint = CheckPoint::findOrFail($id);
 

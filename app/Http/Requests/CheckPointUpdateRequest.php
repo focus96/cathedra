@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CheckPointRequest extends FormRequest
+class CheckPointUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,7 +26,7 @@ class CheckPointRequest extends FormRequest
         return [
             'name' => 'required|string|max:255|min:3',
             'max_point' => 'required|numeric|min:0',
-            'date' => 'required|date|after_or_equal:today',
+            'date' => 'required|date',
             'deadline' => 'required|date|after:date',
         ];
     }

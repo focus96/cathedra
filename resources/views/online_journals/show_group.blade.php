@@ -27,7 +27,7 @@
                         </tr>
                         </thead>
                         @foreach($online_journals as $online_journal)
-                            @if($online_journal->is_public === "1")
+                            @if((int)$online_journal->is_public === 1)
                                 <tr>
                                     <td>
                                         <a href="/online_journals/show_journal/{{ $online_journal->id }}">Журнал

@@ -17,12 +17,28 @@
             margin-left: 5px;
         }
 
+        .yellowquote {
+            background: #FFD700;
+            color: #ff0000;
+        }
+
+        .redquote {
+            background: #FF6347;
+            color: #ffffff;
+        }
+
         .yellow {
-            background: yellow;
+            background: #FFD700;
         }
 
         .red {
-            background: red;
+            background: #FF6347;
+        }
+
+        blockquote {
+            border-left: .25em solid #dfe2e5;
+            color: #6a737d;
+            padding: 0 1em;
         }
 
         body {
@@ -97,7 +113,7 @@
 </head>
 <body>
 <div>
-    @if($journal->is_close === "0")
+    @if((int)$journal->is_close === 0)
         <div class="row mb-4">
             <div class="col text-left">
                 <a href="#" id="btnAddCol" class="btn btn-primary" data-toggle="modal" data-target="#basicModal"
@@ -108,7 +124,7 @@
     @else
     @endif
     <table id="student_points">
-        @if($journal->is_close === "0")
+        @if((int)$journal->is_close === 0)
             <caption>Журнал № {{ $journal->id }} Статус: Открыт</caption>
         @else
             <caption>Журнал № {{ $journal->id }} Статус: Закрыт</caption>
@@ -118,7 +134,7 @@
             @foreach($journal->checkpoints as $checkpoint)
                 <th>
                     {{ $checkpoint->name }}
-                    @if($journal->is_close === "0")
+                    @if((int)$journal->is_close === 0)
                         <a href="/admin/checkpoints/{{ $checkpoint->id }}/edit"><i class="far fa-edit" title="Редактировать"></i></a>
                         <a href="#" title="Удалить" class="delete"><i class="fa fa-trash"></i></a>
                     @else
@@ -248,7 +264,7 @@
     </div>
 </div>
 
-@if($journal->is_close === "0")
+@if((int)$journal->is_close === 0)
     <script type="text/javascript">
 
         var deleteLinks = document.querySelectorAll('.delete');
@@ -377,11 +393,11 @@
 
     </script>
     <br>
-    <div class="yellow"
-         style="width: 150px; height: 40px; text-align: center; padding-top: 10px; color: white; font-size: small;"><b>Оценка
-            просрочена</b></div><br>
-    <div class="red" style="width: 150px; height: 40px; text-align: center; color: white; font-size: small;"><b>Оценка
-            просрочена и отсутствует</b></div>
+        <blockquote>
+            <h4><i class="fas fa-exclamation-triangle"></i></h4>
+                Если оценка подсвечивается <b class="yellowquote ">желтым</b> цветом - срок сдачи был просрочен.
+                <b class="redquote">Красным</b> цветом - оценка просрочена и отсутствует.
+        </blockquote>
 @endif
 
 </body>
