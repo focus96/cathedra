@@ -1,5 +1,6 @@
 <?php
 
+
 use App\Admin\Controllers\NewsController;
 use App\Admin\Controllers\CathedraInfoController;
 use Illuminate\Routing\Router;
@@ -33,5 +34,20 @@ Route::group([
     $router->resource('/telegram-bot/applicants/feedback', 'UserQuestionController');
 
     $router->get('/telegram-bot/mailing/mail', 'TelegramBotController@index');
-   
+
+    $router->resource('/cathedras', 'CathedraController');
+    $router->resource('/teachers', 'TeacherController');
+    $router->resource('/shedules', 'SheduleController');
+    $router->resource('/items', 'ItemController');
+    $router->resource('/students', 'StudentController');
+    $router->resource('/online_journals', 'OnlineJournalController');
+    $router->get('/journals/{id}', 'JournalController@index')->name('journal');
+    $router->post('/checkpoints', 'CheckPointController@store')->name('checkpoints');
+    $router->get('/checkpoints/{id}/edit', 'CheckPointController@edit');
+    $router->patch('/checkpoints/update/{id}', 'CheckPointController@update')->name('checkpoints_update');
+    $router->delete('/checkpoints/delete/{id}', 'CheckPointController@destroy')->name('checkpoint_delete');
+    $router->post('/student_points', 'StudentPointController@save');
+    $router->get('/telegram-bot', 'TelegramBotController@index');
+    $router->get('/telegram-bot/applicants/cathedra', 'TelegramBotController@cathedra');
+    $router->resource('/cathedra-info', 'CathedraInfoControllers');
 });

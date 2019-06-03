@@ -1,6 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
+    <style>
+        .banner-area{
+            background: url(../img/baner2.jpg) right;
+        }
+    </style>
     <!-- start banner Area -->
     <section class="banner-area relative about-banner" id="home">
         <div class="overlay overlay-bg"></div>
@@ -8,9 +13,9 @@
             <div class="row d-flex align-items-center justify-content-center">
                 <div class="about-content col-lg-12">
                     <h1 class="text-white">
-                        Gallery
+                        Галерея
                     </h1>
-                    <p class="text-white link-nav"><a href="index.html">Home </a>  <span class="lnr lnr-arrow-right"></span>  <a href="gallery.html"> Gallery</a></p>
+                    <p class="text-white link-nav"><a href="/">Головна</a></p>
                 </div>
             </div>
         </div>
@@ -50,10 +55,10 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 cta-left">
-                    <h1>Хотите узнать о кафедре больше?</h1>
+                    <h1>Цікаво дізнатися ще більше?</h1>
                 </div>
                 <div class="col-lg-4 cta-right">
-                    <a class="primary-btn wh" href="/news">посмотрите наш блог</a>
+                    <a class="primary-btn wh" href="/news">Подивитися</a>
                 </div>
             </div>
         </div>

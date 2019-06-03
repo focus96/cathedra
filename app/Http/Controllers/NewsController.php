@@ -10,7 +10,7 @@ class NewsController extends Controller
 {
     public function index()
     {
-        $news = News::paginate(2);
+        $news = News::paginate(3);
         $popularNews = News::orderBy('views', 'DESC')->limit('5')->get();
         return View('news.index', compact(['news', 'popularNews']));
     }

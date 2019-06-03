@@ -10,7 +10,7 @@
                     <h1 class="text-white">
                         Event Details
                     </h1>
-                    <p class="text-white link-nav"><a href="index.html">Home </a> <span
+                    <p class="text-white link-nav"><a href="/   ">Home </a> <span
                                 class="lnr lnr-arrow-right"></span> <a href="event-details.html"> Event Details</a></p>
                 </div>
             </div>

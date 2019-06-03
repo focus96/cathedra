@@ -1,6 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
+    <style>
+        .banner-area{
+            background: url(../img/baner2.jpg) right;
+        }
+    </style>
     <!-- start banner Area -->
     <section class="banner-area relative about-banner" style="background-image: url('{{ admin_uploads($album->cover) }}')" id="home">
         <div class="overlay overlay-bg"></div>
