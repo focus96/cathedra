@@ -2,20 +2,18 @@
 
 namespace App\Admin\Controllers;
 
-use App\Models\CathedraInfo;
+use App\Models\Bachelor;
 use App\Http\Controllers\Controller;
 use Encore\Admin\Controllers\HasResourceActions;
+use Encore\Admin\Facades\Admin;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Layout\Content;
 use Encore\Admin\Show;
 use Illuminate\Support\MessageBag;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
 
-class CathedraInfoControllers extends Controller
+class BachelorController extends Controller
 {
-
     use HasResourceActions;
 
     /**
@@ -27,8 +25,8 @@ class CathedraInfoControllers extends Controller
     public function index(Content $content)
     {
         return $content
-            ->header('О кафедре')
-            ->description('')
+            ->header('Бакалавр')
+            ->description(' ')
             ->body($this->grid());
     }
 
@@ -42,8 +40,8 @@ class CathedraInfoControllers extends Controller
     public function show($id, Content $content)
     {
         return $content
-            ->header('Detail')
-            ->description('description')
+            ->header('Просмотр записи')
+            ->description(' ')
             ->body($this->detail($id));
     }
 
@@ -57,8 +55,8 @@ class CathedraInfoControllers extends Controller
     public function edit($id, Content $content)
     {
         return $content
-            ->header('Редактировать')
-            ->description('запись')
+            ->header('Редактирование записи')
+            ->description(' ')
             ->body($this->form()->edit($id));
     }
 
@@ -69,10 +67,10 @@ class CathedraInfoControllers extends Controller
      * @return Content
      */
     public function create(Content $content)
-    {   
+    {
         return $content
-            ->header('Создать')
-            ->description('запись')
+            ->header('Создание записи')
+            ->description(' ')
             ->body($this->form());
     }
 
@@ -83,25 +81,20 @@ class CathedraInfoControllers extends Controller
      */
     protected function grid()
     {
-        $grid = new Grid(new CathedraInfo);
-
+        $grid = new Grid(new Bachelor);
         $grid->id('Ид');
-        $grid->caption('Заголовок')->sortable();
-        $grid->answer('Сообщение');
+        $grid->title('Заголовок')->sortable();
+        $grid->content('Содежание');
         $grid->image('Изображение')->display(function ($id) {
             if (isset($id)) {
-                
-                return '<a href="/storage/uploads/' . $id . '">Просмотреть</a>';
+                return '<a href="/storage/uploads/' . urlencode($id) . '">Просмотреть</a>';
             } else {
-
                 return '-';
             }
         });
-        $grid->active('Публичная новость')->display(function ($isPublic) {
+        $grid->is_public('Публичная новость')->display(function ($isPublic) {
             return $isPublic ? 'Да' : 'Нет';
         })->sortable();
-        $grid->created_at('Дата создания')->sortable();
-        $grid->updated_at('Дата редактирования')->sortable();
 
         return $grid;
     }
@@ -114,16 +107,14 @@ class CathedraInfoControllers extends Controller
      */
     protected function detail($id)
     {
-        $show = new Show(CathedraInfo::findOrFail($id));
+        $show = new Show(Bachelor::findOrFail($id));
 
         $show->id('Ид');
-        $show->caption('Заголовок');
-        $show->answer('Сообщение');
-        $show->image('Изображение')->image();
-        $show->active('Статус');
-        $show->created_at('Дата создания');
-        $show->updated_at('Дата редактирования');
-
+        $show->title('Заголовк');
+        $show->content('Содежание')->unescape();
+        $show->image('Иллюстрация')->image();
+        $show->is_public('Публичная новсть')->using([1 => 'Да', 0 => 'Нет']);
+        
         return $show;
     }
 
@@ -134,36 +125,36 @@ class CathedraInfoControllers extends Controller
      */
     protected function form()
     {
-        $form = new Form(new CathedraInfo);
+        $form = new Form(new Bachelor);
 
-        $form->text('caption', 'Заголовок')->rules('required|max:255', [
+        $form->text('title', 'Заголовок')->rules('required|max:255', [
             'required' => 'Обязательно для заполнения',
             'max' => 'Кол-во символов не более :max',
-        ]);
-        $form->textarea('answer', 'Сообщение')->rules('required|max:2000', [
+        ]);;
+        $form->textarea('content', 'Содержание')->rules('required|max:30000', [
             'required' => 'Обязательно для заполнения',
             'max' => 'Кол-во символов не более :max',
         ]);
         $form->image('image', 'Изображение')->uniqueName()->rules('image', [
             'image' => 'Это должна быть картинка',
         ]);
-        $form->switch('active', 'Статус')->default(1);
+        $form->switch('is_public', 'Публичная новсть')->default(1);
 
         $form->saving(function ($form) {
+            $result = Bachelor::where('is_public', '=', 1)->count();
+
             /* определение числа рядов в выборке */
-            $result = CathedraInfo::where('active', '=', 1)->count();
-            
-            if ($result >= 5 && $form->active === 'on') {
+            if ($result >= 5 && $form->is_public === 'on') {
                 // redirect back with an error message
                 $error = new MessageBag([
                     'title'   => 'Ошибка',
                     'message' => 'Максимальное количество активных записей 5. ',
                 ]);
 
-                return redirect('/admin/telegram-bot/applicants/cathedra-info')->with(compact('error'));              
+                return redirect('/admin/telegram-bot/campaign/bachelor')->with(compact('error'));
             }
         });
 
-        return $form;       
+        return $form;
     }
 }
