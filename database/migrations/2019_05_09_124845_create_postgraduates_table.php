@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateMailsTable extends Migration
+class CreatePostgraduatesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,12 @@ class CreateMailsTable extends Migration
      */
     public function up()
     {
-        Schema::create('mails', function (Blueprint $table) {
+        Schema::create('postgraduates', function (Blueprint $table) {
             $table->increments('id');
-            $table->text('message');
+            $table->string('title');
+            $table->longText('content')->nullable();
             $table->string('image')->nullable();
+            $table->boolean('is_public')->default(true);
             $table->timestamps();
         });
     }
@@ -28,6 +30,6 @@ class CreateMailsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('mails');
+        Schema::dropIfExists('postgraduates');
     }
 }

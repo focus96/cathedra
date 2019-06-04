@@ -8,6 +8,6 @@ class Mail extends Model
 {
     public function recipients()
   	{
-    	return $this->hasMany('App\Models\Recipient', 'recipient_id');
+    	return $this->hasMany('App\Models\Recipient');
   	}
 }

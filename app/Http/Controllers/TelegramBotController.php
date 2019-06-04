@@ -45,6 +45,7 @@ class TelegramBotController extends Controller
 
         $newMail = new Mail;
         $newMail->message = $message;
+        $newMail->image = 'images/'.$newFilename;
         $newMail->save();
 
         if(isset($attachment)){

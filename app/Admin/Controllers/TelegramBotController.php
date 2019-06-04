@@ -25,17 +25,4 @@ class TelegramBotController extends Controller
         });
     }
 
-    public function cathedra()
-    {
-        return Admin::content(function (Content $content) {
-
-            // optional
-            $content->header('О кафедре');
-
-            $content->description(' ');
-
-            // Fill the page body part, you can put any renderable objects here
-            $content->body(view('admin.telegram-bot.index'));
-        });
-    }
 }
