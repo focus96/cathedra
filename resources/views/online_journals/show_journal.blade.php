@@ -76,6 +76,8 @@
                                         $point = $student->points->where('checkpoint_id', $checkpoint->id)->first();
                                     @endphp
                                     <td
+                                            style="text-align: center"
+
                                             data-journal-id="{{$journal->id}}"
                                             data-student-id="{{$student->id}}"
                                             data-checkpoint-id="{{$checkpoint->id}}"
@@ -106,6 +108,7 @@
 
                         .menu-down {
                             margin-bottom: 10px;
+                            margin-top: 10px;
                         }
                     </style>
 

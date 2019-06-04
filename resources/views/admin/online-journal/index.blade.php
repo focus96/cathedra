@@ -392,13 +392,13 @@
         }
 
     </script>
-    <br>
-        <blockquote>
-            <h4><i class="fas fa-exclamation-triangle"></i></h4>
-                Если оценка подсвечивается <b class="yellowquote ">желтым</b> цветом - срок сдачи был просрочен.
-                <b class="redquote">Красным</b> цветом - оценка просрочена и отсутствует.
-        </blockquote>
 @endif
+    <br>
+    <blockquote>
+        <h4><i class="fas fa-exclamation-triangle"></i></h4>
+        Если оценка подсвечивается <b class="yellowquote ">желтым</b> цветом - срок сдачи был просрочен.
+        <b class="redquote">Красным</b> цветом - оценка просрочена и отсутствует.
+    </blockquote>
 
 </body>
 </html>

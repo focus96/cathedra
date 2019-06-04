@@ -10,12 +10,12 @@
 <body>
 <style type="text/css">
     .yellow {
-        background: #ffff00;
+        background: #FFD700;
         color: #ff0000;
     }
 
     .red {
-        background: #ff0000;
+        background: #FF6347;
         color: #ffffff;
     }
 

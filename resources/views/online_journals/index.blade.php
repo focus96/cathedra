@@ -30,6 +30,10 @@
         background: url(../img/baner2.jpg) right;
     }
 
+    .list {
+        margin-bottom: 10px;
+    }
+
 </style>
 
 @extends('layouts.app')
@@ -62,7 +66,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 -flex flex-column address-wrap">
-                    <h3>Список групп:</h3>
+                    <h3 class="list">Список групп:</h3>
                 </div>
             </div>
             <div class="col-md-3">
