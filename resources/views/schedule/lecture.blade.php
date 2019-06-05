@@ -48,6 +48,11 @@
                     <tr id="headTable">
                         <th>День недели</th>
                         <th>Номер пары</th>
+
+                        @php
+                            $lectures = array_unique($lectures);
+                        @endphp
+
                         @foreach($lectures as $key => $lecture)
                             <th id="{{'lecture'.$key}}">{{$lecture}}</th>
                         @endforeach
