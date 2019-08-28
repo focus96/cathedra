@@ -4,7 +4,7 @@ namespace App\Admin\Controllers;
 
 use App\Models\Group;
 use App\Models\Items;
-use App\Models\Shedule;
+use App\Models\Schedule;
 use App\Http\Controllers\Controller;
 use App\Models\Teacher;
 use Encore\Admin\Controllers\HasResourceActions;
@@ -13,7 +13,7 @@ use Encore\Admin\Grid;
 use Encore\Admin\Layout\Content;
 use Encore\Admin\Show;
 
-class SheduleController extends Controller
+class ScheduleController extends Controller
 {
     use HasResourceActions;
 
@@ -82,17 +82,17 @@ class SheduleController extends Controller
      */
     protected function grid()
     {
-        $grid = new Grid(new Shedule);
+        $grid = new Grid(new Schedule);
 
         $grid->id('Ид');
-        $grid->day('День недели');
+        $grid->day('День недели')->using(config('core.dayOfWeek'));
         $grid->parity_week('Четность недели')->using(['even' => 'четная', 'odd' => 'нечетная']);
         $grid->couple_number('Номер пары');
         $grid->lecture_hall('Аудитория');
-        $grid->group('Группа');
-        $grid->teacher('Преподаватель');
-        $grid->item('Предмет');
-        $grid->type_occupation('Тип занятия')->using(['laboratory_work' => 'лабораторная работа', 'practical_lesson' => 'практическое занятие', 'lecture' => 'лекция']);
+        $grid->group_id('Группа')->using(Group::all()->pluck('name_group', 'id')->toArray());
+        $grid->teacher_id('Преподаватель')->using(Teacher::all()->pluck('surname', 'id')->toArray());
+        $grid->item_id('Предмет')->using(Items::all()->pluck('name', 'id')->toArray());
+        $grid->type('Тип занятия')->using(['laboratory_work' => 'лабораторная работа', 'practical_lesson' => 'практическое занятие', 'lecture' => 'лекция']);
 
         return $grid;
     }
@@ -105,17 +105,17 @@ class SheduleController extends Controller
      */
     protected function detail($id)
     {
-        $show = new Show(Shedule::findOrFail($id));
+        $show = new Show(Schedule::findOrFail($id));
 
         $show->id('Ид');
         $show->lecture_hall('Аудитория');
         $show->couple_number('Номер пары');
-        $show->group('Группа');
-        $show->teacher('Преподаватель');
+        $show->group_id('Группа')->using(Group::all()->pluck('name_group', 'id')->toArray());
+        $show->teacher_id('Преподаватель')->using(Teacher::all()->pluck('surname', 'id')->toArray());
         $show->parity_week('Четность недели')->using(['even' => 'четная', 'odd' => 'нечетная']);
-        $show->day('День недели');
-        $show->item('Предмет');
-        $show->type_occupation('Тип занятия')->using(['laboratory_work' => 'лабораторная работа', 'practical_lesson' => 'практическое занятие', 'lecture' => 'лекция']);
+        $show->day('День недели')->using(config('core.dayOfWeek'));
+        $show->item_id('Предмет')->using(Items::all()->pluck('name', 'id')->toArray());
+        $show->type('Тип занятия')->using(['laboratory_work' => 'лабораторная работа', 'practical_lesson' => 'практическое занятие', 'lecture' => 'лекция']);
         $show->created_at('Запись создана');
         $show->updated_at('Запись обновлена');
 
@@ -129,7 +129,7 @@ class SheduleController extends Controller
      */
     protected function form()
     {
-        $form = new Form(new Shedule);
+        $form = new Form(new Schedule);
 
         $form->number('lecture_hall', 'Аудитория')->min(0001)->max(9999)->rules('required|numeric', [
             'required' => 'Обязательно для заполнения',
@@ -139,22 +139,22 @@ class SheduleController extends Controller
             'required' => 'Обязательно для заполнения',
             'numeric' => 'В поле должно быть число',
         ]);
-        $form->select('group','Группа')->options(Group::all()->pluck('name_group', 'name_group'))->rules('required', [
+        $form->select('group_id','Группа')->options(Group::all()->pluck('name_group', 'id'))->rules('required', [
             'required' => 'Обязательно для заполнения',
         ]);
-        $form->select('teacher','Преподаватель')->options(Teacher::all()->pluck('surname', 'surname'))->rules('required', [
+        $form->select('teacher_id','Преподаватель')->options(Teacher::all()->pluck('surname', 'id'))->rules('required', [
             'required' => 'Обязательно для заполнения',
         ]);
         $form->select('parity_week','Четность недели')->options(['even' => 'четная', 'odd' => 'нечетная'])->rules('required', [
             'required' => 'Обязательно для заполнения',
         ]);
-        $form->date('day','День недели')->format('dddd')->rules('required', [
+        $form->select('day','День недели')->options(config('core.dayOfWeek'))->rules('required', [
             'required' => 'Обязательно для заполнения',
         ]);
-        $form->select('item','Предмет')->options(Items::all()->pluck('name', 'name'))->rules('required', [
+        $form->select('item_id','Предмет')->options(Items::all()->pluck('name', 'id'))->rules('required', [
             'required' => 'Обязательно для заполнения',
         ]);
-        $form->select('type_occupation','Тип занятия')->options(['laboratory_work' => 'лабораторная работа', 'practical_lesson' => 'практическое занятие', 'lecture' => 'лекция'])->rules('required', [
+        $form->select('type','Тип занятия')->options(['laboratory_work' => 'лабораторная работа', 'practical_lesson' => 'практическое занятие', 'lecture' => 'лекция'])->rules('required', [
             'required' => 'Обязательно для заполнения',
         ]);
 

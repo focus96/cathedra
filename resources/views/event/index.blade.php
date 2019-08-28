@@ -3,21 +3,31 @@
 @section('content')
 
     <!-- start banner Area -->
-    <section class="banner-area relative about-banner" id="home">
-        <div class="overlay overlay-bg"></div>
+    {{--<section class="banner-area relative about-banner" id="home">--}}
+        {{--<div class="overlay overlay-bg"></div>--}}
+        {{--<div class="container">--}}
+            {{--<div class="row d-flex align-items-center justify-content-center">--}}
+                {{--<div class="about-content col-lg-12">--}}
+                    {{--<h1 class="text-white">--}}
+                        {{--События--}}
+                    {{--</h1>--}}
+                    {{--<p class="text-white link-nav"><a href="/">Home </a> <span--}}
+                                {{--class="lnr lnr-arrow-right"></span> <a href="events.html"> Events</a></p>--}}
+                {{--</div>--}}
+            {{--</div>--}}
+        {{--</div>--}}
+    {{--</section>--}}
+    <!-- End banner Area -->
+
+    <section class="v-title text-center">
         <div class="container">
             <div class="row d-flex align-items-center justify-content-center">
-                <div class="about-content col-lg-12">
-                    <h1 class="text-white">
-                        События
-                    </h1>
-                    <p class="text-white link-nav"><a href="/">Home </a> <span
-                                class="lnr lnr-arrow-right"></span> <a href="events.html"> Events</a></p>
+                <div class="col-lg-12">
+                    <h1>События</h1>
                 </div>
             </div>
         </div>
     </section>
-    <!-- End banner Area -->
 
     <!-- Start events-list Area -->
     <section class="events-list-area section-gap event-page-lists">
@@ -59,17 +69,7 @@
     <!-- End events-list Area -->
 
     <!-- Start cta-two Area -->
-    <section class="cta-two-area">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 cta-left">
-                    <h1>Хотите узнать о кафедре больше?</h1>
-                </div>
-                <div class="col-lg-4 cta-right">
-                    <a class="primary-btn wh" href="/news">посмотрите наш блог</a>
-                </div>
-            </div>
-        </div>
-    </section>
+    @component('components.more-info')
+    @endcomponent
     <!-- End cta-two Area -->
 @endsection

@@ -1,64 +1,56 @@
 @extends('layouts.app')
 
 @section('content')
-    <style>
-        .banner-area{
-            background: url(../img/baner2.jpg) right;
-        }
-    </style>
-    <!-- start banner Area -->
-    <section class="banner-area relative about-banner" style="background-image: url('{{ admin_uploads($album->cover) }}')" id="home">
-        <div class="overlay overlay-bg"></div>
-        <div class="container">
-            <div class="row d-flex align-items-center justify-content-center">
-                <div class="about-content col-lg-12">
-                    <h1 class="text-white">{{ $album->name }}</h1>
-                    <p class="text-white"> {{ $album->description }}</p>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- End banner Area -->
 
     <!-- Start gallery Area -->
     <section class="gallery-area section-gap">
         <div class="container">
             <div class="row">
-                @php
-                    $cols = [7, 5, 4, 4, 4, 5, 7];
-                @endphp
+                <div class="col-lg-2 pb-20">
+                    <a href="{{ route('album-index') }}" class="primary-btn">Назад</a>
+                </div>
+                <div class="col-lg-10 text-right">
+                    <h2 class="mb-20">{{$album->name}}</h2>
+                    <p class="mb-20">{{ $album->description }}</p>
+                </div>
+                @if(count($files) > 2)
+                    @php
+                            $cols = [7, 5, 4, 4, 4, 5, 7];
+                    @endphp
 
-                @foreach($files as $key => $file)
-                    @if($file !== '.' && $file !== '..')
-                        <div class="col-lg-{{ $cols[$key%7] }}">
-                            <a href="{{ '/storage/albums/' . $album->id . '/' . $file }}" class="img-gal">
-                                <div class="single-imgs relative">
-                                    <div class="relative">
-                                        <img style="object-fit: cover; height: 300px" class="img-fluid" src="{{ '/storage/albums/' . $album->id . '/' . $file }}" alt="">
+                    @foreach($files as $key => $file)
+                        @if($file !== '.' && $file !== '..')
+                            <div class="col-lg-{{ $cols[$key%7] }}">
+                                {{--<a href="{{ '/storage/albums/' . $album->id . '/' . $file }}" class="img-gal">--}}
+                                <a href="{{ admin_uploads('albums/' . $album->id . '/' . $file) }}" class="img-gal">
+                                    <div class="single-imgs relative">
+                                        <div class="relative">
+                                            <img style="object-fit: cover; height: 300px" class="img-fluid"
+                                                 src="{{ admin_uploads('albums/' . $album->id . '/' . $file) }}" alt="">
+                                        </div>
                                     </div>
+                                </a>
+                            </div>
+                        @endif
+                    @endforeach
+                @else
+                    <section class="v-title text-center">
+                        <div class="container">
+                            <div class="row d-flex align-items-center justify-content-center">
+                                <div class="col-lg-12">
+                                    <h4>Элементов не найдено</h4>
                                 </div>
-                            </a>
+                            </div>
                         </div>
-                    @endif
-                @endforeach
+                    </section>
+                @endif
+
             </div>
         </div>
     </section>
     <!-- End gallery Area -->
 
 
-    <!-- Start cta-two Area -->
-    <section class="cta-two-area">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 cta-left">
-                    <h1>Хотите узнать о кафедре больше?</h1>
-                </div>
-                <div class="col-lg-4 cta-right">
-                    <a class="primary-btn wh" href="/news">посмотрите наш блог</a>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- End cta-two Area -->
+    @component('components.more-info')
+    @endcomponent
 @endsection

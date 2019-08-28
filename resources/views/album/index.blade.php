@@ -1,21 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-    <style>
-        .banner-area{
-            background: url(../img/baner2.jpg) right;
-        }
-    </style>
-    <!-- start banner Area -->
-    <section class="banner-area relative about-banner" id="home">
-        <div class="overlay overlay-bg"></div>
+    <section class="v-title text-center">
         <div class="container">
             <div class="row d-flex align-items-center justify-content-center">
-                <div class="about-content col-lg-12">
-                    <h1 class="text-white">
-                        Галерея
-                    </h1>
-                    <p class="text-white link-nav"><a href="/">Головна</a></p>
+                <div class="col-lg-12">
+                    <h1>Галерея</h1>
                 </div>
             </div>
         </div>
@@ -51,17 +41,7 @@
 
 
     <!-- Start cta-two Area -->
-    <section class="cta-two-area">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 cta-left">
-                    <h1>Цікаво дізнатися ще більше?</h1>
-                </div>
-                <div class="col-lg-4 cta-right">
-                    <a class="primary-btn wh" href="/news">Подивитися</a>
-                </div>
-            </div>
-        </div>
-    </section>
+    @component('components.more-info')
+    @endcomponent
     <!-- End cta-two Area -->
 @endsection

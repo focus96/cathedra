@@ -135,7 +135,7 @@ class AlbumController extends Controller
         ]);
 
         $form->saved(function (Form $form) {
-            $path = storage_path('/app/public/albums/' . $form->model()->id);
+            $path = storage_path('/app/public/uploads/albums/' . $form->model()->id);
             if(!file_exists($path)) {
                 mkdir($path);
             }   

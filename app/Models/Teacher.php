@@ -6,8 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Teacher extends Model
 {
-    public function shedule()
+    public function schedule()
     {
-        return $this->belongsTo('App\Shedule');
+        return $this->hasMany(Schedule::class);
     }
 }

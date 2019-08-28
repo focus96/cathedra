@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Conversations\OnboardingConversation;
+use App\Services\FileCacheDriver;
 use BotMan\BotMan\BotMan;
 use BotMan\BotMan\BotManFactory;
+use BotMan\BotMan\Cache\Psr6Cache;
 use BotMan\BotMan\Drivers\DriverManager;
 use BotMan\Drivers\Telegram\TelegramDriver;
 use Illuminate\Http\Request;
@@ -19,14 +22,15 @@ class TelegramBotController extends Controller
 
     protected $config = [
         "telegram" => [
-            "token" => '636548977:AAF3TFV6jmYbSUxgyyW3PQbgjhVJ9gb7JUk'
+            "token" => '705199406:AAH9XWBdk0OofJj4yinG4d1Ia4G2X8_89ok'
         ]
     ];
 
     public function __construct()
     {
         DriverManager::loadDriver(TelegramDriver::class);
-        $this->botman = BotManFactory::create($this->config);
+        $adapter = new FileCacheDriver();
+        $this->botman = BotManFactory::create($this->config, new Psr6Cache($adapter));
     }
 
     public function send(Request $request) {
@@ -60,5 +64,14 @@ class TelegramBotController extends Controller
             $newRecipient->save();
             $this->botman->say($message, $userTelegramId, TelegramDriver::class);
         }
+    }
+
+    public function hears()
+    {
+        $this->botman->hears('Hello', function(BotMan $bot) {
+//            $bot->reply('sadasdsa');
+            $bot->startConversation(new OnboardingConversation);
+        });
+        $this->botman->listen();
     }
 }

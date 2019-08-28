@@ -15,3 +15,24 @@
   color: #f7631b;
 }
 
+header {
+  position: relative !important;
+  background-color: #04091e;
+}
+
+.main-menu {
+  border-top: 1px solid #dddddd;
+  border-bottom: none;
+}
+
+.v-title {
+  margin-top: 50px;
+}
+
+.section-gap {
+  padding: 50px 0;
+}
+
+.more-info {
+  padding: 40px 0;
+}

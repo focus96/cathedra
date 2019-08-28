@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateShedulesTable extends Migration
+class CreateSchedulesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,16 @@ class CreateShedulesTable extends Migration
      */
     public function up()
     {
-        Schema::create('shedules', function (Blueprint $table) {
+        Schema::create('schedules', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('lecture_hall')->comment('Аудитория');
             $table->integer('couple_number')->comment('Номер пары');
-            $table->string('group')->comment('Группа');
-            $table->string('teacher')->comment('Преподаватель');
+            $table->unsignedInteger('group_id')->comment('Группа');
+            $table->unsignedBigInteger('teacher_id')->comment('Преподаватель');
+            $table->unsignedInteger('item_id')->comment('Предмет');
             $table->enum('parity_week', ['even', 'odd'])->comment('Четность недели');
-            $table->string('day')->comment('День недели');
-            $table->enum('type_occupation', ['laboratory_work', 'practical_lesson', 'lecture'])->comment('Тип занятия');
+            $table->unsignedTinyInteger('day')->comment('День недели');
+            $table->string('type')->comment('Тип занятия');
             $table->timestamps();
         });
     }
@@ -33,6 +34,6 @@ class CreateShedulesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('shedules');
+        Schema::dropIfExists('schedules');
     }
 }

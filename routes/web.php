@@ -13,11 +13,14 @@ use App\Exports\ScheduleExport;
 |
 */
 
+Auth::routes();
+
 Route::get('/', 'HomePageController@index');
 Route::post('/', 'HomePageController@regist');
-Route::get('/news','HomePageController@show')->name('news-show');
 
 Route::view('/about', 'about');
+Route::view('/contact', 'contact');
+Route::get('/curators', 'CuratorController@index')->name('curators-index');
 
 Route::prefix('news')->group(function () {
     Route::get('/', 'NewsController@index');
@@ -31,7 +34,7 @@ Route::prefix('event')->group(function () {
 });
 
 Route::prefix('album')->group(function () {
-    Route::get('/', 'AlbumController@index');
+    Route::get('/', 'AlbumController@index')->name('album-index');
     Route::get('/{album}', 'AlbumController@show')->name('album-show');
 });
 
@@ -41,58 +44,45 @@ Route::prefix('online_journals')->group(function () {
     Route::get('/show_group/{group}', 'OnlineJournalController@show_group');
 });
 
-
 Route::prefix('schedule')->group(function () {
-    Route::get('/', 'ScheduleController@index');
-});
-
-Route::prefix('teacher')->group(function () {
-    Route::get('/', 'ScheduleController@teacher');
-});
-
-Route::prefix('lecture')->group(function () {
-    Route::get('/', 'ScheduleController@lecture');
+    Route::get('/by-lecture-hall', 'ScheduleController@byLectureHall');
+    Route::get('/by-group', 'ScheduleController@byGroup');
+    Route::get('/by-teacher', 'ScheduleController@byTeacher');
 });
 
 Route::get('/download',function (){
     return Excel::download(new ScheduleExport, 'schedule.xlsx');
 });
 
-Route::prefix('item')->group(function () {
-    Route::get('/', 'ScheduleController@item');
-});
 
-Route::prefix('faculties')->group(function () {
-    Route::get('/', 'ScheduleController@faculties');
-});
 
-Route::post('/subscribe','SubsController@subscribe');
 
-Route::view('/contact', 'contact');
+
+
+
+
+
+//Route::post('/subscribe','SubsController@subscribe');
 
 Route::get('/get-all-cathedra-users', 'CathedraUserController@all');
 
 Route::post('/send-telegram-message', 'TelegramBotController@send');
-
-
 Route::get('/register-telegram-url', function() {
-  $ch = curl_init("https://api.telegram.org/bot636548977:AAF3TFV6jmYbSUxgyyW3PQbgjhVJ9gb7JUk/setWebhook");
+  $ch = curl_init("https://api.telegram.org/bot705199406:AAH9XWBdk0OofJj4yinG4d1Ia4G2X8_89ok/setWebhook");
 
     curl_setopt($ch, CURLOPT_HEADER, 0);
     curl_setopt($ch, CURLOPT_POST, 1);
   	curl_setopt($ch, CURLOPT_POSTFIELDS,
-            "url=https://d563a71e.ngrok.io/botman");
+            "url=https://dab266c5.ngrok.io/botman");
 
     curl_exec($ch);
     curl_close($ch);
 });
 
-Auth::routes();
-
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/save-pdf/{id}', 'SavePDFController@save');
-
 Route::get('/save-xls/{id}', 'SaveXLSController@save');
 
-Route::post('/botman', 'TelegramBotHearsController@hears');
+//Route::post('/botman', 'TelegramBotHearsController@hears');
+Route::post('/botman', 'TelegramBotController@hears');

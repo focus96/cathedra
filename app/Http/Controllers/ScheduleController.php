@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Shedule;
+use App\Models\Schedule;
+use Illuminate\Database\Eloquent\Builder;
 use PDF;
 use DB;
 use App\Models\Group;
@@ -15,33 +16,28 @@ use App\Exports\ScheduleExport;
 
 class ScheduleController extends Controller
 {
-    public function index()
+    public function byLectureHall()
     {
-        $shedules = Shedule::orderBy('couple_number','asc')->get();
-        $teachers = Teacher::pluck('surname','id')->all();
-        $groups = Group::pluck('name_group','id')->all();
-
-        return View('schedule/index',['shedules' => $shedules,'groups' => $groups,'teachers'=>$teachers]);
-    }
-    public function teacher()
-    {
-        $shedules = Shedule::orderBy('couple_number','asc')->get();
-        $teachers = Teacher::pluck('surname','id')->all();
-        return View('schedule/teacher',['shedules' => $shedules,'teachers'=>$teachers]);
+        $schedule = Schedule::with(['group', 'teacher', 'item'])->get()->groupBy('lecture_hall');
+        $lectureHalls = $schedule->keys();
+        return view('schedule/by-lecture-hall', compact(['schedule', 'lectureHalls']));
     }
 
-    public function lecture()
+    public function byGroup()
     {
-        $shedules = Shedule::orderBy('couple_number','asc')->get();
-        $lectures =Shedule::pluck('lecture_hall','id')->all();
-        return View('schedule/lecture',['shedules' => $shedules,'lectures'=>$lectures]);
+        $groups = Group::with(['schedule' => function($q) {
+            $q->with(['teacher', 'item']);
+        }])->get()->keyBy('id');
+        $groupsNames = $groups->pluck('name_group', 'id');
+        return view('schedule/by-group', compact(['groups', 'groupsNames']));
     }
 
-    public function item()
+    public function byTeacher()
     {
-        $shedules = Shedule::orderBy('couple_number','asc')->get();
-        $items =Items::pluck('name','id')->all();
-        $groups = Group::pluck('name_group','id')->all();
-        return View('schedule/item',['shedules' => $shedules,'items'=>$items,'groups' => $groups]);
+        $teachers = Teacher::with(['schedule' => function($q) {
+            $q->with(['teacher', 'item']);
+        }])->get()->keyBy('id');
+        $teacherNames = $teachers->pluck('surname', 'id');
+        return view('schedule/by-teacher', compact(['teachers', 'teacherNames']));
     }
 }

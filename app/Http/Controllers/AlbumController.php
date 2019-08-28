@@ -15,7 +15,7 @@ class AlbumController extends Controller
     public function show(Album $album)
     {
         $id = $album->id;
-        $path = storage_path('/app/public/albums/' . $id);
+        $path = storage_path('/app/public/uploads/albums/' . $id);
         $files = scandir($path);
         return View('album.show', compact(['id', 'files', 'album']));
     }

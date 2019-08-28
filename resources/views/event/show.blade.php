@@ -1,22 +1,15 @@
 @extends('layouts.app')
 
 @section('content')
-    <!-- start banner Area -->
-    <section class="banner-area relative about-banner" id="home">
-        <div class="overlay overlay-bg"></div>
+    <section class="v-title text-center">
         <div class="container">
             <div class="row d-flex align-items-center justify-content-center">
-                <div class="about-content col-lg-12">
-                    <h1 class="text-white">
-                        Event Details
-                    </h1>
-                    <p class="text-white link-nav"><a href="/   ">Home </a> <span
-                                class="lnr lnr-arrow-right"></span> <a href="event-details.html"> Event Details</a></p>
+                <div class="col-lg-12">
+                    <h1>{{ $event->name }}</h1>
                 </div>
             </div>
         </div>
     </section>
-    <!-- End banner Area -->
 
     <!-- Start event-details Area -->
     <section class="event-details-area section-gap">
@@ -28,7 +21,7 @@
                     </div>
                     <div class="details-content">
                         <a href="#">
-                            <h4>{{ $event->name }}</h4>
+                            <h4></h4>
                         </a>
                         <div>
                             {!! $event->content !!}
@@ -36,16 +29,29 @@
                     </div>
                     <div class="social-nav row no-gutters">
                         <div class="col-lg-6 col-md-6 ">
-                            <ul class="focials">
-                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
-                                <li><a href="#"><i class="fa fa-behance"></i></a></li>
-                            </ul>
+                            {{--<ul class="focials">--}}
+                            {{--<li><a href="#"><i class="fa fa-facebook"></i></a></li>--}}
+                            {{--<li><a href="#"><i class="fa fa-twitter"></i></a></li>--}}
+                            {{--<li><a href="#"><i class="fa fa-dribbble"></i></a></li>--}}
+                            {{--<li><a href="#"><i class="fa fa-behance"></i></a></li>--}}
+                            {{--</ul>--}}
                         </div>
                         <div class="col-lg-6 col-md-6 navs">
-                            <a href="#" class="nav-prev"><span class="lnr lnr-arrow-left"></span>Назад</a>
-                            <a href="#" class="nav-next">Вперед<span class="lnr lnr-arrow-right"></span></a>
+                            @if($previous)
+                                <a href="{{ route('event-show', $previous->id) }}" class="nav-prev"><span
+                                            class="lnr lnr-arrow-left"></span>Назад</a>
+                            @else
+                                <span><span class="lnr lnr-arrow-left"></span>Назад</span>
+                            @endif
+
+                            @if($next)
+                                <a href="{{ route('event-show', $next->id) }}" class="nav-next">Вперед<span
+                                            class="lnr lnr-arrow-right"></span></a>
+                            @else
+                                <span>Вперед<span class="lnr lnr-arrow-right"></span></span>
+                            @endif
+
+
                         </div>
                     </div>
                 </div>
@@ -94,17 +100,7 @@
 
 
     <!-- Start cta-two Area -->
-    <section class="cta-two-area">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 cta-left">
-                    <h1>Хотите узнать о кафедре больше?</h1>
-                </div>
-                <div class="col-lg-4 cta-right">
-                    <a class="primary-btn wh" href="#">посмотрите наш блог</a>
-                </div>
-            </div>
-        </div>
-    </section>
+    @component('components.more-info')
+    @endcomponent
     <!-- End cta-two Area -->
 @endsection
