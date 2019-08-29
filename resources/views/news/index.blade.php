@@ -2,19 +2,11 @@
 
 @section('content')
     <!-- start banner Area -->
-    <section class="banner-area relative" id="home">
-        <div class="overlay overlay-bg"></div>
+    <section class="v-title text-center">
         <div class="container">
             <div class="row d-flex align-items-center justify-content-center">
-                <div class="about-content blog-header-content col-lg-12">
-                    <h1 class="text-white">
-                        Dude You’re Getting
-                        a Telescope
-                    </h1>
-                    <p class="text-white">
-                        There is a moment in the life of any aspiring astronomer that it is time to buy that first
-                    </p>
-                    <a href="blog-single.html" class="primary-btn">View More</a>
+                <div class="col-lg-12">
+                    <h1>Новости</h1>
                 </div>
             </div>
         </div>
@@ -89,6 +81,11 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 posts-list">
+                    @if(!count($news))
+                        <div class="text-center">
+                            <h3><strong class="color-app">Упс..</strong> Ничего не найдено <strong class="color-app">:(</strong></h3>
+                        </div>
+                        @endif
                     @foreach($news as $singleNews)
                         <div class="single-post row">
                             <div class="col-lg-3  col-md-3 meta-details">
@@ -109,20 +106,20 @@
                                     <p class="view col-lg-12 col-md-12 col-6"><a
                                                 href="#">Просмотры: {{ $singleNews->views }}</a> <span
                                                 class="lnr lnr-eye"></span></p>
-                                    <p class="comments col-lg-12 col-md-12 col-6"><a href="#">** комментариев</a> <span
-                                                class="lnr lnr-bubble"></span></p>
+                                    {{--<p class="comments col-lg-12 col-md-12 col-6"><a href="#">** комментариев</a> <span--}}
+                                                {{--class="lnr lnr-bubble"></span></p>--}}
                                 </div>
                             </div>
                             <div class="col-lg-9 col-md-9 ">
                                 <div class="feature-img">
-                                    <img class="img-fluid" src="{{ '/uploads/' . $singleNews->image }}" alt="">
+                                    <img class="img-fluid" src="{{ admin_uploads($singleNews->image) }}" alt="">
                                 </div>
-                                <a class="posts-title" href="{{ route('news-show', $singleNews->id) }}">
+                                <a class="posts-title" href="{{ route('news-show', newsParams($singleNews->id)) }}">
                                     <h3>{{ $singleNews->title }}</h3></a>
                                 <p class="excert">
                                     {{ $singleNews->short }}
                                 </p>
-                                <a href="{{ route('news-show', $singleNews->id) }}" class="primary-btn">Подробнее</a>
+                                <a href="{{ route('news-show', newsParams($singleNews->id)) }}" class="primary-btn">Подробнее</a>
                             </div>
                         </div>
                     @endforeach
@@ -133,9 +130,8 @@
                     </nav>
                 </div>
                 <div class="col-lg-4 sidebar-widgets">
-                    @component('news.sidebar', [
-                        'popularNews' => $popularNews
-                    ])@endcomponent
+                    @component('news.sidebar', compact(['popularNews', 'categories', 'tags']))
+                    @endcomponent
                 </div>
             </div>
         </div>

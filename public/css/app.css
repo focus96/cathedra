@@ -36,3 +36,17 @@ header {
 .more-info {
   padding: 40px 0;
 }
+
+.news-sidebar li.active {
+  border-bottom: 2px dotted #f7631b !important;
+}
+.news-sidebar li.active a {
+  color: #f7631b !important;
+}
+.news-sidebar li.active a:hover {
+  color: #fff !important;
+}
+
+.color-app {
+  color: #f7631b;
+}

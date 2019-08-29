@@ -74,9 +74,8 @@
                     <li><a href="/about">Про нас</a></li>
                     <li ><a href="">Студентам</a>
                         <ul class="nav-menu">
-                            <li ><a href="/schedule">Розклад</a></li>
+                            <li ><a href="/schedule/by-lecture-hall">Розклад</a></li>
                             <li ><a href="{{ route('curators-index') }}">Кураторы</a></li>
-                            <li ><a href="/online_journals">Онлайн-журнали</a></li>
                         </ul>
                     </li>
                     <li><a href="/event">Події</a></li>
