@@ -1386,7 +1386,7 @@ module.exports = function normalizeComponent (
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(13);
-module.exports = __webpack_require__(54);
+module.exports = __webpack_require__(55);
 
 
 /***/ }),
@@ -1425,6 +1425,7 @@ window.Vue = __webpack_require__(37);
 
 __webpack_require__(40);
 __webpack_require__(41);
+__webpack_require__(54);
 
 /***/ }),
 /* 14 */
@@ -36885,6 +36886,59 @@ if (false) {
 
 /***/ }),
 /* 54 */
+/***/ (function(module, exports) {
+
+var emailMixin = {
+    data: function data() {
+        return {
+            status: null,
+            isConfirm: null,
+            email: null,
+            error: null,
+            resendSuccess: null
+        };
+    },
+    methods: {
+        subscribe: function subscribe() {
+            var _this = this;
+
+            axios.post('/subscribe', {
+                email: this.email
+            }).then(function (response) {
+                _this.status = response.data.status;
+                _this.isConfirm = response.data.is_confirm;
+                _this.error = null;
+            }).catch(function (error) {
+                _this.status = 'error';
+                _this.error = error.response.data.errors && error.response.data.errors.email ? error.response.data.errors.email[0] : [];
+            });
+        },
+        resend: function resend() {
+            var _this2 = this;
+
+            axios.post('/resend-confirm-subscribe-email', {
+                email: this.email
+            }).then(function (response) {
+                _this2.resendSuccess = true;
+            }).catch(function (error) {
+                _this2.resendSuccess = false;
+            });
+        }
+    }
+};
+
+var emailSubscriberNewsSidebar = new Vue({
+    el: '#email-subscriber-news-sidebar',
+    mixins: [emailMixin]
+});
+
+var emailSubscriberFooter = new Vue({
+    el: '#email-subscriber-footer',
+    mixins: [emailMixin]
+});
+
+/***/ }),
+/* 55 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin

@@ -66,7 +66,7 @@
             @endforeach
         </ul>
     </div>
-    <div class="single-sidebar-widget newsletter-widget">
+    <div id="email-subscriber-news-sidebar" class="single-sidebar-widget newsletter-widget">
         <h4 class="newsletter-title">Подписка</h4>
         <p>
             Подпишитесь на наши обновления, чтобы быть в курсе последних событий.
@@ -79,13 +79,15 @@
                                                          aria-hidden="true"></i>
                         </div>
                     </div>
-                    <input type="text" class="form-control" id="inlineFormInputGroup"
+                    <input type="text" class="form-control"
                            placeholder="Введите email" onfocus="this.placeholder = ''"
-                           onblur="this.placeholder = 'Введите email'">
+                           onblur="this.placeholder = 'Введите email'" v-model="email">
                 </div>
             </div>
-            <a href="#" class="bbtns">Подписаться</a>
+            <a href="javascript:;" @click="subscribe()" class="bbtns">Подписаться</a>
         </div>
+        @component('components.email-subscribe-messages')
+        @endcomponent
         <p class="text-bottom">
             Вы можете отписаться в любое время
         </p>

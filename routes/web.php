@@ -55,6 +55,11 @@ Route::get('/download',function (){
     return Excel::download(new ScheduleExport, 'schedule.xlsx');
 });
 
+Route::post('/subscribe', 'EmailSubscriberController@subscribe');
+Route::get('/confirm-email-subscribe/{subscribeEmail}', 'EmailSubscriberController@confirm');
+Route::post('/resend-confirm-subscribe-email', 'EmailSubscriberController@resend');
+
+
 Route::get('/get-all-cathedra-users', 'CathedraUserController@all');
 
 Route::post('/send-telegram-message', 'TelegramBotController@send');

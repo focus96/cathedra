@@ -1,0 +1,60 @@
+.mosaicflow__column {
+    float: left;
+}
+
+.mosaicflow__item img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+.details a {
+    text-decoration: none;
+    color: #0b0b0b;
+}
+.details a:hover {
+    color: #f7631b;
+}
+
+header {
+    position: relative !important;
+    background-color: #04091e;
+}
+
+.main-menu {
+    border-top: 1px solid #dddddd;
+    border-bottom: none;
+}
+
+.v-title {
+    margin-top: 50px;
+}
+
+.section-gap {
+    padding: 50px 0;
+}
+
+.more-info {
+    padding: 40px 0;
+}
+
+.news-sidebar li.active {
+    border-bottom: 2px dotted #f7631b !important;
+}
+.news-sidebar li.active a {
+    color: #f7631b !important;
+}
+.news-sidebar li.active a:hover {
+    color: #fff !important;
+}
+
+.color-app {
+    color: #f7631b;
+}
+
+.red {
+    color: red !important;
+}
+
+.green {
+    color: green !important;
+}

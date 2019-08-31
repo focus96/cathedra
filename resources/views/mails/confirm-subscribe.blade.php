@@ -1,0 +1,2 @@
+Для подтверждения подписки на рассылку новостей сайта перейдите по ссылке:
+<a href="{{ env('APP_URL') . '/confirm-email-subscribe/' . $subscribeEmail->id . '?confirm_token=' . $subscribeEmail->confirm_token}} ">Подтвердить</a>

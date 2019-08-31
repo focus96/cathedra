@@ -30,3 +30,4 @@ window.Vue = require('vue');
 
 require('./components/Event/fetch');
 require('./components/Admin/TelegramBot/index');
+require('./components/email-subscriber');

@@ -1,24 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-
-    <!-- start banner Area -->
-    {{--<section class="banner-area relative about-banner" id="home">--}}
-        {{--<div class="overlay overlay-bg"></div>--}}
-        {{--<div class="container">--}}
-            {{--<div class="row d-flex align-items-center justify-content-center">--}}
-                {{--<div class="about-content col-lg-12">--}}
-                    {{--<h1 class="text-white">--}}
-                        {{--События--}}
-                    {{--</h1>--}}
-                    {{--<p class="text-white link-nav"><a href="/">Home </a> <span--}}
-                                {{--class="lnr lnr-arrow-right"></span> <a href="events.html"> Events</a></p>--}}
-                {{--</div>--}}
-            {{--</div>--}}
-        {{--</div>--}}
-    {{--</section>--}}
-    <!-- End banner Area -->
-
     <section class="v-title text-center">
         <div class="container">
             <div class="row d-flex align-items-center justify-content-center">

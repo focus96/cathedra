@@ -27,9 +27,9 @@
                                          alt="">
                                 </div>
                                 <div class="content-details">
-                                    <h4 class="content-title mx-auto text-uppercase">Social life</h4>
+                                    <h4 class="content-title mx-auto text-uppercase">Поступление</h4>
                                     <span></span>
-                                    <p>Enjoy your social life together</p>
+                                    <p>Правила, требования, нормы</p>
                                 </div>
                             </a>
                         </div>
@@ -45,9 +45,9 @@
                                          alt="">
                                 </div>
                                 <div class="content-details">
-                                    <h4 class="content-title mx-auto text-uppercase">Politics</h4>
+                                    <h4 class="content-title mx-auto text-uppercase">Обучение</h4>
                                     <span></span>
-                                    <p>Be a part of politics</p>
+                                    <p>Конференции, доклады, статьи</p>
                                 </div>
                             </a>
                         </div>
@@ -59,13 +59,13 @@
                             <div class="overlay overlay-bg"></div>
                             <a href="#" target="_blank">
                                 <div class="thumb">
-                                    <img class="content-image img-fluid d-block mx-auto" src="img/blog/cat-widget3.jpg"
+                                    <img class="content-image img-fluid d-block mx-auto" src="img/blog/cat-widget1.jpg"
                                          alt="">
                                 </div>
                                 <div class="content-details">
-                                    <h4 class="content-title mx-auto text-uppercase">Food</h4>
+                                    <h4 class="content-title mx-auto text-uppercase">Жизнь кафедры</h4>
                                     <span></span>
-                                    <p>Let the food be finished</p>
+                                    <p>Мероприятия, события, отчеты</p>
                                 </div>
                             </a>
                         </div>

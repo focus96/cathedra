@@ -36,6 +36,7 @@
     <link rel="stylesheet" href="/css/jquery-ui.css">
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/css/app.css">
+    <link rel="stylesheet" href="/css/core.css">
     <script src="/js/vendor/jquery-2.2.4.min.js"></script>
 </head>
 <body>
@@ -141,7 +142,7 @@
                     </ul>
                 </div>
             </div>
-            <div class="col-lg-4  col-md-6 col-sm-6">
+            <div id="email-subscriber-footer" class="col-lg-4  col-md-6 col-sm-6">
                 <div class="single-footer-widget">
                     <h4>Подписка</h4>
                     <p>Будьте в курсе последних наших новостей</p>
@@ -150,15 +151,18 @@
                               action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01"
                               method="get">
                             <div class="input-group">
-                                <input type="text" class="form-control" name="EMAIL" placeholder="Введите Email"
+                                <input type="text" class="form-control" placeholder="Введите Email"
                                        onfocus="this.placeholder = ''"
-                                       onblur="this.placeholder = 'Введите Email '" required="" type="email">
+                                       onblur="this.placeholder = 'Введите Email '" required="" type="email" v-model="email">
                                 <div class="input-group-btn">
-                                    <button class="btn btn-default" type="submit">
+                                    <button class="btn btn-default" type="button" @click="subscribe()">
                                         <span class="lnr lnr-arrow-right"></span>
                                     </button>
                                 </div>
-                                <div class="info"></div>
+                                <div class="info">
+                                    @component('components.email-subscribe-messages')
+                                    @endcomponent
+                                </div>
                             </div>
                         </form>
                     </div>
