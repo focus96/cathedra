@@ -18,7 +18,7 @@ class EmailSubscriber extends Model
 
         // auto-sets values on creation
         static::creating(function ($query) {
-            $query->confirm_token = '12345';
+            $query->confirm_token = str_random(10);
         });
     }
 
