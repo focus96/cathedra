@@ -20,6 +20,7 @@ Route::get('/', 'HomeController@index')->name('home');
 Route::view('/about', 'about');
 Route::view('/contact', 'contact');
 Route::get('/curators', 'CuratorController@index')->name('curators-index');
+Route::get('/study-plans', 'StudyPlanController@index')->name('study-plans-index');
 
 Route::prefix('news')->group(function () {
     Route::get('/', 'NewsController@index')->name('news-index');

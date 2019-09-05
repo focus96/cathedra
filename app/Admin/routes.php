@@ -21,6 +21,8 @@ Route::group([
     $router->resource('/events', 'EventController');
     $router->resource('/cathedra-users', 'CathedraUsersController');
     $router->resource('/groups', 'GroupsController');
+    $router->resource('/specializations', 'SpecializationController');
+    $router->resource('/study-plans', 'StudyPlanController');
     $router->resource('/email-subscriber', 'EmailSubscriberController');
 
     $router->resource('/items', 'ItemsController');

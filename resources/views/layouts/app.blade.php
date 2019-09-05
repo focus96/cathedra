@@ -77,6 +77,7 @@
                         <ul class="nav-menu">
                             <li ><a href="/schedule/by-lecture-hall">Розклад</a></li>
                             <li ><a href="{{ route('curators-index') }}">Кураторы</a></li>
+                            <li ><a href="{{ route('study-plans-index') }}">Учебные планы</a></li>
                         </ul>
                     </li>
                     <li><a href="/event">Події</a></li>
