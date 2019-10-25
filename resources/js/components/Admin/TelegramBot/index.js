@@ -1,6 +1,6 @@
 import TelegramBot from './TelegramBot';
 
 const adminTelegramBot = new Vue({
-    el: '#admin-telegram-bot',
+    el: '#admin-messages.php',
     components: {TelegramBot}
 });

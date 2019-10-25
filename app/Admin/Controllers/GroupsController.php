@@ -4,6 +4,7 @@ namespace App\Admin\Controllers;
 
 use App\Models\Group;
 use App\Http\Controllers\Controller;
+use App\Models\Specialization;
 use App\Models\Student;
 use App\Models\Teacher;
 use Encore\Admin\Controllers\HasResourceActions;
@@ -86,21 +87,8 @@ class GroupsController extends Controller
         $grid->id('Ид');
 
         $grid->column('Наименование')->display(function () {
-
-            $group_name = $this->specialty . ' ' . $this->admission_year . ' - ' . $this->group_number;
-
-            if ($this->level_education === 'bachelor_acceleration'){
-                return $group_name . ' [у]';
-            }
-            elseif ($this->level_education === 'master'){
-                return $group_name . ' [м]';
-            }
-            else {
-                return $group_name;
-            }
+            return $this->name;
         });
-
-        $grid->specialty('Специальность');
 
         return $grid;
     }
@@ -117,7 +105,7 @@ class GroupsController extends Controller
 
         $show->id('Ид');
         $show->name_group('Наименование группы');
-        $show->specialty('Специальность');
+        $show->specialization_id('Специальность')->using(Specialization::all()->pluck('short_name', 'id')->toArray());
         $show->admission_year('Год поступления');
         $show->group_number('Номер группы');
         $show->level_education('Уровень образования')->using(['bachelor' => 'бакалавр', 'bachelor_acceleration' => 'бакалавр ускоренный', 'master' => 'магистр']);
@@ -139,7 +127,7 @@ class GroupsController extends Controller
     {
         $form = new Form(new Group);
 
-        $form->select('specialty', 'Специальность')->options(['АПП' => 'АПП', 'КИТ' => 'КИТ', 'ЭСА' => 'ЭСА'])->rules('required', [
+        $form->select('specialization_id', 'Специальность')->options(Specialization::all()->pluck('short_name', 'id'))->rules('required', [
             'required' => 'Обязательно для заполнения',
         ]);
         $form->number('admission_year', 'Год поступления')->min(2000)->max(2019)->rules('required|numeric', [
@@ -162,23 +150,8 @@ class GroupsController extends Controller
         $form->select('headman_id', 'Ид старосты группы')->options(Student::all()->pluck('surname', 'id'));
 
         $form->saving(function (Form $form) {
-
-            $group_name = $form->specialty . ' ' . $form->admission_year . ' - ' . $form->group_number;
-
-            if ($form->level_education === 'bachelor_acceleration'){
-                $name_group = $group_name . ' [у]';
-            }
-            elseif ($form->level_education === 'master'){
-                $name_group = $group_name . ' [м]';
-            }
-            else {
-                $name_group = $group_name;
-            }
-
-            $form->model()->name_group = $name_group;
+            $form->model()->name_group = 'deprecated';
         });
-
-
 
         return $form;
 

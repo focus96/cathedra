@@ -22,6 +22,14 @@ Route::view('/contact', 'contact');
 Route::get('/curators', 'CuratorController@index')->name('curators-index');
 Route::get('/study-plans', 'StudyPlanController@index')->name('study-plans-index');
 
+Route::view('/about-us/general-info', 'about-us.general-info');
+Route::view('/about-us/department-composition', 'about-us.department-composition');
+Route::view('/about-us/education', 'about-us.education');
+Route::view('/about-us/firms', 'about-us.firms');
+Route::view('/about-us/history', 'about-us.history');
+Route::view('/about-us/international-relations', 'about-us.international-relations');
+Route::view('/about-us/life', 'about-us.life');
+
 Route::prefix('news')->group(function () {
     Route::get('/', 'NewsController@index')->name('news-index');
     Route::get('/{news}', 'NewsController@show')->name('news-show');
@@ -59,6 +67,13 @@ Route::get('/download',function (){
 Route::post('/subscribe', 'EmailSubscriberController@subscribe');
 Route::get('/confirm-email-subscribe/{subscribeEmail}', 'EmailSubscriberController@confirm');
 Route::post('/resend-confirm-subscribe-email', 'EmailSubscriberController@resend');
+
+Route::post('/botman-students', 'StudentsTelegramBotController@hears');
+
+
+
+
+
 
 
 Route::get('/get-all-cathedra-users', 'CathedraUserController@all');

@@ -33494,7 +33494,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 var adminTelegramBot = new Vue({
-    el: '#admin-telegram-bot',
+    el: '#admin-messages.php',
     components: { TelegramBot: __WEBPACK_IMPORTED_MODULE_0__TelegramBot___default.a }
 });
 
