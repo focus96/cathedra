@@ -23,12 +23,18 @@ Route::get('/curators', 'CuratorController@index')->name('curators-index');
 Route::get('/study-plans', 'StudyPlanController@index')->name('study-plans-index');
 
 Route::view('/about-us/general-info', 'about-us.general-info');
-Route::view('/about-us/department-composition', 'about-us.department-composition');
+Route::get('/about-us/department-composition', 'DepartmentCompositionController@index');
+Route::get('/about-us/department-composition/{teacher}', 'DepartmentCompositionController@show');
 Route::view('/about-us/education', 'about-us.education');
 Route::view('/about-us/firms', 'about-us.firms');
 Route::view('/about-us/history', 'about-us.history');
 Route::view('/about-us/international-relations', 'about-us.international-relations');
 Route::view('/about-us/life', 'about-us.life');
+Route::view('/about-us/nvk', 'about-us.nvk');
+Route::view('/about-us/material-base', 'about-us.material-base');
+Route::view('/about-us/science-work', 'about-us.science-work');
+Route::view('/about-us/practic', 'about-us.practic');
+Route::view('/about-us/branches', 'about-us.branches');
 
 Route::prefix('news')->group(function () {
     Route::get('/', 'NewsController@index')->name('news-index');
@@ -44,6 +50,10 @@ Route::prefix('event')->group(function () {
 Route::prefix('album')->group(function () {
     Route::get('/', 'AlbumController@index')->name('album-index');
     Route::get('/{album}', 'AlbumController@show')->name('album-show');
+});
+
+Route::prefix('applicants')->group(function () {
+    Route::get('/', 'ApplicantsController@index')->name('applicants-index');
 });
 
 Route::prefix('online_journals')->group(function () {

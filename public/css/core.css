@@ -58,3 +58,29 @@ header {
 .green {
     color: green !important;
 }
+
+.unpointer:hover {
+    cursor: default;
+    color: #222;
+}
+
+.unpointer a:hover {
+    cursor: pointer;
+    color: #f7631b;
+}
+
+.single-feature:hover .desc-wrap a {
+    color: #222;
+}
+
+.single-feature .desc-wrap a:hover {
+    color: #f7631b;
+}
+
+.about-us-submenu li {
+    margin-bottom: 10px;
+}
+
+.info-area-right p {
+    max-width: none !important;
+}

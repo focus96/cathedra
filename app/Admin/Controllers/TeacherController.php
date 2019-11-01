@@ -145,48 +145,40 @@ class TeacherController extends Controller
             'required' => 'Обязательно для заполнения',
             'max' => 'Кол-во символов не более :max',
         ]);
-        $academic_degree = [
-            'Ph_D' => 'Доктор наук',
-            'PhD' => 'Кандидат наук',
-            'Assistant_professor' => 'Доцент',
-            'Professor' => 'Профессор',
-        ];
-        $form->select('academic_degree','Ученая степень')->options($academic_degree)->rules('required', [
-            'required' => 'Обязательно для заполнения',
-        ]);
-        $form->text('function', 'Должность на кафедре')->rules('required|max:100', [
+        $form->text('academic_degree','Ученая степень');
+        $form->text('function', 'Должность на кафедре')->rules('max:100', [
             'required' => 'Обязательно для заполнения',
             'max' => 'Кол-во символов не более :max',
         ]);
-        $form->textarea('additional_information','дополнительная информация ')->rules('required|max:2000', [
+        $form->ckeditor('additional_information','дополнительная информация ')->rules('max:30000', [
             'required' => 'Обязательно для заполнения',
             'max' => 'Кол-во символов не более :max',
         ]);
-        $form->textarea('specialization','специализация, то есть на чем специализируется этот преподаватель, например на автоматизации или CAD/CAM системах и тд.')->rules('required|max:2000', [
+        $form->ckeditor('specialization','специализация, то есть на чем специализируется этот преподаватель, например на автоматизации или CAD/CAM системах и тд.')->rules('max:30000', [
             'required' => 'Обязательно для заполнения',
             'max' => 'Кол-во символов не более :max',
         ]);
-        $form->number('telegram_id','телеграмм ид ')->min(0)->rules('required|numeric', [
+        $form->text('telegram_id','телеграмм ид ')->rules('numeric', [
             'required' => 'Обязательно для заполнения',
             'numeric' => 'В поле должно быть число',
         ]);
-        $form->text('email','емейл')->rules('required|email', [
+        $form->text('email','емейл')->rules('email', [
             'required' => 'Обязательно для заполнения',
             'email' => 'Поле должно быть корректным адресом e-mail',
         ]);
-        $form->text('phone','контактный телефон ')->rules('required|max:100', [
+        $form->text('phone','контактный телефон ')->rules('max:100', [
             'required' => 'Обязательно для заполнения',
             'max' => 'Кол-во символов не более :max',
         ]);
-        $form->number('publicity_phone','признак публичности телефона, то есть отображать ли его публично для всех (0 или 1)')->min(0)->max(1)->rules('required|numeric', [
-            'required' => 'Обязательно для заполнения',
-            'numeric' => 'В поле должно быть число',
+        $form->switch('publicity_phone','признак публичности телефона, то есть отображать ли его публично для всех (0 или 1)')->states([
+            'on'  => ['value' => 1, 'text' => 'Да', 'color' => 'success'],
+            'off' => ['value' => 0, 'text' => 'Нет'],
         ]);
         $form->select('cathedra_id', 'ид кафедры')->options(Cathedra::all()->pluck('name', 'id'))->rules('required', [
             'required' => 'Обязательно для заполнения',
         ]);
 
-        $form->image('foto','фото преподавателя ')->move('/app/public/teachers_foto/')->rules('required|image|max:2000000', [
+        $form->image('foto','фото преподавателя ')->move('/app/public/teachers_foto/')->rules('image|max:2000000', [
             'required' => 'Обязательно для заполнения',
             'image' => 'Файл должен быть изображением в формате jpeg, png, bmp, gif или svg',
             'max' => 'Размер файла не должен превышать 2 Мб',
