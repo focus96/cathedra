@@ -78,6 +78,8 @@ Route::post('/subscribe', 'EmailSubscriberController@subscribe');
 Route::get('/confirm-email-subscribe/{subscribeEmail}', 'EmailSubscriberController@confirm');
 Route::post('/resend-confirm-subscribe-email', 'EmailSubscriberController@resend');
 
+Route::post('/feedback', 'FeedbackController@store')->name('feedback');
+
 Route::post('/botman-students', 'StudentsTelegramBotController@hears');
 
 

@@ -95,8 +95,8 @@
                             <div class="thumb-wrap relative">
                                 <div class="thumb relative"
                                      style="height: 262px; width: 262px;
-                                             background-image: url({{ admin_uploads($news->image) }});
-                                             background-position: center; background-size: cover">
+                                         background-image: url({{ admin_uploads($news->image) }});
+                                         background-position: center; background-size: cover">
                                     {{--<div class="overlay overlay-bg"></div>--}}
                                     {{--<img class="img-fluid" style="max-width: 100%; max-height: 100%;" src="{{ admin_uploads($news->image) }}" alt="">--}}
                                 </div>
@@ -128,54 +128,8 @@
 
 
     <!-- Start search-course Area -->
-    <section class="search-course-area relative">
-        <div class="overlay overlay-bg"></div>
-        <div class="container">
-            <div class="row justify-content-between align-items-center">
-                <div class="col-lg-6 col-md-6 search-course-left">
-                    <h1 class="text-white">
-                        Є питання? <br>
-                        Надішліть його нам!
-                    </h1>
-                    <p>
-                        Ми пілкуємся про наших абітурієнтів, та завжди раді відповіси на всі ваші запитання.
-                        Надішліть нам форму зворотнього зв'язку, та ми обов'язково підготуємо відповідь для Вас!
-                    </p>
-                    {{--<div class="row details-content">--}}
-                        {{--<div class="col single-detials">--}}
-                            {{--<span class="lnr lnr-graduation-hat"></span>--}}
-                            {{--<a href="#"><h4>Expert Instructors</h4></a>--}}
-                            {{--<p>--}}
-                                {{--Usage of the Internet is becoming more common due to rapid advancement of technology and--}}
-                                {{--power.--}}
-                            {{--</p>--}}
-                        {{--</div>--}}
-                        {{--<div class="col single-detials">--}}
-                            {{--<span class="lnr lnr-license"></span>--}}
-                            {{--<a href="#"><h4>Certification</h4></a>--}}
-                            {{--<p>--}}
-                                {{--Usage of the Internet is becoming more common due to rapid advancement of technology and--}}
-                                {{--power.--}}
-                            {{--</p>--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
-                </div>
-                <div class="col-lg-4 col-md-6 search-course-right section-gap">
-                    <form class="form-wrap" action="#">
-                        <h4 class="text-white pb-20 text-center mb-30">Форма зворотнього зв'язку</h4>
-                        <input type="text" class="form-control" name="name" placeholder="Ім'я"
-                               onfocus="this.placeholder = ''" onblur="this.placeholder = 'Ім\'я'">
-                        <input type="phone" class="form-control" name="phone" placeholder="Телефон"
-                               onfocus="this.placeholder = ''" onblur="this.placeholder = 'Телефон'">
-                        <input type="email" class="form-control" name="email" placeholder="Email"
-                               onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email'">
-                        <textarea name="" class="form-control" placeholder="Питання" id="" rows="3"></textarea>
-                        <button class="primary-btn text-uppercase">Надіслати</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
+    @component('components.feedback-section')
+    @endcomponent
     <!-- End search-course Area -->
 
 
@@ -195,17 +149,17 @@
                     @foreach($events as $event)
                         <div class="single-carusel row align-items-center">
                             <div class="col-12 col-md-6 thumb" style="height: 262px; width: 262px;
-                                    background-image: url({{ admin_uploads($event->cover) }});
-                                    background-position: center; background-size: cover">
+                                background-image: url({{ admin_uploads($event->cover) }});
+                                background-position: center; background-size: cover">
                                 {{--<img class="img-fluid" src="img/e1.jpg" alt="">--}}
                             </div>
                             <div class="detials col-12 col-md-6">
                                 <p>{{ $event->start_date }}</p>
                                 <a href="{{ route('event-show', $event->id) }}"><h4>{{ $event->name }}</h4></a>
                                 {{--<p>--}}
-                                    {{--For most of us, the idea of astronomy is something we directly connect to--}}
-                                    {{--“stargazing”,--}}
-                                    {{--telescopes and seeing magnificent displays in the heavens.--}}
+                                {{--For most of us, the idea of astronomy is something we directly connect to--}}
+                                {{--“stargazing”,--}}
+                                {{--telescopes and seeing magnificent displays in the heavens.--}}
                                 {{--</p>--}}
                             </div>
                         </div>
@@ -218,150 +172,150 @@
 
     <!-- Start review Area -->
     {{--<section class="review-area section-gap relative">--}}
-        {{--<div class="overlay overlay-bg"></div>--}}
-        {{--<div class="container">--}}
-            {{--<div class="row">--}}
-                {{--<div class="active-review-carusel">--}}
-                    {{--<div class="single-review item">--}}
-                        {{--<div class="title justify-content-start d-flex">--}}
-                            {{--<a href="#"><h4>Fannie Rowe</h4></a>--}}
-                            {{--<div class="star">--}}
-                                {{--<span class="fa fa-star checked"></span>--}}
-                                {{--<span class="fa fa-star checked"></span>--}}
-                                {{--<span class="fa fa-star checked"></span>--}}
-                                {{--<span class="fa fa-star"></span>--}}
-                                {{--<span class="fa fa-star"></span>--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
-                        {{--<p>--}}
-                            {{--Accessories Here you can find the best computer accessory for your laptop, monitor, printer,--}}
-                            {{--scanner, speaker. Here you can find the best computer accessory for your laptop, monitor,--}}
-                            {{--printer, scanner, speaker.--}}
-                        {{--</p>--}}
-                    {{--</div>--}}
-                    {{--<div class="single-review item">--}}
-                        {{--<div class="title justify-content-start d-flex">--}}
-                            {{--<a href="#"><h4>Hulda Sutton</h4></a>--}}
-                            {{--<div class="star">--}}
-                                {{--<span class="fa fa-star checked"></span>--}}
-                                {{--<span class="fa fa-star checked"></span>--}}
-                                {{--<span class="fa fa-star checked"></span>--}}
-                                {{--<span class="fa fa-star"></span>--}}
-                                {{--<span class="fa fa-star"></span>--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
-                        {{--<p>--}}
-                            {{--Accessories Here you can find the best computer accessory for your laptop, monitor, printer,--}}
-                            {{--scanner, speaker. Here you can find the best computer accessory for your laptop, monitor,--}}
-                            {{--printer, scanner, speaker.--}}
-                        {{--</p>--}}
-                    {{--</div>--}}
-                    {{--<div class="single-review item">--}}
-                        {{--<div class="title justify-content-start d-flex">--}}
-                            {{--<a href="#"><h4>Fannie Rowe</h4></a>--}}
-                            {{--<div class="star">--}}
-                                {{--<span class="fa fa-star checked"></span>--}}
-                                {{--<span class="fa fa-star checked"></span>--}}
-                                {{--<span class="fa fa-star checked"></span>--}}
-                                {{--<span class="fa fa-star"></span>--}}
-                                {{--<span class="fa fa-star"></span>--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
-                        {{--<p>--}}
-                            {{--Accessories Here you can find the best computer accessory for your laptop, monitor, printer,--}}
-                            {{--scanner, speaker. Here you can find the best computer accessory for your laptop, monitor,--}}
-                            {{--printer, scanner, speaker.--}}
-                        {{--</p>--}}
-                    {{--</div>--}}
-                    {{--<div class="single-review item">--}}
-                        {{--<div class="title justify-content-start d-flex">--}}
-                            {{--<a href="#"><h4>Hulda Sutton</h4></a>--}}
-                            {{--<div class="star">--}}
-                                {{--<span class="fa fa-star checked"></span>--}}
-                                {{--<span class="fa fa-star checked"></span>--}}
-                                {{--<span class="fa fa-star checked"></span>--}}
-                                {{--<span class="fa fa-star"></span>--}}
-                                {{--<span class="fa fa-star"></span>--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
-                        {{--<p>--}}
-                            {{--Accessories Here you can find the best computer accessory for your laptop, monitor, printer,--}}
-                            {{--scanner, speaker. Here you can find the best computer accessory for your laptop, monitor,--}}
-                            {{--printer, scanner, speaker.--}}
-                        {{--</p>--}}
-                    {{--</div>--}}
-                    {{--<div class="single-review item">--}}
-                        {{--<div class="title justify-content-start d-flex">--}}
-                            {{--<a href="#"><h4>Fannie Rowe</h4></a>--}}
-                            {{--<div class="star">--}}
-                                {{--<span class="fa fa-star checked"></span>--}}
-                                {{--<span class="fa fa-star checked"></span>--}}
-                                {{--<span class="fa fa-star checked"></span>--}}
-                                {{--<span class="fa fa-star"></span>--}}
-                                {{--<span class="fa fa-star"></span>--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
-                        {{--<p>--}}
-                            {{--Accessories Here you can find the best computer accessory for your laptop, monitor, printer,--}}
-                            {{--scanner, speaker. Here you can find the best computer accessory for your laptop, monitor,--}}
-                            {{--printer, scanner, speaker.--}}
-                        {{--</p>--}}
-                    {{--</div>--}}
-                    {{--<div class="single-review item">--}}
-                        {{--<div class="title justify-content-start d-flex">--}}
-                            {{--<a href="#"><h4>Hulda Sutton</h4></a>--}}
-                            {{--<div class="star">--}}
-                                {{--<span class="fa fa-star checked"></span>--}}
-                                {{--<span class="fa fa-star checked"></span>--}}
-                                {{--<span class="fa fa-star checked"></span>--}}
-                                {{--<span class="fa fa-star"></span>--}}
-                                {{--<span class="fa fa-star"></span>--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
-                        {{--<p>--}}
-                            {{--Accessories Here you can find the best computer accessory for your laptop, monitor, printer,--}}
-                            {{--scanner, speaker. Here you can find the best computer accessory for your laptop, monitor,--}}
-                            {{--printer, scanner, speaker.--}}
-                        {{--</p>--}}
-                    {{--</div>--}}
-                    {{--<div class="single-review item">--}}
-                        {{--<img src="img/r1.png" alt="">--}}
-                        {{--<div class="title justify-content-start d-flex">--}}
-                            {{--<a href="#"><h4>Fannie Rowe</h4></a>--}}
-                            {{--<div class="star">--}}
-                                {{--<span class="fa fa-star checked"></span>--}}
-                                {{--<span class="fa fa-star checked"></span>--}}
-                                {{--<span class="fa fa-star checked"></span>--}}
-                                {{--<span class="fa fa-star"></span>--}}
-                                {{--<span class="fa fa-star"></span>--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
-                        {{--<p>--}}
-                            {{--Accessories Here you can find the best computer accessory for your laptop, monitor, printer,--}}
-                            {{--scanner, speaker. Here you can find the best computer accessory for your laptop, monitor,--}}
-                            {{--printer, scanner, speaker.--}}
-                        {{--</p>--}}
-                    {{--</div>--}}
-                    {{--<div class="single-review item">--}}
-                        {{--<div class="title justify-content-start d-flex">--}}
-                            {{--<a href="#"><h4>Hulda Sutton</h4></a>--}}
-                            {{--<div class="star">--}}
-                                {{--<span class="fa fa-star checked"></span>--}}
-                                {{--<span class="fa fa-star checked"></span>--}}
-                                {{--<span class="fa fa-star checked"></span>--}}
-                                {{--<span class="fa fa-star"></span>--}}
-                                {{--<span class="fa fa-star"></span>--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
-                        {{--<p>--}}
-                            {{--Accessories Here you can find the best computer accessory for your laptop, monitor, printer,--}}
-                            {{--scanner, speaker. Here you can find the best computer accessory for your laptop, monitor,--}}
-                            {{--printer, scanner, speaker.--}}
-                        {{--</p>--}}
-                    {{--</div>--}}
-                {{--</div>--}}
-            {{--</div>--}}
-        {{--</div>--}}
+    {{--<div class="overlay overlay-bg"></div>--}}
+    {{--<div class="container">--}}
+    {{--<div class="row">--}}
+    {{--<div class="active-review-carusel">--}}
+    {{--<div class="single-review item">--}}
+    {{--<div class="title justify-content-start d-flex">--}}
+    {{--<a href="#"><h4>Fannie Rowe</h4></a>--}}
+    {{--<div class="star">--}}
+    {{--<span class="fa fa-star checked"></span>--}}
+    {{--<span class="fa fa-star checked"></span>--}}
+    {{--<span class="fa fa-star checked"></span>--}}
+    {{--<span class="fa fa-star"></span>--}}
+    {{--<span class="fa fa-star"></span>--}}
+    {{--</div>--}}
+    {{--</div>--}}
+    {{--<p>--}}
+    {{--Accessories Here you can find the best computer accessory for your laptop, monitor, printer,--}}
+    {{--scanner, speaker. Here you can find the best computer accessory for your laptop, monitor,--}}
+    {{--printer, scanner, speaker.--}}
+    {{--</p>--}}
+    {{--</div>--}}
+    {{--<div class="single-review item">--}}
+    {{--<div class="title justify-content-start d-flex">--}}
+    {{--<a href="#"><h4>Hulda Sutton</h4></a>--}}
+    {{--<div class="star">--}}
+    {{--<span class="fa fa-star checked"></span>--}}
+    {{--<span class="fa fa-star checked"></span>--}}
+    {{--<span class="fa fa-star checked"></span>--}}
+    {{--<span class="fa fa-star"></span>--}}
+    {{--<span class="fa fa-star"></span>--}}
+    {{--</div>--}}
+    {{--</div>--}}
+    {{--<p>--}}
+    {{--Accessories Here you can find the best computer accessory for your laptop, monitor, printer,--}}
+    {{--scanner, speaker. Here you can find the best computer accessory for your laptop, monitor,--}}
+    {{--printer, scanner, speaker.--}}
+    {{--</p>--}}
+    {{--</div>--}}
+    {{--<div class="single-review item">--}}
+    {{--<div class="title justify-content-start d-flex">--}}
+    {{--<a href="#"><h4>Fannie Rowe</h4></a>--}}
+    {{--<div class="star">--}}
+    {{--<span class="fa fa-star checked"></span>--}}
+    {{--<span class="fa fa-star checked"></span>--}}
+    {{--<span class="fa fa-star checked"></span>--}}
+    {{--<span class="fa fa-star"></span>--}}
+    {{--<span class="fa fa-star"></span>--}}
+    {{--</div>--}}
+    {{--</div>--}}
+    {{--<p>--}}
+    {{--Accessories Here you can find the best computer accessory for your laptop, monitor, printer,--}}
+    {{--scanner, speaker. Here you can find the best computer accessory for your laptop, monitor,--}}
+    {{--printer, scanner, speaker.--}}
+    {{--</p>--}}
+    {{--</div>--}}
+    {{--<div class="single-review item">--}}
+    {{--<div class="title justify-content-start d-flex">--}}
+    {{--<a href="#"><h4>Hulda Sutton</h4></a>--}}
+    {{--<div class="star">--}}
+    {{--<span class="fa fa-star checked"></span>--}}
+    {{--<span class="fa fa-star checked"></span>--}}
+    {{--<span class="fa fa-star checked"></span>--}}
+    {{--<span class="fa fa-star"></span>--}}
+    {{--<span class="fa fa-star"></span>--}}
+    {{--</div>--}}
+    {{--</div>--}}
+    {{--<p>--}}
+    {{--Accessories Here you can find the best computer accessory for your laptop, monitor, printer,--}}
+    {{--scanner, speaker. Here you can find the best computer accessory for your laptop, monitor,--}}
+    {{--printer, scanner, speaker.--}}
+    {{--</p>--}}
+    {{--</div>--}}
+    {{--<div class="single-review item">--}}
+    {{--<div class="title justify-content-start d-flex">--}}
+    {{--<a href="#"><h4>Fannie Rowe</h4></a>--}}
+    {{--<div class="star">--}}
+    {{--<span class="fa fa-star checked"></span>--}}
+    {{--<span class="fa fa-star checked"></span>--}}
+    {{--<span class="fa fa-star checked"></span>--}}
+    {{--<span class="fa fa-star"></span>--}}
+    {{--<span class="fa fa-star"></span>--}}
+    {{--</div>--}}
+    {{--</div>--}}
+    {{--<p>--}}
+    {{--Accessories Here you can find the best computer accessory for your laptop, monitor, printer,--}}
+    {{--scanner, speaker. Here you can find the best computer accessory for your laptop, monitor,--}}
+    {{--printer, scanner, speaker.--}}
+    {{--</p>--}}
+    {{--</div>--}}
+    {{--<div class="single-review item">--}}
+    {{--<div class="title justify-content-start d-flex">--}}
+    {{--<a href="#"><h4>Hulda Sutton</h4></a>--}}
+    {{--<div class="star">--}}
+    {{--<span class="fa fa-star checked"></span>--}}
+    {{--<span class="fa fa-star checked"></span>--}}
+    {{--<span class="fa fa-star checked"></span>--}}
+    {{--<span class="fa fa-star"></span>--}}
+    {{--<span class="fa fa-star"></span>--}}
+    {{--</div>--}}
+    {{--</div>--}}
+    {{--<p>--}}
+    {{--Accessories Here you can find the best computer accessory for your laptop, monitor, printer,--}}
+    {{--scanner, speaker. Here you can find the best computer accessory for your laptop, monitor,--}}
+    {{--printer, scanner, speaker.--}}
+    {{--</p>--}}
+    {{--</div>--}}
+    {{--<div class="single-review item">--}}
+    {{--<img src="img/r1.png" alt="">--}}
+    {{--<div class="title justify-content-start d-flex">--}}
+    {{--<a href="#"><h4>Fannie Rowe</h4></a>--}}
+    {{--<div class="star">--}}
+    {{--<span class="fa fa-star checked"></span>--}}
+    {{--<span class="fa fa-star checked"></span>--}}
+    {{--<span class="fa fa-star checked"></span>--}}
+    {{--<span class="fa fa-star"></span>--}}
+    {{--<span class="fa fa-star"></span>--}}
+    {{--</div>--}}
+    {{--</div>--}}
+    {{--<p>--}}
+    {{--Accessories Here you can find the best computer accessory for your laptop, monitor, printer,--}}
+    {{--scanner, speaker. Here you can find the best computer accessory for your laptop, monitor,--}}
+    {{--printer, scanner, speaker.--}}
+    {{--</p>--}}
+    {{--</div>--}}
+    {{--<div class="single-review item">--}}
+    {{--<div class="title justify-content-start d-flex">--}}
+    {{--<a href="#"><h4>Hulda Sutton</h4></a>--}}
+    {{--<div class="star">--}}
+    {{--<span class="fa fa-star checked"></span>--}}
+    {{--<span class="fa fa-star checked"></span>--}}
+    {{--<span class="fa fa-star checked"></span>--}}
+    {{--<span class="fa fa-star"></span>--}}
+    {{--<span class="fa fa-star"></span>--}}
+    {{--</div>--}}
+    {{--</div>--}}
+    {{--<p>--}}
+    {{--Accessories Here you can find the best computer accessory for your laptop, monitor, printer,--}}
+    {{--scanner, speaker. Here you can find the best computer accessory for your laptop, monitor,--}}
+    {{--printer, scanner, speaker.--}}
+    {{--</p>--}}
+    {{--</div>--}}
+    {{--</div>--}}
+    {{--</div>--}}
+    {{--</div>--}}
     {{--</section>--}}
     <!-- End review Area -->
 
@@ -400,16 +354,17 @@
                 @foreach($albums as $album)
                     <div class="col-lg-3 col-md-6 single-blog">
                         <div class="thumb" style="height: 262px; width: 262px;
-                                background-image: url({{ admin_uploads($album->cover) }});
-                                background-position: center; background-size: cover">
+                            background-image: url({{ admin_uploads($album->cover) }});
+                            background-position: center; background-size: cover">
                             {{--<img class="img-fluid" src="img/b1.jpg" alt="">--}}
                         </div>
                         <br>
                         <a href="{{ route('album-show', $album->id) }}">
                             <h5>{{ $album->name }}</h5>
                         </a>
-                        <a href="{{ route('album-show', $album->id) }}" class="details-btn d-flex justify-content-center align-items-center"><span
-                                    class="details">Переглянути</span><span class="lnr lnr-arrow-right"></span></a>
+                        <a href="{{ route('album-show', $album->id) }}"
+                           class="details-btn d-flex justify-content-center align-items-center"><span
+                                class="details">Переглянути</span><span class="lnr lnr-arrow-right"></span></a>
                     </div>
 
                 @endforeach

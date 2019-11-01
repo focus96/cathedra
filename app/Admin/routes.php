@@ -24,6 +24,7 @@ Route::group([
     $router->resource('/specializations', 'SpecializationController');
     $router->resource('/study-plans', 'StudyPlanController');
     $router->resource('/email-subscriber', 'EmailSubscriberController');
+    $router->resource('/feedback', 'FeedbackController');
 
     $router->resource('/items', 'ItemsController');
     $router->resource('/students', 'StudentsController');
