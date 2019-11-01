@@ -73,16 +73,21 @@
                 <ul class="nav-menu">
                     <li ><a href="/">Головна</a></li>
                     <li><a href="/about">Про нас</a></li>
-                    <li ><a href="">Студентам</a>
+                    <li><a href="/applicants">Абітуріентам</a></li>
+                    <li ><a href="javascript:;">Студентам</a>
                         <ul class="nav-menu">
                             <li ><a href="/schedule/by-lecture-hall">Розклад</a></li>
                             <li ><a href="{{ route('curators-index') }}">Кураторы</a></li>
                             <li ><a href="{{ route('study-plans-index') }}">Учебные планы</a></li>
                         </ul>
                     </li>
-                    <li><a href="/event">Події</a></li>
-                    <li><a href="/album">Галерея</a></li>
-                    <li><a href="/news">Новини</a></li>
+                    <li ><a href="javascript:;">Медіа</a>
+                        <ul class="nav-menu">
+                            <li><a href="/event">Події</a></li>
+                            <li><a href="/album">Галерея</a></li>
+                            <li><a href="/news">Новини</a></li>
+                        </ul>
+                    </li>
                     <li><a href="/contact">Контакти</a></li>
                 </ul>
             </nav><!-- #nav-menu-container -->
