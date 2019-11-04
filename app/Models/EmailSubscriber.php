@@ -22,6 +22,11 @@ class EmailSubscriber extends Model
         });
     }
 
+    public function scopeIsConfirm($query)
+    {
+        return $query->where('is_confirm', true);
+    }
+
 
 
 }

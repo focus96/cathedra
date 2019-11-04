@@ -120,12 +120,15 @@
                     {
                         headers: {
                             'Content-Type': 'multipart/form-data'
-                        }, 
+                        },
                     }).then(response => {
                         this.message = null;
                         Swal.fire(
                             'Отправленно',
-                            'Ваше сообщение успешно отправленно',
+                            `Ваше сообщение успешно отправленно.
+                            <span style="color: green">Доставлено: ${response.data.delivered}.</span>
+                            <span style="color: red">Ошибка отправки: ${response.data.undelivered}</span>.
+                            <a target="_blank" href="/admin/telegram-bot/mailing/${response.data.mailId}">Детали</a>`,
                             'success'
                         )
                     }).catch(error => {

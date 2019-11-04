@@ -28,6 +28,10 @@ window.Vue = require('vue');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
+import CKEditor from '@ckeditor/ckeditor5-vue';
+window.Vue.use( CKEditor );
+
 require('./components/Event/fetch');
 require('./components/Admin/TelegramBot/index');
+require('./components/Admin/Mailing/index');
 require('./components/email-subscriber');
