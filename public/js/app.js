@@ -33494,7 +33494,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 var adminTelegramBot = new Vue({
-    el: '#admin-messages.php',
+    el: '#admin-telegram-bot',
     components: { TelegramBot: __WEBPACK_IMPORTED_MODULE_0__TelegramBot___default.a }
 });
 
@@ -33713,6 +33713,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 
 
@@ -33756,10 +33759,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     }
                 }).then(function (response) {
                     _this.message = null;
-                    console.log('SUCCESS!!');
                     __WEBPACK_IMPORTED_MODULE_1_sweetalert2___default.a.fire('Отправленно', 'Ваше сообщение успешно отправленно', 'success');
                 }).catch(function (error) {
-                    console.log('FAILURE!!');
                     __WEBPACK_IMPORTED_MODULE_1_sweetalert2___default.a.fire('Ошибка', 'Упс.. Произошла ошибка', 'error');
                 });
             } else {
@@ -33895,6 +33896,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -33902,7 +33908,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             isSelectAll: false
         };
     },
-    props: ['users', 'group', 'titleGroup', 'selectedUsers'],
+    props: ['users', 'group', 'titleGroup', 'selectedUsers', 'type'],
     methods: {
         setSelected: function setSelected(telegramId) {
             if (telegramId) {
@@ -33911,7 +33917,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         userName: function userName(user) {
             var telegramPart = user.telegram_id ? ' (' + user.telegram_id + ')' : '';
-            return user.surname + ' ' + user.name + ' ' + user.last_name + telegramPart;
+
+            if (this.type === 'applicants') {
+                return user.name + ' / ' + user.telegram_name + telegramPart;
+            } else if (this.type === 'teachers') {
+                return user.surname + ' ' + user.name + ' ' + user.last_name + telegramPart;
+            } else if (this.type === 'students') {
+                return user.surname + ' ' + user.name + ' ' + user.family_name + telegramPart;
+            }
         },
         selectAll: function selectAll() {
             this.isSelectAll = !this.isSelectAll;
@@ -33993,12 +34006,25 @@ var render = function() {
             ])
           ])
         ])
-      })
+      }),
+      _vm._v(" "),
+      !_vm.users.length ? _c("div", [_vm._m(0)]) : _vm._e()
     ],
     2
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-check" }, [
+      _c("span", { staticStyle: { "margin-left": "25px" } }, [
+        _vm._v("Пользователей не найдено")
+      ])
+    ])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -36697,7 +36723,8 @@ var render = function() {
                       users: _vm.users.teachers,
                       "title-group": "Преподаватели",
                       "selected-users": _vm.selected,
-                      group: "teachers"
+                      group: "teachers",
+                      type: "teachers"
                     },
                     on: {
                       change: function($event) {
@@ -36713,7 +36740,8 @@ var render = function() {
                       users: _vm.users.applicants,
                       "title-group": "Абитуриенты",
                       "selected-users": _vm.selected,
-                      group: "applicants"
+                      group: "applicants",
+                      type: "applicants"
                     },
                     on: {
                       change: function($event) {
@@ -36737,7 +36765,8 @@ var render = function() {
                             users: group.students,
                             "title-group": group.name,
                             "selected-users": _vm.selected,
-                            group: group.id
+                            group: group.id,
+                            type: "students"
                           },
                           on: {
                             change: function($event) {
@@ -36750,20 +36779,6 @@ var render = function() {
                       ],
                       1
                     )
-                  }),
-                  _vm._v(" "),
-                  _c("selection-group-users", {
-                    attrs: {
-                      users: _vm.users.others,
-                      "title-group": "Прочее",
-                      "selected-users": _vm.selected,
-                      group: "others"
-                    },
-                    on: {
-                      change: function($event) {
-                        _vm.setSelected($event)
-                      }
-                    }
                   })
                 ],
                 2

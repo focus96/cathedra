@@ -34,7 +34,7 @@ Route::group([
     $router->resource('/telegram-bot/campaign/bachelor-accelerated', 'BachelorAcceleratedController');
     $router->resource('/telegram-bot/campaign/master', 'MasterController');
     $router->resource('/telegram-bot/campaign/postgraduate', 'PostgraduateController');
-    $router->resource('/telegram-bot/mailing/list', 'MailController');
+    $router->resource('/telegram-bot/mailing', 'MailController');
     $router->resource('/telegram-bot/applicants/cathedra-info', 'CathedraInfoControllers');
     $router->resource('/telegram-bot/applicants/feedback', 'UserQuestionController');
 

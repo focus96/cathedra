@@ -15,6 +15,7 @@
                                         @change="setSelected($event)"
                                         :selected-users="selected"
                                         group="teachers"
+                                        type="teachers"
                                 />
                                 <br>
 
@@ -24,6 +25,7 @@
                                         @change="setSelected($event)"
                                         :selected-users="selected"
                                         group="applicants"
+                                        type="applicants"
                                 />
                                 <br>
 
@@ -36,17 +38,18 @@
                                             @change="setSelected($event)"
                                             :selected-users="selected"
                                             :group="group.id"
+                                            type="students"
                                     />
                                     <br>
                                 </div>
 
-                                <selection-group-users
-                                        :users="users.others"
-                                        title-group="Прочее"
-                                        @change="setSelected($event)"
-                                        :selected-users="selected"
-                                        group="others"
-                                />
+                                <!--<selection-group-users-->
+                                        <!--:users="users.others"-->
+                                        <!--title-group="Прочее"-->
+                                        <!--@change="setSelected($event)"-->
+                                        <!--:selected-users="selected"-->
+                                        <!--group="others"-->
+                                <!--/>-->
                             </div>
                         </div>
                     </div>
@@ -120,14 +123,12 @@
                         }, 
                     }).then(response => {
                         this.message = null;
-                        console.log('SUCCESS!!');
                         Swal.fire(
                             'Отправленно',
                             'Ваше сообщение успешно отправленно',
                             'success'
                         )
                     }).catch(error => {
-                        console.log('FAILURE!!');
                         Swal.fire(
                             'Ошибка',
                             'Упс.. Произошла ошибка',

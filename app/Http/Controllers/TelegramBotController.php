@@ -65,13 +65,4 @@ class TelegramBotController extends Controller
             $this->botman->say($message, $userTelegramId, TelegramDriver::class);
         }
     }
-
-    public function hears()
-    {
-        $this->botman->hears('Hello', function(BotMan $bot) {
-//            $bot->reply('sadasdsa');
-            $bot->startConversation(new OnboardingConversation);
-        });
-        $this->botman->listen();
-    }
 }

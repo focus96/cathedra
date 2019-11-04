@@ -17,6 +17,11 @@
                     userName(user) }}</label>
             </div>
         </div>
+        <div v-if="!users.length">
+            <div class="form-check">
+                <span style="margin-left: 25px">Пользователей не найдено</span>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -25,7 +30,7 @@
         data: () => ({
             isSelectAll: false
         }),
-        props: ['users', 'group', 'titleGroup', 'selectedUsers'],
+        props: ['users', 'group', 'titleGroup', 'selectedUsers', 'type'],
         methods: {
             setSelected(telegramId) {
                 if (telegramId) {
@@ -34,7 +39,14 @@
             },
             userName(user) {
                 let telegramPart = user.telegram_id ? ' (' + user.telegram_id + ')' : '';
-                return user.surname + ' ' + user.name + ' ' + user.last_name + telegramPart;
+
+                if(this.type === 'applicants') {
+                    return  user.name + ' / ' + user.telegram_name+ telegramPart;
+                }else if(this.type === 'teachers') {
+                    return user.surname + ' ' + user.name + ' ' + user.last_name + telegramPart;
+                }else if(this.type === 'students') {
+                    return user.surname + ' ' + user.name + ' ' + user.family_name + telegramPart;
+                }
             },
             selectAll() {
                 this.isSelectAll = !this.isSelectAll;

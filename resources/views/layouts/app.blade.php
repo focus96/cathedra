@@ -109,29 +109,29 @@
                 <div class="single-footer-widget">
                     <h4>О нас</h4>
                     <ul>
-                        <li><a href="#">Общая информация</a></li>
-                        <li><a href="#">Бакалавриат</a></li>
-                        <li><a href="#">Магистратура</a></li>
-                        <li><a href="#">Материальная база</a></li>
+                        <li><a href="#">Загальна информация</a></li>
+                        <li><a href="#">МАТЕРІАЛЬНА БАЗА</a></li>
+                        <li><a href="#">НАУКОВА РОБОТА</a></li>
+                        <li><a href="#">Состав кафедры</a></li>
                     </ul>
                 </div>
             </div>
             <div class="col-lg-2 col-md-6 col-sm-6">
                 <div class="single-footer-widget">
-                    <h4>Абитуриентам</h4>
-                    {{--<ul>--}}
-                        {{--<li><a href="#">Jobs</a></li>--}}
-                        {{--<li><a href="#">Brand Assets</a></li>--}}
-                        {{--<li><a href="#">Investor Relations</a></li>--}}
-                        {{--<li><a href="#">Terms of Service</a></li>--}}
-                    {{--</ul>--}}
+                    <h4 style="color: transparent">F</h4>
+                    <ul>
+                        <li><a href="#">Jobs</a></li>
+                        <li><a href="#">Brand Assets</a></li>
+                        <li><a href="#">Investor Relations</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                    </ul>
                 </div>
             </div>
             <div class="col-lg-2 col-md-6 col-sm-6">
                 <div class="single-footer-widget">
                     <h4>Студентам</h4>
                     <ul>
-                        <li><a href="#">Методические указания</a></li>
+                        {{--<li><a href="#">Методические указания</a></li>--}}
                         <li><a href="#">Список кураторов</a></li>
                         <li><a href="#">Учебные планы</a></li>
                         <li><a href="#">Расспиание занятий</a></li>
