@@ -13,7 +13,15 @@ Route::group([
     'middleware'    => config('admin.route.middleware'),
 ], function (Router $router) {
 
+    /*
+     * Dashboard
+     */
     $router->get('/', 'HomeController@index');
+    $router->post('/save-party', 'HomeController@saveParty');
+
+    /*
+     * Entities
+     */
     $router->resource('/news', 'NewsController');
     $router->resource('/news-category', 'NewsCategoryController');
     $router->resource('/news-tags', 'NewsTagController');

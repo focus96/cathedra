@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\FileCacheDriver;
 use App\Services\TelegramBot\StudentsConversation;
 use BotMan\BotMan\BotManFactory;
+use BotMan\BotMan\Cache\Psr6Cache;
 use BotMan\BotMan\Cache\RedisCache;
 use BotMan\BotMan\Drivers\DriverManager;
 use BotMan\Drivers\Telegram\TelegramDriver;
@@ -16,7 +18,8 @@ class StudentsTelegramBotController extends Controller
     public function __construct()
     {
         DriverManager::loadDriver(TelegramDriver::class);
-        $this->botman = BotManFactory::create($this->getConfig(), new RedisCache('127.0.0.1', 6379));
+        $adapter = new FileCacheDriver();
+        $this->botman = BotManFactory::create($this->getConfig(), new Psr6Cache($adapter));
     }
 
     public function getConfig()

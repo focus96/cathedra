@@ -74,3 +74,21 @@ if (!function_exists('include_page_header')) {
         return $page ? $page->name : '';
     }
 }
+
+if (!function_exists('get_settings')) {
+    function get_settings() {
+        $settings = json_decode(file_get_contents(app_path('/settings.json')));
+
+        if(!$settings) {
+            $settings = [];
+        }
+
+        return $settings;
+    }
+}
+
+if (!function_exists('set_settings')) {
+    function set_settings($settings) {
+        file_put_contents(app_path('/settings.json'), json_encode($settings));
+    }
+}

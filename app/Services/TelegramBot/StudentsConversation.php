@@ -160,4 +160,15 @@ class StudentsConversation extends Conversation
             $this->askAction();
         }, $keyboard->toArray());
     }
+
+    protected function whatWeek()
+    {
+        $parties = [
+            'odd' => '|',
+            'even' => '*',
+        ];
+        $settings = get_settings();
+        $this->say("Текущая неделя: . {$parties[$settings->party_week]}");
+        $this->askAction();
+    }
 }

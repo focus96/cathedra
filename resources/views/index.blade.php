@@ -397,7 +397,7 @@
                     <h1>Цікавить як поступити до кафедри?</h1>
                 </div>
                 <div class="col-lg-4 cta-right">
-                    <a class="primary-btn wh" href="#">Це просто! Дивись..</a>
+                    <a class="primary-btn wh" href="/about">Це просто! Дивись..</a>
                 </div>
             </div>
         </div>

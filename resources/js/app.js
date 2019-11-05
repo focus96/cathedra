@@ -34,4 +34,5 @@ window.Vue.use( CKEditor );
 require('./components/Event/fetch');
 require('./components/Admin/TelegramBot/index');
 require('./components/Admin/Mailing/index');
+require('./components/Admin/Dashboard/index');
 require('./components/email-subscriber');
