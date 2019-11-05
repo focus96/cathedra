@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\Mailing;
 use App\Models\Mail;
 use App\Models\EmailRecipient;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail as MailFacade;
 
 class MailingController extends Controller
 {
@@ -22,7 +24,7 @@ class MailingController extends Controller
             $recipient->mail_id = $mail->id;
             $recipient->email = $email;
 
-            // TODO: send mail
+            MailFacade::to($email)->send(new Mailing($message));
 
             $recipient->save();
         }
