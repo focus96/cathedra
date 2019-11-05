@@ -21,7 +21,7 @@
                     <div class="single-cat-widget">
                         <div class="content relative">
                             <div class="overlay overlay-bg"></div>
-                            <a href="#" target="_blank">
+                            <a href="/news?categories=1">
                                 <div class="thumb">
                                     <img class="content-image img-fluid d-block mx-auto" src="img/blog/cat-widget1.jpg"
                                          alt="">
@@ -39,7 +39,7 @@
                     <div class="single-cat-widget">
                         <div class="content relative">
                             <div class="overlay overlay-bg"></div>
-                            <a href="#" target="_blank">
+                            <a href="/news?categories=2">
                                 <div class="thumb">
                                     <img class="content-image img-fluid d-block mx-auto" src="img/blog/cat-widget2.jpg"
                                          alt="">
@@ -57,7 +57,7 @@
                     <div class="single-cat-widget">
                         <div class="content relative">
                             <div class="overlay overlay-bg"></div>
-                            <a href="#" target="_blank">
+                            <a href="/news?categories=3">
                                 <div class="thumb">
                                     <img class="content-image img-fluid d-block mx-auto" src="img/blog/cat-widget1.jpg"
                                          alt="">
@@ -82,10 +82,9 @@
             <div class="row">
                 <div class="col-lg-8 posts-list">
                     @if(!count($news))
-                        <div class="text-center">
-                            <h3><strong class="color-app">Упс..</strong> Ничего не найдено <strong class="color-app">:(</strong></h3>
-                        </div>
-                        @endif
+                        @component('components.not-found')
+                        @endcomponent
+                    @endif
                     @foreach($news as $singleNews)
                         <div class="single-post row">
                             <div class="col-lg-3  col-md-3 meta-details">
