@@ -119,22 +119,10 @@ class CathedraController extends Controller
     {
         $form = new Form(new Cathedra);
 
-        $form->text('name', 'Наименование кафедры')->rules('required|max:100', [
-            'required' => 'Обязательно для заполнения',
-            'max' => 'Кол-во символов не более :max',
-        ]);
-        $form->text('abbreviation','Аббревиатура кафедры')->rules('required|max:10', [
-            'required' => 'Обязательно для заполнения',
-            'max' => 'Кол-во символов не более :max',
-        ]);
-        $form->textarea('location','Расположение кафедры: корпус, аудитория и тд')->rules('required|max:255', [
-            'required' => 'Обязательно для заполнения',
-            'max' => 'Кол-во символов не более :max',
-        ]);
-        $form->textarea('contacts', 'Контактные данные: емейл, телефон, факс и тд')->rules('required|max:500', [
-            'required' => 'Обязательно для заполнения',
-            'max' => 'Кол-во символов не более :max',
-        ]);
+        $form->text('name', 'Наименование кафедры')->rules('required|max:100');
+        $form->text('abbreviation','Аббревиатура кафедры')->rules('required|max:10');
+        $form->textarea('location','Расположение кафедры: корпус, аудитория и тд')->rules('nullable|max:255');
+        $form->textarea('contacts', 'Контактные данные: емейл, телефон, факс и тд')->rules('nullable|max:500');
 
         return $form;
     }

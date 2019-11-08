@@ -16,7 +16,7 @@
             <div class="row mb-20">
                 <div class="col-md-12">
                     @foreach($groups as $group)
-                        <div><strong>{{ $group->name_group }}</strong> - {{ $group->curator ? $group->curator->surname : 'не назначен' }}</div>
+                        <div><strong>{{ $group->name }}</strong> - {{ $group->curator ? $group->curator->surname : 'не назначен' }}</div>
                     @endforeach
                 </div>
             </div>

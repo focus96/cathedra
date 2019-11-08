@@ -89,7 +89,7 @@ class ScheduleController extends Controller
         $grid->parity_week('Четность недели')->using(['even' => 'четная', 'odd' => 'нечетная']);
         $grid->couple_number('Номер пары');
         $grid->lecture_hall('Аудитория');
-        $grid->group_id('Группа')->using(Group::all()->pluck('name_group', 'id')->toArray());
+        $grid->group_id('Группа')->using(Group::all()->pluck('name', 'id')->toArray());
         $grid->teacher_id('Преподаватель')->using(Teacher::all()->pluck('surname', 'id')->toArray());
         $grid->item_id('Предмет')->using(Items::all()->pluck('name', 'id')->toArray());
         $grid->type('Тип занятия')->using(['laboratory_work' => 'лабораторная работа', 'practical_lesson' => 'практическое занятие', 'lecture' => 'лекция']);
@@ -110,7 +110,7 @@ class ScheduleController extends Controller
         $show->id('Ид');
         $show->lecture_hall('Аудитория');
         $show->couple_number('Номер пары');
-        $show->group_id('Группа')->using(Group::all()->pluck('name_group', 'id')->toArray());
+        $show->group_id('Группа')->using(Group::all()->pluck('name', 'id')->toArray());
         $show->teacher_id('Преподаватель')->using(Teacher::all()->pluck('surname', 'id')->toArray());
         $show->parity_week('Четность недели')->using(['even' => 'четная', 'odd' => 'нечетная']);
         $show->day('День недели')->using(config('core.dayOfWeek'));
@@ -131,32 +131,14 @@ class ScheduleController extends Controller
     {
         $form = new Form(new Schedule);
 
-        $form->number('lecture_hall', 'Аудитория')->min(0001)->max(9999)->rules('required|numeric', [
-            'required' => 'Обязательно для заполнения',
-            'numeric' => 'В поле должно быть число',
-        ]);
-        $form->number('couple_number','Номер пары')->min(1)->max(5)->rules('required|numeric', [
-            'required' => 'Обязательно для заполнения',
-            'numeric' => 'В поле должно быть число',
-        ]);
-        $form->select('group_id','Группа')->options(Group::all()->pluck('name_group', 'id'))->rules('required', [
-            'required' => 'Обязательно для заполнения',
-        ]);
-        $form->select('teacher_id','Преподаватель')->options(Teacher::all()->pluck('surname', 'id'))->rules('required', [
-            'required' => 'Обязательно для заполнения',
-        ]);
-        $form->select('parity_week','Четность недели')->options(['even' => 'четная', 'odd' => 'нечетная'])->rules('required', [
-            'required' => 'Обязательно для заполнения',
-        ]);
-        $form->select('day','День недели')->options(config('core.dayOfWeek'))->rules('required', [
-            'required' => 'Обязательно для заполнения',
-        ]);
-        $form->select('item_id','Предмет')->options(Items::all()->pluck('name', 'id'))->rules('required', [
-            'required' => 'Обязательно для заполнения',
-        ]);
-        $form->select('type','Тип занятия')->options(['laboratory_work' => 'лабораторная работа', 'practical_lesson' => 'практическое занятие', 'lecture' => 'лекция'])->rules('required', [
-            'required' => 'Обязательно для заполнения',
-        ]);
+        $form->text('lecture_hall', 'Аудитория')->rules('required|numeric');
+        $form->text('couple_number','Номер пары')->rules('required|numeric');
+        $form->select('group_id','Группа')->options(Group::all()->pluck('name', 'id'))->rules('required');
+        $form->select('teacher_id','Преподаватель')->options(Teacher::all()->pluck('surname', 'id'))->rules('required');
+        $form->select('parity_week','Четность недели')->options(['even' => 'четная', 'odd' => 'нечетная'])->rules('required');
+        $form->select('day','День недели')->options(config('core.dayOfWeek'))->rules('required');
+        $form->select('item_id','Предмет')->options(Items::all()->pluck('name', 'id'))->rules('required');
+        $form->select('type','Тип занятия')->options(['laboratory_work' => 'лабораторная работа', 'practical_lesson' => 'практическое занятие', 'lecture' => 'лекция'])->rules('required');
 
         return $form;
     }

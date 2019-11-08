@@ -61,7 +61,9 @@
                         </div>
                         <div class="desc-wrap unpointer">
                             <ul class="about-us-submenu">
-
+                                <li><a href="/about-us/branch-app">АВТОМАТИЗАЦІЯ ТА КОМП'ЮТЕРНО-ІНТЕГРОВАНІ ТЕХНОЛОГІЇ</a></li>
+                                <li><a href="/about-us/branch-medical">МЕДИЧНІ СИСТЕМИ, ПРИЛАДИ ТА МІКРОСХЕМОТЕХНІКА</a></li>
+                                <li><a href="/about-us/branch-network">КОМП’ЮТЕРНІ СИСТЕМИ ТА МЕРЕЖІ</a></li>
                             </ul>
                         </div>
                     </div>
@@ -74,6 +76,9 @@
                         <div class="desc-wrap unpointer" style="">
                             <ul class="about-us-submenu">
                                 <li><a href="/about-us/life">Студентське життя АВП</a></li>
+                                <li><a href="/news">Новини</a></li>
+                                <li><a href="/event">Подии</a></li>
+                                <li><a href="/album">Галерея</a></li>
                             </ul>
                         </div>
                     </div>

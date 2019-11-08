@@ -131,32 +131,13 @@ class NewsController extends Controller
     {
         $form = new Form(new News);
 
-        $form->text('title', 'Заголовок')->rules('required|max:255', [
-            'required' => 'Обязательно для заполнения',
-            'max' => 'Кол-во символов не более :max',
-        ]);;
-        $form->textarea('short', 'Анотация')->rules('required|max:1000', [
-            'required' => 'Обязательно для заполнения',
-            'max' => 'Кол-во символов не более :max',
-        ]);;
-        $form->ckeditor('content', 'Содержание')->rules('required|max:30000', [
-            'required' => 'Обязательно для заполнения',
-            'max' => 'Кол-во символов не более :max',
-        ]);
-        $form->image('image', 'Изображение')->rules('required|image', [
-            'required' => 'Обязательно для заполнения',
-            'image' => 'Это должна быть картинка',
-        ]);
-        $form->switch('is_public', 'Публичная новсть')->default(1)->rules('required', [
-            'required' => 'Обязательно для заполнения',
-        ]);
-        $form->datetime('publication_date', 'Дата публикации')->default(date('Y-m-d H:i:s'))->rules('required', [
-            'required' => 'Обязательно для заполнения',
-        ]);
-        $form->text('author', 'Автор')->default('Иван')->rules('required|max:255', [
-            'required' => 'Обязательно для заполнения',
-            'max' => 'Кол-во символов не более :max',
-        ]);
+        $form->text('title', 'Заголовок')->rules('required|max:255');
+        $form->textarea('short', 'Анотация')->rules('required|max:1000');
+        $form->ckeditor('content', 'Содержание')->rules('required|max:30000');
+        $form->image('image', 'Изображение')->rules('required|image');
+        $form->switch('is_public', 'Публичная новсть')->default(1)->rules('required');
+        $form->datetime('publication_date', 'Дата публикации')->default(date('Y-m-d H:i:s'))->rules('required');
+        $form->text('author', 'Автор')->default('Кафедра АВП')->rules('required|max:255');
         $form->multipleSelect('tags', 'Теги')->options(NewsTag::all()->pluck('name', 'id'));
         $form->multipleSelect('categories', 'Категории')->options(NewsCategory::all()->pluck('name', 'id'));
 

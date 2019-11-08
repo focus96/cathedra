@@ -28,7 +28,8 @@ class Group extends Model
 
     public function getNameAttribute()
     {
-        return trim("{$this->specialization->short_name} {$this->short_year}-{$this->group_number} {$this->levelAbbr}");
+        $specializationName = $this->specialization ? $this->specialization->short_name : '';
+        return trim("{$specializationName} {$this->short_year}-{$this->group_number} {$this->levelAbbr}");
     }
 
     public function getShortYearAttribute()

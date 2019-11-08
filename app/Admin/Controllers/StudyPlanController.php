@@ -123,10 +123,14 @@ class StudyPlanController extends Controller
     {
         $form = new Form(new StudyPlan);
 
-        $form->select('level', 'Курс')->options([1 => 'Первый', 2 => 'Второй', 3 => 'Третий', 4 => 'Четвертый', 5 => 'Пятый']);
-        $form->text('year', 'Год');
-        $form->file('file', 'Файл');
-        $form->select('specialization_id', 'Специальность')->options(Specialization::all()->pluck('short_name', 'id'));
+        $form->select('level', 'Курс')
+            ->options([1 => 'Первый', 2 => 'Второй', 3 => 'Третий', 4 => 'Четвертый', 5 => 'Пятый'])
+            ->rules('required|numeric|in:1,2,3,4,5');
+        $form->text('year', 'Год')->rules('required|numeric');;
+        $form->file('file', 'Файл')->rules('required|file');
+        $form->select('specialization_id', 'Специальность')
+            ->options(Specialization::all()->pluck('short_name', 'id'))
+            ->rules('required|numeric|exists:specializations,id');;
 
         return $form;
     }

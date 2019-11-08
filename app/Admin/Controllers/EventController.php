@@ -123,36 +123,14 @@ class EventController extends Controller
     {
         $form = new Form(new Event);
 
-        $form->text('name', 'Найменование')->rules('required|max:255', [
-            'required' => 'Обязательно для заполнения',
-            'max' => 'Кол-во символов не более :max',
-        ]);
-        $form->ckeditor('content', 'Описание')->rules('required|max:5000', [
-            'required' => 'Обязательно для заполнения',
-            'max' => 'Кол-во символов не более :max',
-        ]);
-        $form->image('cover', 'Обложка')->rules('required|image', [
-            'required' => 'Обязательно для заполнения',
-            'image' => 'Это должна быть картинка',
-        ]);
-        $form->datetime('start_date', 'Дата начала')->default(date('Y-m-d H:i:s'))->rules('required|max:255', [
-            'required' => 'Обязательно для заполнения',
-            'max' => 'Кол-во символов не более :max',
-        ]);
-        $form->datetime('end_date', 'Дата завершения')->default(date('Y-m-d H:i:s'))->rules('required|max:255', [
-            'required' => 'Обязательно для заполнения',
-            'max' => 'Кол-во символов не более :max',
-        ]);
-        $form->text('place', 'Место проведения')->rules('required|max:255', [
-            'required' => 'Обязательно для заполнения',
-            'max' => 'Кол-во символов не более :max',
-        ]);
-        $form->number('price', 'Стоимость')->rules('max:255', [
-            'max' => 'Кол-во символов не более :max',
-        ]);
-        $form->text('organization', 'Организатор')->rules('max:255', [
-            'max' => 'Кол-во символов не более :max',
-        ]);
+        $form->text('name', 'Найменование')->rules('required|max:255');
+        $form->ckeditor('content', 'Описание')->rules('required|max:5000');
+        $form->image('cover', 'Обложка')->rules('required|image');
+        $form->datetime('start_date', 'Дата начала')->default(date('Y-m-d H:i:s'))->rules('required|max:255');
+        $form->datetime('end_date', 'Дата завершения')->default(date('Y-m-d H:i:s'))->rules('required|max:255');
+        $form->text('place', 'Место проведения')->rules('required|max:255');
+        $form->number('price', 'Стоимость')->rules('max:255');
+        $form->text('organization', 'Организатор')->rules('max:255');
 
         return $form;
     }

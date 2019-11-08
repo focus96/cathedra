@@ -123,10 +123,11 @@ class SpecializationController extends Controller
     {
         $form = new Form(new Specialization);
 
-        $form->text('full_name', 'Полное найменование');
-        $form->text('short_name', 'Краткое найменование');
-        $form->text('code', 'Код специальности');
-        $form->select('cathedra_id', 'Кафедра')->options(Cathedra::all()->pluck('name', 'id'));
+        $form->text('full_name', 'Полное найменование')->rules('required|max:255');
+        $form->text('short_name', 'Краткое найменование')->rules('required|max:255');
+        $form->text('code', 'Код специальности')->rules('nullable|max:100');
+        $form->select('cathedra_id', 'Кафедра')->options(Cathedra::all()->pluck('name', 'id'))
+            ->rules('required|numeric|exists:cathedras,id');
 
         return $form;
     }

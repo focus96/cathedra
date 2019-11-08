@@ -17,7 +17,7 @@ class CreateSpecializationsTable extends Migration
             $table->increments('id');
             $table->string('full_name');
             $table->string('short_name');
-            $table->string('code');
+            $table->string('code')->nullable();
             $table->unsignedInteger('cathedra_id');
             $table->timestamps();
         });

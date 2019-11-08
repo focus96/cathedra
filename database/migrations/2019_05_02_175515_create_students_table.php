@@ -19,8 +19,8 @@ class CreateStudentsTable extends Migration
             $table->string('name', 50);
             $table->string('family_name', 100);
             $table->integer('telegram_id')->unsigned()->nullable();
-            $table->string('email')->unique();
-            $table->string('number', 100);
+            $table->string('email')->unique()->nullable();
+            $table->string('number', 100)->nullable();
             $table->string('groups_id')->comment('Группа');
             $table->timestamps();
         });
