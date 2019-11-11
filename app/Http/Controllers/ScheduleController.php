@@ -28,7 +28,7 @@ class ScheduleController extends Controller
         $groups = Group::with(['schedule' => function($q) {
             $q->with(['teacher', 'item']);
         }])->get()->keyBy('id');
-        $groupsNames = $groups->pluck('name_group', 'id');
+        $groupsNames = $groups->pluck('name', 'id');
         return view('schedule/by-group', compact(['groups', 'groupsNames']));
     }
 

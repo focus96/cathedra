@@ -26,17 +26,17 @@
                                             href="#">{{ \Carbon\Carbon::parse($news->publication_date)->format('d.m.Y H:i') }}</a>
                                     <span
                                             class="lnr lnr-calendar-full"></span></p>
-                                <p class="view col-lg-12 col-md-12 col-6"><a href="#">Просмотры: {{ $news->views }}</a>
+                                <p class="view col-lg-12 col-md-12 col-6"><a href="#">Перегляди: {{ $news->views }}</a>
                                     <span
                                             class="lnr lnr-eye"></span></p>
                                 {{--<p class="comments col-lg-12 col-md-12 col-6"><a href="#">** комментариев</a> <span--}}
                                             {{--class="lnr lnr-bubble"></span></p>--}}
-                                <ul class="social-links col-lg-12 col-md-12 col-6">
-                                    <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-github"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-behance"></i></a></li>
-                                </ul>
+{{--                                <ul class="social-links col-lg-12 col-md-12 col-6">--}}
+{{--                                    <li><a href="#"><i class="fa fa-facebook"></i></a></li>--}}
+{{--                                    <li><a href="#"><i class="fa fa-twitter"></i></a></li>--}}
+{{--                                    <li><a href="#"><i class="fa fa-github"></i></a></li>--}}
+{{--                                    <li><a href="#"><i class="fa fa-behance"></i></a></li>--}}
+{{--                                </ul>--}}
                             </div>
                         </div>
                         <div class="col-lg-9 col-md-9">
@@ -70,7 +70,7 @@
                                                     class="lnr text-white lnr-arrow-left"></span></a>
                                     </div>
                                     <div class="detials" style="width: 60%">
-                                        <p>Предыдущая новость</p>
+                                        <p>Попередня новина</p>
                                         <a href="{{ route('news-show', newsParams($previous->id)) }}">
                                             <h4>{{ $previous->title }}</h4></a>
                                     </div>
@@ -79,7 +79,7 @@
                             <div class="col-lg-6 col-md-6 col-12 nav-right flex-row d-flex justify-content-end align-items-center">
                                 @if($next)
                                     <div class="detials" style="width: 60%">
-                                        <p>Следующая новость</p>
+                                        <p>Наступна новина</p>
                                         <a href="{{ route('news-show', newsParams($next->id)) }}"><h4>{{ $next->title }}</h4></a>
                                     </div>
                                     <div class="arrow" style="width: 40%;">

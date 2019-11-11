@@ -15,7 +15,7 @@
                     <h1 class="text-white">
                         Контакти
                     </h1>
-                    <p class="text-white link-nav"><a href="index.html">Головна</a></p>
+                    <p class="text-white link-nav"><a href="/">Головна</a></p>
                 </div>
             </div>
         </div>
@@ -71,6 +71,10 @@
                                     іноземних громадян) серія АЕ №636131 від 15.04.2015 р.
                                 </p>
                             </div>
+
+                            <div class="col-md-12">
+                                <div style="width: 100%"><iframe width="100%" height="400" src="https://maps.google.com/maps?width=100%&amp;height=400&amp;hl=en&amp;coord=48.73352130451414, 37.57594585418702&amp;q=Kramators%E2%80%99k%2C%20bul.%20Mashinobudivnykiv%2C%2039%2C%20DSEA%2C%202nd%20bld+(My%20Business%20Name)&amp;ie=UTF8&amp;t=&amp;z=16&amp;iwloc=B&amp;output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"><a href="https://www.maps.ie/coordinates.html">find my coordinates</a></iframe></div><br />
+                         </div>
                         </div>
                     </form>
                 </div>

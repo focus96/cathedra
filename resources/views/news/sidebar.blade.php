@@ -1,8 +1,8 @@
 <div class="widget-wrap news-sidebar">
     <div class="single-sidebar-widget search-widget">
         <form class="search-form" method="get" action="{{ route('news-index') }}">
-            <input placeholder="Поиск новостей" name="search" type="text"
-                   onfocus="this.placeholder = ''" onblur="this.placeholder = 'Поиск новостей'"
+            <input placeholder="Пошук новин" name="search" type="text"
+                   onfocus="this.placeholder = ''" onblur="this.placeholder = 'Пошук новин'"
                    value="{{ request()->get('search', null) }}">
             @if(request()->get('categories', null))
                 <input type="hidden" name="categories" value="{{ request()->get('categories', null) }}">
@@ -33,7 +33,7 @@
     {{--</p>--}}
     {{--</div>--}}
     <div class="single-sidebar-widget popular-post-widget">
-        <h4 class="popular-title">Популярные новости</h4>
+        <h4 class="popular-title">Популярні новини</h4>
         <div class="popular-post-list">
             @foreach($popularNews as $singlePopularNews)
                 <div class="single-post-list d-flex flex-row align-items-center">
@@ -50,7 +50,7 @@
         </div>
     </div>
     <div class="single-sidebar-widget post-category-widget">
-        <h4 class="category-title">Категории</h4>
+        <h4 class="category-title">Категорії</h4>
         <ul class="cat-list">
             @php
                 $categoriesParams = array_filter(explode('_', request()->get('categories', null)));
@@ -67,9 +67,9 @@
         </ul>
     </div>
     <div id="email-subscriber-news-sidebar" class="single-sidebar-widget newsletter-widget">
-        <h4 class="newsletter-title">Подписка</h4>
+        <h4 class="newsletter-title">Підписка</h4>
         <p>
-            Подпишитесь на наши обновления, чтобы быть в курсе последних событий.
+            Підпишіться на наші оновлення, щоб бути в курсі останніх подій.
         </p>
         <div class="form-group d-flex flex-row">
             <div class="col-autos">
@@ -80,16 +80,16 @@
                         </div>
                     </div>
                     <input type="text" class="form-control"
-                           placeholder="Введите email" onfocus="this.placeholder = ''"
-                           onblur="this.placeholder = 'Введите email'" v-model="email">
+                           placeholder="Введіть email" onfocus="this.placeholder = ''"
+                           onblur="this.placeholder = 'Введіть email'" v-model="email">
                 </div>
             </div>
-            <a href="javascript:;" @click="subscribe()" class="bbtns">Подписаться</a>
+            <a href="javascript:;" @click="subscribe()" class="bbtns">Підписатися</a>
         </div>
         @component('components.email-subscribe-messages')
         @endcomponent
         <p class="text-bottom">
-            Вы можете отписаться в любое время
+            Ви можете відписатися в будь-який час
         </p>
     </div>
     <div class="single-sidebar-widget tag-cloud-widget">

@@ -20,9 +20,9 @@
                 <div class="col-lg-2 d-flex flex-column address-wrap">
                     <div class="single-contact-address d-flex flex-row">
                         <select class="btn btn-secondary btn-sm dropdown-toggle" onchange="window.location.href = '/schedule/' + this.value">
-                            <option value="by-lecture-hall" selected>По аудитории</option>
-                            <option value="by-group">По группе</option>
-                            <option value="by-teacher">По преподователю</option>
+                            <option value="by-lecture-hall" selected>за аудиторією</option>
+                            <option value="by-group">за групою</option>
+                            <option value="by-teacher">за викладачем</option>
                         </select>
                     </div>
                 </div>
@@ -35,8 +35,8 @@
                 <table id="example1" class="table table-bordered table-hover">
                     <thead class="thead-light">
                     <tr id="headTable">
-                        <th>День недели</th>
-                        <th>Номер пары</th>
+                        <th>День тижня</th>
+                        <th>Номер пари</th>
                         @foreach($lectureHalls as $hall)
                             <th>{{ $hall }}</th>
                         @endforeach

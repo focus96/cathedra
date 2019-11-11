@@ -5,7 +5,7 @@
         <div class="container">
             <div class="row d-flex align-items-center justify-content-center">
                 <div class="col-lg-12">
-                    <h1>События</h1>
+                    <h1>Події</h1>
                 </div>
             </div>
         </div>
@@ -49,7 +49,7 @@
 
                     <a v-show="viewFetchButton" href="javascript:;" @click="fetch()"
                        class="text-uppercase primary-btn mx-auto mt-40">
-                        Загрузить еще
+                        Завантажити ще
                     </a>
                 </div>
 

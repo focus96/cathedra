@@ -6,7 +6,7 @@
         <div class="container">
             <div class="row d-flex align-items-center justify-content-center">
                 <div class="col-lg-12">
-                    <h1>Новости</h1>
+                    <h1>Новини</h1>
                 </div>
             </div>
         </div>
@@ -27,9 +27,9 @@
                                          alt="">
                                 </div>
                                 <div class="content-details">
-                                    <h4 class="content-title mx-auto text-uppercase">Поступление</h4>
+                                    <h4 class="content-title mx-auto text-uppercase">Вступ</h4>
                                     <span></span>
-                                    <p>Правила, требования, нормы</p>
+                                    <p>Правила, вимоги, норми</p>
                                 </div>
                             </a>
                         </div>
@@ -45,9 +45,9 @@
                                          alt="">
                                 </div>
                                 <div class="content-details">
-                                    <h4 class="content-title mx-auto text-uppercase">Обучение</h4>
+                                    <h4 class="content-title mx-auto text-uppercase">Навчання</h4>
                                     <span></span>
-                                    <p>Конференции, доклады, статьи</p>
+                                    <p>Конференції, доповіді, статті</p>
                                 </div>
                             </a>
                         </div>
@@ -63,9 +63,9 @@
                                          alt="">
                                 </div>
                                 <div class="content-details">
-                                    <h4 class="content-title mx-auto text-uppercase">Жизнь кафедры</h4>
+                                    <h4 class="content-title mx-auto text-uppercase">Життя кафедри</h4>
                                     <span></span>
-                                    <p>Мероприятия, события, отчеты</p>
+                                    <p>Заходи, події, звіти</p>
                                 </div>
                             </a>
                         </div>
@@ -103,7 +103,7 @@
                                         <span
                                                 class="lnr lnr-calendar-full"></span></p>
                                     <p class="view col-lg-12 col-md-12 col-6"><a
-                                                href="#">Просмотры: {{ $singleNews->views }}</a> <span
+                                                href="#">Перегляди: {{ $singleNews->views }}</a> <span
                                                 class="lnr lnr-eye"></span></p>
                                     {{--<p class="comments col-lg-12 col-md-12 col-6"><a href="#">** комментариев</a> <span--}}
                                                 {{--class="lnr lnr-bubble"></span></p>--}}
@@ -118,7 +118,7 @@
                                 <p class="excert">
                                     {{ $singleNews->short }}
                                 </p>
-                                <a href="{{ route('news-show', newsParams($singleNews->id)) }}" class="primary-btn">Подробнее</a>
+                                <a href="{{ route('news-show', newsParams($singleNews->id)) }}" class="primary-btn">Докладніше</a>
                             </div>
                         </div>
                     @endforeach
