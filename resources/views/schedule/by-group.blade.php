@@ -33,8 +33,8 @@
                 </div>
             </div>
             <div class="col-md-12s">
-                <table id="example1" class="table table-bordered table-hover">
-                    <thead class="thead-light">
+                <table id="example1" class="table table-sm">
+                    <thead class="">
                     <tr id="headTable">
                         <th>День тижня</th>
                         <th>Номер пари</th>
@@ -51,9 +51,21 @@
                             @foreach($groupsNames as $groupId => $groupsName)
                                 @php
                                     $scheduleByGroup =  $groups[$groupId]->schedule;
-                                    $scheduleItem = $scheduleByGroup ? $scheduleByGroup->where('couple_number', 1)->where('day', $keyDayOfWeek)->first() : null;
+                                    $scheduleItems = $scheduleByGroup ? $scheduleByGroup->where('couple_number', 1)->where('day', $keyDayOfWeek) : [];
                                 @endphp
-                                <td>{{ $scheduleItem ? $scheduleItem->id : '' }}</td>
+                                <td>
+                                    @php
+                                        $types = ['laboratory_work' => 'лабораторна работа', 'practical_lesson' => 'практичне заняття',  'lecture' => 'лекція'];
+                                    @endphp
+                                    @foreach($scheduleItems as $scheduleItem)
+                                        ({{ $scheduleItem->parity_week === 'even' ? '*' : '|'  }}) {{ $scheduleItem->item ? $scheduleItem->item->name : '-'  }}
+                                        , <br>
+                                        ({{ $scheduleItem->teacher ? $scheduleItem->teacher->fio : '-'  }}), <br>
+                                        {{ $scheduleItem->lecture_hall ? $scheduleItem->lecture_hall : '-'  }}, <br>
+                                        ({{ array_key_exists($scheduleItem->type, $types) ? $types[$scheduleItem->type] : '-'  }})
+                                        <hr>
+                                    @endforeach
+                                </td>
                             @endforeach
                         </tr>
                         @for($number = 2; $number <= 5; $number++)
@@ -62,9 +74,21 @@
                                 @foreach($groupsNames as $groupId => $groupsName)
                                     @php
                                         $scheduleByGroup =  $groups[$groupId]->schedule;
-                                        $scheduleItem = $scheduleByGroup ? $scheduleByGroup->where('couple_number', $number)->where('day', $keyDayOfWeek)->first() : null;
+                                        $scheduleItems = $scheduleByGroup ? $scheduleByGroup->where('couple_number', $number)->where('day', $keyDayOfWeek) : [];
                                     @endphp
-                                    <td>{{ $scheduleItem ? $scheduleItem->id : '' }}</td>
+                                    <td>
+                                        @php
+                                            $types = ['laboratory_work' => 'лабораторна работа', 'practical_lesson' => 'практичне заняття',  'lecture' => 'лекція'];
+                                        @endphp
+                                        @foreach($scheduleItems as $scheduleItem)
+                                            ({{ $scheduleItem->parity_week === 'even' ? '*' : '|'  }}) {{ $scheduleItem->item ? $scheduleItem->item->name : '-'  }}
+                                            , <br>
+                                            ({{ $scheduleItem->teacher ? $scheduleItem->teacher->fio : '-'  }}), <br>
+                                            {{ $scheduleItem->lecture_hall ? $scheduleItem->lecture_hall : '-'  }}, <br>
+                                            ({{ array_key_exists($scheduleItem->type, $types) ? $types[$scheduleItem->type] : '-'  }})
+                                            <hr>
+                                        @endforeach
+                                    </td>
                                 @endforeach
                             </tr>
                         @endfor

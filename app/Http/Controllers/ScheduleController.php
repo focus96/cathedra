@@ -37,7 +37,7 @@ class ScheduleController extends Controller
         $teachers = Teacher::with(['schedule' => function($q) {
             $q->with(['teacher', 'item']);
         }])->get()->keyBy('id');
-        $teacherNames = $teachers->pluck('surname', 'id');
+        $teacherNames = $teachers->pluck('fio', 'id');
         return view('schedule/by-teacher', compact(['teachers', 'teacherNames']));
     }
 }

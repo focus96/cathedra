@@ -19,7 +19,8 @@
             <div class="row mb-20">
                 <div class="col-lg-2 d-flex flex-column address-wrap">
                     <div class="single-contact-address d-flex flex-row">
-                        <select class="btn btn-secondary btn-sm dropdown-toggle" onchange="window.location.href = '/schedule/' + this.value">
+                        <select class="btn btn-secondary btn-sm dropdown-toggle"
+                                onchange="window.location.href = '/schedule/' + this.value">
                             <option value="by-lecture-hall" selected>за аудиторією</option>
                             <option value="by-group">за групою</option>
                             <option value="by-teacher">за викладачем</option>
@@ -32,8 +33,8 @@
                 </div>
             </div>
             <div class="col-md-12s">
-                <table id="example1" class="table table-bordered table-hover">
-                    <thead class="thead-light">
+                <table id="example1" class="table table-sm">
+                    <thead class="">
                     <tr id="headTable">
                         <th>День тижня</th>
                         <th>Номер пари</th>
@@ -49,9 +50,21 @@
                             <td>1</td>
                             @foreach($lectureHalls as $hall)
                                 @php
-                                    $scheduleItem = $schedule[$hall]->where('couple_number', 1)->where('day', $keyDayOfWeek)->first();
+                                    $scheduleItems = $schedule[$hall]->where('couple_number', 1)->where('day', $keyDayOfWeek);
                                 @endphp
-                                <td>{{ $scheduleItem ? $scheduleItem->id : '' }}</td>
+                                <td>
+                                    @php
+                                        $types = ['laboratory_work' => 'лабораторна работа', 'practical_lesson' => 'практичне заняття',  'lecture' => 'лекція'];
+                                    @endphp
+                                    @foreach($scheduleItems as $scheduleItem)
+                                        ({{ $scheduleItem->parity_week === 'even' ? '*' : '|'  }}) {{ $scheduleItem->item ? $scheduleItem->item->name : '-'  }}
+                                        , <br>
+                                        ({{ $scheduleItem->teacher ? $scheduleItem->teacher->fio : '-'  }}), <br>
+                                        {{ $scheduleItem->group ? $scheduleItem->group->name : '-'  }}, <br>
+                                        ({{ array_key_exists($scheduleItem->type, $types) ? $types[$scheduleItem->type] : '-'  }})
+                                        <hr>
+                                    @endforeach
+                                </td>
                             @endforeach
                         </tr>
                         @for($number = 2; $number <= 5; $number++)
@@ -59,9 +72,21 @@
                                 <td>{{ $number }}</td>
                                 @foreach($lectureHalls as $hall)
                                     @php
-                                        $scheduleItem = $schedule[$hall]->where('couple_number', $number)->where('day', $keyDayOfWeek)->first();
+                                        $scheduleItems = $schedule[$hall]->where('couple_number', $number)->where('day', $keyDayOfWeek);
                                     @endphp
-                                    <td>{{ $scheduleItem ? $scheduleItem->id : '' }}</td>
+                                    <td>
+                                        @php
+                                            $types = ['laboratory_work' => 'лабораторна работа', 'practical_lesson' => 'практичне заняття',  'lecture' => 'лекція'];
+                                        @endphp
+                                        @foreach($scheduleItems as $scheduleItem)
+                                            ({{ $scheduleItem->parity_week === 'even' ? '*' : '|'  }}) {{ $scheduleItem->item ? $scheduleItem->item->name : '-'  }}
+                                            , <br>
+                                            ({{ $scheduleItem->teacher ? $scheduleItem->teacher->fio : '-'  }}), <br>
+                                            {{ $scheduleItem->group ? $scheduleItem->group->name : '-'  }}, <br>
+                                            ({{ array_key_exists($scheduleItem->type, $types) ? $types[$scheduleItem->type] : '-'  }})
+                                            <hr>
+                                        @endforeach
+                                    </td>
                                 @endforeach
                             </tr>
                         @endfor

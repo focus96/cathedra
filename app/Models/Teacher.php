@@ -10,4 +10,9 @@ class Teacher extends Model
     {
         return $this->hasMany(Schedule::class);
     }
+
+    public function getFioAttribute()
+    {
+        return $this->surname . ' ' . mb_substr($this->name, 1, 1) . '. ' . mb_substr($this->last_name, 1, 1) . '.';
+    }
 }
