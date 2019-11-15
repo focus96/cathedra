@@ -78,7 +78,7 @@
                         <ul class="nav-menu">
                             <li ><a href="/schedule/by-lecture-hall">Розклад</a></li>
                             <li ><a href="{{ route('curators-index') }}">Кураторы</a></li>
-                            <li ><a href="{{ route('study-plans-index') }}">Учебные планы</a></li>
+                            <li ><a href="{{ route('study-plans-index') }}">Навчальні плани</a></li>
                         </ul>
                     </li>
                     <li ><a href="javascript:;">Медіа</a>
@@ -131,9 +131,9 @@
                     <h4>Студентам</h4>
                     <ul>
                         {{--<li><a href="#">Методические указания</a></li>--}}
-                        <li><a href="#">Список кураторів</a></li>
-                        <li><a href="#">Навчальні плани</a></li>
-                        <li><a href="#">Розклад занять</a></li>
+                        <li><a href="/curators">Список кураторів</a></li>
+                        <li><a href="/study-plans">Навчальні плани</a></li>
+                        <li><a href="/schedule/by-lecture-hall">Розклад занять</a></li>
                     </ul>
                 </div>
             </div>
