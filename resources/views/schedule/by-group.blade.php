@@ -15,7 +15,7 @@
     <!-- End banner Area -->
     <!-- Start contact-page Area -->
     <section class="contact-page-area section-gap">
-        <div class="container">
+        <div class="container-fluid">
             <div class="row mb-20">
                 <div class="col-lg-2 d-flex flex-column address-wrap">
                     <div class="single-contact-address d-flex flex-row">
@@ -56,11 +56,15 @@
                                 <td>
                                     @php
                                         $types = ['laboratory_work' => 'лабораторна работа', 'practical_lesson' => 'практичне заняття',  'lecture' => 'лекція'];
+                                        $index = 0;
                                     @endphp
-                                    @foreach($scheduleItems as $k => $scheduleItem)
-                                        @if($k)
+                                    @foreach($scheduleItems as $scheduleItem)
+                                        @if($index)
                                             <hr>
                                         @endif
+                                        @php
+                                            $index++;
+                                        @endphp
                                         ({{ $scheduleItem->parity_week === 'even' ? '*' : '|'  }}) {{ $scheduleItem->item ? $scheduleItem->item->name : '-'  }}
                                         , <br>
                                         ({{ $scheduleItem->teacher ? $scheduleItem->teacher->fio : '-'  }}), <br>
@@ -82,12 +86,16 @@
                                     <td>
                                         @php
                                             $types = ['laboratory_work' => 'лабораторна работа', 'practical_lesson' => 'практичне заняття',  'lecture' => 'лекція'];
+                                            $index = 0;
                                         @endphp
-                                        @foreach($scheduleItems as $k => $scheduleItem)
-                                            @if($k)
+                                        @foreach($scheduleItems as $scheduleItem)
+                                            @if($index)
                                                 <hr>
                                             @endif
-                                            ({{ $scheduleItem->parity_week === 'even' ? '*' : '|'  }}) {{ $scheduleItem->item ? $scheduleItem->item->name : '-'  }}
+                                            @php
+                                                $index++;
+                                            @endphp
+                                                ({{ $scheduleItem->parity_week === 'even' ? '*' : '|'  }}) {{ $scheduleItem->item ? $scheduleItem->item->name : '-'  }}
                                             , <br>
                                             ({{ $scheduleItem->teacher ? $scheduleItem->teacher->fio : '-'  }}), <br>
                                             {{ $scheduleItem->lecture_hall ? $scheduleItem->lecture_hall : '-'  }}, <br>
