@@ -22,7 +22,7 @@
                         @php
                             $specialization = $specializations->where('id', $idSpecialization)->first();
                         @endphp
-                        <h1>{{ $specialization ? $specialization->full_name : '-'  }}</h1><br><br>
+                        <h3>{{ $specialization ? $specialization->full_name : '-'  }}</h3><br><br>
 
                         @php
                             $byYears = $bySpecialization->groupBy('year');
@@ -30,14 +30,7 @@
                         <ul class="list-group">
                             @foreach($byYears as $year => $byYear)
                                 <li class="list-group-item">
-                                    {{ $year }}:
-                                    @php
-                                        $byLevels = $bySpecialization->groupBy('level');
-                                    @endphp
-                                    @foreach($byLevels as $level => $byLevel)
-                                        <a href="{{ admin_uploads($byLevel->first()->file) }}" download>{{ $level }}
-                                            курс</a>
-                                    @endforeach
+                                        <a href="{{ admin_uploads($byYear->first()->file) }}" download>{{ $year }}</a>
                                 </li>
                             @endforeach
                         </ul>
