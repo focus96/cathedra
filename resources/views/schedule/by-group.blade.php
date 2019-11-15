@@ -57,13 +57,16 @@
                                     @php
                                         $types = ['laboratory_work' => 'лабораторна работа', 'practical_lesson' => 'практичне заняття',  'lecture' => 'лекція'];
                                     @endphp
-                                    @foreach($scheduleItems as $scheduleItem)
+                                    @foreach($scheduleItems as $k => $scheduleItem)
+                                        @if($k)
+                                            <hr>
+                                        @endif
                                         ({{ $scheduleItem->parity_week === 'even' ? '*' : '|'  }}) {{ $scheduleItem->item ? $scheduleItem->item->name : '-'  }}
                                         , <br>
                                         ({{ $scheduleItem->teacher ? $scheduleItem->teacher->fio : '-'  }}), <br>
                                         {{ $scheduleItem->lecture_hall ? $scheduleItem->lecture_hall : '-'  }}, <br>
-                                        ({{ array_key_exists($scheduleItem->type, $types) ? $types[$scheduleItem->type] : '-'  }})
-                                        <hr>
+                                        ({{ array_key_exists($scheduleItem->type, $types) ? $types[$scheduleItem->type] : '-'  }}
+                                        )
                                     @endforeach
                                 </td>
                             @endforeach
@@ -80,13 +83,16 @@
                                         @php
                                             $types = ['laboratory_work' => 'лабораторна работа', 'practical_lesson' => 'практичне заняття',  'lecture' => 'лекція'];
                                         @endphp
-                                        @foreach($scheduleItems as $scheduleItem)
+                                        @foreach($scheduleItems as $k => $scheduleItem)
+                                            @if($k)
+                                                <hr>
+                                            @endif
                                             ({{ $scheduleItem->parity_week === 'even' ? '*' : '|'  }}) {{ $scheduleItem->item ? $scheduleItem->item->name : '-'  }}
                                             , <br>
                                             ({{ $scheduleItem->teacher ? $scheduleItem->teacher->fio : '-'  }}), <br>
                                             {{ $scheduleItem->lecture_hall ? $scheduleItem->lecture_hall : '-'  }}, <br>
-                                            ({{ array_key_exists($scheduleItem->type, $types) ? $types[$scheduleItem->type] : '-'  }})
-                                            <hr>
+                                            ({{ array_key_exists($scheduleItem->type, $types) ? $types[$scheduleItem->type] : '-'  }}
+                                            )
                                         @endforeach
                                     </td>
                                 @endforeach
