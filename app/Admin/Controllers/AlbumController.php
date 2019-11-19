@@ -121,24 +121,15 @@ class AlbumController extends Controller
     {
         $form = new Form(new Album);
 
-        $form->text('name', 'Найменование')->rules('required|max:255', [
-            'required' => 'Обязательно для заполнения',
-            'max' => 'Кол-во символов не более :max',
-        ]);
-        $form->textarea('description', 'Описание')->rules('required|max:2000', [
-            'required' => 'Обязательно для заполнения',
-            'max' => 'Кол-во символов не более :max',
-        ]);
-        $form->image('cover', 'Обложка')->rules('required|image', [
-            'required' => 'Обязательно для заполнения',
-            'image' => 'Это должна быть картинка',
-        ]);
+        $form->text('name', 'Найменование')->rules('required|max:255');
+        $form->textarea('description', 'Описание')->rules('nullable|max:2000');
+        $form->image('cover', 'Обложка')->rules('required|image');
 
         $form->saved(function (Form $form) {
             $path = storage_path('/app/public/uploads/albums/' . $form->model()->id);
             if(!file_exists($path)) {
                 mkdir($path);
-            }   
+            }
         });
 
         return $form;

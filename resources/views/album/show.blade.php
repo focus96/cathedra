@@ -38,7 +38,7 @@
                         <div class="container">
                             <div class="row d-flex align-items-center justify-content-center">
                                 <div class="col-lg-12">
-                                    <h4>Элементов не найдено</h4>
+                                    <h4>Елементів не знайдено</h4>
                                 </div>
                             </div>
                         </div>

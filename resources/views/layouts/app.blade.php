@@ -78,7 +78,7 @@
                         <ul class="nav-menu">
                             <li ><a href="/schedule/by-lecture-hall">Розклад</a></li>
                             <li ><a href="{{ route('curators-index') }}">Кураторы</a></li>
-                            <li ><a href="{{ route('study-plans-index') }}">Учебные планы</a></li>
+                            <li ><a href="{{ route('study-plans-index') }}">Навчальні плани</a></li>
                         </ul>
                     </li>
                     <li ><a href="javascript:;">Медіа</a>
@@ -105,25 +105,24 @@
 <footer class="footer-area section-gap">
     <div class="container">
         <div class="row">
-            <div class="col-lg-2 col-md-6 col-sm-6">
+{{--            <div class="col-lg-2 col-md-6 col-sm-6">--}}
+{{--                <div class="single-footer-widget">--}}
+{{--                    <h4>О нас</h4>--}}
+{{--                    <ul>--}}
+{{--                        <li><a href="#">Загальна информация</a></li>--}}
+{{--                        <li><a href="#">МАТЕРІАЛЬНА БАЗА</a></li>--}}
+{{--                        <li><a href="#">НАУКОВА РОБОТА</a></li>--}}
+{{--                        <li><a href="#">Состав кафедры</a></li>--}}
+{{--                    </ul>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+            <div class="col-lg-4 col-md-6 col-sm-6">
                 <div class="single-footer-widget">
-                    <h4>О нас</h4>
+                    <h4>Спеціальності</h4>
                     <ul>
-                        <li><a href="#">Загальна информация</a></li>
-                        <li><a href="#">МАТЕРІАЛЬНА БАЗА</a></li>
-                        <li><a href="#">НАУКОВА РОБОТА</a></li>
-                        <li><a href="#">Состав кафедры</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="col-lg-2 col-md-6 col-sm-6">
-                <div class="single-footer-widget">
-                    <h4 style="color: transparent">F</h4>
-                    <ul>
-                        <li><a href="#">Jobs</a></li>
-                        <li><a href="#">Brand Assets</a></li>
-                        <li><a href="#">Investor Relations</a></li>
-                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="/about-us/branch-app">Автоматизація та комп'ютерно-інтегровані технології</a></li>
+                        <li><a href="/about-us/branch-medical">Медичні системи, прилади та мікросхемотехніка</a></li>
+                        <li><a href="/about-us/branch-network">Комп’ютерні системи та мережі</a></li>
                     </ul>
                 </div>
             </div>
@@ -132,34 +131,32 @@
                     <h4>Студентам</h4>
                     <ul>
                         {{--<li><a href="#">Методические указания</a></li>--}}
-                        <li><a href="#">Список кураторов</a></li>
-                        <li><a href="#">Учебные планы</a></li>
-                        <li><a href="#">Расспиание занятий</a></li>
+                        <li><a href="/curators">Список кураторів</a></li>
+                        <li><a href="/study-plans">Навчальні плани</a></li>
+                        <li><a href="/schedule/by-lecture-hall">Розклад занять</a></li>
                     </ul>
                 </div>
             </div>
             <div class="col-lg-2 col-md-6 col-sm-6">
                 <div class="single-footer-widget">
-                    <h4>Медиа</h4>
+                    <h4>Медіа</h4>
                     <ul>
                         <li><a href="/news">Блог</a></li>
-                        <li><a href="/event">События</a></li>
+                        <li><a href="/event">Події</a></li>
                         <li><a href="/album">Галерея</a></li>
                     </ul>
                 </div>
             </div>
             <div id="email-subscriber-footer" class="col-lg-4  col-md-6 col-sm-6">
                 <div class="single-footer-widget">
-                    <h4>Подписка</h4>
-                    <p>Будьте в курсе последних наших новостей</p>
+                    <h4>Підписка</h4>
+                    <p>Будьте в курсі останніх наших новин</p>
                     <div class="" id="mc_embed_signup">
-                        <form target="_blank"
-                              action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01"
-                              method="get">
+                        <form>
                             <div class="input-group">
-                                <input type="text" class="form-control" placeholder="Введите Email"
+                                <input type="text" class="form-control" placeholder="Введіть Email"
                                        onfocus="this.placeholder = ''"
-                                       onblur="this.placeholder = 'Введите Email '" required="" type="email" v-model="email">
+                                       onblur="this.placeholder = 'Введіть Email'" required="" type="email" v-model="email">
                                 <div class="input-group-btn">
                                     <button class="btn btn-default" type="button" @click="subscribe()">
                                         <span class="lnr lnr-arrow-right"></span>

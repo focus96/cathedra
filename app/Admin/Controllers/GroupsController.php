@@ -127,26 +127,12 @@ class GroupsController extends Controller
     {
         $form = new Form(new Group);
 
-        $form->select('specialization_id', 'Специальность')->options(Specialization::all()->pluck('short_name', 'id'))->rules('required', [
-            'required' => 'Обязательно для заполнения',
-        ]);
-        $form->number('admission_year', 'Год поступления')->min(2000)->max(2019)->rules('required|numeric', [
-            'required' => 'Обязательно для заполнения',
-            'numeric' => 'В поле должно быть число',
-        ]);
-        $form->number('group_number', 'Номер группы')->min(1)->default(1)->rules('required|numeric', [
-            'required' => 'Обязательно для заполнения',
-            'numeric' => 'В поле должно быть число',
-        ]);
-        $form->select('level_education', 'Уровень образования')->options(['bachelor' => 'бакалавр', 'bachelor_acceleration' => 'бакалавр ускоренный', 'master' => 'магистр'])->rules('required', [
-            'required' => 'Обязательно для заполнения',
-        ]);
-        $form->select('form_study', 'Форма обучения')->options(['daytime' => 'дневная', 'correspondence' => 'заочная'])->rules('required', [
-            'required' => 'Обязательно для заполнения',
-        ]);
-        $form->select('curator_id', 'Ид куратора группы')->options(Teacher::all()->pluck('surname', 'id'))->rules('required', [
-            'required' => 'Обязательно для заполнения',
-        ]);
+        $form->select('specialization_id', 'Специальность')->options(Specialization::all()->pluck('short_name', 'id'))->rules('required');
+        $form->text('admission_year', 'Год поступления')->rules('required|numeric');
+        $form->text('group_number', 'Номер группы')->rules('required|numeric');
+        $form->select('level_education', 'Уровень образования')->options(['bachelor' => 'бакалавр', 'bachelor_acceleration' => 'бакалавр ускоренный', 'master' => 'магистр'])->rules('required');
+        $form->select('form_study', 'Форма обучения')->options(['daytime' => 'дневная', 'correspondence' => 'заочная'])->rules('required');
+        $form->select('curator_id', 'Ид куратора группы')->options(Teacher::all()->pluck('surname', 'id'));
         $form->select('headman_id', 'Ид старосты группы')->options(Student::all()->pluck('surname', 'id'));
 
         $form->saving(function (Form $form) {

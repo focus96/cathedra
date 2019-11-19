@@ -16,8 +16,7 @@ class CreateStudyPlansTable extends Migration
         Schema::create('study_plans', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('specialization_id');
-            $table->unsignedTinyInteger('level');
-            $table->unsignedInteger('year');
+            $table->string('year');
             $table->string('file');
             $table->timestamps();
         });

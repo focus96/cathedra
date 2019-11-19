@@ -57,24 +57,24 @@
                 </div>
                 <div class="col-lg-4 event-details-right">
                     <div class="single-event-details">
-                        <h4>Детали</h4>
+                        <h4>Деталі</h4>
                         <ul class="mt-10">
                             <li class="justify-content-between d-flex">
-                                <span>Дата начала</span>
+                                <span>Дата початку</span>
                                 <span>{{ $event->start_date }}</span>
                             </li>
                             <li class="justify-content-between d-flex">
-                                <span>Дата завершения</span>
+                                <span>Дата завершення</span>
                                 <span>{{ $event->end_date }}</span>
                             </li>
                             <li class="justify-content-between d-flex">
-                                <span>Стоимость</span>
+                                <span>Вартість</span>
                                 <span>{{ $event->price == 0 ? 'Бесплатно' :  ($event->price . ' грн') }}</span>
                             </li>
                         </ul>
                     </div>
                     <div class="single-event-details">
-                        <h4>Место проведения</h4>
+                        <h4>Місце проведення</h4>
                         <ul class="mt-10">
                             <li class="justify-content-between d-flex">
                                 <span>{{ $event->place }}</span>
@@ -83,7 +83,7 @@
                     </div>
                     @if($event->organization)
                         <div class="single-event-details">
-                            <h4>Организатор</h4>
+                            <h4>Організатор</h4>
                             <ul class="mt-10">
                                 <li class="justify-content-between d-flex">
                                     <span>{{ $event->organization }}</span>

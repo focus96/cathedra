@@ -5,7 +5,7 @@
         <div class="container">
             <div class="row d-flex align-items-center justify-content-center">
                 <div class="col-lg-12">
-                    <h1>Состав кафедры</h1>
+                    <h1>Склад кафедри</h1>
                 </div>
             </div>
         </div>

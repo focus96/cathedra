@@ -15,26 +15,32 @@
     <!-- Start gallery Area -->
     <section class="gallery-area section-gap">
         <div class="container">
-            <div class="row">
-                @php
-                    $cols = [7, 5, 4, 4, 4, 5, 7];
-                @endphp
+            @if(!count($albums))
+                @component('components.not-found')
+                @endcomponent
+            @else
+                <div class="row">
+                    @php
+                        $cols = [7, 5, 4, 4, 4, 5, 7];
+                    @endphp
 
-                @foreach($albums as $key => $album)
-                    <div class="col-lg-{{ $cols[$key%7] }}">
-                        <a href="{{ route('album-show', $album->id) }}">
-                            <div class="single-imgs relative">
-                                <div class="overlay overlay-bg text-center">
-                                    <h4 style="color: #fff; margin-top:40px;">{{ $album->name }}</h4>
+                    @foreach($albums as $key => $album)
+                        <div class="col-lg-{{ $cols[$key%7] }}">
+                            <a href="{{ route('album-show', $album->id) }}">
+                                <div class="single-imgs relative">
+                                    <div class="overlay overlay-bg text-center">
+                                        <h4 style="color: #fff; margin-top:40px;">{{ $album->name }}</h4>
+                                    </div>
+                                    <div class="relative">
+                                        <img style="object-fit: cover; height: 300px" class="img-fluid"
+                                             src="{{ admin_uploads($album->cover) }}" alt="">
+                                    </div>
                                 </div>
-                                <div class="relative">
-                                    <img style="object-fit: cover; height: 300px" class="img-fluid" src="{{ admin_uploads($album->cover) }}" alt="">
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                @endforeach
-            </div>
+                            </a>
+                        </div>
+                    @endforeach
+                </div>
+            @endif
         </div>
     </section>
     <!-- End gallery Area -->

@@ -35,6 +35,9 @@ Route::view('/about-us/material-base', 'about-us.material-base');
 Route::view('/about-us/science-work', 'about-us.science-work');
 Route::view('/about-us/practic', 'about-us.practic');
 Route::view('/about-us/branches', 'about-us.branches');
+Route::view('/about-us/branch-app', 'about-us.branch-app');
+Route::view('/about-us/branch-medical', 'about-us.branch-medical');
+Route::view('/about-us/branch-network', 'about-us.branch-network');
 
 Route::prefix('news')->group(function () {
     Route::get('/', 'NewsController@index')->name('news-index');
@@ -89,8 +92,10 @@ Route::post('/botman-students', 'StudentsTelegramBotController@hears');
 
 
 Route::get('/get-all-cathedra-users', 'CathedraUserController@all');
+Route::get('/get-all-cathedra-users-with-email-subscribers', 'CathedraUserController@allWithEmailSubscribers');
 
 Route::post('/send-telegram-message', 'TelegramBotController@send');
+Route::post('/send-mailing', 'MailingController@send');
 Route::post('/botman', 'TelegramBotController@hears');
 
 

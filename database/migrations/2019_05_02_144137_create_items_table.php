@@ -16,7 +16,7 @@ class CreateItemsTable extends Migration
         Schema::create('items', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name', 255);
-            $table->string('abbreviation', 10)->unique();
+            $table->string('abbreviation', 255)->unique();
             $table->string('cathedra_id', 10)->comment('Кафедра');
             $table->timestamps();
         });

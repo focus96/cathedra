@@ -31,7 +31,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-4">
-                    <div class="single-feature">
+                    <div class="single-feature box-media-index-page">
                         <div class="title">
                             <h4>Новини</h4>
                         </div>
@@ -75,9 +75,19 @@
             </div>
         </div>
     </section>
+    <style>
+        .box-media-index-page * {
+            cursor: default;
+        }
+
+        .box-media-index-page a {
+            cursor: pointer;
+        }
+    </style>
     <!-- End feature Area -->
 
     <!-- Start popular-course Area -->
+    @if(count($popularNews))
     <section class="popular-course-area section-gap">
         <div class="container">
             <div class="row d-flex justify-content-center">
@@ -125,6 +135,7 @@
         </div>
     </section>
     <!-- End popular-course Area -->
+    @endif
 
 
     <!-- Start search-course Area -->
@@ -133,6 +144,7 @@
     <!-- End search-course Area -->
 
 
+    @if(count($events))
     <!-- Start upcoming-event Area -->
     <section class="upcoming-event-area section-gap">
         <div class="container">
@@ -168,6 +180,7 @@
             </div>
         </div>
     </section>
+    @endif
     <!-- End upcoming-event Area -->
 
     <!-- Start review Area -->
@@ -339,6 +352,7 @@
     </section>
     <!-- End cta-one Area -->
 
+    @if(count($albums))
     <!-- Start blog Area -->
     <section class="blog-area section-gap" id="blog">
         <div class="container">
@@ -372,6 +386,7 @@
         </div>
     </section>
     <!-- End blog Area -->
+    @endif
 
 
     <!-- Start cta-two Area -->
@@ -382,7 +397,7 @@
                     <h1>Цікавить як поступити до кафедри?</h1>
                 </div>
                 <div class="col-lg-4 cta-right">
-                    <a class="primary-btn wh" href="#">Це просто! Дивись..</a>
+                    <a class="primary-btn wh" href="/about">Це просто! Дивись..</a>
                 </div>
             </div>
         </div>

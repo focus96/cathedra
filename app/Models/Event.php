@@ -8,8 +8,6 @@ use Cviebrock\EloquentSluggable\Sluggable;
 
 class Event extends Model
 {
-    use Sluggable;
-
     protected $fillable = [
         'name',
         'slug',
@@ -30,14 +28,5 @@ class Event extends Model
 
 
         return '/uploads/' . $this->cover;
-    }
-
-    public function sluggable()
-    {
-        return [
-            'slug' => [
-                'source' => 'content'
-            ]
-        ];
     }
 }

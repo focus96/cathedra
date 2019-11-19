@@ -17,10 +17,17 @@
         "laravel-mix": "^4.0.15",
         "lodash": "^4.17.5",
         "popper.js": "^1.12",
-        "vue": "^2.5.17"
+        "resolve-url-loader": "^3.1.0",
+        "sass": "^1.23.3",
+        "sass-loader": "^7.3.1",
+        "vue": "^2.5.17",
+        "vue-template-compiler": "^2.6.10"
     },
     "dependencies": {
+        "@ckeditor/ckeditor5-build-classic": "^15.0.0",
+        "@ckeditor/ckeditor5-vue": "^1.0.0",
         "puppeteer": "^1.16.0",
-        "sweetalert2": "^8.7.0"
+        "sweetalert2": "^8.7.0",
+        "vue-ckeditor5": "^0.4.1"
     }
 }

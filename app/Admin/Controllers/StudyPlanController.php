@@ -83,8 +83,7 @@ class StudyPlanController extends Controller
         $grid = new Grid(new StudyPlan);
 
         $grid->id('Id');
-        $grid->level('Курс');
-        $grid->year('Год');
+        $grid->year('Найменование плана (год \ уровень)');
         $grid->file('Файл');
         $grid->specialization_id('Специальность')->using(Specialization::all()->pluck('short_name', 'id')->toArray());
         $grid->created_at('Создано');
@@ -104,8 +103,7 @@ class StudyPlanController extends Controller
         $show = new Show(StudyPlan::findOrFail($id));
 
         $show->id('Id');
-        $show->level('Курс');
-        $show->year('Год');
+        $show->year('Найменование плана (год \ уровень)');
         $show->file('Файл');
         $show->specialization_id('Специальность')->using(Specialization::all()->pluck('short_name', 'id')->toArray());
         $show->created_at('Создано');
@@ -123,10 +121,11 @@ class StudyPlanController extends Controller
     {
         $form = new Form(new StudyPlan);
 
-        $form->select('level', 'Курс')->options([1 => 'Первый', 2 => 'Второй', 3 => 'Третий', 4 => 'Четвертый', 5 => 'Пятый']);
-        $form->text('year', 'Год');
-        $form->file('file', 'Файл');
-        $form->select('specialization_id', 'Специальность')->options(Specialization::all()->pluck('short_name', 'id'));
+        $form->text('year', 'Найменование плана (год \ уровень)')->rules('required');;
+        $form->file('file', 'Файл')->rules('required|file');
+        $form->select('specialization_id', 'Специальность')
+            ->options(Specialization::all()->pluck('short_name', 'id'))
+            ->rules('required|numeric|exists:specializations,id');;
 
         return $form;
     }

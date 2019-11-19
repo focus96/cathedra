@@ -121,18 +121,9 @@ class ItemController extends Controller
     {
         $form = new Form(new Items);
 
-        $form->text('name', 'Наименование предмета')->rules('required|unique:items|max:255', [
-            'required' => 'Обязательно для заполнения',
-            'unique' => 'Должен быть уникальным',
-            'max' => 'Кол-во символов не более :max',
-        ]);
-
-        $form->text('abbreviation', 'Аббревиатура')->rules('required|unique:items|max:10', [
-            'required' => 'Обязательно для заполнения',
-            'unique' => 'Должен быть уникальным',
-            'max' => 'Кол-во символов не более :max',
-        ]);
-        $form->select('cathedra_id', 'Кафедра')->options(Cathedra::all()->pluck('name', 'id'));
+        $form->text('name', 'Наименование предмета')->rules('required|unique:items|max:255');
+        $form->text('abbreviation', 'Аббревиатура')->rules('required|unique:items|max:150');
+        $form->select('cathedra_id', 'Кафедра')->options(Cathedra::all()->pluck('name', 'id'))->rules('required');
 
         return $form;
     }

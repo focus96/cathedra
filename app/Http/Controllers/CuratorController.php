@@ -8,7 +8,7 @@ class CuratorController extends Controller
 {
     public function index()
     {
-        $groups = Group::with(['curator'])->get(['name_group', 'curator_id']);
+        $groups = Group::with(['curator'])->get();
         return View('curators.index', compact(['groups']));
     }
 }

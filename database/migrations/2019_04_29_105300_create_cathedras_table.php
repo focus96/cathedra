@@ -17,8 +17,8 @@ class CreateCathedrasTable extends Migration
             $table->increments('id');
             $table->string('name', 100)->comment('Наименование кафедры')->unique();
             $table->string('abbreviation', 10)->comment('Аббревиатура кафедры')->unique();
-            $table->string('location', 255)->comment('Расположение кафедры: корпус, аудитория и тд');
-            $table->text('contacts')->comment('Контактные данные: емейл, телефон, факс и тд');
+            $table->string('location', 255)->nullable()->comment('Расположение кафедры: корпус, аудитория и тд');
+            $table->text('contacts')->nullable()->comment('Контактные данные: емейл, телефон, факс и тд');
             $table->timestamps();
         });
     }

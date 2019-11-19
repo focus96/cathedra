@@ -6,7 +6,7 @@
         <div class="container">
             <div class="row d-flex align-items-center justify-content-center">
                 <div class="col-lg-12">
-                    <h1>Новости</h1>
+                    <h1>Новини</h1>
                 </div>
             </div>
         </div>
@@ -21,15 +21,15 @@
                     <div class="single-cat-widget">
                         <div class="content relative">
                             <div class="overlay overlay-bg"></div>
-                            <a href="#" target="_blank">
+                            <a href="/news?categories=1">
                                 <div class="thumb">
                                     <img class="content-image img-fluid d-block mx-auto" src="img/blog/cat-widget1.jpg"
                                          alt="">
                                 </div>
                                 <div class="content-details">
-                                    <h4 class="content-title mx-auto text-uppercase">Поступление</h4>
+                                    <h4 class="content-title mx-auto text-uppercase">Вступ</h4>
                                     <span></span>
-                                    <p>Правила, требования, нормы</p>
+                                    <p>Правила, вимоги, норми</p>
                                 </div>
                             </a>
                         </div>
@@ -39,15 +39,15 @@
                     <div class="single-cat-widget">
                         <div class="content relative">
                             <div class="overlay overlay-bg"></div>
-                            <a href="#" target="_blank">
+                            <a href="/news?categories=2">
                                 <div class="thumb">
                                     <img class="content-image img-fluid d-block mx-auto" src="img/blog/cat-widget2.jpg"
                                          alt="">
                                 </div>
                                 <div class="content-details">
-                                    <h4 class="content-title mx-auto text-uppercase">Обучение</h4>
+                                    <h4 class="content-title mx-auto text-uppercase">Навчання</h4>
                                     <span></span>
-                                    <p>Конференции, доклады, статьи</p>
+                                    <p>Конференції, доповіді, статті</p>
                                 </div>
                             </a>
                         </div>
@@ -57,15 +57,15 @@
                     <div class="single-cat-widget">
                         <div class="content relative">
                             <div class="overlay overlay-bg"></div>
-                            <a href="#" target="_blank">
+                            <a href="/news?categories=3">
                                 <div class="thumb">
                                     <img class="content-image img-fluid d-block mx-auto" src="img/blog/cat-widget1.jpg"
                                          alt="">
                                 </div>
                                 <div class="content-details">
-                                    <h4 class="content-title mx-auto text-uppercase">Жизнь кафедры</h4>
+                                    <h4 class="content-title mx-auto text-uppercase">Життя кафедри</h4>
                                     <span></span>
-                                    <p>Мероприятия, события, отчеты</p>
+                                    <p>Заходи, події, звіти</p>
                                 </div>
                             </a>
                         </div>
@@ -82,10 +82,9 @@
             <div class="row">
                 <div class="col-lg-8 posts-list">
                     @if(!count($news))
-                        <div class="text-center">
-                            <h3><strong class="color-app">Упс..</strong> Ничего не найдено <strong class="color-app">:(</strong></h3>
-                        </div>
-                        @endif
+                        @component('components.not-found')
+                        @endcomponent
+                    @endif
                     @foreach($news as $singleNews)
                         <div class="single-post row">
                             <div class="col-lg-3  col-md-3 meta-details">
@@ -104,7 +103,7 @@
                                         <span
                                                 class="lnr lnr-calendar-full"></span></p>
                                     <p class="view col-lg-12 col-md-12 col-6"><a
-                                                href="#">Просмотры: {{ $singleNews->views }}</a> <span
+                                                href="#">Перегляди: {{ $singleNews->views }}</a> <span
                                                 class="lnr lnr-eye"></span></p>
                                     {{--<p class="comments col-lg-12 col-md-12 col-6"><a href="#">** комментариев</a> <span--}}
                                                 {{--class="lnr lnr-bubble"></span></p>--}}
@@ -119,7 +118,7 @@
                                 <p class="excert">
                                     {{ $singleNews->short }}
                                 </p>
-                                <a href="{{ route('news-show', newsParams($singleNews->id)) }}" class="primary-btn">Подробнее</a>
+                                <a href="{{ route('news-show', newsParams($singleNews->id)) }}" class="primary-btn">Докладніше</a>
                             </div>
                         </div>
                     @endforeach

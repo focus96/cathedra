@@ -28,7 +28,7 @@ class ScheduleController extends Controller
         $groups = Group::with(['schedule' => function($q) {
             $q->with(['teacher', 'item']);
         }])->get()->keyBy('id');
-        $groupsNames = $groups->pluck('name_group', 'id');
+        $groupsNames = $groups->pluck('name', 'id');
         return view('schedule/by-group', compact(['groups', 'groupsNames']));
     }
 
@@ -37,7 +37,7 @@ class ScheduleController extends Controller
         $teachers = Teacher::with(['schedule' => function($q) {
             $q->with(['teacher', 'item']);
         }])->get()->keyBy('id');
-        $teacherNames = $teachers->pluck('surname', 'id');
+        $teacherNames = $teachers->pluck('fio', 'id');
         return view('schedule/by-teacher', compact(['teachers', 'teacherNames']));
     }
 }

@@ -15,7 +15,7 @@
                     <h1 class="text-white">
                         Контакти
                     </h1>
-                    <p class="text-white link-nav"><a href="index.html">Головна</a></p>
+                    <p class="text-white link-nav"><a href="/">Головна</a></p>
                 </div>
             </div>
         </div>
@@ -27,6 +27,79 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-4 d-flex flex-column address-wrap">
+                    <div class="mb-4">
+                        <h3 class="text-center">Кафедра АВП</h3>
+                    </div>
+                    <div class="single-contact-address d-flex flex-row">
+                        <div class="icon">
+                            <span class="lnr lnr-home"></span>
+                        </div>
+                        <div class="contact-details">
+                            <h5> м. Краматорськ, б-р Машинобудівників, 39</h5>
+                            <p>
+                                корп. 2, ауд. 2212 (каф. АВП)
+                            </p>
+                        </div>
+                    </div>
+                    <div class="single-contact-address d-flex flex-row">
+                        <div class="icon">
+                            <span class="lnr lnr-phone-handset"></span>
+                        </div>
+                        <div class="contact-details">
+                            <h5>(0626) 41-69-84</h5>
+                            <h5>(099) 094-97-27</h5>
+                            <h5>(067) 628-39-89</h5>
+                        </div>
+                    </div>
+                    <div class="single-contact-address d-flex flex-row">
+                        <div class="icon">
+                            <span class="lnr lnr-envelope"></span>
+                        </div>
+                        <div class="contact-details">
+                            <h5>E-mail: app@dgma.donetsk.ua</h5>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-lg-4 d-flex flex-column address-wrap">
+                    <div class="mb-4">
+                        <h3 class="text-center">Приймальна комiсiя</h3>
+                    </div>
+                    <div class="single-contact-address d-flex flex-row">
+                        <div class="icon">
+                            <span class="lnr lnr-home"></span>
+                        </div>
+                        <div class="contact-details">
+                            <h5> м. Краматорськ,
+                                б-р Машинобудівників, 39 </h5>
+                            <p>
+                                корп. 2, ауд. 2214
+                            </p>
+                        </div>
+                    </div>
+                    <div class="single-contact-address d-flex flex-row">
+                        <div class="icon">
+                            <span class="lnr lnr-phone-handset"></span>
+                        </div>
+                        <div class="contact-details">
+                            <h5>+38(0626)41-69-38</h5>
+                            <h5>+38(066)051-74-89</h5>
+                        </div>
+                    </div>
+                    <div class="single-contact-address d-flex flex-row">
+                        <div class="icon">
+                            <span class="lnr lnr-envelope"></span>
+                        </div>
+                        <div class="contact-details">
+                            <h5>E-mail: pk@dgma.donetsk.ua</h5>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-lg-4 d-flex flex-column address-wrap">
+                    <div class="mb-4">
+                        <h3 class="text-center">ДДМА</h3>
+                    </div>
                     <div class="single-contact-address d-flex flex-row">
                         <div class="icon">
                             <span class="lnr lnr-home"></span>
@@ -59,27 +132,6 @@
                     </div>
 
                 </div>
-                <div class="col-lg-8">
-                    <form class="form-area contact-form text-center" id="myForm" action="mail.php" method="post">
-                        <div class="row">
-                            <div class="col-lg-12 ">
-                                <h5>Юридичні підстави для здійснення освітньої діяльності:</h5>
-                                <p>
-                                    Ліцензія на надання освітніх послуг навчальними закладами, пов’язаних із одержанням
-                                    вищої освіти на рівні кваліфікаційних
-                                    вимог до молодшого спеціаліста, бакалавра, спеціаліста, магістра (у т. ч. для
-                                    іноземних громадян) серія АЕ №636131 від 15.04.2015 р.
-                                </p>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-            <div class="row">
-                <h4>ПРИЙМАЛЬНА КОМІСІЯ</h4>
-            </div>
-            <div class="row">
-                <p>ДДМА, м. Краматорськ, б-р Машинобудівників, 39 (2-й корпус), ауд. 2214</p>
             </div>
         </div>
     </section>
