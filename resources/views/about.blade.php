@@ -88,7 +88,7 @@
         <div class="container-fluid">
             <div class="row align-items-center">
                 <div class="col-lg-6 no-padding info-area-left">
-                    <img class="img-fluid" src="img/about-img.jpg" alt="">
+                    <img class="img-fluid" src="img/about1.jpg" alt="">
                 </div>
                 <div class="col-lg-6 info-area-right">
                     <h2>ОБЛАСТЬ ИСПОЛЬЗОВАНИЯ СПЕЦИАЛИСТА</h2>
@@ -143,7 +143,7 @@
                     </ul>
                 </div>
                 <div class="col-md-6 justify-content-center align-items-center d-flex relative">
-                    <iframe width="100%" height="100%" src="https://www.youtube.com/embed/6Xjoj_mgXz4" frameborder="0"
+                    <iframe width="100%" height="100%" src="https://www.youtube.com/embed/rchad-V0jfE" frameborder="0"
                             allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                             allowfullscreen></iframe>
                 </div>
@@ -157,7 +157,7 @@
         <div class="container-fluid">
             <div class="row align-items-center">
                 <div class="col-lg-6 no-padding info-area-left">
-                    <img class="img-fluid" src="img/about-img.jpg" alt="">
+                    <img class="img-fluid" src="img/about2.jpg" alt="">
                 </div>
                 <div class="col-lg-6 info-area-right">
                     <h2>КАКИЕ ЗНАНИЯ ПОЛУЧАЕТ СПЕЦИАЛИСТ ПО АВТОМАТИЗИРОВАННОМУ УПРАВЛЕНИЮ?</h2>
