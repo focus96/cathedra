@@ -5,8 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Favicon-->
     <link rel="shortcut icon" href="/img/fav.png">
-    <!-- Author Meta -->
-    <meta name="author" content="colorlib">
+
     <!-- Meta Description -->
     <meta name="description" content="">
     <!-- Meta Keyword -->
@@ -62,7 +61,8 @@
         <div class="row align-items-center justify-content-between d-flex">
             <div id="logo">
                 <a href="/">
-                    <img src="/img/logo1.png" alt="" title=""/></a>
+                    <h2 style="color: #f7631b;">Кафедра АВП</h2>
+                    {{--<img src="/img/logo1.png" alt="" title=""/></a>--}}
             </div>
             <nav id="nav-menu-container" >
                 <style>
