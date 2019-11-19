@@ -136,4 +136,7 @@
         </div>
     </section>
     <!-- End contact-page Area -->
+
+    @component('components.feedback-section')
+    @endcomponent
 @endsection
