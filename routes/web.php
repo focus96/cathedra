@@ -84,6 +84,7 @@ Route::post('/resend-confirm-subscribe-email', 'EmailSubscriberController@resend
 Route::post('/feedback', 'FeedbackController@store')->name('feedback');
 
 Route::post('/botman-students', 'StudentsTelegramBotController@hears');
+Route::post('/botman-applicants', 'ApplicantsTelegramBotController@hears');
 
 
 

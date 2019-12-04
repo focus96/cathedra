@@ -8,36 +8,16 @@ use App\Models\User;
 
 class News extends Model
 {
-    protected $fillable = [
-        'title',
-        'slug',
-        'short',
-        'content',
-        'image',
-        'is_public',
-        'views',
-        'author_id',
-        'publication_date',
-    ];
+    protected $fillable = ['title', 'slug', 'short', 'content', 'image', 'is_public', 'views', 'author_id', 'publication_date',];
 
     public function categories()
     {
-        return $this->belongsToMany(
-            NewsCategory::class,
-            'news_news_category',
-            'news_id',
-            'news_category_id'
-        );
+        return $this->belongsToMany(NewsCategory::class, 'news_news_category', 'news_id', 'news_category_id');
     }
 
     public function tags()
     {
-        return $this->belongsToMany(
-            NewsTag::class,
-            'news_news_tag',
-            'news_id',
-            'news_tag_id'
-        );
+        return $this->belongsToMany(NewsTag::class, 'news_news_tag', 'news_id', 'news_tag_id');
     }
 
     public function scopeSearch($query)

@@ -5,7 +5,7 @@ return [
         'students' => [
             'token' => '705199406:AAH9XWBdk0OofJj4yinG4d1Ia4G2X8_89ok'
         ],
-        'enrollee' => [
+        'applicants' => [
             'token' => '705199406:AAH9XWBdk0OofJj4yinG4d1Ia4G2X8_89ok'
         ],
         'lecturer' => [

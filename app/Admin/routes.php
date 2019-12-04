@@ -53,6 +53,11 @@ Route::group([
     $router->resource('/telegram-bot/applicants/cathedra-info', 'CathedraInfoControllers');
     $router->resource('/telegram-bot/applicants/feedback', 'UserQuestionController');
 
+    $router->resource('/telegram-bot/applicants/data', 'TelegramBotApplicantsController');
+    $router->resource('/telegram-bot/applicants/feedback', 'TelegramApplicantsFeedbackController');
+    $router->get('/telegram-bot/applicants/feedback/send/{feedback}', 'TelegramApplicantsFeedbackController@send');
+
+
     /*
      * Telegram mailing
      */

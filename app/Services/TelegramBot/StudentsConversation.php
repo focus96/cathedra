@@ -4,6 +4,8 @@ namespace App\Services\TelegramBot;
 
 use App\Models\Group;
 use App\Models\Student;
+use App\Models\TelegramApplicantsFeedback;
+use App\Models\TelegramBotApplicantsData;
 use App\Models\TelegramBotVisitor;
 use App\Schedule;
 use App\Traits\GroupCacheable;
@@ -78,25 +80,25 @@ class StudentsConversation extends Conversation
                 KeyboardButton::create('Чт'),
                 KeyboardButton::create('Пт'))
             ->addRow(KeyboardButton::create('Сегодня'),
-                KeyboardButton::create(date ( 'd-m' , strtotime ( '1 weekdays' ) )),
-                KeyboardButton::create(date ( 'd-m' , strtotime ( '2 weekdays' ) )),
-                KeyboardButton::create(date ( 'd-m' , strtotime ( '3 weekdays' ) )),
-                KeyboardButton::create(date ( 'd-m' , strtotime ( '4 weekdays' ) )));
+                KeyboardButton::create(date('d-m', strtotime('1 weekdays'))),
+                KeyboardButton::create(date('d-m', strtotime('2 weekdays'))),
+                KeyboardButton::create(date('d-m', strtotime('3 weekdays'))),
+                KeyboardButton::create(date('d-m', strtotime('4 weekdays'))));
 
         $this->ask('Выбери день недели или дату:', function (Answer $answer) {
             $userText = $answer->getText();
 
             // Проверяем, может сегодня выходной.
-            if($userText === 'Сегодня' && date('N', strtotime('today')) >= 6) {
-                    $this->say('Сегодня выходной, отдыхай)');
+            if ($userText === 'Сегодня' && date('N', strtotime('today')) >= 6) {
+                $this->say('Сегодня выходной, отдыхай)');
             }
 
             // Необходимо получить ид группы для того, чтобы отобразить расспивание;
             $this->groupId = 1;
-            if(!$this->groupId) {
+            if (!$this->groupId) {
                 // Пытаемся выделаить ученика по телеграм ид
                 $student = Student::whereTelegramId($this->getBot()->getUser()->getId())->first();
-                if(!$student) {
+                if (!$student) {
                     $this->askGroup();
                     return;
                 }
@@ -106,11 +108,11 @@ class StudentsConversation extends Conversation
             $rusShortDaysOfWeek = ['Пн' => 1, 'Вт' => 2, 'Ср' => 3, 'Чт' => 4, 'Пт' => 5];
             $dayNumber = null;
 
-            if(array_key_exists($userText, $rusShortDaysOfWeek)) {
+            if (array_key_exists($userText, $rusShortDaysOfWeek)) {
                 $dayNumber = $rusShortDaysOfWeek[$userText];
-            }elseif($userText === 'Сегодня') {
+            } elseif ($userText === 'Сегодня') {
                 $dayNumber = date('N', strtotime('today'));
-            }else {
+            } else {
                 $dayNumber = date('N', strtotime($userText . '.' . Date('Y', strtotime('today'))));
             }
 
@@ -118,7 +120,7 @@ class StudentsConversation extends Conversation
 
             $message = '';
 
-            foreach($schedule as $item) {
+            foreach ($schedule as $item) {
                 $message .= "{$item->couple_number}: {$item->item->name}";
             }
 
@@ -144,10 +146,10 @@ class StudentsConversation extends Conversation
 
         $keyboard = Keyboard::create(Keyboard::TYPE_KEYBOARD)->oneTimeKeyboard();
 
-        foreach($groupsBySpecializations as $groupsBySpecialization) {
+        foreach ($groupsBySpecializations as $groupsBySpecialization) {
             $buttons = [];
 
-            foreach($groupsBySpecialization as $group) {
+            foreach ($groupsBySpecialization as $group) {
                 $buttons[] = KeyboardButton::create("{$group->name}");
             }
 

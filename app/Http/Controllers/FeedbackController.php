@@ -12,7 +12,7 @@ class FeedbackController extends Controller
     {
         Feedback::create($request->only(['name', 'contact', 'message']));
 
-
-        return redirect(URL::previous() . '#feedback')->with(['messageFeedback' => 'Ваш запит прийнято. Чекайте на вiдповiдь.']);
+        return redirect(URL::previous() . '#feedback')
+            ->with(['messageFeedback' => 'Ваш запит прийнято. Чекайте на вiдповiдь.']);
     }
 }
