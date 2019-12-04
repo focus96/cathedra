@@ -4,8 +4,10 @@ namespace App\Services\TelegramBot;
 
 use App\Models\Group;
 use App\Models\Student;
+use App\Models\Teacher;
 use App\Models\TelegramApplicantsFeedback;
 use App\Models\TelegramBotApplicantsData;
+use App\Models\TelegramBotTeachersData;
 use App\Models\TelegramBotVisitor;
 use App\Schedule;
 use App\Traits\GroupCacheable;
@@ -16,23 +18,27 @@ use BotMan\Drivers\Telegram\Extensions\Keyboard;
 use BotMan\Drivers\Telegram\Extensions\KeyboardButton;
 use Illuminate\Support\Facades\Log;
 
-class ApplicantsConversation extends Conversation
+class TeachersConversation extends Conversation
 {
-    const BOT_TYPE = 'applicants';
+    const BOT_TYPE = 'teachers';
 
-    protected $groupId;
+    protected  $teacher;
 
     public function run()
     {
         $this->handleFirstVisit();
-        $this->askApplicants();
+        if($this->handleExistsTeacher()) {
+            $this->askApplicants();
+        }
+
+        return;
     }
 
     public function handleFirstVisit()
     {
         $user = $this->getBot()->getUser();
         if (!TelegramBotVisitor::whereBotType(self::BOT_TYPE)->whereTelegramId($user->getId())->exists()) {
-            $this->say('Привет! Я телеграм бот для аббитуриентов кафедры АПП.');
+            $this->say('Привет! Я телеграм бот для преподавателей кафедры АПП.');
             TelegramBotVisitor::create([
                 'bot_type' => self::BOT_TYPE,
                 'telegram_id' => $user->getId(),
@@ -43,10 +49,28 @@ class ApplicantsConversation extends Conversation
         }
     }
 
+    public function handleExistsTeacher()
+    {
+        $user = $this->getBot()->getUser();
+        $teacher = Teacher::where('telegram_id', $user->getId())->first();
+        if($teacher) {
+            $this->teacher = $teacher;
+            $this->say('Дрбро пожаловать, ' . $teacher->name . ' ' . $teacher->last_name);
+            return true;
+        }else {
+            $this->say('Доступ ограничено. Необходимо подтвердить ваш профиль. Сообщите свой ид администратору системы. Ваш ид - ' . $user->getId());
+            $this->say('/applicants - для абитуриентов');
+            $this->say('/students - для студентов');
+            $this->say('/teachers - для преподавателей');
+        }
+
+        return false;
+    }
+
     protected function askApplicants()
     {
         // Разделы информации для бота
-        $datas = TelegramBotApplicantsData::whereNull('parent_id')->get();
+        $datas = TelegramBotTeachersData::whereNull('parent_id')->get();
 
         $keyboard = Keyboard::create(Keyboard::TYPE_KEYBOARD)->oneTimeKeyboard();
 
@@ -68,10 +92,10 @@ class ApplicantsConversation extends Conversation
         }
 
         // Добавляем пункт задать вопрос
-        $keyboard->addRow(KeyboardButton::create("Задать вопрос"), KeyboardButton::create("Выбор бота"));
+        $keyboard->addRow(KeyboardButton::create("Выбор бота"));
 
         // Спрашиваем чем можем помочь, используя сформированную клавиатуру
-        $this->ask('Чем я могу тебе помочь?', function (Answer $answer) {
+        $this->ask('Чем я могу Вам помочь?', function (Answer $answer) {
             if ($this->checkDefaultButtons($answer)) {
                 return;
             };
@@ -84,7 +108,7 @@ class ApplicantsConversation extends Conversation
         $userText = $answer->getText();
 
         // Получаем пункт меню по заголовку
-        $telegramBotApplicantsData = TelegramBotApplicantsData::where('title', $userText)->first();
+        $telegramBotApplicantsData = TelegramBotTeachersData::where('title', $userText)->first();
 
         if (!$telegramBotApplicantsData) {
             $this->unknownAnswer();
@@ -98,10 +122,10 @@ class ApplicantsConversation extends Conversation
         }
 
         // Получаем дочерние элементы
-        $telegramBotApplicantsDataList = TelegramBotApplicantsData::where('parent_id', $telegramBotApplicantsData->id)->get();
+        $telegramBotApplicantsDataList = TelegramBotTeachersData::where('parent_id', $telegramBotApplicantsData->id)->get();
         // если нет дочерких елементов, выводим предыдущее меню
         if (!count($telegramBotApplicantsDataList)) {
-            $telegramBotApplicantsDataList = TelegramBotApplicantsData::where('parent_id', $telegramBotApplicantsData->parent_id)->get();
+            $telegramBotApplicantsDataList = TelegramBotTeachersData::where('parent_id', $telegramBotApplicantsData->parent_id)->get();
         }
 
         // Создаем клавиатуру по тому же принципу
@@ -144,46 +168,21 @@ class ApplicantsConversation extends Conversation
         if ($userText === 'Главное меню') {
             $this->askApplicants();
             return true;
-        } elseif ($userText === 'Задать вопрос') {
-            $this->question();
-            return true;
         }
 
         return false;
 
     }
 
-    protected function question()
-    {
-        $keyboard = Keyboard::create(Keyboard::TYPE_KEYBOARD)->oneTimeKeyboard();
-        $keyboard = $this->setDefaultButtons($keyboard);
-        $this->ask('Просто напиши мне свой вопрос)', function (Answer $answer) {
-            if ($this->checkDefaultButtons($answer)) {
-                return;
-            };
-            $userText = $answer->getText();
-            $user = $this->getBot()->getUser();
-            $userId = $user->getId();
-
-            TelegramApplicantsFeedback::create([
-                'telegram_id' => $userId,
-                'question' => $userText
-            ]);
-
-            $this->say("Спасибо за вопрос, мы подготовим ответ и я пришлю тебе его в этот же чат");
-            $this->askApplicants();
-        }, $keyboard->toArray());
-    }
-
     public function notInteractiveReply()
     {
-        $this->say('Давай будем общаться с помощью интрактивных кнопок, так мне будет легче тебя понять)');
+        $this->say('Давайте будем общаться с помощью интрактивных кнопок, так мне будет легче Вас понять)');
         $this->askApplicants();
     }
 
     public function unknownAnswer()
     {
-        $this->say('Упс..( Затрудняюсь ответить на это. Попробуй воспользоваться встроенной клавиатурой');
+        $this->say('Упс..( Затрудняюсь ответить на это. Попробуйте воспользоваться встроенной клавиатурой');
         $this->askApplicants();
     }
 

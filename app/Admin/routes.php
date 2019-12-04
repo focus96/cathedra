@@ -54,8 +54,11 @@ Route::group([
     $router->resource('/telegram-bot/applicants/feedback', 'UserQuestionController');
 
     $router->resource('/telegram-bot/applicants/data', 'TelegramBotApplicantsController');
+    $router->resource('/telegram-bot/teachers/data', 'TelegramBotTeachersController');
     $router->resource('/telegram-bot/applicants/feedback', 'TelegramApplicantsFeedbackController');
+    $router->resource('/telegram-bot/students/feedback', 'TelegramStudentsFeedbackController');
     $router->get('/telegram-bot/applicants/feedback/send/{feedback}', 'TelegramApplicantsFeedbackController@send');
+    $router->get('/telegram-bot/students/feedback/send/{feedback}', 'TelegramStudentsFeedbackController@send');
 
 
     /*

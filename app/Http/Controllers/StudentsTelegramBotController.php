@@ -10,6 +10,7 @@ use BotMan\BotMan\Cache\RedisCache;
 use BotMan\BotMan\Drivers\DriverManager;
 use BotMan\Drivers\Telegram\TelegramDriver;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class StudentsTelegramBotController extends Controller
 {
@@ -30,6 +31,12 @@ class StudentsTelegramBotController extends Controller
     }
 
     public function hears () {
+        $conversation = new StudentsConversation;
+        $cacheTime = $conversation->getConversationCacheTime();
+        Log::info($cacheTime);
+
+
+
         $this->botman->hears('/start', function ($bot) {
             $bot->startConversation(new StudentsConversation);
         });
