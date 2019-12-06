@@ -66,6 +66,7 @@ Route::group([
      */
     $router->get('/telegram-bot/mailing', 'TelegramBotController@index');
     $router->resource('/telegram-bot/mailing-history', 'TelegramMailingHistoryController');
+    $router->post('/send-telegram-message', 'TelegramBotController@send');
 
 
     /*

@@ -160,9 +160,11 @@ class StudentsConversation extends Conversation
                         // берем текучую четность недели
                         $partyWeek = $this->getPartyWeek();
 
+
+
                         // если указана четность в распсании и если совпадает с четностью предмета - добавляем в сообщение
                         if ($idWeekDay || !$item->party_week || ($item->party_week && $item->party_week === $partyWeek)) {
-                            $message .= "{$item->couple_number}: " . ($item->item ? $item->item->abbreviation : '-') . ' ' . ($item->parity_week === 'even' ? '*' : '|') . ', ' .
+                            $message .= "{$item->couple_number}: " . ($item->item ? $item->item->abbreviation : '-') . ' ' . ($item->parity_week ?  ($item->parity_week === 'even' ? '*' : '|') : '') . ', ' .
                                 ($item->lecture_hall ? $item->lecture_hall : '-') . '. ' .
                                 ($item->teacher ? $item->teacher->fio : '-') . ', ' .
                                 (array_key_exists($item->type, $types) ? $types[$item->type] : '-') . PHP_EOL;
@@ -329,7 +331,7 @@ class StudentsConversation extends Conversation
 
             $this->ask('Выбери день недели или дату:', function (Answer $answer) use ($teacherId) {
                 $userText = $answer->getText();
-
+                $idWeekDay = false;
                 // Проверяем, может сегодня выходной.
                 if ($userText === 'Сегодня' && date('N', strtotime('today')) >= 6) {
                     $this->say('Сегодня выходной, все отдыхают)');
@@ -339,6 +341,7 @@ class StudentsConversation extends Conversation
                 $dayNumber = null;
 
                 if (array_key_exists($userText, $rusShortDaysOfWeek)) {
+                    $idWeekDay = true;
                     $dayNumber = $rusShortDaysOfWeek[$userText];
                 } elseif ($userText === 'Сегодня') {
                     $dayNumber = date('N', strtotime('today'));
@@ -367,8 +370,8 @@ class StudentsConversation extends Conversation
                             $partyWeek = $this->getPartyWeek();
 
                             // если указана четность в распсании и если совпадает с четностью предмета - добавляем в сообщение
-                            if (!$item->party_week || ($item->party_week && $item->party_week === $partyWeek)) {
-                                $message .= "{$item->couple_number}: " . ($item->item ? $item->item->abbreviation : '-') . ' ' . ($item->parity_week === 'even' ? '*' : '|') . ', ' .
+                            if ($idWeekDay = true || !$item->party_week || ($item->party_week && $item->party_week === $partyWeek)) {
+                                $message .= "{$item->couple_number}: " . ($item->item ? $item->item->abbreviation : '-') . ' ' . ($item->parity_week ?  ($item->parity_week === 'even' ? '*' : '|') : '') . ', ' .
                                     ($item->lecture_hall ? $item->lecture_hall : '-') . ', ' .
                                     ($item->group ? $item->group->name : '-') . ', ' .
                                     (array_key_exists($item->type, $types) ? $types[$item->type] : '-') . PHP_EOL;

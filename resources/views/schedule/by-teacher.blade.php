@@ -64,7 +64,7 @@
                                         @php
                                             $index++;
                                         @endphp
-                                ({{ $scheduleItem->parity_week === 'even' ? '*' : '|'  }}) {{ $scheduleItem->item ? $scheduleItem->item->abbreviation : '-'  }}
+                                            {{ ($scheduleItem->parity_week ?  ($scheduleItem->parity_week === 'even' ? '(*) ' : '(|) ') : '')  }}{{ $scheduleItem->item ? $scheduleItem->item->abbreviation : '-'  }}
                                         , <br>
                                         {{ $scheduleItem->group ? $scheduleItem->group->name : '-'  }}, <br>
                                         {{ $scheduleItem->lecture_hall ? $scheduleItem->lecture_hall : '-'  }}, <br>
@@ -93,7 +93,7 @@
                                             @php
                                                 $index++;
                                             @endphp
-                                                ({{ $scheduleItem->parity_week === 'even' ? '*' : '|'  }}) {{ $scheduleItem->item ? $scheduleItem->item->abbreviation : '-'  }}
+                                                {{ ($scheduleItem->parity_week ?  ($scheduleItem->parity_week === 'even' ? '(*) ' : '(|) ') : '')  }}{{ $scheduleItem->item ? $scheduleItem->item->abbreviation : '-'  }}
                                             , <br>
                                             {{ $scheduleItem->group ? $scheduleItem->group->name : '-'  }}, <br>
                                             {{ $scheduleItem->lecture_hall ? $scheduleItem->lecture_hall : '-'  }}, <br>

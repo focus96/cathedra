@@ -20,7 +20,7 @@ class CreateSchedulesTable extends Migration
             $table->unsignedInteger('group_id')->comment('Группа');
             $table->unsignedBigInteger('teacher_id')->comment('Преподаватель');
             $table->unsignedInteger('item_id')->comment('Предмет');
-            $table->enum('parity_week', ['even', 'odd'])->comment('Четность недели');
+            $table->enum('parity_week', ['even', 'odd'])->nullable()->comment('Четность недели');
             $table->unsignedTinyInteger('day')->comment('День недели');
             $table->string('type')->comment('Тип занятия');
             $table->timestamps();

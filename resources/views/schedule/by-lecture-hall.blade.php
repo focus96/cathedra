@@ -64,7 +64,7 @@
                                         @php
                                             $index++;
                                         @endphp
-                                ({{ $scheduleItem->parity_week === 'even' ? '*' : '|'  }}) {{ $scheduleItem->item ? $scheduleItem->item->abbreviation : '-'  }}
+                                            {{ ($scheduleItem->parity_week ?  ($scheduleItem->parity_week === 'even' ? '(*) ' : '(|) ') : '')  }}{{ $scheduleItem->item ? $scheduleItem->item->abbreviation : '-'  }}
                                         , <br>
                                         ({{ $scheduleItem->teacher ? $scheduleItem->teacher->fio : '-'  }}), <br>
                                         {{ $scheduleItem->group ? $scheduleItem->group->name : '-'  }}, <br>
@@ -93,7 +93,7 @@
                                                 $index++;
                                             @endphp
 
-                                                ({{ $scheduleItem->parity_week === 'even' ? '*' : '|'  }}) {{ $scheduleItem->item ? $scheduleItem->item->abbreviation : '-'  }}
+                                                {{ ($scheduleItem->parity_week ?  ($scheduleItem->parity_week === 'even' ? '(*) ' : '(|) ') : '')  }}{{ $scheduleItem->item ? $scheduleItem->item->abbreviation : '-'  }}
                                             , <br>
                                             ({{ $scheduleItem->teacher ? $scheduleItem->teacher->fio : '-'  }}), <br>
                                             {{ $scheduleItem->group ? $scheduleItem->group->name : '-'  }}, <br>

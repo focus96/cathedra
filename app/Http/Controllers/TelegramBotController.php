@@ -37,54 +37,54 @@ class TelegramBotController extends Controller
 
     public function send(Request $request) {
 
-        $file = $request->file('file');
-        $users = $request->input('users', []);
-        $message = $request->input('message', '');
-
-        $mail = new TelegramMail;
-        $mail->message = $message;
-
-        if(isset($file)){
-            $newFilename = time() . str_random(5) . '.' . $file->getClientOriginalExtension();
-            Storage::disk('local')->put('public/images/'.$newFilename, file_get_contents($file));
-            $url = secure_asset('storage/images/'.$newFilename);
-            $attachment = new Image($url);
-            $mail->image = 'images/'.$newFilename;
-        }
-
-        $mail->save();
-
-        if(isset($attachment)) {
-            $message = OutgoingMessage::create($message)->withAttachment($attachment);
-        }
-
-        $delivered = 0;
-        $undelivered = 0;
-
-        foreach($users as $userTelegramId) {
-            $recipient = new TelegramMailRecipient;
-            $recipient->mail_id = $mail->id;
-            $recipient->telegram_id = $userTelegramId;
-
-            try {
-//                $this->botman->say($message, $userTelegramId, TelegramDriver::class);
-            } catch (BotManException $e) {
-                $recipient->delivered = false;
-                $recipient->save();
-                $undelivered++;
-                continue;
-            }
-
-            $recipient->delivered = true;
-            $recipient->save();
-
-            $delivered++;
-        }
-
-        return response()->json([
-            'delivered' => $delivered,
-            'undelivered' => $undelivered,
-            'mailId' => $mail->id,
-        ]);
+//        $file = $request->file('file');
+//        $users = $request->input('users', []);
+//        $message = $request->input('message', '');
+//
+//        $mail = new TelegramMail;
+//        $mail->message = $message;
+//
+//        if(isset($file)){
+//            $newFilename = time() . str_random(5) . '.' . $file->getClientOriginalExtension();
+//            Storage::disk('local')->put('public/images/'.$newFilename, file_get_contents($file));
+//            $url = secure_asset('storage/images/'.$newFilename);
+//            $attachment = new Image($url);
+//            $mail->image = 'images/'.$newFilename;
+//        }
+//
+//        $mail->save();
+//
+//        if(isset($attachment)) {
+//            $message = OutgoingMessage::create($message)->withAttachment($attachment);
+//        }
+//
+//        $delivered = 0;
+//        $undelivered = 0;
+//
+//        foreach($users as $userTelegramId) {
+//            $recipient = new TelegramMailRecipient;
+//            $recipient->mail_id = $mail->id;
+//            $recipient->telegram_id = $userTelegramId;
+//
+//            try {
+////                $this->botman->say($message, $userTelegramId, TelegramDriver::class);
+//            } catch (BotManException $e) {
+//                $recipient->delivered = false;
+//                $recipient->save();
+//                $undelivered++;
+//                continue;
+//            }
+//
+//            $recipient->delivered = true;
+//            $recipient->save();
+//
+//            $delivered++;
+//        }
+//
+//        return response()->json([
+//            'delivered' => $delivered,
+//            'undelivered' => $undelivered,
+//            'mailId' => $mail->id,
+//        ]);
     }
 }

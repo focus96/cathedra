@@ -95,7 +95,7 @@ Route::post('/botman-applicants', 'ApplicantsTelegramBotController@hears');
 Route::get('/get-all-cathedra-users', 'CathedraUserController@all');
 Route::get('/get-all-cathedra-users-with-email-subscribers', 'CathedraUserController@allWithEmailSubscribers');
 
-Route::post('/send-telegram-message', 'TelegramBotController@send');
+//Route::post('/send-telegram-message', 'TelegramBotController@send');
 Route::post('/send-mailing', 'MailingController@send');
 Route::post('/botman', 'TelegramBotController@hears');
 

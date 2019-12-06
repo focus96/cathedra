@@ -116,7 +116,7 @@
                 }
                 formData.append('file', this.file);
                 if(this.selected.length && this.message) {
-                    axios.post('/send-telegram-message', formData,
+                    axios.post('/admin/send-telegram-message', formData,
                     {
                         headers: {
                             'Content-Type': 'multipart/form-data'

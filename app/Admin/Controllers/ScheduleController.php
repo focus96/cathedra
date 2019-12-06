@@ -135,7 +135,7 @@ class ScheduleController extends Controller
         $form->text('couple_number','Номер пары')->rules('required|numeric');
         $form->select('group_id','Группа')->options(Group::all()->pluck('name', 'id'))->rules('required');
         $form->select('teacher_id','Преподаватель')->options(Teacher::all()->pluck('surname', 'id'))->rules('required');
-        $form->select('parity_week','Четность недели')->options(['even' => 'четная', 'odd' => 'нечетная'])->rules('required');
+        $form->select('parity_week','Четность недели')->options(['even' => 'четная', 'odd' => 'нечетная']);
         $form->select('day','День недели')->options(config('core.dayOfWeek'))->rules('required');
         $form->select('item_id','Предмет')->options(Items::all()->pluck('name', 'id'))->rules('required');
         $form->select('type','Тип занятия')->options(['laboratory_work' => 'лабораторная работа', 'practical_lesson' => 'практическое занятие', 'lecture' => 'лекция'])->rules('required');
