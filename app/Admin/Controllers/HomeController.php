@@ -32,6 +32,7 @@ class HomeController extends Controller
     {
         $settings = get_settings();
         $settings->party_week = $request->party;
+        $settings->party_week_number = date('W');
         set_settings($settings);
 
         return response()->json(['message' => 'success']);

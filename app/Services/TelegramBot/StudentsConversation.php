@@ -9,7 +9,7 @@ use App\Models\TelegramApplicantsFeedback;
 use App\Models\TelegramBotApplicantsData;
 use App\Models\TelegramBotVisitor;
 use App\Models\TelegramStudentsFeedback;
-use App\Schedule;
+use App\Models\Schedule;
 use App\Traits\GroupCacheable;
 use BotMan\BotMan\Messages\Conversations\Conversation;
 use BotMan\BotMan\Messages\Incoming\Answer;
@@ -113,22 +113,19 @@ class StudentsConversation extends Conversation
 
         $this->ask('Выбери день недели или дату:', function (Answer $answer) {
             $userText = $answer->getText();
+            $idWeekDay = false;
 
             // Проверяем, может сегодня выходной.
             if ($userText === 'Сегодня' && date('N', strtotime('today')) >= 6) {
                 $this->say('Сегодня выходной, отдыхай)');
             }
 
-            // Необходимо получить ид группы для того, чтобы отобразить расспивание;
-            $this->groupId = 1;
-            if (!$this->groupId) {
-                // Пытаемся выделаить ученика по телеграм ид
-                $student = Student::whereTelegramId($this->getBot()->getUser()->getId())->first();
-                if (!$student) {
-                    $this->askGroup();
-                    return;
-                }
-                $this->groupId = $student->group_id;
+
+            if (!$this->student) {
+                $this->askGroup();
+                return;
+            } else {
+                $this->groupId = $this->student->groups_id;
             }
 
             $rusShortDaysOfWeek = ['Пн' => 1, 'Вт' => 2, 'Ср' => 3, 'Чт' => 4, 'Пт' => 5];
@@ -136,21 +133,48 @@ class StudentsConversation extends Conversation
 
             if (array_key_exists($userText, $rusShortDaysOfWeek)) {
                 $dayNumber = $rusShortDaysOfWeek[$userText];
+                $idWeekDay = true;
             } elseif ($userText === 'Сегодня') {
                 $dayNumber = date('N', strtotime('today'));
             } else {
                 $dayNumber = date('N', strtotime($userText . '.' . Date('Y', strtotime('today'))));
             }
 
-            $schedule = Schedule::whereGroupId($this->groupId)->where('day', $dayNumber)->with(['teacher', 'item'])->orderBy('couple_number', 'asc')->get();
+            $schedule = Schedule::whereGroupId($this->groupId)
+                ->where('day', $dayNumber)
+                ->with(['teacher', 'item'])
+                ->orderBy('couple_number', 'asc')
+                ->get();
+
 
             $message = '';
+            if (count($schedule)) {
+                $types = ['laboratory_work' => 'лабораторна работа', 'practical_lesson' => 'практичне заняття', 'lecture' => 'лекція'];
 
-            foreach ($schedule as $item) {
-                $message .= "{$item->couple_number}: {$item->item->name}";
+                // Групируем по номеру пары
+                $schedule = $schedule->groupBy('couple_number');
+                // Проходимся по каждому номер парі
+                foreach ($schedule as $coupleNumber => $scheduleItemsByCouple) {
+                    // проходимся по каждому предмету, тк их может быть два чет \ нечет
+                    foreach ($scheduleItemsByCouple as $item) {
+                        // берем текучую четность недели
+                        $partyWeek = $this->getPartyWeek();
+
+                        // если указана четность в распсании и если совпадает с четностью предмета - добавляем в сообщение
+                        if ($idWeekDay || !$item->party_week || ($item->party_week && $item->party_week === $partyWeek)) {
+                            $message .= "{$item->couple_number}: " . ($item->item ? $item->item->abbreviation : '-') . ' ' . ($item->parity_week === 'even' ? '*' : '|') . ', ' .
+                                ($item->lecture_hall ? $item->lecture_hall : '-') . '. ' .
+                                ($item->teacher ? $item->teacher->fio : '-') . ', ' .
+                                (array_key_exists($item->type, $types) ? $types[$item->type] : '-') . PHP_EOL;
+                        }
+                    }
+                }
+            } else {
+                $message = 'Мы еще не заполнили расписание на этот день, обратись с этим вопросом на кафедру';
             }
 
             $this->say($message);
+            $this->askAction();
         }, $keyboard->toArray());
     }
 
@@ -196,8 +220,7 @@ class StudentsConversation extends Conversation
             'odd' => '|',
             'even' => '*',
         ];
-        $settings = get_settings();
-        $this->say("Текущая неделя: . {$parties[$settings->party_week]}");
+        $this->say("Текущая неделя: {$parties[$this->getPartyWeek()]}");
         $this->askAction();
     }
 
@@ -254,7 +277,7 @@ class StudentsConversation extends Conversation
 
     public function whatNamesTeachers()
     {
-        $teachers = Teacher::all();
+        $teachers = Teacher::where('cathedra_id', 1)->get();
 
         $message = 'Список преподавателй кафедры АВП:' . PHP_EOL;
         foreach ($teachers as $teacher) {
@@ -264,5 +287,104 @@ class StudentsConversation extends Conversation
         $this->say($message);
         $this->askAction();
 
+    }
+
+    protected function getPartyWeek()
+    {
+        $currentWeekNumber = date('W');
+        $settings = get_settings();
+
+        if (($currentWeekNumber - $settings->party_week_number) % 2 == 0) {
+            return $settings->party_week;
+        } else {
+            return $settings->party_week === 'odd' ? 'even' : 'odd';
+        }
+    }
+
+    protected function whenTeacher()
+    {
+        // спросить учителя
+        $teachers = Teacher::where('cathedra_id', 1)->get();
+        $message = 'Выбери преподавателя:' . PHP_EOL;
+        foreach ($teachers as $teacher) {
+            $message .= '/' . $teacher->id . ' - ' .  $teacher->surname . ' ' . $teacher->name . $teacher->last_name . PHP_EOL;
+        }
+
+        $this->ask($message, function (Answer $answer) {
+            $userText = $answer->getText();
+            $teacherId = (int)str_replace('/', '', $userText);
+
+            $keyboard = Keyboard::create(Keyboard::TYPE_KEYBOARD)->oneTimeKeyboard()
+                ->addRow(KeyboardButton::create('Пн'),
+                    KeyboardButton::create('Вт'),
+                    KeyboardButton::create('Ср'),
+                    KeyboardButton::create('Чт'),
+                    KeyboardButton::create('Пт'))
+                ->addRow(KeyboardButton::create('Сегодня'),
+                    KeyboardButton::create(date('d-m', strtotime('1 weekdays'))),
+                    KeyboardButton::create(date('d-m', strtotime('2 weekdays'))),
+                    KeyboardButton::create(date('d-m', strtotime('3 weekdays'))),
+                    KeyboardButton::create(date('d-m', strtotime('4 weekdays'))));
+            $keyboard = $this->setDefaultButtons($keyboard);
+
+            $this->ask('Выбери день недели или дату:', function (Answer $answer) use ($teacherId) {
+                $userText = $answer->getText();
+
+                // Проверяем, может сегодня выходной.
+                if ($userText === 'Сегодня' && date('N', strtotime('today')) >= 6) {
+                    $this->say('Сегодня выходной, все отдыхают)');
+                }
+
+                $rusShortDaysOfWeek = ['Пн' => 1, 'Вт' => 2, 'Ср' => 3, 'Чт' => 4, 'Пт' => 5];
+                $dayNumber = null;
+
+                if (array_key_exists($userText, $rusShortDaysOfWeek)) {
+                    $dayNumber = $rusShortDaysOfWeek[$userText];
+                } elseif ($userText === 'Сегодня') {
+                    $dayNumber = date('N', strtotime('today'));
+                } else {
+                    $dayNumber = date('N', strtotime($userText . '.' . Date('Y', strtotime('today'))));
+                }
+
+                $schedule = Schedule::whereTeacherId($teacherId)
+                    ->where('day', $dayNumber)
+                    ->with(['group', 'item'])
+                    ->orderBy('couple_number', 'asc')
+                    ->get();
+
+
+                $message = '';
+                if (count($schedule)) {
+                    $types = ['laboratory_work' => 'лабораторна работа', 'practical_lesson' => 'практичне заняття', 'lecture' => 'лекція'];
+
+                    // Групируем по номеру пары
+                    $schedule = $schedule->groupBy('couple_number');
+                    // Проходимся по каждому номер парі
+                    foreach ($schedule as $coupleNumber => $scheduleItemsByCouple) {
+                        // проходимся по каждому предмету, тк их может быть два чет \ нечет
+                        foreach ($scheduleItemsByCouple as $item) {
+                            // берем текучую четность недели
+                            $partyWeek = $this->getPartyWeek();
+
+                            // если указана четность в распсании и если совпадает с четностью предмета - добавляем в сообщение
+                            if (!$item->party_week || ($item->party_week && $item->party_week === $partyWeek)) {
+                                $message .= "{$item->couple_number}: " . ($item->item ? $item->item->abbreviation : '-') . ' ' . ($item->parity_week === 'even' ? '*' : '|') . ', ' .
+                                    ($item->lecture_hall ? $item->lecture_hall : '-') . ', ' .
+                                    ($item->group ? $item->group->name : '-') . ', ' .
+                                    (array_key_exists($item->type, $types) ? $types[$item->type] : '-') . PHP_EOL;
+                            }
+                        }
+                    }
+                } else {
+                    $message = 'Мы еще не заполнили расписание на этот день, обратись с этим вопросом на кафедру';
+                }
+
+                $this->say($message);
+                $this->askAction();
+            }, $keyboard->toArray());
+        });
+
+        // спросить день недели
+        // вывести расписание
     }
 }

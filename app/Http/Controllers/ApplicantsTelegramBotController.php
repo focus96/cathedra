@@ -56,6 +56,7 @@ class ApplicantsTelegramBotController extends Controller
         })->stopsConversation();
 
         $this->botman->fallback(function($bot) {
+            $bot->reply('Время сессии истекло.');
             $bot->reply('/applicants - для абитуриентов');
             $bot->reply('/students - для студентов');
             $bot->reply('/teachers - для преподавателей');
