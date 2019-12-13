@@ -51,6 +51,8 @@
                             <h4>Сообщение:</h4>
                         </div>
                         <div class="card-body">
+                            <input type="text" class="form-control"  v-model="subject" placeholder="Тема письма">
+                            <br>
                             <textarea class="form-control" cols="30" rows="10"
                                 placeholder="Сообщение для рассылки" v-model="message">
                             </textarea>
@@ -77,6 +79,7 @@
             countRecipients: 0,
             users: [],
             message: null,
+            subject: '',
         }),
         components: {
             SelectionGroupUsers,
@@ -105,6 +108,7 @@
 
                 let formData = new FormData();
                 formData.append('message', this.message);
+                formData.append('subject', this.subject);
                 for(let i=0; i < this.selected.length; i++){
                     formData.append('users[]', this.selected[i])
                 }
@@ -143,7 +147,7 @@
 
 <style>
     .users {
-        max-height: 400px;
+        max-height: 100%;
         overflow-y: scroll;
     }
 </style>

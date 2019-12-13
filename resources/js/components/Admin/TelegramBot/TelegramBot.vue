@@ -167,7 +167,7 @@
 
 <style>
     .users {
-        max-height: 400px;
+        max-height: 100%;
         overflow-y: scroll;
     }
 </style>

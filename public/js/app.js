@@ -1883,6 +1883,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -1891,7 +1893,8 @@ __webpack_require__.r(__webpack_exports__);
       selected: [],
       countRecipients: 0,
       users: [],
-      message: null
+      message: null,
+      subject: ''
     };
   },
   components: {
@@ -1919,6 +1922,7 @@ __webpack_require__.r(__webpack_exports__);
 
       var formData = new FormData();
       formData.append('message', this.message);
+      formData.append('subject', this.subject);
 
       for (var i = 0; i < this.selected.length; i++) {
         formData.append('users[]', this.selected[i]);
@@ -2293,7 +2297,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.users {\n    max-height: 400px;\n    overflow-y: scroll;\n}\n", ""]);
+exports.push([module.i, "\n.users {\n    max-height: 100%;\n    overflow-y: scroll;\n}\n", ""]);
 
 // exports
 
@@ -2350,7 +2354,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.users {\n    max-height: 400px;\n    overflow-y: scroll;\n}\n", ""]);
+exports.push([module.i, "\n.users {\n    max-height: 100%;\n    overflow-y: scroll;\n}\n", ""]);
 
 // exports
 
@@ -26463,6 +26467,30 @@ var render = function() {
             _vm._m(2),
             _vm._v(" "),
             _c("div", { staticClass: "card-body" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.subject,
+                    expression: "subject"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { type: "text", placeholder: "Тема письма" },
+                domProps: { value: _vm.subject },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.subject = $event.target.value
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c("br"),
+              _vm._v(" "),
               _c("textarea", {
                 directives: [
                   {

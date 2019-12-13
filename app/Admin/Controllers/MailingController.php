@@ -26,6 +26,7 @@ class MailingController extends Controller
 
         $users = $request->input('users', []);
         $message = $request->input('message', '');
+        $subject = $request->input('subject', 'Розсилка кафедри АВП');
 
         $mail = new Mail;
         $mail->message = $message;
@@ -37,7 +38,7 @@ class MailingController extends Controller
             $recipient->mail_id = $mail->id;
             $recipient->email = $email;
 
-            MailFacade::to($email)->send(new Mailing($message));
+            MailFacade::to($email)->send(new Mailing($subject, $message));
 
             $recipient->save();
         }

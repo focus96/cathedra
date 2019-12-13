@@ -12,10 +12,12 @@ class Mailing extends Mailable
     use Queueable, SerializesModels;
 
     protected $body;
+    public $subject;
 
-    public function __construct(string $message)
+    public function __construct(string $subject, string $message)
     {
         $this->body = $message;
+        $this->subject = $subject;
     }
 
     /**
@@ -25,7 +27,7 @@ class Mailing extends Mailable
      */
     public function build()
     {
-        return $this->subject(env('APP_NAME', "Кафедра АВП"))->view('mails.mailing', [
+        return $this->subject($this->subject)->view('mails.mailing', [
             'body' => $this->body
         ]);
     }
