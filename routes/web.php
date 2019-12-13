@@ -91,12 +91,11 @@ Route::post('/botman-applicants', 'ApplicantsTelegramBotController@hears');
 
 
 
-
 Route::get('/get-all-cathedra-users', 'CathedraUserController@all');
 Route::get('/get-all-cathedra-users-with-email-subscribers', 'CathedraUserController@allWithEmailSubscribers');
 
 //Route::post('/send-telegram-message', 'TelegramBotController@send');
-Route::post('/send-mailing', 'MailingController@send');
+//Route::post('/send-mailing', 'MailingController@send');
 Route::post('/botman', 'TelegramBotController@hears');
 
 
@@ -106,20 +105,4 @@ Route::post('/botman', 'TelegramBotController@hears');
 
 
 //Route::post('/subscribe','SubsController@subscribe');
-
-
-Route::get('/register-telegram-url', function() {
-  $ch = curl_init("https://api.telegram.org/bot705199406:AAH9XWBdk0OofJj4yinG4d1Ia4G2X8_89ok/setWebhook");
-
-    curl_setopt($ch, CURLOPT_HEADER, 0);
-    curl_setopt($ch, CURLOPT_POST, 1);
-  	curl_setopt($ch, CURLOPT_POSTFIELDS,
-            "url=https://dab266c5.ngrok.io/botman");
-
-    curl_exec($ch);
-    curl_close($ch);
-});
-
-
-
 //Route::post('/botman', 'TelegramBotHearsController@hears');

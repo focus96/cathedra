@@ -19,7 +19,7 @@
                         Кафедра пропонує підготовку за двома напрямами: автоматізація виробничих процессів
                         та комп'ютрна інженерія.
                     </p>
-                    <a href="#" class="primary-btn text-uppercase">Детальніше</a>
+                    <a href="/about" class="primary-btn text-uppercase">Детальніше</a>
                 </div>
             </div>
         </div>
@@ -37,8 +37,7 @@
                         </div>
                         <div class="desc-wrap">
                             <p>
-                                Usage of the Internet is becoming more common due to rapid advancement
-                                of technology.
+                                Новини та публікації
                             </p>
                             <a href="/news">Перейти</a>
                         </div>
@@ -51,8 +50,7 @@
                         </div>
                         <div class="desc-wrap">
                             <p>
-                                For many of us, our very first experience of learning about the celestial bodies begins
-                                when we saw our first.
+                                Конференції, зустрічі, доклади
                             </p>
                             <a href="/event">Перейти</a>
                         </div>
@@ -65,8 +63,7 @@
                         </div>
                         <div class="desc-wrap">
                             <p>
-                                If you are a serious astronomy fanatic like a lot of us are, you can probably remember
-                                that one event.
+                                Мультимедіа, фото та просто цікавинки
                             </p>
                             <a href="/album">Перейти</a>
                         </div>
@@ -394,10 +391,10 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 cta-left">
-                    <h1>Цікавить як поступити до кафедри?</h1>
+                    <h1>Дізнайся про кафедру детальніше</h1>
                 </div>
                 <div class="col-lg-4 cta-right">
-                    <a class="primary-btn wh" href="/about">Це просто! Дивись..</a>
+                    <a class="primary-btn wh" href="/about">Перейти</a>
                 </div>
             </div>
         </div>

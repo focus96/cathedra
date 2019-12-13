@@ -74,6 +74,7 @@ Route::group([
      */
     $router->get('/mailing', 'MailingController@index');
     $router->resource('/mailing-history', 'MailingHistoryController');
+    $router->post('/send-mailing', 'MailingController@send');
 
     /*
      * Online-journal

@@ -57,6 +57,7 @@
                             <br>
                             <button class="form-control btn btn-primary" @click="send()">
                                 Отправить (получателей: {{ countRecipients }})
+                                <span v-if="selected.length > 100">Максимум 100 получателей</span>
                             </button>
                         </div>
                     </div>
@@ -84,19 +85,31 @@
             setSelected(email) {
                 let index = this.selected.indexOf(email);
 
-                if (index !== -1) Vue.delete(this.selected, index);
-                else this.selected.push(email);
+                if (index !== -1) {
+                    Vue.delete(this.selected, index);
+                } else {
+                    this.selected.push(email);
+                }
 
                 this.countRecipients = this.selected.length;
             },
             send() {
+                if(this.selected.length > 100) {
+                    Swal.fire(
+                        'Ошибка',
+                        'Максимальное кол-во получателей - 100',
+                        'error'
+                    );
+                    return;
+                }
+
                 let formData = new FormData();
                 formData.append('message', this.message);
                 for(let i=0; i < this.selected.length; i++){
                     formData.append('users[]', this.selected[i])
                 }
                 if(this.selected.length && this.message) {
-                    axios.post('/send-mailing', formData).then(response => {
+                    axios.post('/admin/send-mailing', formData).then(response => {
                         this.message = null;
                         Swal.fire(
                             'Отправленно',

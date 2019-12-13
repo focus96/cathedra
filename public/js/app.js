@@ -1882,6 +1882,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -1899,11 +1900,22 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     setSelected: function setSelected(email) {
       var index = this.selected.indexOf(email);
-      if (index !== -1) Vue["delete"](this.selected, index);else this.selected.push(email);
+
+      if (index !== -1) {
+        Vue["delete"](this.selected, index);
+      } else {
+        this.selected.push(email);
+      }
+
       this.countRecipients = this.selected.length;
     },
     send: function send() {
       var _this = this;
+
+      if (this.selected.length > 100) {
+        sweetalert2__WEBPACK_IMPORTED_MODULE_1___default.a.fire('Ошибка', 'Максимальное кол-во получателей - 100', 'error');
+        return;
+      }
 
       var formData = new FormData();
       formData.append('message', this.message);
@@ -1913,7 +1925,7 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       if (this.selected.length && this.message) {
-        axios.post('/send-mailing', formData).then(function (response) {
+        axios.post('/admin/send-mailing', formData).then(function (response) {
           _this.message = null;
           sweetalert2__WEBPACK_IMPORTED_MODULE_1___default.a.fire('Отправленно', "\u0420\u0430\u0441\u0441\u044B\u043B\u043A\u0430 \u0443\u0441\u043F\u0435\u0448\u043D\u043E \u043E\u0442\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u043D\u0430.\n                        <a target=\"_blank\" href=\"/admin/mailing-history/".concat(response.data.mailId, "\">\u0414\u0435\u0442\u0430\u043B\u0438</a>"), 'success');
         })["catch"](function (error) {
@@ -2199,6 +2211,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2226,6 +2239,11 @@ __webpack_require__.r(__webpack_exports__);
     },
     send: function send() {
       var _this = this;
+
+      if (this.selected.length > 100) {
+        sweetalert2__WEBPACK_IMPORTED_MODULE_1___default.a.fire('Ошибка', 'Максимальное кол-во получателей - 100', 'error');
+        return;
+      }
 
       var formData = new FormData();
       formData.append('message', this.message);
@@ -26487,8 +26505,11 @@ var render = function() {
                   _vm._v(
                     "\n                            Отправить (получателей: " +
                       _vm._s(_vm.countRecipients) +
-                      ")\n                        "
-                  )
+                      ")\n                            "
+                  ),
+                  _vm.selected.length > 100
+                    ? _c("span", [_vm._v("Максимум 100 получателей")])
+                    : _vm._e()
                 ]
               )
             ])
@@ -26873,8 +26894,11 @@ var render = function() {
                   _vm._v(
                     "\n                            Отправить (получателей: " +
                       _vm._s(_vm.countRecipients) +
-                      ")\n                        "
-                  )
+                      ")\n                            "
+                  ),
+                  _vm.selected.length > 100
+                    ? _c("span", [_vm._v("Максимум 100 получателей")])
+                    : _vm._e()
                 ]
               )
             ])
