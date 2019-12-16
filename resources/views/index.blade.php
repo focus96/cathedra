@@ -341,8 +341,7 @@
                         Раді запропонувати Вам нашого телеграм бота для студентів та абітуріентів.
                         Гарного спілкування!
                     </p>
-                    <a class="primary-btn wh" href="#">Телеграм бот для абітуріентів</a>
-                    <a class="primary-btn wh" href="#">Телеграм бот для студентів</a>
+                    <a class="primary-btn wh" target="_blank" href="https://t.me/DdmaAvpBot">Телеграм бот</a>
                 </div>
             </div>
         </div>
