@@ -68,7 +68,7 @@ class TelegramBotController extends Controller
             Storage::disk('local')->put('public/images/' . $newFilename, file_get_contents($file));
             $url = secure_asset('storage/images/' . $newFilename);
             $attachment = new Image($url);
-            $mail->image = 'images/' . $newFilename;
+            // $mail->image = 'images/' . $newFilename;
         }
 
         $mail->save();
