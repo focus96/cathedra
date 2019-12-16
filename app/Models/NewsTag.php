@@ -8,7 +8,6 @@ use Cviebrock\EloquentSluggable\Sluggable;
 
 class NewsTag extends Model
 {
-    use Sluggable;
 
     public $timestamps = false;
 
@@ -29,12 +28,5 @@ class NewsTag extends Model
     {
         $tags = NewsTag::where('slug',$slug)->firstOrFail();
     }
-    public function sluggable()
-    {
-        return [
-            'slug' => [
-                'source' => 'name'
-            ]
-        ];
-    }
+    
 }
